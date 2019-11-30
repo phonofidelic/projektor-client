@@ -1,18 +1,13 @@
 import React from 'react';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import Button from '@material-ui/core/Button';
-import ButtonBase from '@material-ui/core/ButtonBase';
 
 import styled from 'styled-components';
 
@@ -86,7 +81,15 @@ export default function CenteredGrid() {
     <Container>
       <Grid container>
         {mockProjects.map(project => (
-          <StyledGridItem key={project.id} item xs={12} sm={6} md={4}>
+          <StyledGridItem
+            key={project.id}
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            component={Link}
+            to={`project/${project.id}`}
+          >
             <Card>
               <CardActionArea>
                 <CardContent>

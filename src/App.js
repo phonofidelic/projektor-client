@@ -6,12 +6,16 @@ import Landing from 'views/Landing';
 import Registration from 'views/Registration';
 import Login from 'views/Login';
 import Projects from 'views/Projects';
+import Project from 'views/Project';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
+          <Route path="/project/:projectId">
+            <Project />
+          </Route>
           <Route path="/projects">
             <Projects />
           </Route>
