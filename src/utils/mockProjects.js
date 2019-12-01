@@ -1,3 +1,5 @@
+import createWorkItems from 'utils/createWorkItems';
+
 const mockProjects = [
   {
     id: 1,
@@ -8,7 +10,7 @@ const mockProjects = [
     timeUsed: 6,
     startDate: 1575153708162,
     deadline: null,
-    work: []
+    work: [createWorkItems(3, 6)]
   },
   {
     id: 2,

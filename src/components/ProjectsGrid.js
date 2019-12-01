@@ -22,6 +22,7 @@ const Container = styled.div`
 const StyledGridItem = styled(Grid)`
   padding: 20px;
   // border: 1px solid red;
+  text-decoration: none;
 `;
 
 const ProjectInfoContainer = styled.div`
