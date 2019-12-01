@@ -42,7 +42,6 @@ export default function ProjectGrid(props) {
             md={4}
             component={Link}
             to={`project/${project.id}`}
-            onClick={() => props.handleProjectSelection(project.id)}
           >
             <Card>
               <CardActionArea>

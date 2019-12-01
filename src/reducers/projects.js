@@ -3,7 +3,7 @@ import { SELECT_PROJECT } from 'actions/types';
 
 const defaultState = {
   projectList: mockProjects,
-  selectedProject: null
+  selectedProject: {}
 };
 
 export default function(state = defaultState, action) {
@@ -12,7 +12,7 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         selectedProject: state.projectList.find(
-          project => project.id === action.payload
+          project => project.id == action.payload
         )
       };
 

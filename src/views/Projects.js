@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import * as actions from 'actions';
 import ProjectsGrid from 'components/ProjectsGrid';
 
-function Registration(props) {
+function Projects(props) {
   const handleProjectSelection = id => {
     props.selectProject(id);
   };
   return (
     <div>
       <div>Projects</div>
-      <ProjectsGrid handleProjectSelection={handleProjectSelection} />
+      <ProjectsGrid />
       <div>
         <Link to="/" replace>
           Back
@@ -27,4 +27,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, actions)(Registration);
+export default connect(mapStateToProps, actions)(Projects);
