@@ -3,14 +3,12 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 import ProjectsGrid from 'components/ProjectsGrid';
+import Header from 'components/Header';
 
 function Projects(props) {
-  const handleProjectSelection = id => {
-    props.selectProject(id);
-  };
   return (
     <div>
-      <div>Projects</div>
+      <Header title="Projects"></Header>
       <ProjectsGrid />
       <div>
         <Link to="/" replace>

@@ -1,5 +1,4 @@
 import { uuid } from 'uuidv4';
-import moment from 'moment';
 
 export default function createWorkItems(n, totalTime) {
   let workItems = [];

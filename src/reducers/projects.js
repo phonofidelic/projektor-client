@@ -12,6 +12,7 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         selectedProject: state.projectList.find(
+          // eslint-disable-next-line
           project => project.id == action.payload
         )
       };
