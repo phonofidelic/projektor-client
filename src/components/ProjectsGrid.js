@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import mockProjects from 'utils/mockProjects';
 
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -8,55 +9,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
-
 import styled from 'styled-components';
-
-const mockProjects = [
-  {
-    id: 1,
-    title: 'Test Project 1',
-    description:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    budgetedTime: 8,
-    timeUsed: 6,
-    startDate: 1575153708162,
-    deadline: null,
-    work: []
-  },
-  {
-    id: 2,
-    title: 'Test Project 2',
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    budgetedTime: 40,
-    timeUsed: 8,
-    startDate: 1575153708162,
-    deadline: null,
-    work: []
-  },
-  {
-    id: 3,
-    title: 'Test Project 3',
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    budgetedTime: 16,
-    timeUsed: 4,
-    startDate: 1575153708162,
-    deadline: null,
-    work: []
-  },
-  {
-    id: 4,
-    title: 'Test Project 4',
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    budgetedTime: 16,
-    timeUsed: 10,
-    startDate: 1575153708162,
-    deadline: null,
-    work: []
-  }
-];
 
 const Container = styled.div`
   display: flex;
@@ -76,7 +29,7 @@ const ProjectInfoContainer = styled.div`
   // justify-content: space-around;
 `;
 
-export default function CenteredGrid() {
+export default function ProjectGrid(props) {
   return (
     <Container>
       <Grid container>
@@ -89,6 +42,7 @@ export default function CenteredGrid() {
             md={4}
             component={Link}
             to={`project/${project.id}`}
+            onClick={() => props.handleProjectSelection(project.id)}
           >
             <Card>
               <CardActionArea>
