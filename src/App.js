@@ -7,12 +7,16 @@ import Registration from 'views/Registration';
 import Login from 'views/Login';
 import Projects from 'views/Projects';
 import Project from 'views/Project';
+import CreateProject from 'views/CreateProject';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
+          <Route path="/projects/create">
+            <CreateProject />
+          </Route>
           <Route path="/project/:projectId">
             <Project />
           </Route>
