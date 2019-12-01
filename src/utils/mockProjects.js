@@ -10,7 +10,7 @@ const mockProjects = [
     timeUsed: 6,
     startDate: 1575153708162,
     deadline: null,
-    work: [createWorkItems(3, 6)]
+    work: createWorkItems(3, 6)
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const mockProjects = [
     timeUsed: 8,
     startDate: 1575153708162,
     deadline: null,
-    work: []
+    work: createWorkItems(2, 8)
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const mockProjects = [
     timeUsed: 4,
     startDate: 1575153708162,
     deadline: null,
-    work: []
+    work: createWorkItems(4, 4)
   },
   {
     id: 4,
@@ -43,7 +43,7 @@ const mockProjects = [
     timeUsed: 10,
     startDate: 1575153708162,
     deadline: null,
-    work: []
+    work: createWorkItems(5, 10)
   }
 ];
 
