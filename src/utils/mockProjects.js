@@ -4,6 +4,7 @@ const mockProjects = [
   {
     id: 1,
     title: 'Test Project 1',
+    client: 'Client Name',
     description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
     budgetedTime: 8,
@@ -15,6 +16,7 @@ const mockProjects = [
   {
     id: 2,
     title: 'Test Project 2',
+    client: 'Client Name',
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
     budgetedTime: 40,
@@ -26,6 +28,7 @@ const mockProjects = [
   {
     id: 3,
     title: 'Test Project 3',
+    client: 'Client Name',
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
     budgetedTime: 16,
@@ -37,6 +40,7 @@ const mockProjects = [
   {
     id: 4,
     title: 'Test Project 4',
+    client: 'Client Name',
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
     budgetedTime: 16,

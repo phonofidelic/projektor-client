@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -18,7 +20,9 @@ const materialUITheme = createMuiTheme({});
 ReactDOM.render(
   <Provider store={createStore(reducers, {}, enhancer)}>
     <MuiThemeProvider theme={materialUITheme}>
-      <App />
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <App />
+      </MuiPickersUtilsProvider>
     </MuiThemeProvider>
   </Provider>,
   document.getElementById('root')
