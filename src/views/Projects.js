@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
@@ -22,22 +22,30 @@ function HeaderActions(props) {
 }
 
 function Projects(props) {
-  return (
+  const { projects } = props;
+
+  useEffect(() => {
+    props.getProjects();
+  }, []);
+
+  return projects ? (
     <div>
       <Header title="Projects" headerActions={<HeaderActions />} />
-      <ProjectsGrid />
+      <ProjectsGrid projects={projects} />
       <div>
         <Link to="/" replace>
           Back
         </Link>
       </div>
     </div>
+  ) : (
+    <div>Loading...</div>
   );
 }
 
 const mapStateToProps = state => {
   return {
-    projects: state.projectList
+    projects: state.projects.projectList
   };
 };
 

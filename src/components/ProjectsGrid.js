@@ -31,10 +31,11 @@ const ProjectInfoContainer = styled.div`
 `;
 
 export default function ProjectGrid(props) {
+  const { projects } = props;
   return (
     <Container>
       <Grid container>
-        {mockProjects.map(project => (
+        {projects.map(project => (
           <StyledGridItem
             key={project.id}
             item
@@ -42,7 +43,7 @@ export default function ProjectGrid(props) {
             sm={6}
             md={4}
             component={Link}
-            to={`project/${project.id}`}
+            to={`projects/${project.id}`}
           >
             <Card>
               <CardActionArea>

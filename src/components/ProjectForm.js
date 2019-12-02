@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import styled from 'styled-components';
 import FormikDatePicker from 'components/FormikDatePicker';
@@ -19,7 +19,7 @@ export default function ProjectForm(props) {
   return (
     <Container>
       <Formik
-        initialValues={{ title: '', deadline: null }}
+        initialValues={{ deadline: null }}
         validate={values => {
           const errors = {};
           if (!values.title || values.title === '') {
@@ -28,7 +28,7 @@ export default function ProjectForm(props) {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          console.log('Form values:', values);
+          props.handleFormSubmit(values);
         }}
       >
         {({
@@ -50,7 +50,7 @@ export default function ProjectForm(props) {
                     name="title"
                     label="Project Title"
                     variant="outlined"
-                    value={values.title}
+                    // value={values.title}
                     helperText={errors.title && touched.title && 'Required'}
                     error={errors.title && touched.title}
                     onChange={handleChange}
@@ -67,12 +67,12 @@ export default function ProjectForm(props) {
                     id="description"
                     name="description"
                     label="Description"
-                    value={values.description}
+                    // value={values.description}
                     onChange={handleChange}
                   />
                 </InputContainer>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <InputContainer>
                   <Field
                     id="start-date"
@@ -90,7 +90,7 @@ export default function ProjectForm(props) {
                   />
                 </InputContainer>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <InputContainer>
                   <TextField
                     variant="outlined"
@@ -98,7 +98,7 @@ export default function ProjectForm(props) {
                     id="client"
                     name="client"
                     label="Client"
-                    value={values.client}
+                    // value={values.client}
                     onChange={handleChange}
                   />
                 </InputContainer>

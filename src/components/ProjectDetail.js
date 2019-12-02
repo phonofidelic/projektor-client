@@ -16,7 +16,7 @@ export default function ProjectDetail(props) {
 
   return (
     <div>
-      <Header backButton title={project.title} />
+      <Header back="/projects" title={project.title} />
       <Description>
         <Typography>{project.description}</Typography>
       </Description>
