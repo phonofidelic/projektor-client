@@ -9,6 +9,7 @@ import {
 } from 'actions/types';
 import { uuid } from 'uuidv4';
 import mockProjects from 'utils/mockProjects';
+import axios from 'axios';
 
 export const getProjects = () => {
   return dispatch => {
@@ -52,17 +53,39 @@ export const createProject = (data, history) => {
     work: []
   };
 
-  return dispatch => {
+  // Mock userId
+  data.userId = uuid();
+
+  return async dispatch => {
     dispatch({
       type: POST_CREATE_PROJECT
     });
 
-    setTimeout(() => {
-      history.push(`${mockProject.id}`);
+    // setTimeout(() => {
+    //   history.push(`${mockProject.id}`);
+    //   dispatch({
+    //     type: CREATE_PROJECT_SUCCESS,
+    //     payload: mockProject
+    //   });
+    // }, 1000);
+    let response;
+    try {
+      response = await axios.post(
+        'http://localhost:4000/projects/create',
+        data
+      );
+      console.log('createProject, response:', response);
+
       dispatch({
         type: CREATE_PROJECT_SUCCESS,
-        payload: mockProject
+        payload: response.data
       });
-    }, 1000);
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: CREATE_PROJECT_FAILURE,
+        payload: err
+      });
+    }
   };
 };

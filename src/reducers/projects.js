@@ -3,6 +3,7 @@ import {
   SELECT_PROJECT,
   POST_CREATE_PROJECT,
   CREATE_PROJECT_SUCCESS,
+  CREATE_PROJECT_FAILURE,
   GET_PROJECTS,
   GET_PROJECTS_SUCCESS,
   GET_PROJECTS_FAILURE
@@ -11,7 +12,8 @@ import {
 const defaultState = {
   projectList: [],
   selectedProject: null,
-  loading: false
+  loading: false,
+  error: null
 };
 
 export default function(state = defaultState, action) {
@@ -51,6 +53,13 @@ export default function(state = defaultState, action) {
         loading: false,
         projectList: [...state.projectList, action.payload]
         // selectedProject: action.payload
+      };
+
+    case CREATE_PROJECT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
       };
 
     default:
