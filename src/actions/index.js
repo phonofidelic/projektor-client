@@ -5,7 +5,10 @@ import {
   CREATE_PROJECT_FAILURE,
   GET_PROJECTS,
   GET_PROJECTS_SUCCESS,
-  GET_PROJECTS_FAILURE
+  GET_PROJECTS_FAILURE,
+  GET_PROJECT,
+  GET_PROJECT_SUCCESS,
+  GET_PROJECT_FAILURE
 } from 'actions/types';
 import { uuid } from 'uuidv4';
 import mockProjects from 'utils/mockProjects';
@@ -36,6 +39,30 @@ export const getProjects = () => {
   };
 };
 
+export const getProject = projectId => {
+  return async dispatch => {
+    dispatch({
+      type: GET_PROJECT
+    });
+
+    let response;
+    try {
+      response = await axios.get(`http://localhost:4000/projects/${projectId}`);
+
+      dispatch({
+        type: GET_PROJECT_SUCCESS,
+        payload: response.data
+      });
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: GET_PROJECT_FAILURE,
+        payload: err
+      });
+    }
+  };
+};
+
 export const selectProject = id => {
   console.log('selectProject, id:', id);
   return dispatch => {
@@ -48,9 +75,6 @@ export const selectProject = id => {
 
 export const createProject = (data, history) => {
   console.log('createProject, data:', data);
-
-  // Mock userId
-  data.userId = '0a1e4fdd-28c8-4c84-a7e8-db9e22602ed2';
 
   return async dispatch => {
     dispatch({

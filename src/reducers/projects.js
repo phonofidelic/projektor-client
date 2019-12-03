@@ -6,7 +6,10 @@ import {
   CREATE_PROJECT_FAILURE,
   GET_PROJECTS,
   GET_PROJECTS_SUCCESS,
-  GET_PROJECTS_FAILURE
+  GET_PROJECTS_FAILURE,
+  GET_PROJECT,
+  GET_PROJECT_SUCCESS,
+  GET_PROJECT_FAILURE
 } from 'actions/types';
 
 const defaultState = {
@@ -29,6 +32,33 @@ export default function(state = defaultState, action) {
         ...state,
         loading: false,
         projectList: action.payload
+      };
+
+    case GET_PROJECTS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
+
+    case GET_PROJECT:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case GET_PROJECT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        selectedProject: action.payload
+      };
+
+    case GET_PROJECT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
       };
 
     case SELECT_PROJECT:

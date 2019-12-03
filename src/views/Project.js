@@ -8,7 +8,7 @@ export function Project(props) {
   const { projectId } = useParams();
 
   useEffect(() => {
-    props.selectProject(projectId);
+    props.getProject(projectId);
   }, []);
 
   return props.project ? (
