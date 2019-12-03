@@ -19,7 +19,7 @@ export default function ProjectForm(props) {
   return (
     <Container>
       <Formik
-        initialValues={{ startDate: null, deadline: null }}
+        initialValues={{ title: '', startDate: null, deadline: null }}
         validate={values => {
           const errors = {};
           if (!values.title || values.title === '') {
