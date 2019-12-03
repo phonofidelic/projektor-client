@@ -16,11 +16,6 @@ export default function WorkTable(props) {
   // console.log('====================================');
   return (
     <Paper style={{ margin: 18 }}>
-      <div style={{ margin: 10 }}>
-        <Typography variant="h5" align="left">
-          Work
-        </Typography>
-      </div>
       <Table>
         <TableHead>
           <TableRow>
@@ -35,10 +30,12 @@ export default function WorkTable(props) {
           {project.work.map(workItem => (
             <TableRow key={workItem.id}>
               <TableCell>
-                {moment(workItem.date).format('ddd, MMMM Do YYYY, hh:mm:ss')}
+                {moment(workItem.date).format('MM/DD/YYYY')}
               </TableCell>
-              <TableCell>{moment(workItem.start).format('hh:mm:ss')}</TableCell>
-              <TableCell>{moment(workItem.stop).format('hh:mm:ss')}</TableCell>
+              <TableCell>{moment(workItem.start).format('hh:mm')}</TableCell>
+              <TableCell>
+                {workItem.end ? moment(workItem.end).format('hh:mm:ss') : '--'}
+              </TableCell>
               <TableCell>{workItem.duration}</TableCell>
               <TableCell>{workItem.notes}</TableCell>
             </TableRow>

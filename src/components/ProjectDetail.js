@@ -6,6 +6,7 @@ import Header from 'components/Header';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 const InfoContainer = styled(Grid)`
   margin-top: 40px;
@@ -49,7 +50,16 @@ export default function ProjectDetail(props) {
           </div>
         </Info>
       </InfoContainer>
-      {project.work ? <WorkTable project={project} /> : <div>loading...</div>}
+      <div>
+        <div style={{ margin: 18, display: 'flex' }}>
+          <Typography variant="h5" align="left">
+            Work
+          </Typography>
+          <div style={{ flexGrow: 1 }}></div>
+          <Button>Start Work</Button>
+        </div>
+        {project.work.length > 0 && <WorkTable project={project} />}
+      </div>
     </div>
   );
 }
