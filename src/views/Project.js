@@ -21,9 +21,6 @@ export function Project(props) {
 }
 
 const mapStateToProps = state => {
-  console.log('====================================');
-  console.log(state);
-  console.log('====================================');
   return {
     project: state.projects.selectedProject
   };

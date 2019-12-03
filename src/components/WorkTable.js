@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
+import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,7 +15,12 @@ export default function WorkTable(props) {
   // console.log(project);
   // console.log('====================================');
   return (
-    <Paper>
+    <Paper style={{ margin: 18 }}>
+      <div style={{ margin: 10 }}>
+        <Typography variant="h5" align="left">
+          Work
+        </Typography>
+      </div>
       <Table>
         <TableHead>
           <TableRow>

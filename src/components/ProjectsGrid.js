@@ -37,7 +37,7 @@ export default function ProjectGrid(props) {
       <Grid container>
         {projects.map(project => (
           <StyledGridItem
-            key={project.id}
+            key={project._id}
             item
             xs={12}
             sm={6}
@@ -53,7 +53,9 @@ export default function ProjectGrid(props) {
                   </Typography>
                   <ProjectInfoContainer>
                     <Typography variant="overline">Start Date:</Typography>{' '}
-                    {moment(project.startDate).format('ddd, MMM Do YYYY')}
+                    {project.startDate
+                      ? moment(project.startDate).format('ddd, MMM Do YYYY')
+                      : 'TBD'}
                     <br />
                     <Typography variant="overline">Dealine:</Typography>{' '}
                     {project.deadline
