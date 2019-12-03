@@ -39,35 +39,14 @@ export const selectProject = id => {
 export const createProject = (data, history) => {
   console.log('createProject, data:', data);
 
-  // Create mock Project
-  const mockProject = {
-    id: uuid(),
-    created: Date.now(),
-    title: data.title,
-    description: data.description,
-    client: data.client,
-    budgetedTime: data.budgetedTime,
-    timeUsed: 0,
-    startDate: data.StartDate || null,
-    deadline: data.deadline || null,
-    work: []
-  };
-
   // Mock userId
-  data.userId = uuid();
+  data.userId = '0a1e4fdd-28c8-4c84-a7e8-db9e22602ed2';
 
   return async dispatch => {
     dispatch({
       type: POST_CREATE_PROJECT
     });
 
-    // setTimeout(() => {
-    //   history.push(`${mockProject.id}`);
-    //   dispatch({
-    //     type: CREATE_PROJECT_SUCCESS,
-    //     payload: mockProject
-    //   });
-    // }, 1000);
     let response;
     try {
       response = await axios.post(

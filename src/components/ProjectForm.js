@@ -19,7 +19,7 @@ export default function ProjectForm(props) {
   return (
     <Container>
       <Formik
-        initialValues={{ deadline: null }}
+        initialValues={{ startDate: null, deadline: null }}
         validate={values => {
           const errors = {};
           if (!values.title || values.title === '') {
@@ -76,7 +76,7 @@ export default function ProjectForm(props) {
                 <InputContainer>
                   <Field
                     id="start-date"
-                    name="start-date"
+                    name="startDate"
                     label="Start Date"
                     component={FormikDatePicker}
                   />
@@ -106,11 +106,11 @@ export default function ProjectForm(props) {
                   <TextField
                     fullWidth
                     variant="outlined"
-                    id="budgeted-hours"
-                    name="budgeted-hours"
-                    label="Budgeted Hours"
+                    id="budgeted-time"
+                    name="budgetedTime"
+                    label="Budgeted Time"
                     type="number"
-                    value={values.budgetedHours}
+                    // value={values.budgetedHours}
                     onChange={handleChange}
                   />
                 </InputContainer>
