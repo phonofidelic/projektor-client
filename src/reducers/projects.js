@@ -37,7 +37,7 @@ export default function(state = defaultState, action) {
         ...state,
         selectedProject: state.projectList.find(
           // eslint-disable-next-line
-          project => project.id == action.payload
+          project => project._id == action.payload
         )
       };
 

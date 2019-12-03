@@ -12,17 +12,27 @@ import mockProjects from 'utils/mockProjects';
 import axios from 'axios';
 
 export const getProjects = () => {
-  return dispatch => {
+  return async dispatch => {
     dispatch({
       type: GET_PROJECTS
     });
 
-    setTimeout(() => {
+    let response;
+    try {
+      response = await axios.get('http://localhost:4000/projects');
+      console.log('getProjects, response:', response);
+
       dispatch({
         type: GET_PROJECTS_SUCCESS,
-        payload: mockProjects
+        payload: response.data
       });
-    }, 1000);
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: GET_PROJECTS_FAILURE,
+        payload: err
+      });
+    }
   };
 };
 

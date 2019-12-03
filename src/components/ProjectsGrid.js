@@ -43,7 +43,7 @@ export default function ProjectGrid(props) {
             sm={6}
             md={4}
             component={Link}
-            to={`projects/${project.id}`}
+            to={`projects/${project._id}`}
           >
             <Card>
               <CardActionArea>
@@ -70,11 +70,15 @@ export default function ProjectGrid(props) {
                   </Typography>
                 </CardContent>
               </CardActionArea>
-              <LinearProgress
-                value={(project.timeUsed / project.budgetedTime) * 100}
-                variant="determinate"
-                style={{ height: 20 }}
-              />
+              <div style={{ height: 20 }}>
+                {project.budgetedTime && (
+                  <LinearProgress
+                    value={(project.timeUsed / project.budgetedTime) * 100}
+                    variant="determinate"
+                    style={{ height: 20 }}
+                  />
+                )}
+              </div>
             </Card>
           </StyledGridItem>
         ))}
