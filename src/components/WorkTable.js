@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import FormattedTime from 'components/FormattedTime';
 
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
@@ -28,15 +29,25 @@ export default function WorkTable(props) {
         </TableHead>
         <TableBody>
           {project.work.map(workItem => (
-            <TableRow key={workItem.id}>
+            <TableRow key={workItem._id}>
               <TableCell>
-                {moment(workItem.date).format('MM/DD/YYYY')}
+                <Typography>
+                  {moment(workItem.date).format('MM/DD/YYYY')}
+                </Typography>
               </TableCell>
-              <TableCell>{moment(workItem.start).format('hh:mm')}</TableCell>
               <TableCell>
-                {workItem.end ? moment(workItem.end).format('hh:mm:ss') : '--'}
+                <Typography>
+                  {moment(workItem.start).format('hh:mm')}
+                </Typography>
               </TableCell>
-              <TableCell>{workItem.duration}</TableCell>
+              <TableCell>
+                <Typography>
+                  {workItem.end ? moment(workItem.end).format('hh:mm') : '--'}
+                </Typography>
+              </TableCell>
+              <TableCell>
+                <FormattedTime time={workItem.duration} />
+              </TableCell>
               <TableCell>{workItem.notes}</TableCell>
             </TableRow>
           ))}

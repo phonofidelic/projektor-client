@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 import WorkTable from 'components/WorkTable';
 import Header from 'components/Header';
+import WorkSection from 'components/WorkSection';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -19,7 +20,7 @@ const Info = styled(Grid)`
 `;
 
 export default function ProjectDetail(props) {
-  const { project } = props;
+  const { project, createWork } = props;
 
   return (
     <div>
@@ -50,16 +51,7 @@ export default function ProjectDetail(props) {
           </div>
         </Info>
       </InfoContainer>
-      <div>
-        <div style={{ margin: 18, display: 'flex' }}>
-          <Typography variant="h5" align="left">
-            Work
-          </Typography>
-          <div style={{ flexGrow: 1 }}></div>
-          <Button>Start Work</Button>
-        </div>
-        {project.work.length > 0 && <WorkTable project={project} />}
-      </div>
+      <WorkSection project={project} createWork={createWork} />
     </div>
   );
 }

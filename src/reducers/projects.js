@@ -9,7 +9,8 @@ import {
   GET_PROJECTS_FAILURE,
   GET_PROJECT,
   GET_PROJECT_SUCCESS,
-  GET_PROJECT_FAILURE
+  GET_PROJECT_FAILURE,
+  CREATE_WORK_SUCCESS
 } from 'actions/types';
 
 const defaultState = {
@@ -90,6 +91,15 @@ export default function(state = defaultState, action) {
         ...state,
         loading: false,
         error: action.payload
+      };
+
+    case CREATE_WORK_SUCCESS:
+      return {
+        ...state,
+        selectedProject: {
+          ...state.selectedProject,
+          work: [...state.selectedProject.work, action.payload]
+        }
       };
 
     default:

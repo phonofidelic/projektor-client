@@ -8,7 +8,12 @@ import {
   GET_PROJECTS_FAILURE,
   GET_PROJECT,
   GET_PROJECT_SUCCESS,
-  GET_PROJECT_FAILURE
+  GET_PROJECT_FAILURE,
+  START_WORK,
+  CREATE_WORK,
+  CREATE_WORK_SUCCESS,
+  CREATE_WORK_FAILURE,
+  STOP_WORK
 } from 'actions/types';
 import { uuid } from 'uuidv4';
 import mockProjects from 'utils/mockProjects';
@@ -97,6 +102,35 @@ export const createProject = (data, history) => {
       console.error(err);
       dispatch({
         type: CREATE_PROJECT_FAILURE,
+        payload: err
+      });
+    }
+  };
+};
+
+export const startWork = projectId => {
+  return async dispatch => {};
+};
+
+export const createWork = work => {
+  console.log('createWork, work:', work);
+  return async dispatch => {
+    dispatch({
+      type: CREATE_WORK
+    });
+
+    let response;
+    try {
+      response = await axios.post('http://localhost:4000/work/create', work);
+      console.log('createWork, response:', response);
+      dispatch({
+        type: CREATE_WORK_SUCCESS,
+        payload: response.data
+      });
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: CREATE_WORK_FAILURE,
         payload: err
       });
     }

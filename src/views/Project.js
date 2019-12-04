@@ -13,7 +13,7 @@ export function Project(props) {
 
   return props.project ? (
     <div>
-      <ProjectDetail project={props.project} />
+      <ProjectDetail project={props.project} createWork={props.createWork} />
     </div>
   ) : (
     <div>loading...</div>
