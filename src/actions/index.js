@@ -98,6 +98,8 @@ export const createProject = (data, history) => {
         type: CREATE_PROJECT_SUCCESS,
         payload: response.data
       });
+
+      history.push(`/projects/${response.data._id}`);
     } catch (err) {
       console.error(err);
       dispatch({
