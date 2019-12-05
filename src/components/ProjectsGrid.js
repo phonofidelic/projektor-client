@@ -19,7 +19,7 @@ export default function ProjectGrid(props) {
     <Container>
       <Grid container>
         {projects.map(project => (
-          <ProjectGridItem project={project} />
+          <ProjectGridItem key={project._id} project={project} />
         ))}
       </Grid>
     </Container>

@@ -9,6 +9,9 @@ import {
   GET_PROJECT,
   GET_PROJECT_SUCCESS,
   GET_PROJECT_FAILURE,
+  DELETE_PROJECT,
+  DELETE_PROJECT_SUCCESS,
+  DELETE_PROJECT_FAILURE,
   START_WORK,
   CREATE_WORK,
   CREATE_WORK_SUCCESS,
@@ -104,6 +107,34 @@ export const createProject = (data, history) => {
       console.error(err);
       dispatch({
         type: CREATE_PROJECT_FAILURE,
+        payload: err
+      });
+    }
+  };
+};
+
+const deleteProject = projectId => {
+  return async dispatch => {
+    dispatch({
+      type: DELETE_PROJECT
+    });
+
+    let response;
+    try {
+      response = await axios.delete(
+        `http://localhost:4000/projects/${projectId}`,
+        projectId
+      );
+
+      dispatch({
+        type: DELETE_PROJECT_SUCCESS,
+        payload: response.data._id
+      });
+    } catch (err) {
+      console.error(err);
+
+      dispatch({
+        type: DELETE_PROJECT_FAILURE,
         payload: err
       });
     }
