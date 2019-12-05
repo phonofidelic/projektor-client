@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import moment from 'moment';
+import momentDurationFormatSetup from 'moment-duration-format';
 
 import WorkTable from 'components/WorkTable';
 import Timer from 'components/Timer';
-import FormattedTime from 'components/FormattedTime';
 
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -60,13 +60,13 @@ export default function WorkSection(props) {
         <Typography variant="h5" align="left">
           Work
         </Typography>
-        <div style={{ flexGrow: 1 }}>
+        <div style={{ flexGrow: 1, lineHeight: '48px' }}>
           {workStarted && (
             <div>
               {workActive ? (
                 <Timer format="hh:mm:ss" currentTime={time} setTime={setTime} />
               ) : (
-                <FormattedTime time={time} />
+                moment.duration(time, 'ms').format('hh:mm:ss', { trim: false })
               )}
             </div>
           )}

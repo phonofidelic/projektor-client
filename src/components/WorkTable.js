@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import FormattedTime from 'components/FormattedTime';
+import momentDurationFormatSetup from 'moment-duration-format';
 
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
@@ -46,7 +46,11 @@ export default function WorkTable(props) {
                 </Typography>
               </TableCell>
               <TableCell>
-                <FormattedTime time={workItem.duration} />
+                <Typography>
+                  {moment
+                    .duration(workItem.duration, 'ms')
+                    .format('hh:mm:ss', { trim: false })}
+                </Typography>
               </TableCell>
               <TableCell>{workItem.notes}</TableCell>
             </TableRow>

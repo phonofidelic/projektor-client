@@ -98,6 +98,7 @@ export default function(state = defaultState, action) {
         ...state,
         selectedProject: {
           ...state.selectedProject,
+          timeUsed: state.selectedProject.timeUsed + action.payload.duration,
           work: [...state.selectedProject.work, action.payload]
         }
       };

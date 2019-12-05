@@ -75,7 +75,9 @@ export default function ProjectGrid(props) {
               <div style={{ height: 20 }}>
                 {project.budgetedTime && (
                   <LinearProgress
-                    value={(project.timeUsed / project.budgetedTime) * 100}
+                    value={
+                      (project.timeUsed / (project.budgetedTime * 3.6e6)) * 100
+                    }
                     variant="determinate"
                     style={{ height: 20 }}
                   />
