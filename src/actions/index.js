@@ -113,7 +113,8 @@ export const createProject = (data, history) => {
   };
 };
 
-const deleteProject = projectId => {
+export const deleteProject = projectId => {
+  console.log('deleteProject, projectId:', projectId);
   return async dispatch => {
     dispatch({
       type: DELETE_PROJECT
@@ -125,6 +126,8 @@ const deleteProject = projectId => {
         `http://localhost:4000/projects/${projectId}`,
         projectId
       );
+
+      console.log('deleteProject, response:', response);
 
       dispatch({
         type: DELETE_PROJECT_SUCCESS,

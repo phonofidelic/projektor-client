@@ -2,9 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
+
 import WorkTable from 'components/WorkTable';
 import Header from 'components/Header';
 import WorkSection from 'components/WorkSection';
+import ProjectMenu from 'components/ProjectMenu';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -26,7 +28,11 @@ export default function ProjectDetail(props) {
 
   return (
     <div>
-      <Header back="/projects" title={project.title} />
+      <Header
+        back="/projects"
+        title={project.title}
+        headerActions={<ProjectMenu project={project} color="#fff" />}
+      />
       <InfoContainer container>
         <Info item xs={12} sm={6}>
           {project.description}

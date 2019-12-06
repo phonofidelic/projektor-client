@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import * as actions from 'actions';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -7,8 +9,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Delete from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-export default function ProjectMenu(props) {
-  const { project } = props;
+function ProjectMenu(props) {
+  const { project, color } = props;
 
   const [anchorEl, setAnchor] = useState(null);
   const handleMenuClick = e => {
@@ -21,7 +23,7 @@ export default function ProjectMenu(props) {
   return (
     <div>
       <IconButton onClick={handleMenuClick}>
-        <MoreVertIcon />
+        <MoreVertIcon style={{ color }} />
       </IconButton>
       <Menu
         id={`project-options-menu_${project._id}`}
@@ -30,7 +32,7 @@ export default function ProjectMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleCloseMenu}
       >
-        <MenuItem>
+        <MenuItem onClick={() => props.deleteProject(project._id)}>
           <ListItemIcon>
             <Delete />
           </ListItemIcon>
@@ -40,3 +42,5 @@ export default function ProjectMenu(props) {
     </div>
   );
 }
+
+export default connect(null, actions)(ProjectMenu);
