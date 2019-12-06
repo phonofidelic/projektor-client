@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 
-import WorkTable from 'components/WorkTable';
+import WorkTable from 'components/ProjectDetail/WorkTable';
 import Timer from 'components/Timer';
 
 import Typography from '@material-ui/core/Typography';
@@ -73,7 +73,7 @@ export default function WorkSection(props) {
         </div>
         <div>
           {!workStarted ? (
-            <Button onClick={handleStartWork}>Start Work</Button>
+            <Button onClick={handleStartWork}>Start new task</Button>
           ) : !workActive ? (
             <IconButton onClick={handleResumeWork}>
               <PlayArrowIcon />

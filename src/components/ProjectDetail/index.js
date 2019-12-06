@@ -3,14 +3,12 @@ import styled from 'styled-components';
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 
-import WorkTable from 'components/WorkTable';
 import Header from 'components/Header';
-import WorkSection from 'components/WorkSection';
+import WorkSection from 'components/ProjectDetail/WorkSection';
 import ProjectMenu from 'components/ProjectMenu';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 const InfoContainer = styled(Grid)`

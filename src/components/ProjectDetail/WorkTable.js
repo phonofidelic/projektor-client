@@ -17,7 +17,7 @@ export default function WorkTable(props) {
   // console.log('====================================');
   return (
     <Paper style={{ margin: 18 }}>
-      <Table>
+      <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
@@ -29,7 +29,7 @@ export default function WorkTable(props) {
         </TableHead>
         <TableBody>
           {project.work.map(workItem => (
-            <TableRow key={workItem._id}>
+            <TableRow key={workItem._id} hover>
               <TableCell>
                 <Typography>
                   {moment(workItem.date).format('MM/DD/YYYY')}

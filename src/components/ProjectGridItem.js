@@ -36,8 +36,7 @@ export default function ProjectGridItem(props) {
       <Card>
         <CardHeader>
           <Typography
-            style={{ flexGrow: 1 }}
-            gutterBottom
+            style={{ flexGrow: 1, lineHeight: '2em' }}
             variant="h5"
             component="h2"
           >
