@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
+import { useHistory } from 'react-router-dom';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -11,6 +12,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 function ProjectMenu(props) {
   const { project, color } = props;
+
+  const history = useHistory();
 
   const [anchorEl, setAnchor] = useState(null);
   const handleMenuClick = e => {
@@ -32,7 +35,7 @@ function ProjectMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleCloseMenu}
       >
-        <MenuItem onClick={() => props.deleteProject(project._id)}>
+        <MenuItem onClick={() => props.deleteProject(project._id, history)}>
           <ListItemIcon>
             <Delete />
           </ListItemIcon>

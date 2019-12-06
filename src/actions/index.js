@@ -113,7 +113,7 @@ export const createProject = (data, history) => {
   };
 };
 
-export const deleteProject = projectId => {
+export const deleteProject = (projectId, history) => {
   console.log('deleteProject, projectId:', projectId);
   return async dispatch => {
     dispatch({
@@ -122,8 +122,8 @@ export const deleteProject = projectId => {
 
     let response;
     try {
-      response = await axios.delete(
-        `http://localhost:4000/projects/${projectId}`,
+      response = await axios.put(
+        `http://localhost:4000/projects/${projectId}/status/delete`,
         projectId
       );
 
@@ -133,6 +133,7 @@ export const deleteProject = projectId => {
         type: DELETE_PROJECT_SUCCESS,
         payload: response.data._id
       });
+      history && history.push('/projects');
     } catch (err) {
       console.error(err);
 
