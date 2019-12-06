@@ -13,7 +13,7 @@ function CreateProject(props) {
   };
   return (
     <div>
-      <Header back="/projects" title="Create Project" />
+      <Header back="/projects" centerTitle title="Create Project" />
       <ProjectForm handleFormSubmit={handleFormSubmit} />
     </div>
   );

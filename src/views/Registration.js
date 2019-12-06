@@ -1,15 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Header from 'components/Header';
+
 function Registration(props) {
   return (
     <div>
-      <div>Register</div>
-      <div>
-        <Link to="/" replace>
-          Back
-        </Link>
-      </div>
+      <Header title="Create a new account" centerTitle back="/" />
+      <div></div>
     </div>
   );
 }

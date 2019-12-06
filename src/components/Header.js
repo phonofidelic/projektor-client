@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import BackArrow from '@material-ui/icons/ArrowBack';
 
 export default function Header(props) {
-  const { title, back, headerActions } = props;
+  const { title, centerTitle, back, headerActions } = props;
   const history = useHistory();
 
   return (
@@ -16,7 +16,7 @@ export default function Header(props) {
       <Toolbar>
         {back && (
           <IconButton
-            style={{ marginRight: 25, textDecoration: 'none' }}
+            style={{ textDecoration: 'none' }}
             // onClick={() => history.goBack()}
             component={Link}
             to={back}
@@ -24,9 +24,11 @@ export default function Header(props) {
             <BackArrow style={{ color: '#fff' }} />
           </IconButton>
         )}
-        <Typography variant="h6">{title}</Typography>
-        <div style={{ flexGrow: 1 }}></div>
-        {headerActions}
+        <div style={{ flexGrow: centerTitle ? 1 : 0 }}>
+          <Typography variant="h6">{title}</Typography>
+        </div>
+        {!centerTitle && <div style={{ flexGrow: 1 }}></div>}
+        <div>{headerActions}</div>
       </Toolbar>
     </AppBar>
   );
