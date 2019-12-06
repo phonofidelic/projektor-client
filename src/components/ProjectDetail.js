@@ -21,6 +21,9 @@ const InfoContainer = styled(Grid)`
 
 const Info = styled(Grid)`
   padding: 18px;
+  max-height: 300px;
+  overflow-y: auto;
+  white-space: pre-wrap;
 `;
 
 export default function ProjectDetail(props) {
@@ -35,7 +38,7 @@ export default function ProjectDetail(props) {
       />
       <InfoContainer container>
         <Info item xs={12} sm={6}>
-          {project.description}
+          <Typography>{project.description}</Typography>
         </Info>
         <Info item xs={12} sm={6}>
           <div>
@@ -61,7 +64,7 @@ export default function ProjectDetail(props) {
           </div>
           <div>
             <Typography variant="overline">Budgeted Time:</Typography>{' '}
-            {project.budgetedTime}
+            {project.budgetedTime}h
           </div>
           <div>
             <LinearProgress

@@ -73,17 +73,12 @@ export default function WorkSection(props) {
         </div>
         <div>
           {!workStarted ? (
-            // <Button onClick={handleStartWork}>Start Work</Button>
-            <IconButton onClick={handleStartWork}>
-              <PlayArrowIcon />
-            </IconButton>
+            <Button onClick={handleStartWork}>Start Work</Button>
           ) : !workActive ? (
-            // <Button onClick={handleResumeWork}>Resume Work</Button>
             <IconButton onClick={handleResumeWork}>
               <PlayArrowIcon />
             </IconButton>
           ) : (
-            // <Button onClick={handlePauseWork}>Pause Work</Button>
             <IconButton onClick={handlePauseWork}>
               <PauseIcon />
             </IconButton>

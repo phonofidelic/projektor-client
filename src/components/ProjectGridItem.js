@@ -62,7 +62,7 @@ export default function ProjectGridItem(props) {
               variant="body2"
               color="textSecondary"
               component="p"
-              style={{ height: 100, overflowY: 'auto' }}
+              style={{ height: 100, overflowY: 'auto', whiteSpace: 'pre-wrap' }}
             >
               {project.description}
             </Typography>
