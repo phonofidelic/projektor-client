@@ -19,7 +19,10 @@ import {
   STOP_WORK,
   POST_REGISTRATION,
   POST_REGISTRATION_SUCCESS,
-  POST_REGISTRATION_FAILURE
+  POST_REGISTRATION_FAILURE,
+  POST_LOGIN,
+  POST_LOGIN_SUCCESS,
+  POST_LOGIN_FAILURE
 } from 'actions/types';
 import { uuid } from 'uuidv4';
 import mockProjects from 'utils/mockProjects';
@@ -180,6 +183,7 @@ export const createWork = work => {
 export const registerNewUser = (formData, history) => {
   console.log('registerNewUser, formData:', formData);
   const { email, password } = formData;
+
   return async dispatch => {
     dispatch({
       type: POST_REGISTRATION
@@ -200,6 +204,36 @@ export const registerNewUser = (formData, history) => {
       console.error(err);
       dispatch({
         type: POST_REGISTRATION_FAILURE,
+        password: err
+      });
+    }
+  };
+};
+
+export const loginUser = (formData, history) => {
+  console.log('loginUser, formData:', formData);
+  const { email, password } = formData;
+
+  return async dispatch => {
+    dispatch({
+      type: POST_LOGIN
+    });
+
+    let response;
+    try {
+      response = await axios.post('http://localhost:4000/auth/login', {
+        email,
+        password
+      });
+      dispatch({
+        type: POST_LOGIN_SUCCESS,
+        payload: response.data
+      });
+      history.push('/projects');
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: POST_LOGIN_FAILURE,
         password: err
       });
     }

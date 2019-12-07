@@ -15,26 +15,22 @@ const InputContainer = styled(Grid)`
   margin: 10px;
 `;
 
-export default function RegistrationForm(props) {
+export default function LoginForm(props) {
   return (
     <Container>
       <Formik
-        initialValues={{ email: null, password: null, passwordMatch: null }}
+        initialValues={{ email: null, password: null }}
         validate={values => {
           const errors = {};
           if (!values.email) {
             errors.email = 'Please enter a valid email';
           } else if (!values.password) {
             errors.password = 'Password is required';
-          } else if (!values.passwordMatch) {
-            errors.passwordMatch = 'Please confirm password';
-          } else if (values.password !== values.passwordMatch) {
-            errors.passwordMatch = 'Passwords do not match';
           }
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          props.handleRegistrationSubmit(values);
+          props.handleLoginSubmit(values);
         }}
       >
         {({
@@ -76,25 +72,6 @@ export default function RegistrationForm(props) {
                       errors.password && touched.password && errors.password
                     }
                     error={errors.password && touched.password}
-                    onChange={handleChange}
-                  />
-                </InputContainer>
-              </Grid>
-              <Grid item xs={12}>
-                <InputContainer>
-                  <TextField
-                    fullWidth
-                    type="password"
-                    id="password-match"
-                    name="passwordMatch"
-                    label="Confirm password"
-                    variant="outlined"
-                    helperText={
-                      errors.passwordMatch &&
-                      touched.passwordMatch &&
-                      errors.passwordMatch
-                    }
-                    error={errors.passwordMatch && touched.passwordMatch}
                     onChange={handleChange}
                   />
                 </InputContainer>
