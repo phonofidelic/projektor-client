@@ -1,15 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from 'actions';
 
 import Header from 'components/Header';
+import RegistrationForm from 'components/RegistrationForm';
 
 function Registration(props) {
+  const handleRegistrationSubmit = formData => {
+    props.registerNewUser(formData);
+  };
+
   return (
     <div>
       <Header title="Create a new account" centerTitle back="/" />
-      <div></div>
+      <RegistrationForm handleRegistrationSubmit={handleRegistrationSubmit} />
     </div>
   );
 }
 
-export default Registration;
+export default connect(null, actions)(Registration);

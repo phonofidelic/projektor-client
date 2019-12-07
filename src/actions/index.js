@@ -16,7 +16,10 @@ import {
   CREATE_WORK,
   CREATE_WORK_SUCCESS,
   CREATE_WORK_FAILURE,
-  STOP_WORK
+  STOP_WORK,
+  POST_REGISTRATION,
+  POST_REGISTRATION_SUCCESS,
+  POST_REGISTRATION_FAILURE
 } from 'actions/types';
 import { uuid } from 'uuidv4';
 import mockProjects from 'utils/mockProjects';
@@ -81,8 +84,8 @@ export const selectProject = id => {
   };
 };
 
-export const createProject = (data, history) => {
-  console.log('createProject, data:', data);
+export const createProject = (formData, history) => {
+  console.log('createProject, formData:', formData);
 
   return async dispatch => {
     dispatch({
@@ -93,16 +96,16 @@ export const createProject = (data, history) => {
     try {
       response = await axios.post(
         'http://localhost:4000/projects/create',
-        data
+        formData
       );
       console.log('createProject, response:', response);
 
       dispatch({
         type: CREATE_PROJECT_SUCCESS,
-        payload: response.data
+        payload: response.formData
       });
 
-      history.push(`/projects/${response.data._id}`);
+      history.push(`/projects/${response.formData._id}`);
     } catch (err) {
       console.error(err);
       dispatch({
@@ -169,6 +172,34 @@ export const createWork = work => {
       dispatch({
         type: CREATE_WORK_FAILURE,
         payload: err
+      });
+    }
+  };
+};
+
+export const registerNewUser = formData => {
+  console.log('registerNewUser, formData:', formData);
+  const { email, password } = formData;
+  return async dispatch => {
+    dispatch({
+      type: POST_REGISTRATION
+    });
+
+    let response;
+    try {
+      response = await axios.post('http://localhost:4000/auth/register', {
+        email,
+        password
+      });
+      dispatch({
+        type: POST_REGISTRATION_SUCCESS,
+        payload: response.data
+      });
+    } catch (err) {
+      console.error(err);
+      dispatch({
+        type: POST_REGISTRATION_FAILURE,
+        password: err
       });
     }
   };

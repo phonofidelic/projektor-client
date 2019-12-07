@@ -1,15 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import Header from 'components/Header';
 
 function Login(props) {
   return (
     <div>
-      <div>Login</div>
-      <div>
-        <Link to="/" replace>
-          Back
-        </Link>
-      </div>
+      <Header title="Sign in" centerTitle back="/" />
+      <div></div>
     </div>
   );
 }
