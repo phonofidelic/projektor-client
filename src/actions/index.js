@@ -177,7 +177,7 @@ export const createWork = work => {
   };
 };
 
-export const registerNewUser = formData => {
+export const registerNewUser = (formData, history) => {
   console.log('registerNewUser, formData:', formData);
   const { email, password } = formData;
   return async dispatch => {
@@ -195,6 +195,7 @@ export const registerNewUser = formData => {
         type: POST_REGISTRATION_SUCCESS,
         payload: response.data
       });
+      history.push('/projects');
     } catch (err) {
       console.error(err);
       dispatch({
