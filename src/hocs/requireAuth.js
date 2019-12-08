@@ -13,7 +13,7 @@ export default ChildComponent => {
       this.shouldNavigateAway();
     }
     shouldNavigateAway() {
-      console.log('requireAurth, props:', this.props);
+      // console.log('requireAurth, props:', this.props);
       if (!this.props.token) {
         history.push('/');
       }

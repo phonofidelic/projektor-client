@@ -6,6 +6,7 @@ import ProjectDetail from 'components/ProjectDetail';
 
 export function Project(props) {
   const { projectId } = useParams();
+  console.log('projectId:', projectId);
 
   useEffect(() => {
     props.getProject(projectId);

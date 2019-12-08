@@ -86,7 +86,7 @@ export default function(state = defaultState, action) {
         ...state,
         loading: false,
         projectList: [...state.projectList, action.payload]
-        // selectedProject: action.payload
+        // selectedProject: action.payloadx
       };
 
     case CREATE_PROJECT_FAILURE:

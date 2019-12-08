@@ -30,16 +30,22 @@ function Projects(props) {
     props.getProjects();
   }, []);
 
-  return projects.length > 0 ? (
+  return (
     <div>
       <Header nav title="Projects" headerActions={<HeaderActions />} />
-      <ProjectsGrid projects={projects} />
-      <div>
-        <Button onClick={props.logoutUser}>Sign out</Button>
-      </div>
+      {projects.length > 0 ? (
+        <div>
+          <ProjectsGrid projects={projects} />
+          <div>
+            <Button onClick={props.logoutUser}>Sign out</Button>
+          </div>
+        </div>
+      ) : (
+        <div style={{ margin: '80px' }}>
+          <div>Add a project to get started</div>
+        </div>
+      )}
     </div>
-  ) : (
-    <div>Loading...</div>
   );
 }
 

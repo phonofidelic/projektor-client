@@ -145,9 +145,9 @@ export const createProject = formData => {
         'http://localhost:4000/projects/create',
         formData
       );
-
+      console.log('createProject response:', response);
       handleResponse(response, dispatch, CREATE_PROJECT_SUCCESS);
-      history.push(`/projects/${response.data._id}`);
+      history.push(`/projects/${response.data.data._id}`);
     } catch (err) {
       console.error(err);
       handleError(err, dispatch, CREATE_PROJECT_FAILURE);
@@ -171,7 +171,7 @@ export const deleteProject = projectId => {
       );
 
       handleResponse(response, dispatch, DELETE_PROJECT_SUCCESS);
-      history && history.push('/projects');
+      history.push('/projects');
     } catch (err) {
       console.error(err);
 
