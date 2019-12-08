@@ -25,15 +25,17 @@ import {
   POST_LOGIN_FAILURE,
   POST_LOGOUT,
   POST_LOGOUT_SUCCESS,
-  POST_LOGOUT_FAILURE
+  POST_LOGOUT_FAILURE,
+  SET_NEW_TOKEN
 } from 'actions/types';
-import { uuid } from 'uuidv4';
-import mockProjects from 'utils/mockProjects';
 import axios from 'axios';
 
 import { history } from 'config';
 
-const api = token => axios.create({ headers: { token } });
+const api = token =>
+  axios.create({
+    headers: { token }
+  });
 
 const handleError = (err, dispatch, actionType) => {
   if (err.response && err.response.status === 401) {
@@ -51,6 +53,31 @@ const handleError = (err, dispatch, actionType) => {
   }
 };
 
+const handleResponse = (response, dispatch, actionType) => {
+  /**
+   * If a new token was provided, set it and then proceed with the action
+   */
+  if (response.data.token) {
+    const token = response.data.token;
+
+    localStorage.setItem('token', token);
+    dispatch({
+      type: SET_NEW_TOKEN,
+      payload: token
+    });
+
+    dispatch({
+      type: actionType,
+      payload: response.data.data
+    });
+  } else {
+    dispatch({
+      type: actionType,
+      payload: response.data.data
+    });
+  }
+};
+
 export const getProjects = () => {
   return async dispatch => {
     dispatch({
@@ -62,12 +89,8 @@ export const getProjects = () => {
     let response;
     try {
       response = await api(token).get('http://localhost:4000/projects');
-      console.log('getProjects, response:', response);
 
-      dispatch({
-        type: GET_PROJECTS_SUCCESS,
-        payload: response.data
-      });
+      handleResponse(response, dispatch, GET_PROJECTS_SUCCESS);
     } catch (err) {
       console.error('getProjects error:', err.response);
 
@@ -90,10 +113,7 @@ export const getProject = projectId => {
         `http://localhost:4000/projects/${projectId}`
       );
 
-      dispatch({
-        type: GET_PROJECT_SUCCESS,
-        payload: response.data
-      });
+      handleResponse(response, dispatch, GET_PROJECT_SUCCESS);
     } catch (err) {
       console.error(err);
       handleError(err, dispatch, GET_PROJECT_FAILURE);
@@ -112,8 +132,6 @@ export const selectProject = id => {
 };
 
 export const createProject = formData => {
-  console.log('createProject, formData:', formData);
-
   return async dispatch => {
     dispatch({
       type: POST_CREATE_PROJECT
@@ -127,13 +145,8 @@ export const createProject = formData => {
         'http://localhost:4000/projects/create',
         formData
       );
-      console.log('createProject, response:', response);
 
-      dispatch({
-        type: CREATE_PROJECT_SUCCESS,
-        payload: response.data
-      });
-
+      handleResponse(response, dispatch, CREATE_PROJECT_SUCCESS);
       history.push(`/projects/${response.data._id}`);
     } catch (err) {
       console.error(err);
@@ -143,7 +156,6 @@ export const createProject = formData => {
 };
 
 export const deleteProject = projectId => {
-  console.log('deleteProject, projectId:', projectId);
   return async dispatch => {
     dispatch({
       type: DELETE_PROJECT
@@ -158,12 +170,7 @@ export const deleteProject = projectId => {
         projectId
       );
 
-      console.log('deleteProject, response:', response);
-
-      dispatch({
-        type: DELETE_PROJECT_SUCCESS,
-        payload: response.data._id
-      });
+      handleResponse(response, dispatch, DELETE_PROJECT_SUCCESS);
       history && history.push('/projects');
     } catch (err) {
       console.error(err);
@@ -174,7 +181,6 @@ export const deleteProject = projectId => {
 };
 
 export const createWork = work => {
-  console.log('createWork, work:', work);
   return async dispatch => {
     dispatch({
       type: CREATE_WORK
@@ -188,11 +194,7 @@ export const createWork = work => {
         'http://localhost:4000/work/create',
         work
       );
-      console.log('createWork, response:', response);
-      dispatch({
-        type: CREATE_WORK_SUCCESS,
-        payload: response.data
-      });
+      handleResponse(response, dispatch, CREATE_WORK_SUCCESS);
     } catch (err) {
       console.error(err);
       handleError(err, dispatch, CREATE_WORK_FAILURE);

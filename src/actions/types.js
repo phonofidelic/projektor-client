@@ -25,4 +25,5 @@ export const SELECT_PROJECT = 'select_project',
   POST_LOGIN_FAILURE = 'post_login_failure',
   POST_LOGOUT = 'post_logout',
   POST_LOGOUT_SUCCESS = 'post_logout_success',
-  POST_LOGOUT_FAILURE = 'post_logout_failure';
+  POST_LOGOUT_FAILURE = 'post_logout_failure',
+  SET_NEW_TOKEN = 'set_new_token';

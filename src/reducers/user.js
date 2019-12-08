@@ -4,11 +4,13 @@ import {
   POST_REGISTRATION_FAILURE,
   POST_LOGIN,
   POST_LOGIN_SUCCESS,
-  POST_LOGIN_FAILURE
+  POST_LOGIN_FAILURE,
+  SET_NEW_TOKEN
 } from 'actions/types';
 
 const defaultState = {
   userInfo: { token: localStorage.getItem('token') },
+  token: localStorage.getItem('token'),
   loading: false,
   error: null
 };
@@ -53,6 +55,12 @@ export default function(state = defaultState, action) {
         ...state,
         loading: false,
         error: action.payload
+      };
+
+    case SET_NEW_TOKEN:
+      return {
+        ...state,
+        token: action.payload
       };
 
     default:
