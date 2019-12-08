@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
+import requireAuth from 'hocs/requireAuth';
+
 import ProjectsGrid from 'components/ProjectsGrid';
 import Header from 'components/Header';
 
@@ -28,14 +30,12 @@ function Projects(props) {
     props.getProjects();
   }, []);
 
-  return projects ? (
+  return projects.length > 0 ? (
     <div>
       <Header title="Projects" headerActions={<HeaderActions />} />
       <ProjectsGrid projects={projects} />
       <div>
-        <Link to="/" replace>
-          Back
-        </Link>
+        <Button onClick={props.logoutUser}>Sign out</Button>
       </div>
     </div>
   ) : (
@@ -49,4 +49,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, actions)(Projects);
+export default connect(mapStateToProps, actions)(requireAuth(Projects));

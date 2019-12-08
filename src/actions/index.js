@@ -22,11 +22,34 @@ import {
   POST_REGISTRATION_FAILURE,
   POST_LOGIN,
   POST_LOGIN_SUCCESS,
-  POST_LOGIN_FAILURE
+  POST_LOGIN_FAILURE,
+  POST_LOGOUT,
+  POST_LOGOUT_SUCCESS,
+  POST_LOGOUT_FAILURE
 } from 'actions/types';
 import { uuid } from 'uuidv4';
 import mockProjects from 'utils/mockProjects';
 import axios from 'axios';
+
+import { history } from 'config';
+
+const api = token => axios.create({ headers: { token } });
+
+const handleError = (err, dispatch, actionType) => {
+  if (err.response && err.status === 401) {
+    console.log('*** 401 ***');
+    dispatch({
+      type: actionType,
+      payload: err
+    });
+    history.push('/');
+  } else {
+    dispatch({
+      type: actionType,
+      payload: err
+    });
+  }
+};
 
 export const getProjects = () => {
   return async dispatch => {
@@ -34,9 +57,11 @@ export const getProjects = () => {
       type: GET_PROJECTS
     });
 
+    const token = localStorage.getItem('token');
+
     let response;
     try {
-      response = await axios.get('http://localhost:4000/projects');
+      response = await api(token).get('http://localhost:4000/projects');
       console.log('getProjects, response:', response);
 
       dispatch({
@@ -44,11 +69,9 @@ export const getProjects = () => {
         payload: response.data
       });
     } catch (err) {
-      console.error(err);
-      dispatch({
-        type: GET_PROJECTS_FAILURE,
-        payload: err
-      });
+      console.error('getProjects error:', err.response);
+
+      handleError(err, dispatch, GET_PROJECTS_FAILURE);
     }
   };
 };
@@ -59,9 +82,13 @@ export const getProject = projectId => {
       type: GET_PROJECT
     });
 
+    const token = localStorage.getItem('token');
+
     let response;
     try {
-      response = await axios.get(`http://localhost:4000/projects/${projectId}`);
+      response = await api(token).get(
+        `http://localhost:4000/projects/${projectId}`
+      );
 
       dispatch({
         type: GET_PROJECT_SUCCESS,
@@ -69,10 +96,7 @@ export const getProject = projectId => {
       });
     } catch (err) {
       console.error(err);
-      dispatch({
-        type: GET_PROJECT_FAILURE,
-        payload: err
-      });
+      handleError(err, dispatch, GET_PROJECT_FAILURE);
     }
   };
 };
@@ -87,7 +111,7 @@ export const selectProject = id => {
   };
 };
 
-export const createProject = (formData, history) => {
+export const createProject = formData => {
   console.log('createProject, formData:', formData);
 
   return async dispatch => {
@@ -95,9 +119,11 @@ export const createProject = (formData, history) => {
       type: POST_CREATE_PROJECT
     });
 
+    const token = localStorage.getItem('token');
+
     let response;
     try {
-      response = await axios.post(
+      response = await api(token).post(
         'http://localhost:4000/projects/create',
         formData
       );
@@ -105,30 +131,29 @@ export const createProject = (formData, history) => {
 
       dispatch({
         type: CREATE_PROJECT_SUCCESS,
-        payload: response.formData
+        payload: response.data
       });
 
-      history.push(`/projects/${response.formData._id}`);
+      history.push(`/projects/${response.data._id}`);
     } catch (err) {
       console.error(err);
-      dispatch({
-        type: CREATE_PROJECT_FAILURE,
-        payload: err
-      });
+      handleError(err, dispatch, CREATE_PROJECT_FAILURE);
     }
   };
 };
 
-export const deleteProject = (projectId, history) => {
+export const deleteProject = projectId => {
   console.log('deleteProject, projectId:', projectId);
   return async dispatch => {
     dispatch({
       type: DELETE_PROJECT
     });
 
+    const token = localStorage.getItem('token');
+
     let response;
     try {
-      response = await axios.put(
+      response = await api(token).put(
         `http://localhost:4000/projects/${projectId}/status/delete`,
         projectId
       );
@@ -143,16 +168,9 @@ export const deleteProject = (projectId, history) => {
     } catch (err) {
       console.error(err);
 
-      dispatch({
-        type: DELETE_PROJECT_FAILURE,
-        payload: err
-      });
+      handleError(err, dispatch, DELETE_PROJECT_FAILURE);
     }
   };
-};
-
-export const startWork = projectId => {
-  return async dispatch => {};
 };
 
 export const createWork = work => {
@@ -162,9 +180,14 @@ export const createWork = work => {
       type: CREATE_WORK
     });
 
+    const token = localStorage.getItem('token');
+
     let response;
     try {
-      response = await axios.post('http://localhost:4000/work/create', work);
+      response = await api(token).post(
+        'http://localhost:4000/work/create',
+        work
+      );
       console.log('createWork, response:', response);
       dispatch({
         type: CREATE_WORK_SUCCESS,
@@ -172,15 +195,12 @@ export const createWork = work => {
       });
     } catch (err) {
       console.error(err);
-      dispatch({
-        type: CREATE_WORK_FAILURE,
-        payload: err
-      });
+      handleError(err, dispatch, CREATE_WORK_FAILURE);
     }
   };
 };
 
-export const registerNewUser = (formData, history) => {
+export const registerNewUser = formData => {
   console.log('registerNewUser, formData:', formData);
   const { email, password } = formData;
 
@@ -199,6 +219,7 @@ export const registerNewUser = (formData, history) => {
         type: POST_REGISTRATION_SUCCESS,
         payload: response.data
       });
+      localStorage.setItem('token', response.data.token);
       history.push('/projects');
     } catch (err) {
       console.error(err);
@@ -210,7 +231,7 @@ export const registerNewUser = (formData, history) => {
   };
 };
 
-export const loginUser = (formData, history) => {
+export const loginUser = formData => {
   console.log('loginUser, formData:', formData);
   const { email, password } = formData;
 
@@ -225,16 +246,48 @@ export const loginUser = (formData, history) => {
         email,
         password
       });
+      console.log('loginUser, response:', response);
       dispatch({
         type: POST_LOGIN_SUCCESS,
         payload: response.data
       });
+      localStorage.setItem('token', response.data.token);
       history.push('/projects');
     } catch (err) {
       console.error(err);
       dispatch({
         type: POST_LOGIN_FAILURE,
-        password: err
+        payload: err
+      });
+    }
+  };
+};
+
+export const logoutUser = () => {
+  return async dispatch => {
+    dispatch({
+      type: POST_LOGOUT
+    });
+
+    const token = localStorage.getItem('token');
+
+    let response;
+    try {
+      response = await api(token).post('http://localhost:4000/auth/logout');
+      console.log('logoutUser, response:', response);
+
+      dispatch({
+        type: POST_LOGOUT_SUCCESS
+      });
+
+      localStorage.removeItem('token');
+      history.push('/');
+    } catch (err) {
+      console.error(err);
+
+      dispatch({
+        type: POST_LOGIN_FAILURE,
+        payload: err
       });
     }
   };

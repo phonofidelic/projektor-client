@@ -10,6 +10,9 @@ import reducers from './reducers';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
+
+import { history } from 'config';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -21,7 +24,9 @@ ReactDOM.render(
   <Provider store={createStore(reducers, {}, enhancer)}>
     <MuiThemeProvider theme={materialUITheme}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <App />
+        <ConnectedRouter history={history}>
+          <App />
+        </ConnectedRouter>
       </MuiPickersUtilsProvider>
     </MuiThemeProvider>
   </Provider>,

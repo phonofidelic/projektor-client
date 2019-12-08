@@ -1,15 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
-import { useHistory } from 'react-router-dom';
 import Header from 'components/Header';
 import ProjectForm from 'components/ProjectForm';
 
 function CreateProject(props) {
-  const history = useHistory();
-
   const handleFormSubmit = data => {
-    props.createProject(data, history);
+    props.createProject(data);
   };
   return (
     <div>

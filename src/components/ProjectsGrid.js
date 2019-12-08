@@ -15,12 +15,14 @@ const Container = styled.div`
 
 export default function ProjectGrid(props) {
   const { projects } = props;
+
   return (
     <Container>
       <Grid container>
-        {projects.map(project => (
-          <ProjectGridItem key={project._id} project={project} />
-        ))}
+        {projects.length > 0 &&
+          projects.map(project => (
+            <ProjectGridItem key={project._id} project={project} />
+          ))}
       </Grid>
     </Container>
   );

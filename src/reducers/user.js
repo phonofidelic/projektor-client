@@ -8,7 +8,7 @@ import {
 } from 'actions/types';
 
 const defaultState = {
-  userInfo: null,
+  userInfo: { token: localStorage.getItem('token') },
   loading: false,
   error: null
 };

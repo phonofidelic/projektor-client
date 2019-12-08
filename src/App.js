@@ -12,28 +12,26 @@ import CreateProject from 'views/CreateProject';
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Switch>
-          <Route path="/projects/create">
-            <CreateProject />
-          </Route>
-          <Route path="/projects/:projectId">
-            <Project />
-          </Route>
-          <Route path="/projects">
-            <Projects />
-          </Route>
-          <Route path="/registration">
-            <Registration />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/">
-            <Landing />
-          </Route>
-        </Switch>
-      </Router>
+      <Switch>
+        <Route path="/projects/create">
+          <CreateProject />
+        </Route>
+        <Route path="/projects/:projectId">
+          <Project />
+        </Route>
+        <Route path="/projects">
+          <Projects />
+        </Route>
+        <Route path="/registration">
+          <Registration />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route exact path="/">
+          <Landing />
+        </Route>
+      </Switch>
     </div>
   );
 }

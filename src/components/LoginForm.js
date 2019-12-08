@@ -82,7 +82,7 @@ export default function LoginForm(props) {
                     type="submit"
                     // disabled={Object.keys(errors).length > 0}
                   >
-                    Create account
+                    Sign in
                   </Button>
                 </InputContainer>
               </Grid>
