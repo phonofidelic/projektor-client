@@ -36,7 +36,7 @@ import { history } from 'config';
 const api = token => axios.create({ headers: { token } });
 
 const handleError = (err, dispatch, actionType) => {
-  if (err.response && err.status === 401) {
+  if (err.response && err.response.status === 401) {
     console.log('*** 401 ***');
     dispatch({
       type: actionType,
@@ -286,7 +286,7 @@ export const logoutUser = () => {
       console.error(err);
 
       dispatch({
-        type: POST_LOGIN_FAILURE,
+        type: POST_LOGOUT_FAILURE,
         payload: err
       });
     }
