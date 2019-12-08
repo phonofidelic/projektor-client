@@ -32,7 +32,7 @@ function Projects(props) {
 
   return projects.length > 0 ? (
     <div>
-      <Header title="Projects" headerActions={<HeaderActions />} />
+      <Header nav title="Projects" headerActions={<HeaderActions />} />
       <ProjectsGrid projects={projects} />
       <div>
         <Button onClick={props.logoutUser}>Sign out</Button>
