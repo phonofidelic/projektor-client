@@ -8,7 +8,6 @@ import ProjectMenu from 'components/ProjectMenu';
 
 export function Project(props) {
   const { projectId } = useParams();
-  console.log('projectId:', projectId);
 
   const { project, createWork } = props;
 

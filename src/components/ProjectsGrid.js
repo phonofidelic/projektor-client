@@ -15,9 +15,6 @@ const Container = styled.div`
 
 export default function ProjectGrid(props) {
   const { projects } = props;
-  console.log('====================================');
-  console.log('projects:', projects);
-  console.log('====================================');
 
   return (
     <Container>
