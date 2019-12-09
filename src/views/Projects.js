@@ -23,7 +23,7 @@ function HeaderActions(props) {
   );
 }
 
-function Projects(props) {
+export function Projects(props) {
   const { projects } = props;
 
   useEffect(() => {
@@ -33,18 +33,12 @@ function Projects(props) {
   return (
     <div>
       <Header nav title="Projects" headerActions={<HeaderActions />} />
-      {projects.length > 0 ? (
+      <div>
+        <ProjectsGrid projects={projects} />
         <div>
-          <ProjectsGrid projects={projects} />
-          <div>
-            <Button onClick={props.logoutUser}>Sign out</Button>
-          </div>
+          <Button onClick={props.logoutUser}>Sign out</Button>
         </div>
-      ) : (
-        <div style={{ margin: '80px' }}>
-          <div>Add a project to get started</div>
-        </div>
-      )}
+      </div>
     </div>
   );
 }
