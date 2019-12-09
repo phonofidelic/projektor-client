@@ -111,6 +111,13 @@ export default function(state = defaultState, action) {
         )
       };
 
+    case DELETE_PROJECT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
+
     case CREATE_WORK_SUCCESS:
       return {
         ...state,

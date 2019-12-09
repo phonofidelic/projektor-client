@@ -12,11 +12,9 @@ import {
   DELETE_PROJECT,
   DELETE_PROJECT_SUCCESS,
   DELETE_PROJECT_FAILURE,
-  START_WORK,
   CREATE_WORK,
   CREATE_WORK_SUCCESS,
   CREATE_WORK_FAILURE,
-  STOP_WORK,
   POST_REGISTRATION,
   POST_REGISTRATION_SUCCESS,
   POST_REGISTRATION_FAILURE,
@@ -34,6 +32,7 @@ import { history } from 'config';
 
 const api = token =>
   axios.create({
+    baseURL: 'http://localhost:4000',
     headers: { token }
   });
 
@@ -88,7 +87,7 @@ export const getProjects = () => {
 
     let response;
     try {
-      response = await api(token).get('http://localhost:4000/projects');
+      response = await api(token).get('/projects');
 
       handleResponse(response, dispatch, GET_PROJECTS_SUCCESS);
     } catch (err) {
@@ -109,9 +108,7 @@ export const getProject = projectId => {
 
     let response;
     try {
-      response = await api(token).get(
-        `http://localhost:4000/projects/${projectId}`
-      );
+      response = await api(token).get(`/projects/${projectId}`);
 
       handleResponse(response, dispatch, GET_PROJECT_SUCCESS);
     } catch (err) {
@@ -141,10 +138,7 @@ export const createProject = formData => {
 
     let response;
     try {
-      response = await api(token).post(
-        'http://localhost:4000/projects/create',
-        formData
-      );
+      response = await api(token).post('/projects/create', formData);
       console.log('createProject response:', response);
       handleResponse(response, dispatch, CREATE_PROJECT_SUCCESS);
       history.push(`/projects/${response.data.data._id}`);
@@ -166,7 +160,7 @@ export const deleteProject = projectId => {
     let response;
     try {
       response = await api(token).put(
-        `http://localhost:4000/projects/${projectId}/status/delete`,
+        `/projects/${projectId}/status/delete`,
         projectId
       );
 
@@ -190,10 +184,7 @@ export const createWork = work => {
 
     let response;
     try {
-      response = await api(token).post(
-        'http://localhost:4000/work/create',
-        work
-      );
+      response = await api(token).post('/work/create', work);
       handleResponse(response, dispatch, CREATE_WORK_SUCCESS);
     } catch (err) {
       console.error(err);
@@ -213,7 +204,7 @@ export const registerNewUser = formData => {
 
     let response;
     try {
-      response = await axios.post('http://localhost:4000/auth/register', {
+      response = await axios.post('/auth/register', {
         email,
         password
       });
@@ -244,7 +235,7 @@ export const loginUser = formData => {
 
     let response;
     try {
-      response = await axios.post('http://localhost:4000/auth/login', {
+      response = await axios.post('/auth/login', {
         email,
         password
       });
@@ -275,7 +266,7 @@ export const logoutUser = () => {
 
     let response;
     try {
-      response = await api(token).post('http://localhost:4000/auth/logout');
+      response = await api(token).post('/auth/logout');
       console.log('logoutUser, response:', response);
 
       dispatch({
