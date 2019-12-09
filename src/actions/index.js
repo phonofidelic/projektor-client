@@ -77,7 +77,7 @@ const handleResponse = (response, dispatch, actionType) => {
   }
 };
 
-export const getProjects = () => {
+export const getProjects = status => {
   return async dispatch => {
     dispatch({
       type: GET_PROJECTS
@@ -87,7 +87,7 @@ export const getProjects = () => {
 
     let response;
     try {
-      response = await api(token).get('/projects');
+      response = await api(token).get('/projects', { params: { status } });
 
       handleResponse(response, dispatch, GET_PROJECTS_SUCCESS);
     } catch (err) {

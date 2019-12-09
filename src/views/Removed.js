@@ -17,17 +17,17 @@ function HeaderActions(props) {
         component={Link}
         to="/projects/create"
       >
-        New
+        Empty trash
       </Button>
     </div>
   );
 }
 
-export function Projects(props) {
+export function Removed(props) {
   const { projects } = props;
 
   useEffect(() => {
-    props.getProjects('active');
+    props.getProjects('deleted');
   }, []);
 
   return (
@@ -49,4 +49,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, actions)(requireAuth(Projects));
+export default connect(mapStateToProps, actions)(requireAuth(Removed));
