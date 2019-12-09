@@ -34,7 +34,7 @@ export function Removed(props) {
     <div>
       <Header nav title="Projects" headerActions={<HeaderActions />} />
       <div>
-        <ProjectsGrid projects={projects} />
+        <ProjectsGrid projects={projects.reverse()} />
         <div>
           <Button onClick={props.logoutUser}>Sign out</Button>
         </div>

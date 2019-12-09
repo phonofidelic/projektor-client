@@ -2,22 +2,31 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 import { useParams } from 'react-router-dom';
+import Header from 'components/Header';
 import ProjectDetail from 'components/ProjectDetail';
+import ProjectMenu from 'components/ProjectMenu';
 
 export function Project(props) {
   const { projectId } = useParams();
   console.log('projectId:', projectId);
 
+  const { project, createWork } = props;
+
   useEffect(() => {
     props.getProject(projectId);
   }, []);
 
-  return props.project ? (
+  return (
     <div>
-      <ProjectDetail project={props.project} createWork={props.createWork} />
+      <Header
+        back="/projects"
+        title={project && project.title}
+        headerActions={
+          project && <ProjectMenu project={project} color="#fff" />
+        }
+      />
+      <ProjectDetail project={project} createWork={createWork} />
     </div>
-  ) : (
-    <div>loading...</div>
   );
 }
 

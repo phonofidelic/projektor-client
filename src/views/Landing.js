@@ -26,7 +26,7 @@ function HeaderActions(props) {
   );
 }
 
-function Landing(props) {
+export function Landing(props) {
   return (
     <div>
       <Header title="Projektor" headerActions={<HeaderActions />} />

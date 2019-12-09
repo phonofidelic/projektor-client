@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 
-import Header from 'components/Header';
 import WorkSection from 'components/ProjectDetail/WorkSection';
-import ProjectMenu from 'components/ProjectMenu';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -27,13 +25,8 @@ const Info = styled(Grid)`
 export default function ProjectDetail(props) {
   const { project, createWork } = props;
 
-  return (
+  return project ? (
     <div>
-      <Header
-        back="/projects"
-        title={project.title}
-        headerActions={<ProjectMenu project={project} color="#fff" />}
-      />
       <InfoContainer container>
         <Info item xs={12} sm={6}>
           <Typography>{project.description}</Typography>
@@ -75,5 +68,7 @@ export default function ProjectDetail(props) {
       </InfoContainer>
       <WorkSection project={project} createWork={createWork} />
     </div>
+  ) : (
+    <div>Loading...</div>
   );
 }

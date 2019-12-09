@@ -4,7 +4,7 @@ import * as actions from 'actions';
 import Header from 'components/Header';
 import ProjectForm from 'components/ProjectForm';
 
-function CreateProject(props) {
+export function CreateProject(props) {
   const handleFormSubmit = data => {
     props.createProject(data);
   };

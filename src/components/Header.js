@@ -17,6 +17,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import AppsIcon from '@material-ui/icons/Apps';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DeleteIcon from '@material-ui/icons/Delete';
+import BookIcon from '@material-ui/icons/Book';
 
 const navItems = [
   {
@@ -28,6 +29,11 @@ const navItems = [
     title: 'Projects',
     icon: <AppsIcon />,
     link: '/projects'
+  },
+  {
+    title: 'Archived',
+    icon: <BookIcon />,
+    link: '/archived'
   },
   {
     title: 'Removed',

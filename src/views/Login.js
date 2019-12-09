@@ -1,16 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
-import { useHistory } from 'react-router-dom';
 
 import Header from 'components/Header';
 import LoginForm from 'components/LoginForm';
 
-function Login(props) {
-  const history = useHistory();
-
+export function Login(props) {
   const handleLoginSubmit = formData => {
-    props.loginUser(formData, history);
+    props.loginUser(formData);
   };
   return (
     <div>
