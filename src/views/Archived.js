@@ -23,11 +23,11 @@ function HeaderActions(props) {
   );
 }
 
-export function Removed(props) {
+export function Archived(props) {
   const { projects } = props;
 
   useEffect(() => {
-    props.getProjects('deleted');
+    props.getProjects('archived');
   }, []);
 
   return (
@@ -49,4 +49,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, actions)(requireAuth(Removed));
+export default connect(mapStateToProps, actions)(requireAuth(Archived));

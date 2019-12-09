@@ -9,6 +9,7 @@ import Projects from 'views/Projects';
 import Project from 'views/Project';
 import CreateProject from 'views/CreateProject';
 import Removed from 'views/Removed';
+import Archived from 'views/Archived';
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
         </Route>
         <Route path="/removed">
           <Removed />
+        </Route>
+        <Route path="/archived">
+          <Archived />
         </Route>
         <Route path="/registration">
           <Registration />
