@@ -204,7 +204,7 @@ export const registerNewUser = formData => {
 
     let response;
     try {
-      response = await axios.post('/auth/register', {
+      response = await api().post('/auth/register', {
         email,
         password
       });
@@ -235,7 +235,7 @@ export const loginUser = formData => {
 
     let response;
     try {
-      response = await axios.post('/auth/login', {
+      response = await api().post('/auth/login', {
         email,
         password
       });
