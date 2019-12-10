@@ -19,7 +19,7 @@ export default function LoginForm(props) {
   return (
     <Container>
       <Formik
-        initialValues={{ email: null, password: null }}
+        initialValues={{ email: '', password: '' }}
         validate={values => {
           const errors = {};
           if (!values.email) {
@@ -55,6 +55,7 @@ export default function LoginForm(props) {
                     variant="outlined"
                     helperText={errors.email && touched.email && errors.email}
                     error={errors.email && touched.email}
+                    value={values.email}
                     onChange={handleChange}
                   />
                 </InputContainer>
@@ -68,6 +69,7 @@ export default function LoginForm(props) {
                     name="password"
                     label="Password"
                     variant="outlined"
+                    value={values.password}
                     helperText={
                       errors.password && touched.password && errors.password
                     }

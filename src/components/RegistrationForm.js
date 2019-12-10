@@ -19,7 +19,7 @@ export default function RegistrationForm(props) {
   return (
     <Container>
       <Formik
-        initialValues={{ email: null, password: null, passwordMatch: null }}
+        initialValues={{ email: '', password: '', passwordMatch: '' }}
         validate={values => {
           const errors = {};
           if (!values.email) {
@@ -59,6 +59,7 @@ export default function RegistrationForm(props) {
                     variant="outlined"
                     helperText={errors.email && touched.email && errors.email}
                     error={errors.email && touched.email}
+                    value={values.email}
                     onChange={handleChange}
                   />
                 </InputContainer>
@@ -76,6 +77,7 @@ export default function RegistrationForm(props) {
                       errors.password && touched.password && errors.password
                     }
                     error={errors.password && touched.password}
+                    value={values.password}
                     onChange={handleChange}
                   />
                 </InputContainer>
@@ -95,6 +97,7 @@ export default function RegistrationForm(props) {
                       errors.passwordMatch
                     }
                     error={errors.passwordMatch && touched.passwordMatch}
+                    value={values.passwordMatch}
                     onChange={handleChange}
                   />
                 </InputContainer>
