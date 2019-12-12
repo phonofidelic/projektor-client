@@ -15,6 +15,9 @@ function App() {
   return (
     <div className="App">
       <Switch>
+        <Route exact path="/">
+          <Landing />
+        </Route>
         <Route path="/projects/create">
           <CreateProject />
         </Route>
@@ -35,9 +38,6 @@ function App() {
         </Route>
         <Route path="/login">
           <Login />
-        </Route>
-        <Route exact path="/">
-          <Landing />
         </Route>
       </Switch>
     </div>

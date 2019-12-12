@@ -19,7 +19,13 @@ export default function ProjectForm(props) {
   return (
     <Container>
       <Formik
-        initialValues={{ title: '', startDate: null, deadline: null }}
+        initialValues={{
+          title: '',
+          startDate: null,
+          deadline: null,
+          client: '',
+          budgetedTime: ''
+        }}
         validate={values => {
           const errors = {};
           if (!values.title || values.title === '') {
@@ -50,9 +56,9 @@ export default function ProjectForm(props) {
                     name="title"
                     label="Project Title"
                     variant="outlined"
-                    // value={values.title}
                     helperText={errors.title && touched.title && 'Required'}
                     error={errors.title && touched.title}
+                    value={values.title}
                     onChange={handleChange}
                   />
                 </InputContainer>
@@ -67,7 +73,7 @@ export default function ProjectForm(props) {
                     id="description"
                     name="description"
                     label="Description"
-                    // value={values.description}
+                    value={values.description}
                     onChange={handleChange}
                   />
                 </InputContainer>
@@ -98,7 +104,7 @@ export default function ProjectForm(props) {
                     id="client"
                     name="client"
                     label="Client"
-                    // value={values.client}
+                    value={values.client}
                     onChange={handleChange}
                   />
                 </InputContainer>
@@ -110,7 +116,7 @@ export default function ProjectForm(props) {
                     name="budgetedTime"
                     label="Budgeted Time"
                     type="number"
-                    // value={values.budgetedHours}
+                    value={values.budgetedTime}
                     onChange={handleChange}
                   />
                 </InputContainer>
