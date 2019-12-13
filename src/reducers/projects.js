@@ -1,4 +1,3 @@
-import mockProjects from 'utils/mockProjects';
 import {
   SELECT_PROJECT,
   POST_CREATE_PROJECT,
@@ -13,7 +12,10 @@ import {
   DELETE_PROJECT,
   DELETE_PROJECT_SUCCESS,
   DELETE_PROJECT_FAILURE,
-  CREATE_WORK_SUCCESS
+  CREATE_WORK_SUCCESS,
+  SET_RPOJECT_STATUS,
+  SET_RPOJECT_STATUS_SUCCESS,
+  SET_RPOJECT_STATUS_FAILURE
 } from 'actions/types';
 
 const defaultState = {
@@ -112,6 +114,28 @@ export default function(state = defaultState, action) {
       };
 
     case DELETE_PROJECT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
+
+    case SET_RPOJECT_STATUS:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case SET_RPOJECT_STATUS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        projectList: state.projectList.filter(
+          project => project._id !== action.payload
+        )
+      };
+
+    case SET_RPOJECT_STATUS_FAILURE:
       return {
         ...state,
         loading: false,

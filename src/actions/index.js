@@ -24,17 +24,22 @@ import {
   POST_LOGOUT,
   POST_LOGOUT_SUCCESS,
   POST_LOGOUT_FAILURE,
-  SET_NEW_TOKEN
+  SET_NEW_TOKEN,
+  SET_RPOJECT_STATUS,
+  SET_RPOJECT_STATUS_SUCCESS,
+  SET_RPOJECT_STATUS_FAILURE
 } from 'actions/types';
 import axios from 'axios';
 
 import { history } from 'config';
 
-const api = token =>
-  axios.create({
+const api = () => {
+  const token = localStorage.getItem('token');
+  return axios.create({
     baseURL: 'http://localhost:4000',
     headers: { token }
   });
+};
 
 const handleError = (err, dispatch, actionType) => {
   if (err.response && err.response.status === 401) {
@@ -60,6 +65,7 @@ const handleResponse = (response, dispatch, actionType) => {
     const token = response.data.token;
 
     localStorage.setItem('token', token);
+
     dispatch({
       type: SET_NEW_TOKEN,
       payload: token
@@ -83,11 +89,9 @@ export const getProjects = status => {
       type: GET_PROJECTS
     });
 
-    const token = localStorage.getItem('token');
-
     let response;
     try {
-      response = await api(token).get('/projects', { params: { status } });
+      response = await api().get('/projects', { params: { status } });
 
       handleResponse(response, dispatch, GET_PROJECTS_SUCCESS);
     } catch (err) {
@@ -104,11 +108,9 @@ export const getProject = projectId => {
       type: GET_PROJECT
     });
 
-    const token = localStorage.getItem('token');
-
     let response;
     try {
-      response = await api(token).get(`/projects/${projectId}`);
+      response = await api().get(`/projects/${projectId}`);
 
       handleResponse(response, dispatch, GET_PROJECT_SUCCESS);
     } catch (err) {
@@ -134,11 +136,9 @@ export const createProject = formData => {
       type: POST_CREATE_PROJECT
     });
 
-    const token = localStorage.getItem('token');
-
     let response;
     try {
-      response = await api(token).post('/projects/create', formData);
+      response = await api().post('/projects/create', formData);
       console.log('createProject response:', response);
       handleResponse(response, dispatch, CREATE_PROJECT_SUCCESS);
       history.push(`/projects/${response.data.data._id}`);
@@ -155,11 +155,9 @@ export const deleteProject = projectId => {
       type: DELETE_PROJECT
     });
 
-    const token = localStorage.getItem('token');
-
     let response;
     try {
-      response = await api(token).put(
+      response = await api().put(
         `/projects/${projectId}/status/delete`,
         projectId
       );
@@ -174,17 +172,37 @@ export const deleteProject = projectId => {
   };
 };
 
+export const setProjectStatus = (projectId, status) => {
+  return async dispatch => {
+    dispatch({
+      type: SET_RPOJECT_STATUS
+    });
+
+    let response;
+    try {
+      response = await api().put(`/projects/${projectId}/status`, {
+        projectId,
+        status
+      });
+
+      handleResponse(response, dispatch, SET_RPOJECT_STATUS_SUCCESS);
+    } catch (err) {
+      console.error(err);
+
+      handleError(err, dispatch, SET_RPOJECT_STATUS_FAILURE);
+    }
+  };
+};
+
 export const createWork = work => {
   return async dispatch => {
     dispatch({
       type: CREATE_WORK
     });
 
-    const token = localStorage.getItem('token');
-
     let response;
     try {
-      response = await api(token).post('/work/create', work);
+      response = await api().post('/work/create', work);
       handleResponse(response, dispatch, CREATE_WORK_SUCCESS);
     } catch (err) {
       console.error(err);
