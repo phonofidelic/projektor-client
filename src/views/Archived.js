@@ -32,7 +32,7 @@ export function Archived(props) {
 
   return (
     <div>
-      <Header nav title="Projects" headerActions={<HeaderActions />} />
+      <Header nav title="Archive" headerActions={<HeaderActions />} />
       <div>
         <ProjectsGrid projects={projects} />
         <div>

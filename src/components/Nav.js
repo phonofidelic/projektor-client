@@ -30,7 +30,7 @@ const navItems = [
     link: '/archived'
   },
   {
-    title: 'Removed',
+    title: 'Trash',
     icon: <DeleteIcon />,
     link: '/removed'
   },

@@ -32,7 +32,7 @@ export function Removed(props) {
 
   return (
     <div>
-      <Header nav title="Projects" headerActions={<HeaderActions />} />
+      <Header nav title="Trash" headerActions={<HeaderActions />} />
       <div>
         <ProjectsGrid projects={projects} />
         <div>
