@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
+// import STATUS from 'constants';
+
+import { ACTIVE, COMPLETE, ARCHIVED, DELETED } from 'constants/status';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -9,9 +12,31 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import BookIcon from '@material-ui/icons/Book';
 import Delete from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import CachedIcon from '@material-ui/icons/Cached';
+
+const menuActions = [
+  {
+    pathname: '/projects',
+    status: ACTIVE,
+    title: 'Activate',
+    icon: <CachedIcon />
+  },
+  {
+    pathname: '/archived',
+    status: ARCHIVED,
+    title: 'Archive',
+    icon: <BookIcon />
+  },
+  {
+    pathname: '/removed',
+    status: DELETED,
+    title: 'Delete',
+    icon: <Delete />
+  }
+];
 
 function ProjectMenu(props) {
-  const { project, color } = props;
+  const { project, color, location } = props;
 
   const [anchorEl, setAnchor] = useState(null);
   const handleMenuClick = e => {
@@ -33,23 +58,27 @@ function ProjectMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleCloseMenu}
       >
-        <MenuItem
-          onClick={() => props.setProjectStatus(project._id, 'archived')}
-        >
-          <ListItemIcon>
-            <BookIcon />
-          </ListItemIcon>
-          Archive
-        </MenuItem>
-        <MenuItem onClick={() => props.deleteProject(project._id)}>
-          <ListItemIcon>
-            <Delete />
-          </ListItemIcon>
-          Delete
-        </MenuItem>
+        {menuActions.map(
+          (item, i) =>
+            project.status !== item.status && (
+              <MenuItem
+                key={i}
+                onClick={() => props.setProjectStatus(project._id, item.status)}
+              >
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                {item.title}
+              </MenuItem>
+            )
+        )}
       </Menu>
     </div>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    location: state.router.location
+  };
+};
 
 export default connect(null, actions)(ProjectMenu);
