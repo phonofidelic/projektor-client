@@ -46,6 +46,11 @@ function ProjectMenu(props) {
     setAnchor(null);
   };
 
+  const handleMenuSelection = (projectId, status) => {
+    props.setProjectStatus(projectId, status);
+    handleCloseMenu();
+  };
+
   return (
     <div>
       <IconButton onClick={handleMenuClick}>
@@ -63,7 +68,7 @@ function ProjectMenu(props) {
             project.status !== item.status && (
               <MenuItem
                 key={i}
-                onClick={() => props.setProjectStatus(project._id, item.status)}
+                onClick={() => handleMenuSelection(project._id, item.status)}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 {item.title}
