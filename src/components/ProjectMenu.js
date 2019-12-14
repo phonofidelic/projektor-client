@@ -30,7 +30,7 @@ const menuActions = [
   {
     pathname: '/removed',
     status: DELETED,
-    title: 'Delete',
+    title: 'Move to trash',
     icon: <Delete />
   }
 ];
@@ -48,6 +48,11 @@ function ProjectMenu(props) {
 
   const handleMenuSelection = (projectId, status) => {
     props.setProjectStatus(projectId, status, location);
+    handleCloseMenu();
+  };
+
+  const handleDelete = projectId => {
+    props.deleteProject(projectId, location);
     handleCloseMenu();
   };
 
@@ -74,6 +79,14 @@ function ProjectMenu(props) {
                 {item.title}
               </MenuItem>
             )
+        )}
+        {project.status === DELETED && (
+          <MenuItem key="perm_delete" onClick={() => handleDelete(project._id)}>
+            <ListItemIcon>
+              <Delete />
+            </ListItemIcon>
+            Delete
+          </MenuItem>
         )}
       </Menu>
     </div>

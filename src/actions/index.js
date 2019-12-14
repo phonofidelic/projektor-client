@@ -179,7 +179,7 @@ export const setProjectStatus = (projectId, status, location) => {
   };
 };
 
-export const deleteProject = projectId => {
+export const deleteProject = (projectId, location) => {
   return async dispatch => {
     dispatch({
       type: DELETE_PROJECT
@@ -187,13 +187,14 @@ export const deleteProject = projectId => {
 
     let response;
     try {
-      response = await api().put(
-        `/projects/${projectId}/status/delete`,
-        projectId
-      );
+      response = await api().delete(`/projects/removed/delete/${projectId}`);
 
       handleResponse(response, dispatch, DELETE_PROJECT_SUCCESS);
-      history.push('/projects');
+
+      /**
+       * Go back to previous view if status was set from project detail
+       */
+      if (location.pathname.includes(projectId)) history.goBack();
     } catch (err) {
       console.error(err);
 
