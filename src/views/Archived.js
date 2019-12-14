@@ -9,20 +9,6 @@ import Header from 'components/Header';
 
 import Button from '@material-ui/core/Button';
 
-function HeaderActions(props) {
-  return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Button
-        style={{ textDecoratino: 'none', color: '#fff' }}
-        component={Link}
-        to="/projects/create"
-      >
-        Empty trash
-      </Button>
-    </div>
-  );
-}
-
 export function Archived(props) {
   const { projects } = props;
 
@@ -32,7 +18,7 @@ export function Archived(props) {
 
   return (
     <div>
-      <Header nav title="Archive" headerActions={<HeaderActions />} />
+      <Header nav title="Archive" />
       <div>
         <ProjectsGrid projects={projects} />
         <div>

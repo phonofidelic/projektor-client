@@ -15,7 +15,10 @@ import {
   CREATE_WORK_SUCCESS,
   SET_RPOJECT_STATUS,
   SET_RPOJECT_STATUS_SUCCESS,
-  SET_RPOJECT_STATUS_FAILURE
+  SET_RPOJECT_STATUS_FAILURE,
+  DELET_ALL_REMOVED_PORJECTS,
+  DELETE_ALL_REMOVED_PROJECTS_SUCCESS,
+  DELETE_ALL_REMOVED_PROJECTS_FAILURE
 } from 'actions/types';
 
 const defaultState = {
@@ -136,6 +139,26 @@ export default function(state = defaultState, action) {
       };
 
     case SET_RPOJECT_STATUS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
+
+    case DELET_ALL_REMOVED_PORJECTS:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case DELETE_ALL_REMOVED_PROJECTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        projectList: []
+      };
+
+    case DELETE_ALL_REMOVED_PROJECTS_FAILURE:
       return {
         ...state,
         loading: false,

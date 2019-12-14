@@ -12,11 +12,7 @@ import Button from '@material-ui/core/Button';
 function HeaderActions(props) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Button
-        style={{ textDecoratino: 'none', color: '#fff' }}
-        component={Link}
-        to="/projects/create"
-      >
+      <Button style={{ color: '#fff' }} onClick={props.emptyTrash}>
         Empty trash
       </Button>
     </div>
@@ -26,13 +22,21 @@ function HeaderActions(props) {
 export function Removed(props) {
   const { projects } = props;
 
+  const emptyTrash = () => {
+    props.deleteAllTrash();
+  };
+
   useEffect(() => {
     props.getProjects('deleted');
   }, []);
 
   return (
     <div>
-      <Header nav title="Trash" headerActions={<HeaderActions />} />
+      <Header
+        nav
+        title="Trash"
+        headerActions={<HeaderActions emptyTrash={emptyTrash} />}
+      />
       <div>
         <ProjectsGrid projects={projects} />
         <div>

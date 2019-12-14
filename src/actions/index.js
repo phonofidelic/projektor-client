@@ -27,7 +27,10 @@ import {
   SET_NEW_TOKEN,
   SET_RPOJECT_STATUS,
   SET_RPOJECT_STATUS_SUCCESS,
-  SET_RPOJECT_STATUS_FAILURE
+  SET_RPOJECT_STATUS_FAILURE,
+  DELET_ALL_REMOVED_PORJECTS,
+  DELETE_ALL_REMOVED_PROJECTS_SUCCESS,
+  DELETE_ALL_REMOVED_PROJECTS_FAILURE
 } from 'actions/types';
 import axios from 'axios';
 
@@ -149,6 +152,28 @@ export const createProject = formData => {
   };
 };
 
+export const setProjectStatus = (projectId, status) => {
+  return async dispatch => {
+    dispatch({
+      type: SET_RPOJECT_STATUS
+    });
+
+    let response;
+    try {
+      response = await api().put(`/projects/${projectId}/status`, {
+        projectId,
+        status
+      });
+
+      handleResponse(response, dispatch, SET_RPOJECT_STATUS_SUCCESS);
+    } catch (err) {
+      console.error(err);
+
+      handleError(err, dispatch, SET_RPOJECT_STATUS_FAILURE);
+    }
+  };
+};
+
 export const deleteProject = projectId => {
   return async dispatch => {
     dispatch({
@@ -172,24 +197,20 @@ export const deleteProject = projectId => {
   };
 };
 
-export const setProjectStatus = (projectId, status) => {
+export const deleteAllTrash = () => {
   return async dispatch => {
     dispatch({
-      type: SET_RPOJECT_STATUS
+      type: DELET_ALL_REMOVED_PORJECTS
     });
 
     let response;
     try {
-      response = await api().put(`/projects/${projectId}/status`, {
-        projectId,
-        status
-      });
-
-      handleResponse(response, dispatch, SET_RPOJECT_STATUS_SUCCESS);
+      response = await api().delete('/projects/removed/delete');
+      console.log('deleteAllTrash, response:', response);
+      handleResponse(response, dispatch, DELETE_ALL_REMOVED_PROJECTS_SUCCESS);
     } catch (err) {
       console.error(err);
-
-      handleError(err, dispatch, SET_RPOJECT_STATUS_FAILURE);
+      handleError(err, dispatch, DELETE_ALL_REMOVED_PROJECTS_FAILURE);
     }
   };
 };
