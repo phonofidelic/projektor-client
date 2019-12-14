@@ -152,7 +152,7 @@ export const createProject = formData => {
   };
 };
 
-export const setProjectStatus = (projectId, status) => {
+export const setProjectStatus = (projectId, status, location) => {
   return async dispatch => {
     dispatch({
       type: SET_RPOJECT_STATUS
@@ -166,6 +166,11 @@ export const setProjectStatus = (projectId, status) => {
       });
 
       handleResponse(response, dispatch, SET_RPOJECT_STATUS_SUCCESS);
+
+      /**
+       * Go back to previous view if status was set from project detail
+       */
+      if (location.pathname.includes(projectId)) history.goBack();
     } catch (err) {
       console.error(err);
 

@@ -47,7 +47,7 @@ function ProjectMenu(props) {
   };
 
   const handleMenuSelection = (projectId, status) => {
-    props.setProjectStatus(projectId, status);
+    props.setProjectStatus(projectId, status, location);
     handleCloseMenu();
   };
 
@@ -86,4 +86,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(null, actions)(ProjectMenu);
+export default connect(mapStateToProps, actions)(ProjectMenu);
