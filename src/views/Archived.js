@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 import requireAuth from 'hocs/requireAuth';
@@ -11,11 +10,11 @@ import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import Button from '@material-ui/core/Button';
 
 export function Archived(props) {
-  const { projects } = props;
+  const { projects, getProjects } = props;
 
   useEffect(() => {
-    props.getProjects('archived');
-  }, []);
+    getProjects('archived');
+  }, [getProjects]);
 
   return (
     <div>

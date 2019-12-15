@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import momentDurationFormatSetup from 'moment-duration-format';
+// import momentDurationFormatSetup from 'moment-duration-format';
 
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';

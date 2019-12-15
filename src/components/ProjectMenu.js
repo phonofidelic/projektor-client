@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from 'actions';
 // import STATUS from 'constants';
 
-import { ACTIVE, COMPLETE, ARCHIVED, DELETED } from 'constants/status';
+import { ACTIVE, ARCHIVED, DELETED } from 'constants/status';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';

@@ -25,11 +25,11 @@ function HeaderActions(props) {
 }
 
 export function Projects(props) {
-  const { projects } = props;
+  const { projects, getProjects } = props;
 
   useEffect(() => {
-    props.getProjects('active');
-  }, []);
+    getProjects('active');
+  }, [getProjects]);
 
   return (
     <div>

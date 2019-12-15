@@ -20,15 +20,15 @@ function HeaderActions(props) {
 }
 
 export function Removed(props) {
-  const { projects } = props;
+  const { projects, getProjects, deleteAllTrash } = props;
 
   const emptyTrash = () => {
-    props.deleteAllTrash();
+    deleteAllTrash();
   };
 
   useEffect(() => {
-    props.getProjects('deleted');
-  }, []);
+    getProjects('deleted');
+  }, [getProjects]);
 
   return (
     <div>

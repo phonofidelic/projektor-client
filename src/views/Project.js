@@ -9,11 +9,11 @@ import ProjectMenu from 'components/ProjectMenu';
 export function Project(props) {
   const { projectId } = useParams();
 
-  const { project, createWork } = props;
+  const { project, getProject, createWork } = props;
 
   useEffect(() => {
-    props.getProject(projectId);
-  }, []);
+    getProject(projectId);
+  }, [getProject, projectId]);
 
   return (
     <div>

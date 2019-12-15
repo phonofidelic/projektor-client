@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import momentDurationFormatSetup from 'moment-duration-format';
+// import momentDurationFormatSetup from 'moment-duration-format';
 
 import WorkTable from 'components/ProjectDetail/WorkTable';
 import Timer from 'components/Timer';

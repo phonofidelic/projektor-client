@@ -1,7 +1,6 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
-import { useHistory } from 'react-router-dom';
 import { history } from 'config';
 
 export default ChildComponent => {

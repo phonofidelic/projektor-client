@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
+// eslint-disable-next-line
 import momentDurationFormatSetup from 'moment-duration-format';
 
 import WorkSection from 'components/ProjectDetail/WorkSection';

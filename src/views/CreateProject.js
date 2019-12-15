@@ -16,8 +16,4 @@ export function CreateProject(props) {
   );
 }
 
-const mapStateToProps = state => {
-  return {};
-};
-
 export default connect(null, actions)(CreateProject);

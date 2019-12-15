@@ -10,7 +10,7 @@ import reducers from './reducers';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
+import { ConnectedRouter } from 'connected-react-router';
 
 import { history } from 'config';
 
