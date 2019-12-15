@@ -6,6 +6,7 @@ import requireAuth from 'hocs/requireAuth';
 
 import ProjectsGrid from 'components/ProjectsGrid';
 import Header from 'components/Header';
+import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 
 import Button from '@material-ui/core/Button';
 
@@ -13,7 +14,7 @@ function HeaderActions(props) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
       <Button
-        style={{ textDecoratino: 'none', color: '#fff' }}
+        style={{ textDecoration: 'none', color: '#fff' }}
         component={Link}
         to="/projects/create"
       >
@@ -34,7 +35,11 @@ export function Projects(props) {
     <div>
       <Header nav title="Projects" headerActions={<HeaderActions />} />
       <div>
-        <ProjectsGrid projects={projects} />
+        {projects.length ? (
+          <ProjectsGrid projects={projects} />
+        ) : (
+          <DefaultEmptyMessage text="Add a project to get started" />
+        )}
         <div>
           <Button onClick={props.logoutUser}>Sign out</Button>
         </div>

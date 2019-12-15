@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 import requireAuth from 'hocs/requireAuth';
 
 import ProjectsGrid from 'components/ProjectsGrid';
 import Header from 'components/Header';
+import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 
 import Button from '@material-ui/core/Button';
 
@@ -38,7 +38,11 @@ export function Removed(props) {
         headerActions={<HeaderActions emptyTrash={emptyTrash} />}
       />
       <div>
-        <ProjectsGrid projects={projects} />
+        {projects.length ? (
+          <ProjectsGrid projects={projects} />
+        ) : (
+          <DefaultEmptyMessage text="Removed Projects will show up here" />
+        )}
         <div>
           <Button onClick={props.logoutUser}>Sign out</Button>
         </div>

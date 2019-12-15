@@ -6,6 +6,7 @@ import requireAuth from 'hocs/requireAuth';
 
 import ProjectsGrid from 'components/ProjectsGrid';
 import Header from 'components/Header';
+import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 
 import Button from '@material-ui/core/Button';
 
@@ -20,7 +21,11 @@ export function Archived(props) {
     <div>
       <Header nav title="Archive" />
       <div>
-        <ProjectsGrid projects={projects} />
+        {projects.length ? (
+          <ProjectsGrid projects={projects} />
+        ) : (
+          <DefaultEmptyMessage text="Archived Projects will show up here" />
+        )}
         <div>
           <Button onClick={props.logoutUser}>Sign out</Button>
         </div>

@@ -18,17 +18,11 @@ export default function ProjectGrid(props) {
 
   return (
     <Container>
-      {projects.length > 0 ? (
-        <Grid container>
-          {projects.map(project => (
-            <ProjectGridItem key={project._id} project={project} />
-          ))}
-        </Grid>
-      ) : (
-        <div style={{ margin: '80px' }}>
-          <div>Add a project to get started</div>
-        </div>
-      )}
+      <Grid container>
+        {projects.map(project => (
+          <ProjectGridItem key={project._id} project={project} />
+        ))}
+      </Grid>
     </Container>
   );
 }
