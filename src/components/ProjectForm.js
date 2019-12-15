@@ -114,8 +114,9 @@ export default function ProjectForm(props) {
                     variant="outlined"
                     id="budgeted-time"
                     name="budgetedTime"
-                    label="Budgeted Time"
+                    label="Budgeted Time (hours)"
                     type="number"
+                    inputProps={{ step: '0.1' }}
                     value={values.budgetedTime}
                     onChange={handleChange}
                   />
