@@ -25,6 +25,7 @@
     "react-timer-hook": "^1.1.8",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
+    "string-format": "^2.0.0",
     "styled-components": "^4.4.1",
     "use-interval": "^1.1.0",
     "uuidv4": "^6.0.0"

@@ -25,10 +25,10 @@ import {
   POST_LOGOUT_SUCCESS,
   POST_LOGOUT_FAILURE,
   SET_NEW_TOKEN,
-  SET_RPOJECT_STATUS,
-  SET_RPOJECT_STATUS_SUCCESS,
-  SET_RPOJECT_STATUS_FAILURE,
-  DELET_ALL_REMOVED_PORJECTS,
+  SET_PROJECT_STATUS,
+  SET_PROJECT_STATUS_SUCCESS,
+  SET_PROJECT_STATUS_FAILURE,
+  DELETE_ALL_REMOVED_PROJECTS,
   DELETE_ALL_REMOVED_PROJECTS_SUCCESS,
   DELETE_ALL_REMOVED_PROJECTS_FAILURE
 } from 'actions/types';
@@ -44,18 +44,18 @@ const api = () => {
   });
 };
 
-const handleError = (err, dispatch, actionType) => {
+const handleError = (err, dispatch, errorType) => {
   if (err.response && err.response.status === 401) {
     console.log('*** 401 ***');
     dispatch({
-      type: actionType,
-      payload: err
+      type: errorType
+      // payload: err
     });
     history.push('/');
   } else {
     dispatch({
-      type: actionType,
-      payload: err
+      type: errorType
+      // payload: err
     });
   }
 };
@@ -155,7 +155,7 @@ export const createProject = formData => {
 export const setProjectStatus = (projectId, status, location) => {
   return async dispatch => {
     dispatch({
-      type: SET_RPOJECT_STATUS
+      type: SET_PROJECT_STATUS
     });
 
     let response;
@@ -165,7 +165,7 @@ export const setProjectStatus = (projectId, status, location) => {
         status
       });
 
-      handleResponse(response, dispatch, SET_RPOJECT_STATUS_SUCCESS);
+      handleResponse(response, dispatch, SET_PROJECT_STATUS_SUCCESS);
 
       /**
        * Go back to previous view if status was set from project detail
@@ -174,7 +174,11 @@ export const setProjectStatus = (projectId, status, location) => {
     } catch (err) {
       console.error(err);
 
-      handleError(err, dispatch, SET_RPOJECT_STATUS_FAILURE);
+      handleError(err, dispatch, SET_PROJECT_STATUS_FAILURE);
+      dispatch({
+        type: SET_PROJECT_STATUS_FAILURE,
+        payload: status
+      });
     }
   };
 };
@@ -206,7 +210,7 @@ export const deleteProject = (projectId, location) => {
 export const deleteAllTrash = () => {
   return async dispatch => {
     dispatch({
-      type: DELET_ALL_REMOVED_PORJECTS
+      type: DELETE_ALL_REMOVED_PROJECTS
     });
 
     let response;

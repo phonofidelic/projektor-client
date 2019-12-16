@@ -18,3 +18,48 @@ export const mockProject = {
   deadline: '2019-12-16T10:22:00.000Z',
   __v: 3
 };
+
+export const mockSelectedProject = {
+  description: 'No description provided',
+  timeUsed: 48459,
+  status: 'active',
+  work: [
+    {
+      _id: '5df68683c1181c125b671ef1',
+      userId: '5deae94a77d40a110ddb30ea',
+      projectId: '5df5e2d85032413df009eebc',
+      date: '2019-12-15T19:15:30.327Z',
+      start: '2019-12-15T19:15:30.327Z',
+      end: '2019-12-15T19:16:18.786Z',
+      duration: 48459,
+      created: '2019-12-15T19:16:19.291Z',
+      __v: 0
+    }
+  ],
+  _id: '5df5e2d85032413df009eebc',
+  userId: '5deae94a77d40a110ddb30ea',
+  created: '2019-12-15T07:38:00.967Z',
+  title: 'Short project',
+  client: 'Phonofidelic',
+  budgetedTime: 0.5,
+  startDate: null,
+  deadline: null,
+  __v: 0
+};
+
+export const mockWork = {
+  _id: '5df68683c1181c125b671ef1',
+  userId: '5deae94a77d40a110ddb30ea',
+  projectId: '5df5e2d85032413df009eebc',
+  date: '2019-12-15T19:15:30.327Z',
+  start: '2019-12-15T19:15:30.327Z',
+  end: '2019-12-15T19:16:18.786Z',
+  duration: 48459,
+  created: '2019-12-15T19:16:19.291Z',
+  __v: 0
+};
+
+export const mockError = {
+  status: 500,
+  message: 'Something went wrong'
+};

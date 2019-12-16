@@ -1,0 +1,12 @@
+export const MSG__CREATE_PROJECT_ERROR = 'Sorry, could not create project',
+  MSG__GET_PROJECTS_ERROR = 'Sorry, could not load projects',
+  MSG__GET_PROJECT_ERROR = 'Sorry, could not load project',
+  MSG__DELETE_PROJECT_ERROR = 'Sorry, could not delete project',
+  MSG__SET_PROJECT_STATUS_ERROR = 'Sorry, could not set project status',
+  MSG_FRG__SET_PROJECT_STATUS_ERROR = 'Sorry, could not send project to {0}',
+  TTL__ACTIVE = 'Projects',
+  TTL__COMPLETE = 'Completed',
+  TTL__ARCHIVED = 'Archived',
+  TTL__DELETED = 'Removed',
+  MSG__DELETE_ALL_REMOVED_PROJECTS_ERROR = 'Sorry, could not empty trash',
+  MSG__CREATE_WORK_ERROR = 'Could not create Work item';
