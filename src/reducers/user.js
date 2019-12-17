@@ -7,8 +7,12 @@ import {
   POST_LOGIN_FAILURE,
   SET_NEW_TOKEN
 } from 'actions/types';
+import {
+  MSG__POST_REGISTRATION_ERROR,
+  MSG__POST_LOGIN_ERROR
+} from 'constants/strings';
 
-const defaultState = {
+export const defaultState = {
   userInfo: { token: localStorage.getItem('token') },
   token: localStorage.getItem('token'),
   loading: false,
@@ -34,7 +38,7 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         loading: false,
-        error: action.payload
+        error: { message: MSG__POST_REGISTRATION_ERROR }
       };
 
     case POST_LOGIN:
@@ -54,7 +58,7 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         loading: false,
-        error: action.payload
+        error: { message: MSG__POST_LOGIN_ERROR }
       };
 
     case SET_NEW_TOKEN:

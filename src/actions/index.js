@@ -66,9 +66,7 @@ const handleResponse = (response, dispatch, actionType) => {
    */
   if (response.data.token) {
     const token = response.data.token;
-
     localStorage.setItem('token', token);
-
     dispatch({
       type: SET_NEW_TOKEN,
       payload: token
@@ -266,8 +264,8 @@ export const registerNewUser = formData => {
     } catch (err) {
       console.error(err);
       dispatch({
-        type: POST_REGISTRATION_FAILURE,
-        password: err
+        type: POST_REGISTRATION_FAILURE
+        // payload: err
       });
     }
   };

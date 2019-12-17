@@ -63,3 +63,10 @@ export const mockError = {
   status: 500,
   message: 'Something went wrong'
 };
+
+export const mockUserInfo = {
+  _id: '5deae2fc0538f147d0eace3c',
+  email: 'test1@test.com',
+  token:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGVhZTJmYzA1MzhmMTQ3ZDBlYWNlM2MiLCJlbWFpbCI6InRlc3QxQHRlc3QuY29tIiwicnQiOiI4MGY5OGNjMi04MjU4LTQzZGEtYjI0ZC1iMDlmNDgzYTQ3ZDUiLCJpYXQiOjE1NzY1NjcxNzUsImV4cCI6MTU3NjU2ODA3NSwiYXVkIjoicHJvamVrdG9yX2NsaWVudCIsImlzcyI6InByb2pla3Rvcl9hcGkiLCJzdWIiOiI1ZGVhZTJmYzA1MzhmMTQ3ZDBlYWNlM2MiLCJqdGkiOiJmOTZkMGVkZi1iYmY2LTQ1ZmQtYWYxMi1mNmYwYTkyODcxNWUifQ.-hqUCC-l1GGu6kl-yxsrph2TcCgE3r2MhFiyFWTTMdU'
+};

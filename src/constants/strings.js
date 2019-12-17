@@ -9,4 +9,7 @@ export const MSG__CREATE_PROJECT_ERROR = 'Sorry, could not create project',
   TTL__ARCHIVED = 'Archived',
   TTL__DELETED = 'Removed',
   MSG__DELETE_ALL_REMOVED_PROJECTS_ERROR = 'Sorry, could not empty trash',
-  MSG__CREATE_WORK_ERROR = 'Could not create Work item';
+  MSG__CREATE_WORK_ERROR = 'Could not create Work item',
+  MSG__POST_REGISTRATION_ERROR =
+    'Could not registre new user. Please try again later',
+  MSG__POST_LOGIN_ERROR = 'Sorry, could not sign you in';
