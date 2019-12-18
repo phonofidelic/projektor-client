@@ -24,7 +24,7 @@ export default ChildComponent => {
 
   const mapStateToProps = state => {
     return {
-      token: state.user.token
+      token: state.user.userInfo.token
     };
   };
 
