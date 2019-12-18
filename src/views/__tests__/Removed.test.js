@@ -2,9 +2,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Removed } from 'views/Removed';
 import Header from 'components/Header';
-import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import Root from 'Root';
-import { TTL__DELETED } from 'constants/strings';
+import { TTL__DELETED, MSG__DEFAULT_EMPTY_REMOVED } from 'constants/strings';
 
 describe('Removed view', () => {
   let wrapper;
@@ -22,10 +21,10 @@ describe('Removed view', () => {
   });
 
   it('displays the view title', () => {
-    expect(wrapper.find(Header).text()).toContain(TTL__DELETED);
+    expect(wrapper.text()).toContain(TTL__DELETED);
   });
 
   it('shows a default message', () => {
-    expect(wrapper.find(DefaultEmptyMessage).length).toBe(1);
+    expect(wrapper.text()).toContain(MSG__DEFAULT_EMPTY_REMOVED);
   });
 });

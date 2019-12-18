@@ -8,7 +8,7 @@ import ProjectsGrid from 'components/ProjectsGrid';
 import Header from 'components/Header';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 
-import { TTL__ACTIVE } from 'constants/strings';
+import { TTL__ACTIVE, MSG__DEFAULT_EMPTY_ACTIVE } from 'constants/strings';
 
 import Button from '@material-ui/core/Button';
 
@@ -40,7 +40,7 @@ export function Projects(props) {
         {projects.length ? (
           <ProjectsGrid projects={projects} />
         ) : (
-          <DefaultEmptyMessage text="Add a project to get started" />
+          <DefaultEmptyMessage text={MSG__DEFAULT_EMPTY_ACTIVE} />
         )}
         <div>
           <Button onClick={props.logoutUser}>Sign out</Button>

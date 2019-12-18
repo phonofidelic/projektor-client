@@ -12,4 +12,7 @@ export const TTL__ACTIVE = 'Projects',
   MSG__CREATE_WORK_ERROR = 'Could not create Work item',
   MSG__POST_REGISTRATION_ERROR =
     'Could not registre new user. Please try again later',
-  MSG__POST_LOGIN_ERROR = 'Sorry, could not sign you in';
+  MSG__POST_LOGIN_ERROR = 'Sorry, could not sign you in',
+  MSG__DEFAULT_EMPTY_ACTIVE = 'Add a project to get started',
+  MSG__DEFAULT_EMPTY_ARCHIVED = 'Archived Projects will show up here',
+  MSG__DEFAULT_EMPTY_REMOVED = 'Removed Projects will show up here';

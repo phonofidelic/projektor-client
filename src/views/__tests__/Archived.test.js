@@ -2,9 +2,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Archived } from 'views/Archived';
 import Header from 'components/Header';
-import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import Root from 'Root';
-import { TTL__ARCHIVED } from 'constants/strings';
+import { TTL__ARCHIVED, MSG__DEFAULT_EMPTY_ARCHIVED } from 'constants/strings';
 
 describe('Removed view', () => {
   let wrapper;
@@ -22,10 +21,10 @@ describe('Removed view', () => {
   });
 
   it('displays the view title', () => {
-    expect(wrapper.find(Header).text()).toContain(TTL__ARCHIVED);
+    expect(wrapper.text()).toContain(TTL__ARCHIVED);
   });
 
-  it('shows a default message', () => {
-    expect(wrapper.find(DefaultEmptyMessage).length).toBe(1);
+  it('displays a default message', () => {
+    expect(wrapper.text()).toContain(MSG__DEFAULT_EMPTY_ARCHIVED);
   });
 });

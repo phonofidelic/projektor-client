@@ -2,9 +2,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { Projects } from 'views/Projects';
 import Header from 'components/Header';
-import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import Root from 'Root';
-import { TTL__ACTIVE } from 'constants/strings';
+import { TTL__ACTIVE, MSG__DEFAULT_EMPTY_ACTIVE } from 'constants/strings';
 
 describe('Projects view', () => {
   let wrapper;
@@ -26,10 +25,10 @@ describe('Projects view', () => {
   });
 
   it('displays the view title', () => {
-    expect(wrapper.find(Header).text()).toContain(TTL__ACTIVE);
+    expect(wrapper.text()).toContain(TTL__ACTIVE);
   });
 
-  it('shows a default message', () => {
-    expect(wrapper.find(DefaultEmptyMessage).length).toBe(1);
+  it('displays a default message', () => {
+    expect(wrapper.text()).toContain(MSG__DEFAULT_EMPTY_ACTIVE);
   });
 });
