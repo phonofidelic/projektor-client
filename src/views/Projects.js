@@ -8,6 +8,8 @@ import ProjectsGrid from 'components/ProjectsGrid';
 import Header from 'components/Header';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 
+import { TTL__ACTIVE } from 'constants/strings';
+
 import Button from '@material-ui/core/Button';
 
 function HeaderActions(props) {
@@ -33,7 +35,7 @@ export function Projects(props) {
 
   return (
     <div>
-      <Header nav title="Projects" headerActions={<HeaderActions />} />
+      <Header nav title={TTL__ACTIVE} headerActions={<HeaderActions />} />
       <div>
         {projects.length ? (
           <ProjectsGrid projects={projects} />

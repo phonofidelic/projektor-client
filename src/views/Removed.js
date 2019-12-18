@@ -7,6 +7,8 @@ import ProjectsGrid from 'components/ProjectsGrid';
 import Header from 'components/Header';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 
+import { TTL__DELETED } from 'constants/strings';
+
 import Button from '@material-ui/core/Button';
 
 function HeaderActions(props) {
@@ -34,7 +36,7 @@ export function Removed(props) {
     <div>
       <Header
         nav
-        title="Trash"
+        title={TTL__DELETED}
         headerActions={<HeaderActions emptyTrash={emptyTrash} />}
       />
       <div>

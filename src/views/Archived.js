@@ -7,6 +7,8 @@ import ProjectsGrid from 'components/ProjectsGrid';
 import Header from 'components/Header';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 
+import { TTL__ARCHIVED } from 'constants/strings';
+
 import Button from '@material-ui/core/Button';
 
 export function Archived(props) {
@@ -18,7 +20,7 @@ export function Archived(props) {
 
   return (
     <div>
-      <Header nav title="Archive" />
+      <Header nav title={TTL__ARCHIVED} />
       <div>
         {projects.length ? (
           <ProjectsGrid projects={projects} />
