@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { StringContext } from 'strings';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 import requireAuth from 'hocs/requireAuth';
@@ -7,12 +8,11 @@ import ProjectsGrid from 'components/ProjectsGrid';
 import Header from 'components/Header';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 
-import { TTL__ARCHIVED, MSG__DEFAULT_EMPTY_ARCHIVED } from 'constants/strings';
-
 import Button from '@material-ui/core/Button';
 
 export function Archived(props) {
   const { projects, getProjects } = props;
+  const strings = useContext(StringContext);
 
   useEffect(() => {
     getProjects('archived');
@@ -20,12 +20,12 @@ export function Archived(props) {
 
   return (
     <div>
-      <Header nav title={TTL__ARCHIVED} />
+      <Header nav title={strings.ttl__archived} />
       <div>
         {projects.length ? (
           <ProjectsGrid projects={projects} />
         ) : (
-          <DefaultEmptyMessage text={MSG__DEFAULT_EMPTY_ARCHIVED} />
+          <DefaultEmptyMessage text={strings.msg__default_empty_archived} />
         )}
         <div>
           <Button onClick={props.logoutUser}>Sign out</Button>
