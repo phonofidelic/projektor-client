@@ -25,5 +25,11 @@
     "lbl__work_tbl_start_time": "Start",
     "lbl__work_tbl_end_time": "Stop",
     "lbl__work_tble_duration": "Duration",
-    "lbl__work_tble_notes": "Notes"
+    "lbl__work_tble_notes": "Notes",
+    "btn__start_new_task": "Start new Task",
+    "btn__pause_task": "Pause Task",
+    "btn__submit_task": "Post Task",
+    "btn__cancel_task": "Cancel Task",
+    "ttl__work": "Work",
+    "btn__resume_task": "Resume Task"
 }

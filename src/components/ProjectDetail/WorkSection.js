@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import moment from 'moment';
-// import momentDurationFormatSetup from 'moment-duration-format';
+import { StringContext } from 'strings';
 
 import WorkTable from 'components/ProjectDetail/WorkTable';
 import Timer from 'components/Timer';
 
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
+import AddIcon from '@material-ui/icons/Add';
 
 export default function WorkSection(props) {
   const { project, createWork } = props;
+  const strings = useContext(StringContext);
   const [time, setTime] = useState(0);
   const [startTime, setStartTime] = useState(0);
   const [workStarted, setWorkStarted] = useState(false);
@@ -58,7 +61,7 @@ export default function WorkSection(props) {
     <div>
       <div style={{ margin: 18, display: 'flex' }}>
         <Typography variant="h5" align="left">
-          Work
+          {strings.ttl__work}
         </Typography>
         <div style={{ flexGrow: 1, lineHeight: '48px' }}>
           {workStarted && (
@@ -73,19 +76,51 @@ export default function WorkSection(props) {
         </div>
         <div>
           {!workStarted ? (
-            <Button onClick={handleStartWork}>Start new task</Button>
+            /**
+             * Start new task
+             */
+            <Tooltip
+              title={strings.btn__start_new_task}
+              placement="top-start"
+              enterDelay={400}
+            >
+              <IconButton onClick={handleStartWork}>
+                <AddIcon />
+              </IconButton>
+            </Tooltip>
           ) : !workActive ? (
-            <IconButton onClick={handleResumeWork}>
-              <PlayArrowIcon />
-            </IconButton>
+            /**
+             * Resume task
+             */
+            <Tooltip
+              title={strings.btn__resume_task}
+              placement="top-start"
+              enterDelay={400}
+            >
+              <IconButton onClick={handleResumeWork}>
+                <PlayArrowIcon />
+              </IconButton>
+            </Tooltip>
           ) : (
-            <IconButton onClick={handlePauseWork}>
-              <PauseIcon />
-            </IconButton>
+            /**
+             * Pause task
+             */
+            <Tooltip
+              title={strings.btn__pause_task}
+              placement="top-start"
+              enterDelay={400}
+            >
+              <IconButton onClick={handlePauseWork}>
+                <PauseIcon />
+              </IconButton>
+            </Tooltip>
           )}
           {workStarted && (
+            /**
+             * Submit new task
+             */
             <Button disabled={workActive} onClick={handleSubmitWork}>
-              Submit
+              {strings.btn__submit_task}
             </Button>
           )}
         </div>

@@ -23,7 +23,13 @@
     "ttl__removed": "Borttagna",
     "lbl__work_tbl_start_date": "Datum",
     "lbl__work_tbl_start_time": "Start",
-    "lbl__work_tbl_end_time": "Stop",
+    "lbl__work_tbl_end_time": "Stopp",
     "lbl__work_tble_duration": "Varaktighet",
-    "lbl__work_tble_notes": "Anteckingar"
+    "lbl__work_tble_notes": "Anteckingar",
+    "btn__start_new_task": "Påbörja nytt arbete",
+    "btn__pause_task": "Pausa arbete",
+    "btn__submit_task": "Posta arbete",
+    "btn__cancel_task": "Avbryt arbete",
+    "ttl__work": "Arbete",
+    "btn__resume_task": "Fortsätt"
 }
