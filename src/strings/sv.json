@@ -9,5 +9,16 @@
     "ttl__active": "Projekt",
     "ttl__complete": "Slutförda",
     "ttl__archived": "Arkiverade",
-    "ttl__removed": "Borttagna"
+    "ttl__removed": "Borttagna",
+    "msg__create_project_error": "Det gick inte att skapa projektet",
+    "msg__get_projects_error": "Kunde inte ladda projekt",
+    "msg__get_project_error": "Det gick inte att ladda projektet",
+    "msg__delete_project_error": "Kunde inte ta bort projectet",
+    "msg__set_project_status_error": "Det gick inte att ändra projektstatus",
+    "fmt_msg__set_project_status_error": "Kunde inte skicka projektet till {0}",
+    "msg__post_registration_error": "Kunde inte registrera dig. Försök igen senare",
+    "msg__post_login_error": "Inloggningen misslyckades",
+    "msg__default_empty_active": "Kom igång genom att lägga till ett projekt",
+    "msg__default_empty_archived": "Arkiverade projekt hamnar här",
+    "msg__default_empty_removed": "Borttagna projekt hamnar här"
 }

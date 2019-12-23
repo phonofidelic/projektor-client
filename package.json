@@ -16,7 +16,9 @@
     "connected-react-router": "^6.6.1",
     "csvtojson": "^2.0.10",
     "date-fns": "^2.0.0-beta.5",
+    "dotenv": "^8.2.0",
     "formik": "^2.0.6",
+    "googleapis": "^39.2.0",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
     "react": "^16.12.0",
@@ -37,7 +39,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "trans": "node ./scripts/genStringfiles.js"
+    "trans": "node ./scripts/getMasterTranslations.js"
   },
   "eslintConfig": {
     "extends": "react-app"

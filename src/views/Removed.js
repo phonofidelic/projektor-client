@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { StringContext } from 'strings';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 import requireAuth from 'hocs/requireAuth';
@@ -23,6 +24,7 @@ function HeaderActions(props) {
 
 export function Removed(props) {
   const { projects, getProjects, deleteAllTrash } = props;
+  const strings = useContext(StringContext);
 
   const emptyTrash = () => {
     deleteAllTrash();
@@ -36,14 +38,14 @@ export function Removed(props) {
     <div>
       <Header
         nav
-        title={TTL__DELETED}
+        title={strings.ttl__removed}
         headerActions={<HeaderActions emptyTrash={emptyTrash} />}
       />
       <div>
         {projects.length ? (
           <ProjectsGrid projects={projects} />
         ) : (
-          <DefaultEmptyMessage text={MSG__DEFAULT_EMPTY_REMOVED} />
+          <DefaultEmptyMessage text={strings.msg__default_empty_removed} />
         )}
         <div>
           <Button onClick={props.logoutUser}>Sign out</Button>

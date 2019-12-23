@@ -1,9 +1,9 @@
 import React, { useEffect, useContext } from 'react';
+import { StringContext } from 'strings';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 import requireAuth from 'hocs/requireAuth';
-import { StringContext } from 'strings';
 
 import ProjectsGrid from 'components/ProjectsGrid';
 import Header from 'components/Header';
