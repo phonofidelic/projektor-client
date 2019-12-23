@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import moment from 'moment';
-// import momentDurationFormatSetup from 'moment-duration-format';
+import { StringContext } from 'strings';
 
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
@@ -10,8 +10,16 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+moment.locale(navigator.language);
+var currentLocaleData = moment.localeData(moment.locale());
+var svLocaleData = moment.localeData('sv');
+console.log('====================================');
+console.log('currentLocaleData:', currentLocaleData);
+console.log('====================================');
+
 export default function WorkTable(props) {
   const { project } = props;
+  const strings = useContext(StringContext);
   // console.log('====================================');
   // console.log(project);
   // console.log('====================================');
@@ -20,11 +28,11 @@ export default function WorkTable(props) {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Start</TableCell>
-            <TableCell>Stop</TableCell>
-            <TableCell>Duration</TableCell>
-            <TableCell>Notes</TableCell>
+            <TableCell>{strings.lbl__work_tbl_start_date}</TableCell>
+            <TableCell>{strings.lbl__work_tbl_start_time}</TableCell>
+            <TableCell>{strings.lbl__work_tbl_end_time}</TableCell>
+            <TableCell>{strings.lbl__work_tble_duration}</TableCell>
+            <TableCell>{strings.lbl__work_tble_notes}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -37,12 +45,12 @@ export default function WorkTable(props) {
               </TableCell>
               <TableCell>
                 <Typography>
-                  {moment(workItem.start).format('hh:mm')}
+                  {moment(workItem.start).format('hh:mm a')}
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography>
-                  {workItem.end ? moment(workItem.end).format('hh:mm') : '--'}
+                  {workItem.end ? moment(workItem.end).format('hh:mm a') : '--'}
                 </Typography>
               </TableCell>
               <TableCell>

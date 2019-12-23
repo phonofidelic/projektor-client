@@ -41,7 +41,7 @@ export default function ProjectInfo(props) {
       </div>
       <div>
         <Typography variant="overline">{strings.lbl__budgeted_time}</Typography>{' '}
-        {project.budgetedTime}
+        {project.budgetedTime.toLocaleString(navigator.language)}
         {strings.frg__hours_short}
       </div>
       <div>
