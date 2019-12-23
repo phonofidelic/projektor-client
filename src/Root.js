@@ -7,7 +7,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { ConnectedRouter } from 'connected-react-router';
-
+import { StringProvider } from 'strings';
 import { history } from 'config';
 
 export default function Root({ children }) {
@@ -24,7 +24,9 @@ export default function Root({ children }) {
     <Provider store={store}>
       <MuiThemeProvider theme={materialUITheme}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <ConnectedRouter history={history}>{children}</ConnectedRouter>
+          <StringProvider>
+            <ConnectedRouter history={history}>{children}</ConnectedRouter>
+          </StringProvider>
         </MuiPickersUtilsProvider>
       </MuiThemeProvider>
     </Provider>

@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 import requireAuth from 'hocs/requireAuth';
+import { StringContext } from 'strings';
 
 import ProjectsGrid from 'components/ProjectsGrid';
 import Header from 'components/Header';
@@ -28,6 +29,7 @@ function HeaderActions(props) {
 
 export function Projects(props) {
   const { projects, getProjects } = props;
+  const strings = useContext(StringContext);
 
   useEffect(() => {
     getProjects('active');
@@ -35,7 +37,11 @@ export function Projects(props) {
 
   return (
     <div>
-      <Header nav title={TTL__ACTIVE} headerActions={<HeaderActions />} />
+      <Header
+        nav
+        title={strings.ttl__active}
+        headerActions={<HeaderActions />}
+      />
       <div>
         {projects.length ? (
           <ProjectsGrid projects={projects} />

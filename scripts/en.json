@@ -1,0 +1,9 @@
+{
+    "lbl__client": "Client:",
+    "lbl__start_date": "Start Date:",
+    "lbl__deadline": "Deadline:",
+    "lbl__time_used": "Time Used:",
+    "lbl__budgeted_time": "Budgeted Time:",
+    "frg__hours_short": "h",
+    "__test__": "test"
+}

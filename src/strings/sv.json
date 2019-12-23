@@ -1,0 +1,13 @@
+{
+    "lbl__client": "Uppdragsgivare:",
+    "lbl__start_date": "Startdatum:",
+    "lbl__deadline": "Deadline:",
+    "lbl__time_used": "Använd tid:",
+    "lbl__budgeted_time": "Budgeterad tid:",
+    "frg__hours_short": "t",
+    "__test__": "test",
+    "ttl__active": "Projekt",
+    "ttl__complete": "Slutförda",
+    "ttl__archived": "Arkiverade",
+    "ttl__removed": "Borttagna"
+}

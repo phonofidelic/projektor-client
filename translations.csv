@@ -1,0 +1,23 @@
+string_id,description,en,sv
+lbl__client,projectInfo,Client:,Uppdragsgivare:
+lbl__start_date,,Start Date:,Startdatum:
+lbl__deadline,,Deadline:,Deadline:
+lbl__time_used,,Time Used:,Använd tid:
+lbl__budgeted_time,,Budgeted Time:,Budgeterad tid:
+frg__hours_short,,h,t
+__test__,,test,test
+ttl__active,,Projects,Projekt
+ttl__complete,,Completed,Slutförda
+ttl__archived,,Archived,Arkiverade
+ttl__removed,,Removed,Borttagna
+msg__create_project_error,,"Sorry, could not create project",
+msg__get_projects_error,,"Sorry, could not load projects",
+msg__get_project_error,,"Sorry, could not load project",
+msg__delete_project_error,,"Sorry, could not delete project",
+msg__set_project_status_error,,"Sorry, could not set project status",
+fmt_msg__set_project_status_error,,"Sorry, could not send project to {0}",
+msg__post_registration_error,,Could not registre new user. Please try again later,
+msg__post_login_error,,"Sorry, could not sign you in",
+msg__default_empty_active,,Add a project to get started,
+msg__default_empty_archived,,Archived Projects will show up here,
+msg__default_empty_removed,,Removed Projects will show up here,
