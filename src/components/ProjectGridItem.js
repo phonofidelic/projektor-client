@@ -1,7 +1,8 @@
-import React from 'react';
-import moment from 'moment';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { StringContext } from 'strings';
+import moment from 'moment';
 
 import ProjectMenu from 'components/ProjectMenu';
 
@@ -30,6 +31,8 @@ const ProjectInfoContainer = styled.div`
 
 export default function ProjectGridItem(props) {
   const { project } = props;
+  const strings = useContext(StringContext);
+  const currentLocaleData = moment.localeData();
 
   return (
     <StyledGridItem key={project._id} item xs={12} sm={6} md={4}>
@@ -47,15 +50,23 @@ export default function ProjectGridItem(props) {
         <CardActionArea component={Link} to={`projects/${project._id}`}>
           <CardContent>
             <ProjectInfoContainer>
-              <Typography variant="overline">Start Date:</Typography>{' '}
+              <Typography variant="overline">
+                {strings.lbl__start_date}
+              </Typography>{' '}
               {project.startDate
-                ? moment(project.startDate).format('ddd, MMM Do YYYY')
-                : 'TBD'}
+                ? moment(project.startDate).format(
+                    currentLocaleData.longDateFormat('L')
+                  )
+                : strings.msc__tbd_short}
               <br />
-              <Typography variant="overline">Dealine:</Typography>{' '}
+              <Typography variant="overline">
+                {strings.lbl__deadline}
+              </Typography>{' '}
               {project.deadline
-                ? moment(project.deadline).format('ddd, MMM Do YYYY')
-                : 'open'}
+                ? moment(project.deadline).format(
+                    currentLocaleData.longDateFormat('L')
+                  )
+                : strings.msc__open}
             </ProjectInfoContainer>
             <Typography
               variant="body2"

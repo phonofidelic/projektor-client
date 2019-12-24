@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Root from 'Root';
+import moment from 'moment';
+
+import 'moment/locale/sv';
+
+moment.locale(navigator.language);
 
 ReactDOM.render(
   <Root>

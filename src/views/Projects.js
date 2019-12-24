@@ -10,17 +10,28 @@ import Header from 'components/Header';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+import AddIcon from '@material-ui/icons/Add';
 
 function HeaderActions(props) {
+  const strings = useContext(StringContext);
+
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Button
-        style={{ textDecoration: 'none', color: '#fff' }}
-        component={Link}
-        to="/projects/create"
+      <Tooltip
+        title={strings.btn__create_project}
+        placement="top-start"
+        enterDelay={400}
       >
-        New
-      </Button>
+        <IconButton
+          style={{ textDecoration: 'none', color: '#fff' }}
+          component={Link}
+          to="/projects/create"
+        >
+          <AddIcon />
+        </IconButton>
+      </Tooltip>
     </div>
   );
 }

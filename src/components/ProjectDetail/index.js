@@ -6,6 +6,7 @@ import WorkSection from 'components/ProjectDetail/WorkSection';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import { strings } from 'strings';
 
 const InfoContainer = styled(Grid)`
   margin-top: 40px;
@@ -27,7 +28,11 @@ export default function ProjectDetail(props) {
     <div>
       <InfoContainer container>
         <Info item xs={12} sm={6}>
-          <Typography>{project.description}</Typography>
+          <Typography>
+            {project.description === 'No description provided'
+              ? strings.msg__empty_project_description
+              : project.description}
+          </Typography>
         </Info>
         <ProjectInfo project={project} />
       </InfoContainer>

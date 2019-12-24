@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 // eslint-disable-next-line
 import momentDurationFormatSetup from 'moment-duration-format';
-// import { strings } from 'strings';
 import { StringContext } from 'strings';
-import { MomentContext } from 'contexts/MomentContext';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -21,7 +19,6 @@ const Container = styled(Grid)`
 export default function ProjectInfo(props) {
   const { project } = props;
   const strings = useContext(StringContext);
-  const moment = useContext(MomentContext);
   const currentLocaleData = moment.localeData();
 
   return (
@@ -36,7 +33,7 @@ export default function ProjectInfo(props) {
           ? moment(project.startDate).format(
               currentLocaleData.longDateFormat('LL')
             )
-          : 'TBD'}
+          : strings.msc_tbd_short}
       </div>
       <div>
         <Typography variant="overline">{strings.lbl__deadline}</Typography>{' '}
@@ -44,12 +41,13 @@ export default function ProjectInfo(props) {
           ? moment(project.deadline).format(
               currentLocaleData.longDateFormat('LL')
             )
-          : 'open'}
+          : strings.msc_open}
       </div>
       <div>
         <Typography variant="overline">{strings.lbl__budgeted_time}</Typography>{' '}
-        {project.budgetedTime.toLocaleString(navigator.language)}
-        {strings.frg__hours_short}
+        {project.budgetedTime &&
+          project.budgetedTime.toLocaleString(navigator.language) +
+            strings.frg__hours_short}
       </div>
       <div>
         <Typography variant="overline">{strings.lbl__time_used}</Typography>{' '}

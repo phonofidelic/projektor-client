@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { StringContext } from 'strings';
-import { MomentContext } from 'contexts/MomentContext';
+import moment from 'moment';
 
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
@@ -13,7 +13,6 @@ import Paper from '@material-ui/core/Paper';
 export default function WorkTable(props) {
   const { project } = props;
   const strings = useContext(StringContext);
-  const moment = useContext(MomentContext);
   const currentLocaleData = moment.localeData();
 
   return (

@@ -31,5 +31,11 @@
     "btn__submit_task": "Posta arbete",
     "btn__cancel_task": "Avbryt arbete",
     "ttl__work": "Arbete",
-    "btn__resume_task": "Fortsätt"
+    "btn__resume_task": "Fortsätt",
+    "msc__tbd_short": "ej fastställd",
+    "msc__open": "öppen",
+    "msg__empty_project_description": "Ingen beskrivning",
+    "ttl__dashboard": "Översikt",
+    "ttl__settings": "Inställningar",
+    "btn__create_project": "Skapa nytt projekt"
 }

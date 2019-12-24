@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { StringContext } from 'strings';
 
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -12,34 +13,6 @@ import AppsIcon from '@material-ui/icons/Apps';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DeleteIcon from '@material-ui/icons/Delete';
 import BookIcon from '@material-ui/icons/Book';
-
-const navItems = [
-  {
-    title: 'Dashboard',
-    icon: <DashboardIcon />,
-    link: '/dashboard'
-  },
-  {
-    title: 'Projects',
-    icon: <AppsIcon />,
-    link: '/projects'
-  },
-  {
-    title: 'Archived',
-    icon: <BookIcon />,
-    link: '/archived'
-  },
-  {
-    title: 'Trash',
-    icon: <DeleteIcon />,
-    link: '/removed'
-  },
-  {
-    title: 'Settings',
-    icon: <SettingsIcon />,
-    link: '/setings'
-  }
-];
 
 const NavLink = styled(Link)`
   text-decoration: none;
@@ -54,6 +27,35 @@ const NavLink = styled(Link)`
 
 export default function Nav(props) {
   const { open, closeNav } = props;
+  const strings = useContext(StringContext);
+
+  const navItems = [
+    {
+      title: strings.ttl__dashboard,
+      icon: <DashboardIcon />,
+      link: '/dashboard'
+    },
+    {
+      title: strings.ttl__active,
+      icon: <AppsIcon />,
+      link: '/projects'
+    },
+    {
+      title: strings.ttl__archived,
+      icon: <BookIcon />,
+      link: '/archived'
+    },
+    {
+      title: strings.ttl__removed,
+      icon: <DeleteIcon />,
+      link: '/removed'
+    },
+    {
+      title: strings.ttl__settings,
+      icon: <SettingsIcon />,
+      link: '/setings'
+    }
+  ];
 
   return (
     <Drawer open={open} onClose={closeNav}>
