@@ -10,6 +10,7 @@ import Project from 'views/Project';
 import CreateProject from 'views/CreateProject';
 import Removed from 'views/Removed';
 import Archived from 'views/Archived';
+import Settings from 'views/Settings';
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
         </Route>
         <Route path="/registration">
           <Registration />
+        </Route>
+        <Route path="/settings">
+          <Settings />
         </Route>
         <Route path="/login">
           <Login />

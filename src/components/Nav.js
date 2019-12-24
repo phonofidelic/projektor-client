@@ -53,7 +53,7 @@ export default function Nav(props) {
     {
       title: strings.ttl__settings,
       icon: <SettingsIcon />,
-      link: '/setings'
+      link: '/settings'
     }
   ];
 

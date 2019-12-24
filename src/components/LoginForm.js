@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik, Form } from 'formik';
 import styled from 'styled-components';
+import { StringContext } from 'strings';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -16,6 +17,8 @@ const InputContainer = styled(Grid)`
 `;
 
 export default function LoginForm(props) {
+  const strings = useContext(StringContext);
+
   return (
     <Container>
       <Formik
@@ -23,9 +26,9 @@ export default function LoginForm(props) {
         validate={values => {
           const errors = {};
           if (!values.email) {
-            errors.email = 'Please enter a valid email';
+            errors.email = strings.msg__email_required;
           } else if (!values.password) {
-            errors.password = 'Password is required';
+            errors.password = strings.msg__password_required;
           }
           return errors;
         }}
@@ -51,7 +54,7 @@ export default function LoginForm(props) {
                     type="email"
                     id="email"
                     name="email"
-                    label="Email"
+                    label={strings.inp_lbl__email}
                     variant="outlined"
                     helperText={errors.email && touched.email && errors.email}
                     error={errors.email && touched.email}
@@ -67,7 +70,7 @@ export default function LoginForm(props) {
                     type="password"
                     id="password"
                     name="password"
-                    label="Password"
+                    label={strings.inp_lbl__password}
                     variant="outlined"
                     value={values.password}
                     helperText={
@@ -84,7 +87,7 @@ export default function LoginForm(props) {
                     type="submit"
                     // disabled={Object.keys(errors).length > 0}
                   >
-                    Sign in
+                    {strings.btn__sign_in}
                   </Button>
                 </InputContainer>
               </Grid>

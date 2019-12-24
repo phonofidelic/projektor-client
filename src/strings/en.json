@@ -49,5 +49,17 @@
     "msg__required": "Required",
     "btn__archive": "Archive",
     "btn__remove": "Move to trash",
-    "btn__activate": "Activate"
+    "btn__activate": "Activate",
+    "btn__sign_out": "Sign out",
+    "btn__create_account": "Create Account",
+    "ttl__create_account": "Create a new Account",
+    "btn__sign_in": "Sign In",
+    "msg__email_required": "Please enter a valid email",
+    "msg__password_required": "Password is required",
+    "msg__password_confirm": "Please confirm password",
+    "msg__password_match": "Passwords do not match",
+    "inp_lbl__email": "Email",
+    "inp_lbl__password": "Password",
+    "inp_lbl__confirm_password": "Confirm Password",
+    "ttl__sign_in": "Sign In"
 }

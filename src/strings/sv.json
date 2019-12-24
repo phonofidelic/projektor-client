@@ -49,5 +49,17 @@
     "msg__required": "Obligatorisk",
     "btn__archive": "Arkivera",
     "btn__remove": "Ta bort",
-    "btn__activate": "Aktivera"
+    "btn__activate": "Aktivera",
+    "btn__sign_out": "Logga ut",
+    "btn__create_account": "Skapa konto",
+    "ttl__create_account": "Skapa ett nytt konto",
+    "btn__sign_in": "Logga in",
+    "msg__email_required": "Ange en giltig email-address",
+    "msg__password_required": "Ange ett lösenord",
+    "msg__password_confirm": "Upprepa lösenordet",
+    "msg__password_match": "Lösenorden matchar inte",
+    "inp_lbl__email": "Email",
+    "inp_lbl__password": " Lösenord",
+    "inp_lbl__confirm_password": "Upprepa lösenordet",
+    "ttl__sign_in": "Logga in"
 }
