@@ -20,7 +20,7 @@ function HeaderActions(props) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
       <Tooltip
-        title={strings.btn__create_project}
+        title={strings.hnt__create_project}
         placement="top-start"
         enterDelay={400}
       >

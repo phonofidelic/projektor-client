@@ -71,7 +71,7 @@ function listSheetContents(auth) {
   sheets.spreadsheets.values.get(
     {
       spreadsheetId: '1GHJ5yumhTfJ8n1AlXbRjPb52ArgbcS9uhxKSbDTuVLc',
-      range: '2:50'
+      range: '2:100'
     },
     (err, res) => {
       if (err) return console.log('The API returned an error: ' + err);

@@ -37,5 +37,17 @@
     "msg__empty_project_description": "No description provided",
     "ttl__dashboard": "Dashboard",
     "ttl__settings": "Settings",
-    "btn__create_project": "Create new Project"
+    "hnt__create_project": "Create new Project",
+    "ttl__create_project": "Create Project",
+    "inp_lbl__project_title": "Project Title",
+    "inp_lbl__project_description": "Description",
+    "inp_lbl__project_start_date": "Strart Date",
+    "inp_lbl__project_deadline": "Deadline",
+    "inp_lbl__project_client": "Client",
+    "inp_lbl__project_budgeted_time": "Budgeted Time (hours)",
+    "btn__create_project": "Create Project",
+    "msg__required": "Required",
+    "btn__archive": "Archive",
+    "btn__remove": "Move to trash",
+    "btn__activate": "Activate"
 }

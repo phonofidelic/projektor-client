@@ -37,5 +37,17 @@
     "msg__empty_project_description": "Ingen beskrivning",
     "ttl__dashboard": "Översikt",
     "ttl__settings": "Inställningar",
-    "btn__create_project": "Skapa nytt projekt"
+    "hnt__create_project": "Skapa nytt projekt",
+    "ttl__create_project": "Skapa projekt",
+    "inp_lbl__project_title": "Projekttitel",
+    "inp_lbl__project_description": "Beskrivning",
+    "inp_lbl__project_start_date": "Startdatum",
+    "inp_lbl__project_deadline": "Deadline",
+    "inp_lbl__project_client": "Uppdragsgivare",
+    "inp_lbl__project_budgeted_time": "Åsidosatt tid (timmar)",
+    "btn__create_project": "Skapa projekt",
+    "msg__required": "Obligatorisk",
+    "btn__archive": "Arkivera",
+    "btn__remove": "Ta bort",
+    "btn__activate": "Aktivera"
 }

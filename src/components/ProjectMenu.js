@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useContext } from 'react';
 import * as actions from 'actions';
+import { connect } from 'react-redux';
+import { StringContext } from 'strings';
 // import STATUS from 'constants';
 
 import { ACTIVE, ARCHIVED, DELETED } from 'constants/status';
@@ -14,29 +15,9 @@ import Delete from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CachedIcon from '@material-ui/icons/Cached';
 
-const menuActions = [
-  {
-    pathname: '/projects',
-    status: ACTIVE,
-    title: 'Activate',
-    icon: <CachedIcon />
-  },
-  {
-    pathname: '/archived',
-    status: ARCHIVED,
-    title: 'Archive',
-    icon: <BookIcon />
-  },
-  {
-    pathname: '/removed',
-    status: DELETED,
-    title: 'Move to trash',
-    icon: <Delete />
-  }
-];
-
 function ProjectMenu(props) {
   const { project, color, location } = props;
+  const strings = useContext(StringContext);
 
   const [anchorEl, setAnchor] = useState(null);
   const handleMenuClick = e => {
@@ -55,6 +36,27 @@ function ProjectMenu(props) {
     props.deleteProject(projectId, location);
     handleCloseMenu();
   };
+
+  const menuActions = [
+    {
+      pathname: '/projects',
+      status: ACTIVE,
+      title: strings.btn__activate,
+      icon: <CachedIcon />
+    },
+    {
+      pathname: '/archived',
+      status: ARCHIVED,
+      title: strings.btn__archive,
+      icon: <BookIcon />
+    },
+    {
+      pathname: '/removed',
+      status: DELETED,
+      title: strings.btn__remove,
+      icon: <Delete />
+    }
+  ];
 
   return (
     <div>

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik, Form, Field } from 'formik';
 import styled from 'styled-components';
 import FormikDatePicker from 'components/FormikDatePicker';
+import { StringContext } from 'strings';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -16,6 +17,8 @@ const InputContainer = styled(Grid)`
 `;
 
 export default function ProjectForm(props) {
+  const strings = useContext(StringContext);
+
   return (
     <Container>
       <Formik
@@ -29,7 +32,7 @@ export default function ProjectForm(props) {
         validate={values => {
           const errors = {};
           if (!values.title || values.title === '') {
-            errors.title = 'Required';
+            errors.title = strings.msg__required;
           }
           return errors;
         }}
@@ -54,9 +57,11 @@ export default function ProjectForm(props) {
                     fullWidth
                     id="title"
                     name="title"
-                    label="Project Title"
+                    label={strings.inp_lbl__project_title}
                     variant="outlined"
-                    helperText={errors.title && touched.title && 'Required'}
+                    helperText={
+                      errors.title && touched.title && strings.msg__required
+                    }
                     error={errors.title && touched.title}
                     value={values.title}
                     onChange={handleChange}
@@ -72,7 +77,7 @@ export default function ProjectForm(props) {
                     fullWidth
                     id="description"
                     name="description"
-                    label="Description"
+                    label={strings.inp_lbl__project_description}
                     value={values.description}
                     onChange={handleChange}
                   />
@@ -83,7 +88,7 @@ export default function ProjectForm(props) {
                   <Field
                     id="start-date"
                     name="startDate"
-                    label="Start Date"
+                    label={strings.inp_lbl__project_start_date}
                     component={FormikDatePicker}
                   />
                 </InputContainer>
@@ -91,7 +96,7 @@ export default function ProjectForm(props) {
                   <Field
                     id="deadline"
                     name="deadline"
-                    label="Deadline"
+                    label={strings.inp_lbl__project_deadline}
                     component={FormikDatePicker}
                   />
                 </InputContainer>
@@ -103,7 +108,7 @@ export default function ProjectForm(props) {
                     fullWidth
                     id="client"
                     name="client"
-                    label="Client"
+                    label={strings.inp_lbl__project_client}
                     value={values.client}
                     onChange={handleChange}
                   />
@@ -114,7 +119,7 @@ export default function ProjectForm(props) {
                     variant="outlined"
                     id="budgeted-time"
                     name="budgetedTime"
-                    label="Budgeted Time (hours)"
+                    label={strings.inp_lbl__project_budgeted_time}
                     type="number"
                     inputProps={{ step: '0.1' }}
                     value={values.budgetedTime}
@@ -129,7 +134,7 @@ export default function ProjectForm(props) {
                     type="submit"
                     disabled={Object.keys(errors).length > 0}
                   >
-                    Create Project
+                    {strings.btn__create_project}
                   </Button>
                 </InputContainer>
               </Grid>
