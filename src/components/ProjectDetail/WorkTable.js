@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import moment from 'moment';
 import { StringContext } from 'strings';
+import { MomentContext } from 'contexts/MomentContext';
 
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
@@ -10,19 +10,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-moment.locale(navigator.language);
-var currentLocaleData = moment.localeData(moment.locale());
-var svLocaleData = moment.localeData('sv');
-console.log('====================================');
-console.log('currentLocaleData:', currentLocaleData);
-console.log('====================================');
-
 export default function WorkTable(props) {
   const { project } = props;
   const strings = useContext(StringContext);
-  // console.log('====================================');
-  // console.log(project);
-  // console.log('====================================');
+  const moment = useContext(MomentContext);
+  const currentLocaleData = moment.localeData();
+
   return (
     <Paper style={{ margin: 18 }}>
       <Table size="small">
@@ -40,17 +33,25 @@ export default function WorkTable(props) {
             <TableRow key={workItem._id} hover>
               <TableCell>
                 <Typography>
-                  {moment(workItem.date).format('MM/DD/YYYY')}
+                  {moment(workItem.date).format(
+                    currentLocaleData.longDateFormat('L')
+                  )}
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography>
-                  {moment(workItem.start).format('hh:mm a')}
+                  {moment(workItem.start).format(
+                    currentLocaleData.longDateFormat('LT')
+                  )}
                 </Typography>
               </TableCell>
               <TableCell>
                 <Typography>
-                  {workItem.end ? moment(workItem.end).format('hh:mm a') : '--'}
+                  {workItem.end
+                    ? moment(workItem.end).format(
+                        currentLocaleData.longDateFormat('LT')
+                      )
+                    : '--'}
                 </Typography>
               </TableCell>
               <TableCell>

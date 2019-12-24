@@ -5,6 +5,7 @@ import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 // import { strings } from 'strings';
 import { StringContext } from 'strings';
+import { MomentContext } from 'contexts/MomentContext';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -20,6 +21,8 @@ const Container = styled(Grid)`
 export default function ProjectInfo(props) {
   const { project } = props;
   const strings = useContext(StringContext);
+  const moment = useContext(MomentContext);
+  const currentLocaleData = moment.localeData();
 
   return (
     <Container item xs={12} sm={6}>
@@ -30,13 +33,17 @@ export default function ProjectInfo(props) {
       <div>
         <Typography variant="overline">{strings.lbl__start_date}</Typography>{' '}
         {project.startDate
-          ? moment(project.startDate).format('ddd, MMM Do YYYY')
+          ? moment(project.startDate).format(
+              currentLocaleData.longDateFormat('LL')
+            )
           : 'TBD'}
       </div>
       <div>
         <Typography variant="overline">{strings.lbl__deadline}</Typography>{' '}
         {project.deadline
-          ? moment(project.deadline).format('ddd, MMM Do YYYY')
+          ? moment(project.deadline).format(
+              currentLocaleData.longDateFormat('LL')
+            )
           : 'open'}
       </div>
       <div>
