@@ -15,6 +15,12 @@ import {
   CREATE_WORK,
   CREATE_WORK_SUCCESS,
   CREATE_WORK_FAILURE,
+  UPDATE_WORK,
+  UPDATE_WORK_SUCCESS,
+  UPATE_WORK_FAILURE,
+  REMOVE_WORK,
+  REMOVE_WORK_SUCCESS,
+  REMOVE_WORK_FAILURE,
   SET_PROJECT_STATUS,
   SET_PROJECT_STATUS_SUCCESS,
   SET_PROJECT_STATUS_FAILURE,
@@ -241,6 +247,24 @@ export default function(state = defaultState, action) {
         ...state,
         loading: false,
         error: { message: MSG__CREATE_WORK_ERROR }
+      };
+
+    case UPDATE_WORK:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case UPDATE_WORK_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        selectedProject: {
+          ...state.selectedProject,
+          work: state.selectedProject.work.map(workItem =>
+            workItem._id === action.payload._id ? action.payload : workItem
+          )
+        }
       };
 
     default:

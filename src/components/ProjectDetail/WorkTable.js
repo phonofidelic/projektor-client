@@ -2,16 +2,19 @@ import React, { useContext } from 'react';
 import { StringContext } from 'strings';
 import moment from 'moment';
 
+import IconButton from '@material-ui/core/IconButton';
+import Paper from '@material-ui/core/Paper';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 
 export default function WorkTable(props) {
-  const { project } = props;
+  const { project, hadleOpenNote } = props;
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
 
@@ -25,6 +28,7 @@ export default function WorkTable(props) {
             <TableCell>{strings.lbl__work_tbl_end_time}</TableCell>
             <TableCell>{strings.lbl__work_tble_duration}</TableCell>
             <TableCell>{strings.lbl__work_tble_notes}</TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -60,7 +64,31 @@ export default function WorkTable(props) {
                     .format('hh:mm:ss', { trim: false })}
                 </Typography>
               </TableCell>
-              <TableCell>{workItem.notes}</TableCell>
+              <TableCell>
+                {workItem.notes ? (
+                  <Typography noWrap style={{ maxWidth: 150 }}>
+                    {workItem.notes}
+                  </Typography>
+                ) : (
+                  <Typography variant="caption" style={{ margin: 10 }}>
+                    {strings.msg__default_empty_notes}
+                  </Typography>
+                )}
+              </TableCell>
+              <TableCell>
+                <Tooltip
+                  title={strings.hnt__add_note}
+                  placement="top-start"
+                  enterDelay={400}
+                >
+                  <IconButton
+                    size="small"
+                    onClick={() => hadleOpenNote(workItem)}
+                  >
+                    <PostAddIcon />
+                  </IconButton>
+                </Tooltip>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -9,7 +9,7 @@ import ProjectMenu from 'components/ProjectMenu';
 export function Project(props) {
   const { projectId } = useParams();
 
-  const { project, getProject, createWork } = props;
+  const { project, getProject, createWork, updateWork } = props;
 
   useEffect(() => {
     getProject(projectId);
@@ -24,7 +24,11 @@ export function Project(props) {
           project && <ProjectMenu project={project} color="#fff" />
         }
       />
-      <ProjectDetail project={project} createWork={createWork} />
+      <ProjectDetail
+        project={project}
+        createWork={createWork}
+        updateWork={updateWork}
+      />
     </div>
   );
 }

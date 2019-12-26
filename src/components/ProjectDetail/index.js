@@ -22,7 +22,7 @@ const Info = styled(Grid)`
 `;
 
 export default function ProjectDetail(props) {
-  const { project, createWork } = props;
+  const { project, createWork, updateWork } = props;
 
   return project ? (
     <div>
@@ -36,7 +36,11 @@ export default function ProjectDetail(props) {
         </Info>
         <ProjectInfo project={project} />
       </InfoContainer>
-      <WorkSection project={project} createWork={createWork} />
+      <WorkSection
+        project={project}
+        createWork={createWork}
+        updateWork={updateWork}
+      />
     </div>
   ) : (
     <div>Loading...</div>
