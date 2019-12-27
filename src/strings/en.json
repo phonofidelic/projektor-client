@@ -67,5 +67,8 @@
     "btn__save": "Save",
     "btn__cancel": "Cancel",
     "hnt__pause_to_post": "Pause Task to post",
-    "msg__default_empty_notes": "(No notes)"
+    "msg__default_empty_notes": "(No notes)",
+    "btn__edit": "Edit",
+    "btn__delete": "Delete",
+    "msg__confirm_delete_work": "Are you sure you want to delete this task?"
 }

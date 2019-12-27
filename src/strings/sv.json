@@ -67,5 +67,8 @@
     "btn__save": "Spara",
     "btn__cancel": "Avbryt",
     "hnt__pause_to_post": "Pausa arbete för att posta",
-    "msg__default_empty_notes": "(inga anteckningar)"
+    "msg__default_empty_notes": "(inga anteckningar)",
+    "btn__edit": "Redigera",
+    "btn__delete": "Ta bort",
+    "msg__confirm_delete_work": "Är du säker på att du vill ta bort uppgiften?"
 }

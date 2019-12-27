@@ -29,6 +29,7 @@ function ContextMenu(props) {
     hadleOpenNote,
     removeWork
   } = props;
+  const strings = useContext(StringContext);
 
   const selectEdit = () => {
     hadleOpenNote(workItem);
@@ -36,7 +37,7 @@ function ContextMenu(props) {
   };
 
   const handleSelectDelete = () => {
-    if (window.confirm('Are you sure you want to delete this task?')) {
+    if (window.confirm(strings.msg__confirm_delete_work)) {
       removeWork(workItem._id);
       handleCloseContextMenu();
     } else {
@@ -60,7 +61,7 @@ function ContextMenu(props) {
         <ListItemIcon>
           <EditIcon />
         </ListItemIcon>
-        <ListItemText>Edit</ListItemText>
+        <ListItemText>{strings.btn__edit}</ListItemText>
       </MenuItem>
       <MenuItem
         key="delete-work"
@@ -71,7 +72,7 @@ function ContextMenu(props) {
         <ListItemIcon>
           <DeleteIcon />
         </ListItemIcon>
-        <ListItemText>Delete</ListItemText>
+        <ListItemText>{strings.btn__delete}</ListItemText>
       </MenuItem>
     </Menu>
   );
