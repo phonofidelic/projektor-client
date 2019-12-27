@@ -18,7 +18,7 @@ import PostAddIcon from '@material-ui/icons/PostAdd';
 import PublishIcon from '@material-ui/icons/Publish';
 
 export default function WorkSection(props) {
-  const { project, createWork, updateWork } = props;
+  const { project, createWork, updateWork, removeWork } = props;
   const strings = useContext(StringContext);
   const [time, setTime] = useState(0);
   const [startTime, setStartTime] = useState(0);
@@ -185,7 +185,11 @@ export default function WorkSection(props) {
         </div>
       </div>
       {project.work.length > 0 && (
-        <WorkTable project={project} hadleOpenNote={hadleOpenNote} />
+        <WorkTable
+          project={project}
+          hadleOpenNote={hadleOpenNote}
+          removeWork={removeWork}
+        />
       )}
     </div>
   );

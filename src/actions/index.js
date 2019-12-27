@@ -274,10 +274,11 @@ export const removeWork = workId => {
 
     let response;
     try {
-      response = api().delete('/work/delete', workId);
+      response = await api().delete(`/work/delete/${workId}`);
+      console.log('removeWork, response:', response);
       handleResponse(response, dispatch, REMOVE_WORK_SUCCESS);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       handleError(err, dispatch, REMOVE_WORK_FAILURE);
     }
   };

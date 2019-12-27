@@ -267,6 +267,25 @@ export default function(state = defaultState, action) {
         }
       };
 
+    case REMOVE_WORK:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case REMOVE_WORK_SUCCESS:
+      return {
+        ...state,
+        loading: true,
+        selectedProject: {
+          ...state.selectedProject,
+          timeUsed: state.selectedProject.timeUsed - action.payload.duration,
+          work: state.selectedProject.work.filter(
+            workItem => workItem._id !== action.payload._id
+          )
+        }
+      };
+
     default:
       return state;
   }

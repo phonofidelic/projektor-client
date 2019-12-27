@@ -22,7 +22,7 @@ const Info = styled(Grid)`
 `;
 
 export default function ProjectDetail(props) {
-  const { project, createWork, updateWork } = props;
+  const { project, createWork, updateWork, removeWork } = props;
 
   return project ? (
     <div>
@@ -40,6 +40,7 @@ export default function ProjectDetail(props) {
         project={project}
         createWork={createWork}
         updateWork={updateWork}
+        removeWork={removeWork}
       />
     </div>
   ) : (

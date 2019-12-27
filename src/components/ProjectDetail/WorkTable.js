@@ -26,12 +26,22 @@ function ContextMenu(props) {
     contextPos,
     workItem,
     handleCloseContextMenu,
-    hadleOpenNote
+    hadleOpenNote,
+    removeWork
   } = props;
 
   const selectEdit = () => {
     hadleOpenNote(workItem);
     handleCloseContextMenu();
+  };
+
+  const handleSelectDelete = () => {
+    if (window.confirm('Are you sure you want to delete this task?')) {
+      removeWork(workItem._id);
+      handleCloseContextMenu();
+    } else {
+      handleCloseContextMenu();
+    }
   };
 
   return (
@@ -52,7 +62,12 @@ function ContextMenu(props) {
         </ListItemIcon>
         <ListItemText>Edit</ListItemText>
       </MenuItem>
-      <MenuItem key="delete-work" button component={ListItem}>
+      <MenuItem
+        key="delete-work"
+        button
+        component={ListItem}
+        onClick={handleSelectDelete}
+      >
         <ListItemIcon>
           <DeleteIcon />
         </ListItemIcon>
@@ -63,7 +78,7 @@ function ContextMenu(props) {
 }
 
 export default function WorkTable(props) {
-  const { project, hadleOpenNote } = props;
+  const { project, hadleOpenNote, removeWork } = props;
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
   const [selectedWork, setSelectedWork] = useState({ _id: null });
@@ -75,7 +90,6 @@ export default function WorkTable(props) {
   };
 
   const handleOpenContextMenu = (e, workItem) => {
-    console.log('openContextMenu, e:', e);
     e.preventDefault();
     setSelectedWork(workItem);
     setContextPos({ x: e.clientX, y: e.clientY });
@@ -95,6 +109,7 @@ export default function WorkTable(props) {
         workItem={selectedWork}
         hadleOpenNote={hadleOpenNote}
         handleCloseContextMenu={handleCloseContextMenu}
+        removeWork={removeWork}
       />
       <Table size="small">
         <TableHead>
@@ -109,6 +124,11 @@ export default function WorkTable(props) {
         </TableHead>
         <TableBody>
           {project.work.map(workItem => (
+            // <Tooltip
+            //   key={workItem._id}
+            //   title="Right-click for options"
+            //   enterDelay={800}
+            // >
             <TableRow
               key={workItem._id}
               hover
@@ -196,6 +216,7 @@ export default function WorkTable(props) {
                 )}
               </TableCell> */}
             </TableRow>
+            // </Tooltip>
           ))}
         </TableBody>
       </Table>

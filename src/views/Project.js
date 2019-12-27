@@ -9,7 +9,7 @@ import ProjectMenu from 'components/ProjectMenu';
 export function Project(props) {
   const { projectId } = useParams();
 
-  const { project, getProject, createWork, updateWork } = props;
+  const { project, getProject, createWork, updateWork, removeWork } = props;
 
   useEffect(() => {
     getProject(projectId);
@@ -28,6 +28,7 @@ export function Project(props) {
         project={project}
         createWork={createWork}
         updateWork={updateWork}
+        removeWork={removeWork}
       />
     </div>
   );
