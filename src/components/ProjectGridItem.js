@@ -74,7 +74,9 @@ export default function ProjectGridItem(props) {
               component="p"
               style={{ height: 100, overflowY: 'auto', whiteSpace: 'pre-wrap' }}
             >
-              {project.description}
+              {project.description === 'No description provided'
+                ? strings.msg__empty_project_description
+                : project.description}
             </Typography>
           </CardContent>
         </CardActionArea>
