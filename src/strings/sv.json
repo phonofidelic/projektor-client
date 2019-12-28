@@ -70,5 +70,6 @@
     "msg__default_empty_notes": "(inga anteckningar)",
     "btn__edit": "Redigera",
     "btn__delete": "Ta bort",
-    "msg__confirm_delete_work": "Är du säker på att du vill ta bort uppgiften?"
+    "msg__confirm_delete_work": "Är du säker på att du vill ta bort uppgiften?",
+    "ttl__work_details": "Arbetsdetaljer"
 }

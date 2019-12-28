@@ -64,7 +64,7 @@ export function WorkModal(props) {
                     id="form-dialog-title"
                     variant="h6"
                   >
-                    Task Details
+                    {strings.ttl__work_details}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={workItem ? 6 : 12}>

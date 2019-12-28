@@ -70,5 +70,6 @@
     "msg__default_empty_notes": "(No notes)",
     "btn__edit": "Edit",
     "btn__delete": "Delete",
-    "msg__confirm_delete_work": "Are you sure you want to delete this task?"
+    "msg__confirm_delete_work": "Are you sure you want to delete this task?",
+    "ttl__work_details": "Task Details"
 }
