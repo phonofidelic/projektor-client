@@ -267,6 +267,14 @@ export default function(state = defaultState, action) {
         }
       };
 
+    case UPATE_WORK_FAILURE: {
+      return {
+        ...state,
+        loading: false,
+        error: { message: 'Could not update work entry' }
+      };
+    }
+
     case REMOVE_WORK:
       return {
         ...state,
@@ -284,6 +292,13 @@ export default function(state = defaultState, action) {
             workItem => workItem._id !== action.payload._id
           )
         }
+      };
+
+    case REMOVE_WORK_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: { message: 'Could not remove work entry' }
       };
 
     default:

@@ -4,16 +4,14 @@ import { StringContext } from 'strings';
 
 import WorkTable from 'components/ProjectDetail/WorkTable';
 import Timer from 'components/Timer';
-import NoteDialog from 'components/ProjectDetail/NoteDialog';
+import WorkModal from 'components/ProjectDetail/WorkModal';
 
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
 import AddIcon from '@material-ui/icons/Add';
-import NotesIcon from '@material-ui/icons/Notes';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import PublishIcon from '@material-ui/icons/Publish';
 
@@ -28,12 +26,12 @@ export default function WorkSection(props) {
   const [activeNote, setActiveNote] = useState(null);
   const [workItem, setWorkItem] = useState(null);
 
-  const hadleOpenNote = work => {
+  const hadleOpenWork = work => {
     if (work) setWorkItem(work);
     setNoteOpen(true);
   };
 
-  const handleCloseNote = () => {
+  const handleCloseWork = () => {
     setNoteOpen(false);
     setWorkItem(null);
   };
@@ -84,10 +82,10 @@ export default function WorkSection(props) {
 
   return (
     <div>
-      <NoteDialog
+      <WorkModal
         open={noteOpen}
         workItem={workItem}
-        handleClose={handleCloseNote}
+        handleClose={handleCloseWork}
         handleSetActiveNote={handleSetActiveNote}
         updateWork={updateWork}
       />
@@ -114,7 +112,7 @@ export default function WorkSection(props) {
               placement="top-start"
               enterDelay={400}
             >
-              <IconButton onClick={() => hadleOpenNote()}>
+              <IconButton onClick={() => hadleOpenWork()}>
                 <PostAddIcon />
               </IconButton>
             </Tooltip>
@@ -187,7 +185,7 @@ export default function WorkSection(props) {
       {project.work.length > 0 && (
         <WorkTable
           project={project}
-          hadleOpenNote={hadleOpenNote}
+          hadleOpenWork={hadleOpenWork}
           removeWork={removeWork}
         />
       )}

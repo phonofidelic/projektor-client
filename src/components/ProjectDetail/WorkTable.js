@@ -7,16 +7,13 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
-import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import PostAddIcon from '@material-ui/icons/PostAdd';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -26,13 +23,13 @@ function ContextMenu(props) {
     contextPos,
     workItem,
     handleCloseContextMenu,
-    hadleOpenNote,
+    hadleOpenWork,
     removeWork
   } = props;
   const strings = useContext(StringContext);
 
   const selectEdit = () => {
-    hadleOpenNote(workItem);
+    hadleOpenWork(workItem);
     handleCloseContextMenu();
   };
 
@@ -79,7 +76,7 @@ function ContextMenu(props) {
 }
 
 export default function WorkTable(props) {
-  const { project, hadleOpenNote, removeWork } = props;
+  const { project, hadleOpenWork, removeWork } = props;
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
   const [selectedWork, setSelectedWork] = useState({ _id: null });
@@ -108,7 +105,7 @@ export default function WorkTable(props) {
         open={contextOpen}
         contextPos={contextPos}
         workItem={selectedWork}
-        hadleOpenNote={hadleOpenNote}
+        hadleOpenWork={hadleOpenWork}
         handleCloseContextMenu={handleCloseContextMenu}
         removeWork={removeWork}
       />
@@ -131,11 +128,13 @@ export default function WorkTable(props) {
             //   enterDelay={800}
             // >
             <TableRow
+              style={{ cursor: 'pointer' }}
               key={workItem._id}
               hover
               selected={workItem._id === selectedWork._id}
               onClick={() => handleSelectWork(workItem)}
               onContextMenu={e => handleOpenContextMenu(e, workItem)}
+              onDoubleClick={() => hadleOpenWork(workItem)}
             >
               <TableCell>
                 <Typography>
@@ -169,19 +168,11 @@ export default function WorkTable(props) {
               </TableCell>
               <TableCell>
                 {workItem.notes ? (
-                  <Typography
-                    noWrap
-                    style={{ maxWidth: 150, cursor: 'pointer' }}
-                    onClick={() => hadleOpenNote(workItem)}
-                  >
+                  <Typography noWrap style={{ maxWidth: 150 }}>
                     {workItem.notes}
                   </Typography>
                 ) : (
-                  <Typography
-                    variant="caption"
-                    style={{ margin: 10, cursor: 'pointer' }}
-                    onClick={() => hadleOpenNote(workItem)}
-                  >
+                  <Typography variant="caption" style={{ margin: 10 }}>
                     {strings.msg__default_empty_notes}
                   </Typography>
                 )}
@@ -196,7 +187,7 @@ export default function WorkTable(props) {
                     >
                       <IconButton
                         size="small"
-                        onClick={() => hadleOpenNote(workItem)}
+                        onClick={() => hadleOpenWork(workItem)}
                       >
                         <EditIcon />
                       </IconButton>
@@ -208,7 +199,7 @@ export default function WorkTable(props) {
                     >
                       <IconButton
                         size="small"
-                        onClick={() => hadleOpenNote(workItem)}
+                        onClick={() => hadleOpenWork(workItem)}
                       >
                         <DeleteIcon />
                       </IconButton>
