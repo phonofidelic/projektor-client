@@ -11,10 +11,19 @@ import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import Button from '@material-ui/core/Button';
 
 function HeaderActions(props) {
+  const { emptyTrash } = props;
+  const strings = useContext(StringContext);
+
+  const handleEmptyTrash = () => {
+    if (window.confirm(strings.msg__empty_trash_confirm)) {
+      emptyTrash();
+    }
+  };
+
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Button style={{ color: '#fff' }} onClick={props.emptyTrash}>
-        Empty trash
+      <Button style={{ color: '#fff' }} onClick={handleEmptyTrash}>
+        {strings.btn__empty_trash}
       </Button>
     </div>
   );

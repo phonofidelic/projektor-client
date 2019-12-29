@@ -72,5 +72,7 @@
     "btn__delete": "Ta bort",
     "msg__confirm_delete_work": "Är du säker på att du vill ta bort uppgiften?",
     "ttl__work_details": "Arbetsdetaljer",
-    "btn__save_changes": "Spara ändringar"
+    "btn__save_changes": "Spara ändringar",
+    "btn__empty_trash": "Rensa borttagna",
+    "msg__empty_trash_confirm": "Är du säker på att du vill ta bort dessa projekt permanent?"
 }
