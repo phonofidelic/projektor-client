@@ -18,7 +18,7 @@ import CachedIcon from '@material-ui/icons/Cached';
 import EditIcon from '@material-ui/icons/Edit';
 
 function ProjectMenu(props) {
-  const { project, color, location } = props;
+  const { project, color, location, setProjectStatus, deleteProject } = props;
   const strings = useContext(StringContext);
 
   const [anchorEl, setAnchor] = useState(null);
@@ -30,12 +30,14 @@ function ProjectMenu(props) {
   };
 
   const handleMenuSelection = (projectId, status) => {
-    props.setProjectStatus(projectId, status, location);
+    setProjectStatus(projectId, status, location);
     handleCloseMenu();
   };
 
   const handleDelete = projectId => {
-    props.deleteProject(projectId, location);
+    if (window.confirm(strings.msg__delete_perm_confirm)) {
+      deleteProject(projectId, location);
+    }
     handleCloseMenu();
   };
 
@@ -99,7 +101,7 @@ function ProjectMenu(props) {
             <ListItemIcon>
               <Delete />
             </ListItemIcon>
-            Delete
+            {strings.btn__delete}
           </MenuItem>
         )}
       </Menu>

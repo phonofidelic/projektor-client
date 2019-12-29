@@ -74,5 +74,6 @@
     "ttl__work_details": "Task Details",
     "btn__save_changes": "Save Changes",
     "btn__empty_trash": "Empty trash",
-    "msg__empty_trash_confirm": "Are you sure you want to permanently delete these projects?"
+    "msg__empty_trash_confirm": "Are you sure you want to permanently delete these projects?",
+    "msg__delete_perm_confirm": "Are you sure you want to permanently delete this project?"
 }

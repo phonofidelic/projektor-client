@@ -69,10 +69,11 @@
     "hnt__pause_to_post": "Pausa arbete för att posta",
     "msg__default_empty_notes": "(inga anteckningar)",
     "btn__edit": "Redigera",
-    "btn__delete": "Ta bort",
+    "btn__delete": "Radera",
     "msg__confirm_delete_work": "Är du säker på att du vill ta bort uppgiften?",
     "ttl__work_details": "Arbetsdetaljer",
     "btn__save_changes": "Spara ändringar",
     "btn__empty_trash": "Rensa borttagna",
-    "msg__empty_trash_confirm": "Är du säker på att du vill ta bort dessa projekt permanent?"
+    "msg__empty_trash_confirm": "Är du säker på att du vill ta bort dessa projekt permanent?",
+    "msg__delete_perm_confirm": "Är du säker på att du vill ta bort detta projekt permanent?"
 }
