@@ -13,11 +13,7 @@ export function CreateProject(props) {
   };
   return (
     <div>
-      <Header
-        back="/projects"
-        centerTitle
-        title={strings.ttl__create_project}
-      />
+      <Header back centerTitle title={strings.ttl__create_project} />
       <ProjectForm handleFormSubmit={handleFormSubmit} />
     </div>
   );

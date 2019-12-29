@@ -44,6 +44,7 @@ export const getProjects = status => {
 };
 
 export const getProject = projectId => {
+  console.log('getProject, projectId:', projectId);
   return async dispatch => {
     dispatch({
       type: GET_PROJECT
@@ -86,6 +87,27 @@ export const createProject = formData => {
     } catch (err) {
       console.error(err);
       handleError(err, dispatch, CREATE_PROJECT_FAILURE);
+    }
+  };
+};
+
+export const editProject = (projectId, projectInfo) => {
+  return async dispatch => {
+    dispatch({
+      type: UPDATE_PROJECT
+    });
+
+    let response;
+    try {
+      response = await api().put(`/projects/${projectId}`, {
+        projectInfo
+      });
+      console.log('editProject, response:', response);
+      handleResponse(response, dispatch, UPDATE_PROJECT_SUCCESS);
+      history.goBack();
+    } catch (err) {
+      console.error(err);
+      handleError(err, dispatch, UPDATE_PROJECT_FAILURE);
     }
   };
 };

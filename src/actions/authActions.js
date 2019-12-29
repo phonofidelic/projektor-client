@@ -10,7 +10,7 @@ import {
   POST_LOGOUT_FAILURE
 } from 'actions/types';
 import { history } from 'config';
-import { api, handleError, handleResponse } from 'actions/utils';
+import { api } from 'actions/utils';
 
 export const registerNewUser = formData => {
   console.log('registerNewUser, formData:', formData);

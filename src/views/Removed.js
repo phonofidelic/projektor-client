@@ -45,9 +45,6 @@ export function Removed(props) {
         ) : (
           <DefaultEmptyMessage text={strings.msg__default_empty_removed} />
         )}
-        <div>
-          <Button onClick={props.logoutUser}>Sign out</Button>
-        </div>
       </div>
     </div>
   );

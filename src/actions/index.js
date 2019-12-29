@@ -2,6 +2,7 @@ import {
   getProjects,
   getProject,
   createProject,
+  editProject,
   setProjectStatus,
   deleteProject,
   deleteAllTrash
@@ -13,6 +14,7 @@ export {
   getProjects,
   getProject,
   createProject,
+  editProject,
   setProjectStatus,
   deleteProject,
   deleteAllTrash,

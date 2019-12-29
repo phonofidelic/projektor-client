@@ -27,9 +27,6 @@ export function Archived(props) {
         ) : (
           <DefaultEmptyMessage text={strings.msg__default_empty_archived} />
         )}
-        <div>
-          <Button onClick={props.logoutUser}>Sign out</Button>
-        </div>
       </div>
     </div>
   );

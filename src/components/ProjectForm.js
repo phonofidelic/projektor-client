@@ -17,17 +17,19 @@ const InputContainer = styled(Grid)`
 `;
 
 export default function ProjectForm(props) {
+  const { project } = props;
   const strings = useContext(StringContext);
 
   return (
     <Container>
       <Formik
         initialValues={{
-          title: '',
-          startDate: null,
-          deadline: null,
-          client: '',
-          budgetedTime: ''
+          title: project ? project.title : '',
+          description: project ? project.description : '',
+          startDate: project ? project.startDate : null,
+          deadline: project ? project.deadline : null,
+          client: project ? project.client : '',
+          budgetedTime: project ? project.budgetedTime : ''
         }}
         validate={values => {
           const errors = {};

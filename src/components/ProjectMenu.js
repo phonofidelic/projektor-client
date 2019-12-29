@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import * as actions from 'actions';
 import { connect } from 'react-redux';
 import { StringContext } from 'strings';
+import { Link } from 'react-router-dom';
 // import STATUS from 'constants';
 
 import { ACTIVE, ARCHIVED, DELETED } from 'constants/status';
@@ -14,6 +15,7 @@ import BookIcon from '@material-ui/icons/Book';
 import Delete from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CachedIcon from '@material-ui/icons/Cached';
+import EditIcon from '@material-ui/icons/Edit';
 
 function ProjectMenu(props) {
   const { project, color, location } = props;
@@ -70,6 +72,16 @@ function ProjectMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleCloseMenu}
       >
+        <MenuItem
+          key="edit"
+          component={Link}
+          to={`/projects/edit/${project._id}`}
+        >
+          <ListItemIcon>
+            <EditIcon />
+          </ListItemIcon>
+          {strings.btn__edit}
+        </MenuItem>
         {menuActions.map(
           (item, i) =>
             project.status !== item.status && (

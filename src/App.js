@@ -11,6 +11,7 @@ import CreateProject from 'views/CreateProject';
 import Removed from 'views/Removed';
 import Archived from 'views/Archived';
 import Settings from 'views/Settings';
+import EditProject from 'views/EditProject';
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
         </Route>
         <Route path="/projects/create">
           <CreateProject />
+        </Route>
+        <Route path="/projects/edit/:projectId">
+          <EditProject />
         </Route>
         <Route path="/projects/:projectId">
           <Project />

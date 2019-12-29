@@ -57,9 +57,6 @@ export function Projects(props) {
         ) : (
           <DefaultEmptyMessage text={strings.msg__default_empty_active} />
         )}
-        <div>
-          <Button onClick={props.logoutUser}>Sign out</Button>
-        </div>
       </div>
     </div>
   );

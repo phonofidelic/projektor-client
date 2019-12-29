@@ -88,7 +88,8 @@ export default function(state = defaultState, action) {
     case GET_PROJECTS:
       return {
         ...state,
-        loading: true
+        loading: true,
+        selectedProject: null
       };
 
     case GET_PROJECTS_SUCCESS:

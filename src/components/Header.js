@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { history } from 'config';
 
 import Nav from 'components/Nav';
 
@@ -33,9 +34,8 @@ export default function Header(props) {
         )}
         {back && (
           <IconButton
-            style={{ textDecoration: 'none', marginRight: 10 }}
-            component={Link}
-            to={back}
+            style={{ marginRight: 10 }}
+            onClick={() => history.goBack()}
           >
             <BackArrow style={{ color: '#fff' }} />
           </IconButton>
