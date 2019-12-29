@@ -136,7 +136,9 @@ export default function ProjectForm(props) {
                     type="submit"
                     disabled={Object.keys(errors).length > 0}
                   >
-                    {strings.btn__create_project}
+                    {project
+                      ? strings.btn__save_changes
+                      : strings.btn__create_project}
                   </Button>
                 </InputContainer>
               </Grid>

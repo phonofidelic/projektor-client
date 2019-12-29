@@ -71,5 +71,6 @@
     "btn__edit": "Edit",
     "btn__delete": "Delete",
     "msg__confirm_delete_work": "Are you sure you want to delete this task?",
-    "ttl__work_details": "Task Details"
+    "ttl__work_details": "Task Details",
+    "btn__save_changes": "Save Changes"
 }

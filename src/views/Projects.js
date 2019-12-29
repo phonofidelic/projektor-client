@@ -9,7 +9,6 @@ import ProjectsGrid from 'components/ProjectsGrid';
 import Header from 'components/Header';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import AddIcon from '@material-ui/icons/Add';

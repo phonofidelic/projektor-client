@@ -8,8 +8,6 @@ import ProjectsGrid from 'components/ProjectsGrid';
 import Header from 'components/Header';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 
-import Button from '@material-ui/core/Button';
-
 export function Archived(props) {
   const { projects, getProjects } = props;
   const strings = useContext(StringContext);
