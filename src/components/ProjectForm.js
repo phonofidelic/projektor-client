@@ -9,7 +9,8 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 const Container = styled.div`
-  margin: 80px;
+  max-width: 800px;
+  margin: 80px auto;
 `;
 
 const InputContainer = styled(Grid)`
@@ -133,6 +134,7 @@ export default function ProjectForm(props) {
               <Grid item xs={12}>
                 <InputContainer>
                   <Button
+                    style={{ marginTop: '20px' }}
                     type="submit"
                     disabled={Object.keys(errors).length > 0}
                   >

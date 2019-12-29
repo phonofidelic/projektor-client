@@ -21,7 +21,7 @@ export function EditProject(props) {
 
   return (
     <div>
-      <Header back centerTitle title={project && project.title} />
+      <Header back title={project && project.title} />
       {project && (
         <ProjectForm project={project} handleFormSubmit={handleFormSubmit} />
       )}
