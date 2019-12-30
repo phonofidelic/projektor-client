@@ -8,7 +8,12 @@ import {
   deleteAllTrash
 } from 'actions/projectActions';
 import { createWork, updateWork, removeWork } from 'actions/workActions';
-import { registerNewUser, loginUser, logoutUser } from 'actions/authActions';
+import {
+  registerNewUser,
+  loginUser,
+  logoutUser,
+  getUserInfo
+} from 'actions/authActions';
 
 export {
   getProjects,
@@ -23,5 +28,6 @@ export {
   removeWork,
   registerNewUser,
   loginUser,
-  logoutUser
+  logoutUser,
+  getUserInfo
 };

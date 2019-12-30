@@ -5,7 +5,10 @@ import {
   POST_LOGIN,
   POST_LOGIN_SUCCESS,
   POST_LOGIN_FAILURE,
-  SET_NEW_TOKEN
+  SET_NEW_TOKEN,
+  GET_USER_INFO,
+  GET_USER_INFO_SUCCESS,
+  GET_USERINFO_FAILURE
 } from 'actions/types';
 import {
   MSG__POST_REGISTRATION_ERROR,
@@ -13,7 +16,7 @@ import {
 } from 'constants/strings';
 
 export const defaultState = {
-  userInfo: { token: localStorage.getItem('token') },
+  userInfo: {},
   token: localStorage.getItem('token'),
   loading: false,
   error: null
@@ -31,7 +34,8 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         loading: false,
-        userInfo: action.payload
+        userInfo: action.payload,
+        token: action.payload.token
       };
 
     case POST_REGISTRATION_FAILURE:
@@ -51,7 +55,8 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         loading: false,
-        userInfo: action.payload
+        userInfo: action.payload,
+        token: action.payload.token
       };
 
     case POST_LOGIN_FAILURE:
@@ -65,6 +70,26 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         token: action.payload
+      };
+
+    case GET_USER_INFO:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case GET_USER_INFO_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        userInfo: action.payload
+      };
+
+    case GET_USERINFO_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: { message: 'Could not retreive user info' }
       };
 
     default:

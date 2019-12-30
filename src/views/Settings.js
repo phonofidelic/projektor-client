@@ -1,19 +1,26 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 import requireAuth from 'hocs/requireAuth';
 import { StringContext } from 'strings';
 
 import Header from 'components/Header';
+import UserInfo from 'components/UserInfo';
 
 import Button from '@material-ui/core/Button';
 
 export function Settings(props) {
+  const { userInfo, getUserInfo } = props;
   const strings = useContext(StringContext);
+
+  useEffect(() => {
+    getUserInfo();
+  }, [getUserInfo]);
 
   return (
     <div>
       <Header nav title={strings.ttl__settings} />
+      <UserInfo userInfo={userInfo} />
       <div>
         <Button onClick={props.logoutUser}>{strings.btn__sign_out}</Button>
       </div>
@@ -21,4 +28,10 @@ export function Settings(props) {
   );
 }
 
-export default connect(null, actions)(requireAuth(Settings));
+const mapStateToProps = state => {
+  return {
+    userInfo: state.user.userInfo
+  };
+};
+
+export default connect(mapStateToProps, actions)(requireAuth(Settings));

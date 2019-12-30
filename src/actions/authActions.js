@@ -7,10 +7,13 @@ import {
   POST_LOGIN_FAILURE,
   POST_LOGOUT,
   POST_LOGOUT_SUCCESS,
-  POST_LOGOUT_FAILURE
+  POST_LOGOUT_FAILURE,
+  GET_USER_INFO,
+  GET_USER_INFO_SUCCESS,
+  GET_USERINFO_FAILURE
 } from 'actions/types';
 import { history } from 'config';
-import { api } from 'actions/utils';
+import { api, handleError, handleResponse } from 'actions/utils';
 
 export const registerNewUser = formData => {
   console.log('registerNewUser, formData:', formData);
@@ -101,6 +104,24 @@ export const logoutUser = () => {
         type: POST_LOGOUT_FAILURE,
         payload: err
       });
+    }
+  };
+};
+
+export const getUserInfo = () => {
+  return async dispatch => {
+    dispatch({
+      type: GET_USER_INFO
+    });
+
+    let response;
+    try {
+      response = await api().get('auth/user');
+      console.log('getUserInfo, response:', response);
+      handleResponse(response, dispatch, GET_USER_INFO_SUCCESS);
+    } catch (err) {
+      console.error(err);
+      handleError(err, dispatch, GET_USERINFO_FAILURE);
     }
   };
 };
