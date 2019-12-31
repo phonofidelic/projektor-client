@@ -1,29 +1,16 @@
 import React, { useState, useContext } from 'react';
-import moment from 'moment';
 import { StringContext } from 'strings';
 
 import WorkTable from 'components/ProjectDetail/WorkTable';
-import Timer from 'components/Timer';
 import WorkModal from 'components/ProjectDetail/WorkModal';
+import ActiveWork from 'components/ProjectDetail/ActiveWork';
 
-import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import PauseIcon from '@material-ui/icons/Pause';
-import AddIcon from '@material-ui/icons/Add';
-import PostAddIcon from '@material-ui/icons/PostAdd';
-import PublishIcon from '@material-ui/icons/Publish';
 
 export default function WorkSection(props) {
   const { project, createWork, updateWork, removeWork } = props;
   const strings = useContext(StringContext);
-  const [time, setTime] = useState(0);
-  const [startTime, setStartTime] = useState(0);
-  const [workStarted, setWorkStarted] = useState(false);
-  const [workActive, setWorkActive] = useState(false);
   const [noteOpen, setNoteOpen] = useState(false);
-  const [activeNote, setActiveNote] = useState(null);
   const [workItem, setWorkItem] = useState(null);
 
   const hadleOpenWork = work => {
@@ -36,151 +23,18 @@ export default function WorkSection(props) {
     setWorkItem(null);
   };
 
-  const handleStartWork = () => {
-    setStartTime(Date.now());
-    setWorkStarted(true);
-    setWorkActive(true);
-    setTime(time);
-  };
-
-  const handlePauseWork = () => {
-    setWorkActive(false);
-    setTime(time);
-  };
-
-  const handleResumeWork = () => {
-    setWorkActive(true);
-  };
-
-  const handleCancelWork = () => {};
-
-  const handleSubmitWork = () => {
-    console.log('====================================');
-    console.log('start:', startTime);
-    console.log('end:', moment(time + startTime).format('hh:mm:ss'));
-    console.log('duration:', time);
-    console.log('notes:', activeNote);
-    console.log('====================================');
-
-    createWork({
-      projectId: project._id,
-      date: startTime,
-      start: startTime,
-      end: startTime + time,
-      duration: time,
-      notes: activeNote
-    });
-
-    setWorkActive(false);
-    setWorkStarted(false);
-    setTime(0);
-  };
-
-  const handleSetActiveNote = note => {
-    setActiveNote(note);
-  };
-
   return (
     <div>
       <WorkModal
         open={noteOpen}
         workItem={workItem}
         handleClose={handleCloseWork}
-        handleSetActiveNote={handleSetActiveNote}
         updateWork={updateWork}
       />
       <div style={{ margin: 18, display: 'flex' }}>
         <Typography variant="h5" align="left">
           {strings.ttl__work}
         </Typography>
-
-        <div style={{ flexGrow: 1, lineHeight: '48px' }}>
-          {workStarted && (
-            <div>
-              {workActive ? (
-                <Timer format="hh:mm:ss" currentTime={time} setTime={setTime} />
-              ) : (
-                moment.duration(time, 'ms').format('hh:mm:ss', { trim: false })
-              )}
-            </div>
-          )}
-        </div>
-        <div>
-          {workStarted && (
-            <Tooltip
-              title={strings.hnt__add_note}
-              placement="top-start"
-              enterDelay={400}
-            >
-              <IconButton onClick={() => hadleOpenWork()}>
-                <PostAddIcon />
-              </IconButton>
-            </Tooltip>
-          )}
-          {!workStarted ? (
-            <div>
-              {/**
-               * Start new task
-               */}
-              <Tooltip
-                title={strings.btn__start_new_task}
-                placement="top-start"
-                enterDelay={400}
-              >
-                <IconButton onClick={handleStartWork}>
-                  <AddIcon />
-                </IconButton>
-              </Tooltip>
-            </div>
-          ) : !workActive ? (
-            /**
-             * Resume task
-             */
-            <Tooltip
-              title={strings.btn__resume_task}
-              placement="top-start"
-              enterDelay={400}
-            >
-              <IconButton onClick={handleResumeWork}>
-                <PlayArrowIcon />
-              </IconButton>
-            </Tooltip>
-          ) : (
-            /**
-             * Pause task
-             */
-
-            <Tooltip
-              title={strings.btn__pause_task}
-              placement="top-start"
-              enterDelay={400}
-            >
-              <IconButton onClick={handlePauseWork}>
-                <PauseIcon />
-              </IconButton>
-            </Tooltip>
-          )}
-          {workStarted && (
-            /**
-             * Submit new task
-             */
-            <Tooltip
-              title={
-                workActive
-                  ? strings.hnt__pause_to_post
-                  : strings.btn__submit_task
-              }
-              placement="top-start"
-              enterDelay={400}
-            >
-              <span>
-                <IconButton disabled={workActive} onClick={handleSubmitWork}>
-                  <PublishIcon />
-                </IconButton>
-              </span>
-            </Tooltip>
-          )}
-        </div>
       </div>
       {project.work.length > 0 && (
         <WorkTable
@@ -189,6 +43,7 @@ export default function WorkSection(props) {
           removeWork={removeWork}
         />
       )}
+      <ActiveWork project={project} createWork={createWork} />
     </div>
   );
 }

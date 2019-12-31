@@ -22,7 +22,7 @@ function HeaderActions(props) {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Button style={{ color: '#fff' }} onClick={handleEmptyTrash}>
+      <Button style={{ color: '#000' }} onClick={handleEmptyTrash}>
         {strings.btn__empty_trash}
       </Button>
     </div>

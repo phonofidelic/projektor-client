@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { history } from 'config';
+import styled from 'styled-components';
 
 import Nav from 'components/Nav';
 
@@ -10,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import BackArrow from '@material-ui/icons/ArrowBack';
 import MenuIcon from '@material-ui/icons/Menu';
+
+const Container = styled.div``;
 
 export default function Header(props) {
   const { nav, title, centerTitle, back, headerActions } = props;
@@ -21,9 +24,10 @@ export default function Header(props) {
   };
 
   return (
-    <AppBar position="sticky">
+    // <AppBar position="sticky" color="inherit">
+    <Container>
       <Toolbar>
-        {nav && (
+        {/* {nav && (
           <IconButton
             id="nav-btn-expand"
             style={{ marginRight: 10 }}
@@ -31,13 +35,13 @@ export default function Header(props) {
           >
             <MenuIcon style={{ color: '#fff' }} />
           </IconButton>
-        )}
+        )} */}
         {back && (
           <IconButton
             style={{ marginRight: 10 }}
             onClick={() => history.goBack()}
           >
-            <BackArrow style={{ color: '#fff' }} />
+            <BackArrow style={{ color: '#000' }} />
           </IconButton>
         )}
         <div style={{ flexGrow: centerTitle ? 1 : 0 }}>
@@ -46,7 +50,8 @@ export default function Header(props) {
         {!centerTitle && <div style={{ flexGrow: 1 }}></div>}
         <div>{headerActions}</div>
       </Toolbar>
-      {nav && <Nav open={open} closeNav={closeNav} />}
-    </AppBar>
+      {/* {nav && <Nav open={open} closeNav={closeNav} />} */}
+    </Container>
+    // </AppBar>
   );
 }

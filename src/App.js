@@ -12,42 +12,49 @@ import Removed from 'views/Removed';
 import Archived from 'views/Archived';
 import Settings from 'views/Settings';
 import EditProject from 'views/EditProject';
+import Nav from 'components/Nav';
 
 function App() {
   return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/">
-          <Landing />
-        </Route>
-        <Route path="/projects/create">
-          <CreateProject />
-        </Route>
-        <Route path="/projects/edit/:projectId">
-          <EditProject />
-        </Route>
-        <Route path="/projects/:projectId">
-          <Project />
-        </Route>
-        <Route path="/projects">
-          <Projects />
-        </Route>
-        <Route path="/removed">
-          <Removed />
-        </Route>
-        <Route path="/archived">
-          <Archived />
-        </Route>
-        <Route path="/registration">
-          <Registration />
-        </Route>
-        <Route path="/settings">
-          <Settings />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-      </Switch>
+    <div className="App" style={{ display: 'flex' }}>
+      <div>
+        <Nav />
+      </div>
+      <div style={{ width: '100%', paddingBottom: 90 }}>
+        <Switch>
+          <Route exact path="/">
+            <Landing />
+          </Route>
+          <Route path="/registration">
+            <Registration />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+
+          <Route path="/projects/create">
+            <CreateProject />
+          </Route>
+          <Route path="/projects/edit/:projectId">
+            <EditProject />
+          </Route>
+          <Route path="/projects/:projectId">
+            <Project />
+          </Route>
+          <Route path="/projects">
+            <Projects />
+          </Route>
+          <Route path="/removed">
+            <Removed />
+          </Route>
+          <Route path="/archived">
+            <Archived />
+          </Route>
+          <Route path="/settings">
+            <Settings />
+          </Route>
+        </Switch>
+      </div>
     </div>
   );
 }
