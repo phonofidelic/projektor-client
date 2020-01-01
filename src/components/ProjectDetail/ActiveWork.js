@@ -13,16 +13,12 @@ import PauseIcon from '@material-ui/icons/Pause';
 import AddIcon from '@material-ui/icons/Add';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import PublishIcon from '@material-ui/icons/Publish';
+import CloseIcon from '@material-ui/icons/Close';
 
 const Container = styled.div`
   display: flex;
-  position: fixed;
+  position: sticky;
   bottom: 0;
-  // width: 100%;
-  left: 0;
-  right: 0;
-  // background-color: #f6f8f8;
-  // background-color: #212121;
   background-color: #fff;
   border-top: solid #e0e0e0 1px;
   padding: 18px;
@@ -68,7 +64,13 @@ export default function ActiveWork(props) {
     // setWorkItem(null);
   };
 
-  const handleCancelWork = () => {};
+  const handleCancelWork = () => {
+    if (window.confirm(strings.msg__cancel_work_confirm)) {
+      setWorkActive(false);
+      setWorkStarted(false);
+      setTime(0);
+    }
+  };
 
   const handleSubmitWork = () => {
     console.log('====================================');
@@ -99,6 +101,22 @@ export default function ActiveWork(props) {
         handleClose={handleCloseWork}
         handleSetActiveNote={handleSetActiveNote}
       />
+      <div>
+        {/**
+         * Cancel work
+         */}
+        {workStarted && (
+          <Tooltip
+            title={strings.hnt__cancel_work}
+            placement="top-start"
+            enterDelay={400}
+          >
+            <IconButton onClick={() => handleCancelWork()}>
+              <CloseIcon />
+            </IconButton>
+          </Tooltip>
+        )}
+      </div>
       <div style={{ flexGrow: 1, lineHeight: '48px' }}>
         {workStarted && (
           <div>
@@ -111,6 +129,9 @@ export default function ActiveWork(props) {
         )}
       </div>
       <div>
+        {/**
+         * Open note modal
+         */}
         {workStarted && (
           <Tooltip
             title={strings.hnt__add_note}

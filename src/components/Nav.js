@@ -40,7 +40,7 @@ const Container = styled.div`
   width: ${NAV_WIDTH}px;
   background-color: #fff;
   border-right: solid #e0e0e0 1px;
-  z-index: 3000;
+  z-index: 1;
 `;
 
 const NavLink = styled(Link)`

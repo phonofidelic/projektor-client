@@ -75,5 +75,7 @@
     "btn__save_changes": "Spara ändringar",
     "btn__empty_trash": "Rensa borttagna",
     "msg__empty_trash_confirm": "Är du säker på att du vill ta bort dessa projekt permanent?",
-    "msg__delete_perm_confirm": "Är du säker på att du vill ta bort detta projekt permanent?"
+    "msg__delete_perm_confirm": "Är du säker på att du vill ta bort detta projekt permanent?",
+    "hnt__cancel_work": "Avbryt arbete",
+    "msg__cancel_work_confirm": "Är du säker på att du vill avbryta arbetet?"
 }

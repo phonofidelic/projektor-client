@@ -75,5 +75,7 @@
     "btn__save_changes": "Save Changes",
     "btn__empty_trash": "Empty trash",
     "msg__empty_trash_confirm": "Are you sure you want to permanently delete these projects?",
-    "msg__delete_perm_confirm": "Are you sure you want to permanently delete this project?"
+    "msg__delete_perm_confirm": "Are you sure you want to permanently delete this project?",
+    "hnt__cancel_work": "Cancel Task",
+    "msg__cancel_work_confirm": "Are you sure you want to cancel this task?"
 }

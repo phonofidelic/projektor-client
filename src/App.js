@@ -20,7 +20,7 @@ function App() {
       <div>
         <Nav />
       </div>
-      <div style={{ width: '100%', paddingBottom: 90 }}>
+      <div style={{ width: '100%' }}>
         <Switch>
           <Route exact path="/">
             <Landing />
