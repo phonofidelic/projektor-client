@@ -8,7 +8,9 @@ import ProjectsGrid from 'components/ProjectsGrid';
 import Header from 'components/Header';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 function HeaderActions(props) {
   const { emptyTrash } = props;
@@ -22,9 +24,11 @@ function HeaderActions(props) {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Button style={{ color: '#000' }} onClick={handleEmptyTrash}>
-        {strings.btn__empty_trash}
-      </Button>
+      <Tooltip title={strings.btn__empty_trash}>
+        <IconButton onClick={handleEmptyTrash}>
+          <DeleteForeverIcon />
+        </IconButton>
+      </Tooltip>
     </div>
   );
 }

@@ -1,15 +1,13 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import * as actions from 'actions';
 import Header from 'components/Header';
 import ProjectForm from 'components/ProjectForm';
-// import { StringContext } from 'strings';
 
 export function EditProject(props) {
   const { projectId } = useParams();
   const { project, getProject, editProject } = props;
-  // const strings = useContext(StringContext);
 
   useEffect(() => {
     getProject(projectId);

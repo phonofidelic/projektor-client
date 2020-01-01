@@ -8,20 +8,49 @@ import ProjectMenu from 'components/ProjectMenu';
 
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-const StyledGridItem = styled(Grid)`
-  padding: 20px;
+const Container = styled(Grid)`
+  padding: 10px;
   // border: 1px solid red;
   text-decoration: none;
+`;
+
+const CardContainer = styled(Card)`
+  &:hover {
+    // border: 2px solid red;
+    background-color: #e0e0e0
+    transition: background-color 0.6s;
+    // box-shadow: 0 0 8px #b6bce2;
+    // transition: box-shadow 0.4s;
+  }
 `;
 
 const CardHeader = styled.div`
   display: flex;
   padding: 16px;
+`;
+
+const CardLink = styled(Link)`
+  text-decoration: none;
+
+  &:visited {
+    color: #000;
+  }
+
+  &:focus {
+    color: #000;
+  }
+
+  &:hover {
+    color: #000;
+  }
+
+  &:active {
+    color: #000;
+  }
 `;
 
 const ProjectInfoContainer = styled.div`
@@ -35,8 +64,8 @@ export default function ProjectGridItem(props) {
   const currentLocaleData = moment.localeData();
 
   return (
-    <StyledGridItem key={project._id} item xs={12} sm={6} md={4}>
-      <Card>
+    <Container key={project._id} item xs={12} sm={6} md={4}>
+      <CardContainer>
         <CardHeader>
           <Typography
             style={{ flexGrow: 1, lineHeight: '2em' }}
@@ -47,7 +76,10 @@ export default function ProjectGridItem(props) {
           </Typography>
           <ProjectMenu project={project} />
         </CardHeader>
-        <CardActionArea component={Link} to={`projects/${project._id}`}>
+        <CardLink
+          to={`projects/${project._id}`}
+          style={{ textDecoration: 'none' }}
+        >
           <CardContent>
             <ProjectInfoContainer>
               <Typography variant="overline">
@@ -79,7 +111,7 @@ export default function ProjectGridItem(props) {
                 : project.description}
             </Typography>
           </CardContent>
-        </CardActionArea>
+        </CardLink>
         <div style={{ height: 20 }}>
           {project.budgetedTime && (
             <LinearProgress
@@ -89,7 +121,7 @@ export default function ProjectGridItem(props) {
             />
           )}
         </div>
-      </Card>
-    </StyledGridItem>
+      </CardContainer>
+    </Container>
   );
 }

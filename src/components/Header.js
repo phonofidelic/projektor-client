@@ -1,57 +1,44 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { history } from 'config';
 import styled from 'styled-components';
 
-import Nav from 'components/Nav';
-
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import BackArrow from '@material-ui/icons/ArrowBack';
-import MenuIcon from '@material-ui/icons/Menu';
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  padding: 10px;
+`;
+
+const TitleContainer = styled.div`
+  padding: 12px;
+`;
+
+const ActionsContainer = styled.div`
+  // padding: 12px;
+`;
 
 export default function Header(props) {
-  const { nav, title, centerTitle, back, headerActions } = props;
-
-  const [open, setOpen] = useState(false);
-
-  const closeNav = () => {
-    setOpen(false);
-  };
+  const { title, centerTitle, back, headerActions } = props;
 
   return (
-    // <AppBar position="sticky" color="inherit">
     <Container>
-      <Toolbar>
-        {/* {nav && (
-          <IconButton
-            id="nav-btn-expand"
-            style={{ marginRight: 10 }}
-            onClick={() => setOpen(!open)}
-          >
-            <MenuIcon style={{ color: '#fff' }} />
-          </IconButton>
-        )} */}
-        {back && (
-          <IconButton
-            style={{ marginRight: 10 }}
-            onClick={() => history.goBack()}
-          >
-            <BackArrow style={{ color: '#000' }} />
-          </IconButton>
-        )}
-        <div style={{ flexGrow: centerTitle ? 1 : 0 }}>
-          <Typography variant="h6">{title}</Typography>
-        </div>
-        {!centerTitle && <div style={{ flexGrow: 1 }}></div>}
-        <div>{headerActions}</div>
-      </Toolbar>
-      {/* {nav && <Nav open={open} closeNav={closeNav} />} */}
+      {back && (
+        <IconButton
+          style={{ marginRight: 10 }}
+          onClick={() => history.goBack()}
+        >
+          <BackArrow style={{ color: '#000' }} />
+        </IconButton>
+      )}
+      <TitleContainer>
+        <Typography variant="h6" style={{ lineHeight: '24px' }}>
+          {title}
+        </Typography>
+      </TitleContainer>
+      {!centerTitle && <div style={{ flexGrow: 1 }}></div>}
+      <ActionsContainer>{headerActions}</ActionsContainer>
     </Container>
-    // </AppBar>
   );
 }

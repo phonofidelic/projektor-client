@@ -11,6 +11,7 @@ const Container = styled.div`
   justify-content: space-around;
   overflow: 'hidden';
   text-align: left;
+  padding: 0 10px;
 `;
 
 export default function ProjectGrid(props) {

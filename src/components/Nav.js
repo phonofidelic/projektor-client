@@ -1,11 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { StringContext } from 'strings';
 import { history } from 'config';
 
-import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -16,10 +15,19 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import DeleteIcon from '@material-ui/icons/Delete';
 import BookIcon from '@material-ui/icons/Book';
 import Typography from '@material-ui/core/Typography';
-import { routerActions } from 'connected-react-router';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  root: { backgroundColor: '#fff' },
+  selected: { textDecoration: 'underline', backgroundColor: '#fff' }
+});
 
 const NAV_WIDTH = 178;
 
+/**
+ * Base component creates a margin for main contentso that
+ * the Nav component does not overlay it.
+ */
 const Base = styled.div`
   width: ${NAV_WIDTH}px;
 `;
@@ -49,12 +57,13 @@ const NavLink = styled(Link)`
 export function Nav(props) {
   const { pathname } = props;
   const strings = useContext(StringContext);
+  const classes = useStyles();
 
-  const [open, setOpen] = useState(true);
+  // const [open, setOpen] = useState(true);
 
-  const closeNav = () => {
-    setOpen(false);
-  };
+  // const closeNav = () => {
+  //   setOpen(false);
+  // };
 
   console.log('====================================');
   console.log('Nav, history:', history.location.pathname);
@@ -91,7 +100,6 @@ export function Nav(props) {
   return pathname === '/' ||
     pathname === '/registration' ||
     pathname === '/login' ? null : (
-    // <Drawer open={open} onClose={closeNav} variant="permanent">
     <Base>
       <Container>
         <div style={{ margin: 10 }}>
@@ -100,6 +108,7 @@ export function Nav(props) {
         <List>
           {navItems.map((navItem, i) => (
             <ListItem
+              classes={{ root: classes.root, selected: classes.selected }}
               key={i}
               button
               component={NavLink}
@@ -114,7 +123,6 @@ export function Nav(props) {
       </Container>
     </Base>
   );
-  // </Drawer>
 }
 
 const mapStateToProps = state => {

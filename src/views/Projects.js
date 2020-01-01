@@ -24,7 +24,7 @@ function HeaderActions(props) {
         enterDelay={400}
       >
         <IconButton
-          style={{ textDecoration: 'none', color: '#000' }}
+          style={{ textDecoration: 'none' }}
           component={Link}
           to="/projects/create"
         >
