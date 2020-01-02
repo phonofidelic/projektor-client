@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import WorkTable from 'components/ProjectDetail/WorkTable';
 import WorkModal from 'components/ProjectDetail/WorkModal';
 import ActiveWork from 'components/ProjectDetail/ActiveWork';
+import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 
 import Typography from '@material-ui/core/Typography';
 
@@ -53,9 +54,7 @@ export default function WorkSection(props) {
             removeWork={removeWork}
           />
         ) : (
-          <Typography color="textSecondary">
-            {strings.msg__default_empty_work}
-          </Typography>
+          <DefaultEmptyMessage text={strings.msg__default_empty_work} />
         )}
       </WorkContainer>
       <ActiveWork project={project} createWork={createWork} />

@@ -25,20 +25,29 @@ const Description = styled(Grid)`
   white-space: pre-wrap;
 `;
 
+const ProjectInfoContainer = styled(Grid)`
+  padding: 18px;
+  max-height: 300px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+`;
+
 export default function ProjectDetail(props) {
   const { project, createWork, updateWork, removeWork } = props;
 
   return project ? (
     <Container>
       <InfoContainer container>
-        <Description item xs={12} sm={6}>
+        <Description item xs={12} sm={6} lg={8}>
           <Typography>
             {project.description === 'No description provided'
               ? strings.msg__empty_project_description
               : project.description}
           </Typography>
         </Description>
-        <ProjectInfo project={project} />
+        <ProjectInfoContainer item xs={12} sm={6} lg={4}>
+          <ProjectInfo project={project} />
+        </ProjectInfoContainer>
       </InfoContainer>
       <WorkSection
         project={project}

@@ -10,10 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 const Container = styled(Grid)`
-  padding: 18px;
-  max-height: 300px;
-  overflow-y: auto;
-  white-space: pre-wrap;
+  // padding: 18px;
+  // max-height: 300px;
+  // overflow-y: auto;
+  // white-space: pre-wrap;
 `;
 
 export default function ProjectInfo(props) {
@@ -22,7 +22,7 @@ export default function ProjectInfo(props) {
   const currentLocaleData = moment.localeData();
 
   return (
-    <Container item xs={12} sm={6}>
+    <Container>
       <div>
         <Typography variant="overline">{strings.lbl__client}</Typography>{' '}
         {project.client}
@@ -59,7 +59,7 @@ export default function ProjectInfo(props) {
         <LinearProgress
           value={(project.timeUsed / (project.budgetedTime * 3.6e6)) * 100}
           variant="determinate"
-          style={{ height: 20 }}
+          style={{ height: 10 }}
         />
       </div>
     </Container>

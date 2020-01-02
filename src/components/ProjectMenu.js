@@ -74,16 +74,18 @@ function ProjectMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleCloseMenu}
       >
-        <MenuItem
-          key="edit"
-          component={Link}
-          to={`/projects/edit/${project._id}`}
-        >
-          <ListItemIcon>
-            <EditIcon />
-          </ListItemIcon>
-          {strings.btn__edit}
-        </MenuItem>
+        {project.status === ACTIVE && (
+          <MenuItem
+            key="edit"
+            component={Link}
+            to={`/projects/edit/${project._id}`}
+          >
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            {strings.btn__edit}
+          </MenuItem>
+        )}
         {menuActions.map(
           (item, i) =>
             project.status !== item.status && (

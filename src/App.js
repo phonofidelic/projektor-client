@@ -22,6 +22,7 @@ function App() {
       </div>
       <div style={{ width: '100%' }}>
         <Switch>
+          {/* Public Routes */}
           <Route exact path="/">
             <Landing />
           </Route>
@@ -32,6 +33,7 @@ function App() {
             <Login />
           </Route>
 
+          {/* Active Project Routes */}
           <Route path="/projects/create">
             <CreateProject />
           </Route>
@@ -44,12 +46,23 @@ function App() {
           <Route path="/projects">
             <Projects />
           </Route>
-          <Route path="/removed">
-            <Removed />
+
+          {/* Archived Project Routes */}
+          <Route path="/archived/:projectId">
+            <Project />
           </Route>
           <Route path="/archived">
             <Archived />
           </Route>
+
+          {/* Removed Project Routes */}
+          <Route path="/removed/:projectId">
+            <Project />
+          </Route>
+          <Route path="/removed">
+            <Removed />
+          </Route>
+
           <Route path="/settings">
             <Settings />
           </Route>

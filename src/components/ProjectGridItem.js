@@ -40,18 +40,10 @@ const CardHeader = styled.div`
 const CardLink = styled(Link)`
   text-decoration: none;
 
-  &:visited {
-    color: #000;
-  }
-
-  &:focus {
-    color: #000;
-  }
-
-  &:hover {
-    color: #000;
-  }
-
+  &:link,
+  &:visited,
+  &:focus,
+  &:hover,
   &:active {
     color: #000;
   }
@@ -95,14 +87,15 @@ export default function ProjectGridItem(props) {
             style={{ flexGrow: 1, lineHeight: '2em' }}
             variant="h5"
             component="h2"
+            noWrap
           >
             {project.title}
           </Typography>
           <ProjectMenu project={project} />
         </CardHeader>
         <CardLink
-          to={`projects/${project._id}`}
-          style={{ textDecoration: 'none' }}
+          to={`${project.location}/${project._id}`}
+          // style={{ textDecoration: 'none' }}
         >
           <CardContent>
             <ProjectInfoContainer>
