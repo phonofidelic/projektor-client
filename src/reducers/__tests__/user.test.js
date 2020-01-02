@@ -35,7 +35,12 @@ describe('user reducer', () => {
     expect(newState).toEqual({
       ...defaultState,
       loading: false,
-      userInfo: mockUserInfo
+      userInfo: {
+        _id: mockUserInfo._id,
+        email: mockUserInfo.email,
+        token: mockUserInfo.token
+      },
+      token: mockUserInfo.token
     });
   });
 
@@ -71,7 +76,12 @@ describe('user reducer', () => {
     expect(newState).toEqual({
       ...defaultState,
       loading: false,
-      userInfo: mockUserInfo
+      userInfo: {
+        _id: mockUserInfo._id,
+        email: mockUserInfo.email,
+        token: mockUserInfo.token
+      },
+      token: mockUserInfo.token
     });
   });
 
