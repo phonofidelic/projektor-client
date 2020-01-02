@@ -61,7 +61,7 @@
     "ttl__removed": "Removed",
     "ttl__settings": "Settings",
     "ttl__sign_in": "Sign In",
-    "ttl__work": "Work",
+    "ttl__work": "Tasks",
     "hnt__add_note": "Add Note",
     "ttl__work_notes": "Notes ",
     "btn__save": "Save",
@@ -77,5 +77,6 @@
     "msg__empty_trash_confirm": "Are you sure you want to permanently delete these projects?",
     "msg__delete_perm_confirm": "Are you sure you want to permanently delete this project?",
     "hnt__cancel_work": "Cancel Task",
-    "msg__cancel_work_confirm": "Are you sure you want to cancel this task?"
+    "msg__cancel_work_confirm": "Are you sure you want to cancel this task?",
+    "msg__default_empty_work": "Completed Tasks will show up here"
 }

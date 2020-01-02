@@ -8,13 +8,17 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { strings } from 'strings';
 
+const Container = styled.div`
+  // background: #a5d6a7;
+`;
+
 const InfoContainer = styled(Grid)`
   margin-top: 40px;
   margin-bottom: 20px;
   text-align: left;
 `;
 
-const Info = styled(Grid)`
+const Description = styled(Grid)`
   padding: 18px;
   max-height: 300px;
   overflow-y: auto;
@@ -25,15 +29,15 @@ export default function ProjectDetail(props) {
   const { project, createWork, updateWork, removeWork } = props;
 
   return project ? (
-    <div>
+    <Container>
       <InfoContainer container>
-        <Info item xs={12} sm={6}>
+        <Description item xs={12} sm={6}>
           <Typography>
             {project.description === 'No description provided'
               ? strings.msg__empty_project_description
               : project.description}
           </Typography>
-        </Info>
+        </Description>
         <ProjectInfo project={project} />
       </InfoContainer>
       <WorkSection
@@ -42,7 +46,7 @@ export default function ProjectDetail(props) {
         updateWork={updateWork}
         removeWork={removeWork}
       />
-    </div>
+    </Container>
   ) : (
     <div>Loading...</div>
   );

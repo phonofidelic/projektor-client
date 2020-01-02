@@ -1,11 +1,20 @@
 import React, { useState, useContext } from 'react';
 import { StringContext } from 'strings';
+import styled from 'styled-components';
 
 import WorkTable from 'components/ProjectDetail/WorkTable';
 import WorkModal from 'components/ProjectDetail/WorkModal';
 import ActiveWork from 'components/ProjectDetail/ActiveWork';
 
 import Typography from '@material-ui/core/Typography';
+
+const Container = styled.div`
+  border-top: solid #e0e0e0 1px;
+`;
+
+const WorkContainer = styled.div`
+  min-height 200px;
+`;
 
 export default function WorkSection(props) {
   const { project, createWork, updateWork, removeWork } = props;
@@ -24,7 +33,7 @@ export default function WorkSection(props) {
   };
 
   return (
-    <div>
+    <Container>
       <WorkModal
         open={noteOpen}
         workItem={workItem}
@@ -36,14 +45,20 @@ export default function WorkSection(props) {
           {strings.ttl__work}
         </Typography>
       </div>
-      {project.work.length > 0 && (
-        <WorkTable
-          project={project}
-          hadleOpenWork={hadleOpenWork}
-          removeWork={removeWork}
-        />
-      )}
+      <WorkContainer>
+        {project.work.length > 0 ? (
+          <WorkTable
+            project={project}
+            hadleOpenWork={hadleOpenWork}
+            removeWork={removeWork}
+          />
+        ) : (
+          <Typography color="textSecondary">
+            {strings.msg__default_empty_work}
+          </Typography>
+        )}
+      </WorkContainer>
       <ActiveWork project={project} createWork={createWork} />
-    </div>
+    </Container>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { StringContext } from 'strings';
@@ -19,13 +19,17 @@ const Container = styled(Grid)`
 `;
 
 const CardContainer = styled(Card)`
+  position: relative;
   &:hover {
-    // border: 2px solid red;
     background-color: #e0e0e0
+    // background-color: #ffc107
     transition: background-color 0.6s;
-    // box-shadow: 0 0 8px #b6bce2;
-    // transition: box-shadow 0.4s;
   }
+`;
+
+const CardTheme = styled.div`
+  height: 5px;
+  background: ${({ projectThemeColor }) => projectThemeColor};
 `;
 
 const CardHeader = styled.div`
@@ -60,12 +64,32 @@ const ProjectInfoContainer = styled.div`
 
 export default function ProjectGridItem(props) {
   const { project } = props;
+  const projectThemeColor = '#ffc107'; // TODO: get from project settings
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
 
+  const [hovered, setHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const HandleMouseLeave = () => {
+    setHovered(false);
+  };
+
   return (
-    <Container key={project._id} item xs={12} sm={6} md={4}>
+    <Container
+      key={project._id}
+      item
+      xs={12}
+      sm={6}
+      md={4}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={HandleMouseLeave}
+    >
       <CardContainer>
+        {/* <CardTheme projectThemeColor={projectThemeColor} /> */}
         <CardHeader>
           <Typography
             style={{ flexGrow: 1, lineHeight: '2em' }}
@@ -104,7 +128,11 @@ export default function ProjectGridItem(props) {
               variant="body2"
               color="textSecondary"
               component="p"
-              style={{ height: 100, overflowY: 'auto', whiteSpace: 'pre-wrap' }}
+              style={{
+                height: 100,
+                overflowY: 'auto',
+                whiteSpace: 'pre-wrap'
+              }}
             >
               {project.description === 'No description provided'
                 ? strings.msg__empty_project_description
@@ -112,12 +140,12 @@ export default function ProjectGridItem(props) {
             </Typography>
           </CardContent>
         </CardLink>
-        <div style={{ height: 20 }}>
+        <div style={{ height: 5 }}>
           {project.budgetedTime && (
             <LinearProgress
               value={(project.timeUsed / (project.budgetedTime * 3.6e6)) * 100}
               variant="determinate"
-              style={{ height: 20 }}
+              style={{ height: 5 }}
             />
           )}
         </div>

@@ -61,7 +61,7 @@
     "ttl__removed": "Borttagna",
     "ttl__settings": "Inställningar",
     "ttl__sign_in": "Logga in",
-    "ttl__work": "Arbete",
+    "ttl__work": "Utfört arbete",
     "hnt__add_note": "Lägg till anteckning",
     "ttl__work_notes": "Anteckingar",
     "btn__save": "Spara",
@@ -77,5 +77,6 @@
     "msg__empty_trash_confirm": "Är du säker på att du vill ta bort dessa projekt permanent?",
     "msg__delete_perm_confirm": "Är du säker på att du vill ta bort detta projekt permanent?",
     "hnt__cancel_work": "Avbryt arbete",
-    "msg__cancel_work_confirm": "Är du säker på att du vill avbryta arbetet?"
+    "msg__cancel_work_confirm": "Är du säker på att du vill avbryta arbetet?",
+    "msg__default_empty_work": "Utfört arbete kommer att visas här"
 }

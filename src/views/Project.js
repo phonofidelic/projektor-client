@@ -20,9 +20,7 @@ export function Project(props) {
       <Header
         back="/projects"
         title={project && project.title}
-        headerActions={
-          project && <ProjectMenu project={project} color="#000" />
-        }
+        headerActions={project && <ProjectMenu project={project} />}
       />
       <ProjectDetail
         project={project}

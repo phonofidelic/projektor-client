@@ -16,7 +16,13 @@ export default function Root({ children }) {
 
   const enhancer = composeEnhancers(applyMiddleware(reduxThunk));
 
-  const materialUITheme = createMuiTheme({});
+  const materialUITheme = createMuiTheme({
+    palette: {
+      primary: {
+        main: '#212121'
+      }
+    }
+  });
 
   const store = createStore(reducers, {}, enhancer);
 
