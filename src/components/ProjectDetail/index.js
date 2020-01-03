@@ -39,11 +39,14 @@ export default function ProjectDetail(props) {
     <Container>
       <InfoContainer container>
         <Description item xs={12} sm={6} lg={8}>
-          <Typography>
-            {project.description === 'No description provided'
-              ? strings.msg__empty_project_description
-              : project.description}
-          </Typography>
+          {project.description === 'No description provided' ||
+          project.description === '' ? (
+            <Typography color="textSecondary">
+              {strings.msg__empty_project_description}
+            </Typography>
+          ) : (
+            <Typography>{project.description}</Typography>
+          )}
         </Description>
         <ProjectInfoContainer item xs={12} sm={6} lg={4}>
           <ProjectInfo project={project} />

@@ -42,7 +42,7 @@
     "msg__default_empty_removed": "Borttagna projekt hamnar här",
     "msg__delete_project_error": "Kunde inte ta bort projectet",
     "msg__email_required": "Ange en giltig email-address",
-    "msg__empty_project_description": "Ingen beskrivning",
+    "msg__empty_project_description": "(ingen beskrivning)",
     "msg__get_project_error": "Det gick inte att ladda projektet",
     "msg__get_projects_error": "Kunde inte ladda projekt",
     "msg__password_confirm": "Upprepa lösenordet",

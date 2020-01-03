@@ -42,7 +42,7 @@
     "msg__default_empty_removed": "Removed Projects will show up here",
     "msg__delete_project_error": "Sorry, could not delete project",
     "msg__email_required": "Please enter a valid email",
-    "msg__empty_project_description": "No description provided",
+    "msg__empty_project_description": "(no description provided)",
     "msg__get_project_error": "Sorry, could not load project",
     "msg__get_projects_error": "Sorry, could not load projects",
     "msg__password_confirm": "Please confirm password",

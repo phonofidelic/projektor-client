@@ -18,7 +18,7 @@ import removedColor from '@material-ui/core/colors/red';
 import settingsColor from '@material-ui/core/colors/purple';
 
 const NAV_WIDTH = 178;
-const SHADE = 500;
+const SHADE = 400;
 
 /**
  * Base component creates a margin for main contentso that

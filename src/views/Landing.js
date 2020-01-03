@@ -12,17 +12,13 @@ function HeaderActions(props) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
       <Button
-        style={{ textDecoratino: 'none', color: '#fff' }}
+        style={{ textDecoratino: 'none' }}
         component={Link}
         to="/registration"
       >
         {strings.btn__create_account}
       </Button>
-      <Button
-        style={{ textDecoratino: 'none', color: '#fff' }}
-        component={Link}
-        to="/login"
-      >
+      <Button style={{ textDecoratino: 'none' }} component={Link} to="/login">
         {strings.btn__sign_in}
       </Button>
     </div>
