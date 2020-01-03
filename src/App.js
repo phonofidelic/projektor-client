@@ -12,6 +12,7 @@ import Removed from 'views/Removed';
 import Archived from 'views/Archived';
 import Settings from 'views/Settings';
 import EditProject from 'views/EditProject';
+import Dashboard from 'views/Dashboard';
 import Nav from 'components/Nav';
 
 function App() {
@@ -61,6 +62,10 @@ function App() {
           </Route>
           <Route path="/removed">
             <Removed />
+          </Route>
+
+          <Route path="/dashboard">
+            <Dashboard />
           </Route>
 
           <Route path="/settings">
