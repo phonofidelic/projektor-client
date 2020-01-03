@@ -1,21 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { StringContext } from 'strings';
-import { history } from 'config';
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AppsIcon from '@material-ui/icons/Apps';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DeleteIcon from '@material-ui/icons/Delete';
 import BookIcon from '@material-ui/icons/Book';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 
 import dashboardColor from '@material-ui/core/colors/blue';
 import activeColor from '@material-ui/core/colors/green';
@@ -45,9 +39,14 @@ const Container = styled.div`
   z-index: 1;
 `;
 
+const LogoContainer = styled.div`
+  padding: 18px 10px;
+`;
+
 const Navlist = styled.ul`
   list-style: none;
   padding: 0;
+  margin: 0;
 `;
 
 const NavlistItem = styled(NavLink)`
@@ -74,67 +73,9 @@ const NavlistIcon = styled.div`
   margin-right: 12px;
 `;
 
-// const NavLink = styled(Link)`
-//   text-decoration: none;
-//   link-style: none;
-//   :link,
-//   :visited,
-//   :active,
-//   :hover {
-//     color: inherit;
-//   }
-// `;
-
 export function Nav(props) {
   const { pathname } = props;
   const strings = useContext(StringContext);
-  const [selectedNavItem, setSelectedNavItem] = useState({
-    color: '#000',
-    contrast: '#fff'
-  });
-
-  const handleNavChange = navItem => {
-    setSelectedNavItem(navItem);
-  };
-
-  useEffect(() => {
-    switch (pathname) {
-      case '/dashboard':
-        return setSelectedNavItem(navItems[0]);
-
-      case '/projects':
-        return setSelectedNavItem(navItems[1]);
-
-      case '/archived':
-        return setSelectedNavItem(navItems[2]);
-
-      case '/removed':
-        return setSelectedNavItem(navItems[3]);
-
-      case '/settings':
-        return setSelectedNavItem(navItems[4]);
-
-      default:
-        return setSelectedNavItem(navItems[0]);
-    }
-  }, [pathname]);
-
-  // const useStyles = makeStyles({
-  //   root: { backgroundColor: '#fff' },
-  //   selected: {
-  //     textDecoration: 'underline',
-  //     backgroundColor: 'red',
-  //     color: 'red'
-  //   }
-  // });
-
-  // const classes = useStyles();
-
-  // const [open, setOpen] = useState(true);
-
-  // const closeNav = () => {
-  //   setOpen(false);
-  // };
 
   const navItems = [
     {
@@ -174,34 +115,14 @@ export function Nav(props) {
     }
   ];
 
-  // console.log('====================================');
-  // console.log('pathname:', pathname);
-  // console.log('selectedNavItem:', selectedNavItem);
-  // console.log('====================================');
-
   return pathname === '/' ||
     pathname === '/registration' ||
     pathname === '/login' ? null : (
     <Base>
-      <Container selectedNavItem={selectedNavItem}>
-        <div style={{ margin: 10 }}>
+      <Container>
+        <LogoContainer>
           <Typography variant="h4">[projektor]</Typography>
-        </div>
-        {/* <List>
-          {navItems.map((navItem, i) => (
-            <ListItem
-              classes={{ root: classes.root, selected: classes.selected }}
-              key={i}
-              button
-              component={NavLink}
-              to={navItem.link}
-              selected={navItem.link === pathname}
-            >
-              <ListItemIcon>{navItem.icon}</ListItemIcon>
-              <ListItemText>{navItem.title}</ListItemText>
-            </ListItem>
-          ))}
-        </List> */}
+        </LogoContainer>
         <Navlist>
           {navItems.map((navItem, i) => (
             <NavlistItem
@@ -209,10 +130,9 @@ export function Nav(props) {
               key={i}
               to={navItem.link}
               selected={pathname.match(navItem.link)}
-              // selected={selectedNavItem.link === navItem.link}
               color={navItem.color}
               contrast={navItem.contrast}
-              onClick={() => handleNavChange(navItem)}
+              // onClick={() => handleNavChange(navItem)}
             >
               <NavlistIcon>{navItem.icon}</NavlistIcon>
               <Typography>{navItem.title}</Typography>

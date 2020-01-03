@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { StringContext } from 'strings';
@@ -27,11 +27,6 @@ const CardContainer = styled(Card)`
   }
 `;
 
-const CardTheme = styled.div`
-  height: 5px;
-  background: ${({ projectThemeColor }) => projectThemeColor};
-`;
-
 const CardHeader = styled.div`
   display: flex;
   padding: 16px;
@@ -56,32 +51,12 @@ const ProjectInfoContainer = styled.div`
 
 export default function ProjectGridItem(props) {
   const { project } = props;
-  const projectThemeColor = '#ffc107'; // TODO: get from project settings
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
 
-  const [hovered, setHovered] = useState(false);
-
-  const handleMouseEnter = () => {
-    setHovered(true);
-  };
-
-  const HandleMouseLeave = () => {
-    setHovered(false);
-  };
-
   return (
-    <Container
-      key={project._id}
-      item
-      xs={12}
-      sm={6}
-      md={4}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={HandleMouseLeave}
-    >
+    <Container key={project._id} item xs={12} sm={6} md={4}>
       <CardContainer>
-        {/* <CardTheme projectThemeColor={projectThemeColor} /> */}
         <CardHeader>
           <Typography
             style={{ flexGrow: 1, lineHeight: '2em' }}

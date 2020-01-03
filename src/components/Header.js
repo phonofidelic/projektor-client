@@ -8,7 +8,8 @@ import BackArrow from '@material-ui/icons/ArrowBack';
 
 const Container = styled.div`
   display: flex;
-  padding: 10px;
+  // padding: 10px;
+  padding: 18px;
   background: ${({ background }) => background};
 `;
 
