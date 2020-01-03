@@ -9,6 +9,17 @@ import DateFnsUtils from '@date-io/date-fns';
 import { ConnectedRouter } from 'connected-react-router';
 import { StringProvider } from 'strings';
 import { history } from 'config';
+import moment from 'moment';
+import enLocale from 'date-fns/locale/en-US';
+import svLocale from 'date-fns/locale/sv';
+// import 'moment/locale/sv';
+
+moment.locale(navigator.language);
+
+const localeMap = {
+  en: enLocale,
+  sv: svLocale
+};
 
 export default function Root({ children }) {
   const composeEnhancers =
@@ -29,7 +40,10 @@ export default function Root({ children }) {
   return (
     <Provider store={store}>
       <MuiThemeProvider theme={materialUITheme}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <MuiPickersUtilsProvider
+          utils={DateFnsUtils}
+          locale={localeMap[navigator.language]}
+        >
           <StringProvider>
             <ConnectedRouter history={history}>{children}</ConnectedRouter>
           </StringProvider>
