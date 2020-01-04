@@ -4,17 +4,17 @@ import styled from 'styled-components';
 
 import WorkTable from 'components/ProjectDetail/WorkTable';
 import WorkModal from 'components/ProjectDetail/WorkModal';
-import ActiveWork from 'components/ProjectDetail/ActiveWork';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 
 import Typography from '@material-ui/core/Typography';
 
 const Container = styled.div`
   border-top: solid #e0e0e0 1px;
+  flex: 1;
 `;
 
 const WorkContainer = styled.div`
-  min-height 200px;
+  // flex: 1;
 `;
 
 export default function WorkSection(props) {
@@ -57,7 +57,7 @@ export default function WorkSection(props) {
           <DefaultEmptyMessage text={strings.msg__default_empty_work} />
         )}
       </WorkContainer>
-      <ActiveWork project={project} createWork={createWork} />
+      {/* <ActiveWork project={project} createWork={createWork} /> */}
     </Container>
   );
 }

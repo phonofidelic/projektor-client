@@ -3,19 +3,23 @@ import styled from 'styled-components';
 
 import ProjectInfo from 'components/ProjectDetail/ProjectInfo';
 import WorkSection from 'components/ProjectDetail/WorkSection';
+import ActiveWork from 'components/ProjectDetail/ActiveWork';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { strings } from 'strings';
 
 const Container = styled.div`
-  // background: #a5d6a7;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 `;
 
 const InfoContainer = styled(Grid)`
   margin-top: 40px;
   margin-bottom: 20px;
   text-align: left;
+  height: 201px;
 `;
 
 const Description = styled(Grid)`
@@ -58,6 +62,7 @@ export default function ProjectDetail(props) {
         updateWork={updateWork}
         removeWork={removeWork}
       />
+      <ActiveWork project={project} createWork={createWork} />
     </Container>
   ) : (
     <div>Loading...</div>

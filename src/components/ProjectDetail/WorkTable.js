@@ -100,7 +100,7 @@ export default function WorkTable(props) {
   };
 
   return (
-    <Paper style={{ margin: 18 }}>
+    <Paper style={{ margin: 18, flex: 1 }}>
       <ContextMenu
         open={contextOpen}
         contextPos={contextPos}
