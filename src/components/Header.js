@@ -35,7 +35,7 @@ export default function Header(props) {
         </IconButton>
       )}
       <TitleContainer>
-        <Typography variant="h6" style={{ lineHeight: '24px' }}>
+        <Typography variant="h5" style={{ lineHeight: '24px' }}>
           {title}
         </Typography>
       </TitleContainer>

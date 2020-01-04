@@ -7,7 +7,10 @@ import {
   UPATE_WORK_FAILURE,
   REMOVE_WORK,
   REMOVE_WORK_SUCCESS,
-  REMOVE_WORK_FAILURE
+  REMOVE_WORK_FAILURE,
+  GET_WORK_BY_INTERVAL,
+  GET_WORK_BY_INTERVAL_SUCCESS,
+  GET_WORK_BY_INTERVAL_FAILURE
 } from 'actions/types';
 import { api, handleError, handleResponse } from 'actions/utils';
 
@@ -61,6 +64,26 @@ export const removeWork = workId => {
     } catch (err) {
       console.error(err);
       handleError(err, dispatch, REMOVE_WORK_FAILURE);
+    }
+  };
+};
+
+export const getAllWorkByInterval = (start, end) => {
+  console.log('getAllWorkByInterval, start:', start);
+  return async dispatch => {
+    dispatch({
+      type: GET_WORK_BY_INTERVAL
+    });
+
+    let response;
+    try {
+      // response = await api().get('/work/interval', { params: { start, end } });
+      response = await api().get(`/work/interval/${start}/${end}`);
+      console.log('getAllWorkByInterval, response:', response);
+      handleResponse(response, dispatch, GET_WORK_BY_INTERVAL_SUCCESS);
+    } catch (err) {
+      console.error(err);
+      handleError(err, dispatch, GET_WORK_BY_INTERVAL_FAILURE);
     }
   };
 };

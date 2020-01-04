@@ -78,5 +78,13 @@
     "msg__delete_perm_confirm": "Are you sure you want to permanently delete this project?",
     "hnt__cancel_work": "Cancel Task",
     "msg__cancel_work_confirm": "Are you sure you want to cancel this task?",
-    "msg__default_empty_work": "Completed Tasks will show up here"
+    "msg__default_empty_work": "Completed Tasks will show up here",
+    "lbl__day_mon": "Mon.",
+    "lbl__day_tue": "Tue.",
+    "lbl__day_wed": "Wed.",
+    "lbl__day_thu": "Thu.",
+    "lbl__day_fri": "Fri.",
+    "lbl__day_sat": "Sat.",
+    "lbl__day_sun": "Sun.",
+    "ttl__this__week": "This Week:"
 }

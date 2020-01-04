@@ -1,3 +1,4 @@
+/** PROJECT ACTIONS */
 import {
   getProjects,
   getProject,
@@ -7,7 +8,16 @@ import {
   deleteProject,
   deleteAllTrash
 } from 'actions/projectActions';
-import { createWork, updateWork, removeWork } from 'actions/workActions';
+
+/** WORK ACTIONS */
+import {
+  createWork,
+  updateWork,
+  removeWork,
+  getAllWorkByInterval
+} from 'actions/workActions';
+
+/** AUTH ACTIONS */
 import {
   registerNewUser,
   loginUser,
@@ -26,6 +36,7 @@ export {
   createWork,
   updateWork,
   removeWork,
+  getAllWorkByInterval,
   registerNewUser,
   loginUser,
   logoutUser,

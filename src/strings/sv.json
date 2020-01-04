@@ -23,7 +23,7 @@
     "inp_lbl__project_deadline": "Deadline",
     "inp_lbl__project_description": "Beskrivning",
     "inp_lbl__project_start_date": "Startdatum",
-    "inp_lbl__project_title": "Projekttitel",
+    "inp_lbl__project_title": "Titel",
     "lbl__budgeted_time": "Budgeterad tid:",
     "lbl__client": "Uppdragsgivare:",
     "lbl__deadline": "Deadline:",
@@ -78,5 +78,13 @@
     "msg__delete_perm_confirm": "Är du säker på att du vill ta bort detta projekt permanent?",
     "hnt__cancel_work": "Avbryt arbete",
     "msg__cancel_work_confirm": "Är du säker på att du vill avbryta arbetet?",
-    "msg__default_empty_work": "Utfört arbete kommer att visas här"
+    "msg__default_empty_work": "Utfört arbete kommer att visas här",
+    "lbl__day_mon": "mån",
+    "lbl__day_tue": "tis",
+    "lbl__day_wed": "ons",
+    "lbl__day_thu": "tor",
+    "lbl__day_fri": "fre",
+    "lbl__day_sat": "lör",
+    "lbl__day_sun": "sön",
+    "ttl__this__week": "Denna vecka:"
 }

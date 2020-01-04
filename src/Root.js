@@ -12,7 +12,7 @@ import { history } from 'config';
 import moment from 'moment';
 import enLocale from 'date-fns/locale/en-US';
 import svLocale from 'date-fns/locale/sv';
-// import 'moment/locale/sv';
+import 'moment/locale/sv';
 
 moment.locale(navigator.language);
 
