@@ -1,11 +1,11 @@
 import { SET_NEW_TOKEN } from 'actions/types';
 import axios from 'axios';
-import { history } from 'config';
+import { history, apiBaseUrl } from 'config';
 
 export const api = () => {
   const token = localStorage.getItem('token');
   return axios.create({
-    baseURL: 'http://localhost:4000',
+    baseURL: apiBaseUrl,
     headers: { token }
   });
 };
