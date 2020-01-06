@@ -10,6 +10,12 @@ import Root from 'Root';
 
 // moment.locale(navigator.language);
 
+if (process.env.NODE_ENV === 'production') {
+  console.log = () => {
+    return;
+  };
+}
+
 ReactDOM.render(
   <Root>
     <App />
