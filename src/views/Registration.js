@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 import { StringContext } from 'strings';
+import { Helmet } from 'react-helmet';
 
 import Header from 'components/Header';
 import RegistrationForm from 'components/RegistrationForm';
@@ -14,6 +15,12 @@ export function Registration(props) {
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>
+          {strings.ttl__app_title} - {strings.ttl__create_account}
+        </title>
+      </Helmet>
       <Header title={strings.ttl__create_account} centerTitle back="/" />
       <RegistrationForm handleRegistrationSubmit={handleRegistrationSubmit} />
     </div>

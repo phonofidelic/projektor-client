@@ -3,6 +3,7 @@ import { StringContext } from 'strings';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
+import { Helmet } from 'react-helmet';
 import requireAuth from 'hocs/requireAuth';
 
 import ProjectsGrid from 'components/ProjectsGrid';
@@ -50,6 +51,12 @@ export function Projects(props) {
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>
+          {strings.ttl__app_title} - {strings.ttl__active}
+        </title>
+      </Helmet>
       <Header
         nav
         title={strings.ttl__active}

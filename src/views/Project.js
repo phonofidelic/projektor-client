@@ -1,26 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 import { useParams } from 'react-router-dom';
+import { StringContext } from 'strings';
+import { Helmet } from 'react-helmet';
+
 import Header from 'components/Header';
 import ProjectDetail from 'components/ProjectDetail';
 import ProjectMenu from 'components/ProjectMenu';
 
 export function Project(props) {
   const { projectId } = useParams();
-
   const { project, getProject, createWork, updateWork, removeWork } = props;
+  const strings = useContext(StringContext);
 
   useEffect(() => {
     getProject(projectId);
   }, [getProject, projectId]);
 
-  return (
+  return project ? (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>
+          {strings.ttl__app_title} - {project.title}
+        </title>
+      </Helmet>
       <Header
         back="/projects"
-        title={project && project.title}
-        headerActions={project && <ProjectMenu project={project} />}
+        title={project.title}
+        headerActions={<ProjectMenu project={project} />}
       />
       <ProjectDetail
         project={project}
@@ -29,6 +38,8 @@ export function Project(props) {
         removeWork={removeWork}
       />
     </div>
+  ) : (
+    <div>loading...</div>
   );
 }
 

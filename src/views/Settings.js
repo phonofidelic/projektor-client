@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
-import requireAuth from 'hocs/requireAuth';
 import { StringContext } from 'strings';
+import { Helmet } from 'react-helmet';
+import requireAuth from 'hocs/requireAuth';
 
 import Header from 'components/Header';
 import UserInfo from 'components/UserInfo';
@@ -19,6 +20,12 @@ export function Settings(props) {
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>
+          {strings.ttl__app_title} - {strings.ttl__settings}
+        </title>
+      </Helmet>
       <Header nav title={strings.ttl__settings} />
       <UserInfo userInfo={userInfo} />
       <div>

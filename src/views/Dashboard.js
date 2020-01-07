@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import * as actions from 'actions';
 import { StringContext } from 'strings';
 import moment from 'moment';
+import { Helmet } from 'react-helmet';
+import requireAuth from 'hocs/requireAuth';
 
 import Header from 'components/Header';
 import WeekOverview from 'components/WeekOverview';
@@ -24,6 +26,12 @@ export function Dashboard(props) {
 
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>
+          {strings.ttl__app_title} - {strings.ttl__dashboard}
+        </title>
+      </Helmet>
       <Header title={strings.ttl__dashboard} />
       <WeekOverview work={work} />
     </div>
@@ -36,4 +44,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, actions)(Dashboard);
+export default connect(mapStateToProps, actions)(requireAuth(Dashboard));

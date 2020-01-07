@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { StringContext } from 'strings';
+import { Helmet } from 'react-helmet';
 
 import Header from 'components/Header';
 
@@ -26,8 +27,14 @@ function HeaderActions(props) {
 }
 
 export function Landing(props) {
+  const strings = useContext(StringContext);
+
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{strings.ttl__app_title}</title>
+      </Helmet>
       <Header title="Projektor" headerActions={<HeaderActions />} />
     </div>
   );

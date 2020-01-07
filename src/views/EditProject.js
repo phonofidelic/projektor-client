@@ -1,13 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import * as actions from 'actions';
+import { StringContext } from 'strings';
+import { Helmet } from 'react-helmet';
+import requireAuth from 'hocs/requireAuth';
+
 import Header from 'components/Header';
 import ProjectForm from 'components/ProjectForm';
 
 export function EditProject(props) {
   const { projectId } = useParams();
   const { project, getProject, editProject } = props;
+  const strings = useContext(StringContext);
 
   useEffect(() => {
     getProject(projectId);
@@ -17,13 +22,19 @@ export function EditProject(props) {
     editProject(projectId, data);
   };
 
-  return (
+  return project ? (
     <div>
-      <Header back title={project && project.title} />
-      {project && (
-        <ProjectForm project={project} handleFormSubmit={handleFormSubmit} />
-      )}
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>
+          {strings.ttl__app_title} - {project.title}
+        </title>
+      </Helmet>
+      <Header back title={project.title} />
+      <ProjectForm project={project} handleFormSubmit={handleFormSubmit} />
     </div>
+  ) : (
+    <div>loading...</div>
   );
 }
 
@@ -33,4 +44,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, actions)(EditProject);
+export default connect(mapStateToProps, actions)(requireAuth(EditProject));

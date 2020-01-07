@@ -86,5 +86,6 @@
     "lbl__day_fri": "fre",
     "lbl__day_sat": "lör",
     "lbl__day_sun": "sön",
-    "ttl__this__week": "Denna vecka:"
+    "ttl__this__week": "Denna vecka:",
+    "ttl__app_title": "Projektor"
 }
