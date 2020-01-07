@@ -19,12 +19,17 @@ function HeaderActions(props) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
       <Tooltip
+        arrow
         title={strings.hnt__create_project}
         placement="top-start"
         enterDelay={400}
       >
         <IconButton
-          style={{ textDecoration: 'none' }}
+          style={{
+            textDecoration: 'none'
+            // backgroundColor: activeColor[400],
+            // color: '#fff'
+          }}
           component={Link}
           to="/projects/create"
         >

@@ -24,7 +24,7 @@ function HeaderActions(props) {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Tooltip title={strings.btn__empty_trash}>
+      <Tooltip arrow title={strings.btn__empty_trash}>
         <IconButton onClick={handleEmptyTrash}>
           <DeleteForeverIcon />
         </IconButton>

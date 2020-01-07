@@ -107,6 +107,7 @@ export default function ActiveWork(props) {
          */}
         {workStarted && (
           <Tooltip
+            arrow
             title={strings.hnt__cancel_work}
             placement="top-start"
             enterDelay={400}
@@ -134,6 +135,7 @@ export default function ActiveWork(props) {
          */}
         {workStarted && (
           <Tooltip
+            arrow
             title={strings.hnt__add_note}
             placement="top-start"
             enterDelay={400}
@@ -149,6 +151,7 @@ export default function ActiveWork(props) {
              * Start new task
              */}
             <Tooltip
+              arrow
               title={strings.btn__start_new_task}
               placement="top-start"
               enterDelay={400}
@@ -163,6 +166,7 @@ export default function ActiveWork(props) {
            * Resume task
            */
           <Tooltip
+            arrow
             title={strings.btn__resume_task}
             placement="top-start"
             enterDelay={400}
@@ -177,6 +181,7 @@ export default function ActiveWork(props) {
            */
 
           <Tooltip
+            arrow
             title={strings.btn__pause_task}
             placement="top-start"
             enterDelay={400}
@@ -191,6 +196,7 @@ export default function ActiveWork(props) {
            * Submit new task
            */
           <Tooltip
+            arrow
             title={
               workActive ? strings.hnt__pause_to_post : strings.btn__submit_task
             }
