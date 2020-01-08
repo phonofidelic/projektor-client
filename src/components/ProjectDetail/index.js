@@ -19,7 +19,7 @@ const InfoContainer = styled(Grid)`
   margin-top: 40px;
   margin-bottom: 20px;
   text-align: left;
-  height: 201px;
+  // height: 201px;
 `;
 
 const Description = styled(Grid)`
