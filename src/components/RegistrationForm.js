@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 const Container = styled.div`
-  margin: 80px auto;
+  margin: auto;
   max-width: 500px;
 `;
 
@@ -108,6 +108,7 @@ export default function RegistrationForm(props) {
               <Grid item xs={12}>
                 <InputContainer>
                   <Button
+                    variant="outlined"
                     type="submit"
                     // disabled={Object.keys(errors).length > 0}
                   >

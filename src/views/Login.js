@@ -2,10 +2,31 @@ import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 import { StringContext } from 'strings';
+import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 
 import Header from 'components/Header';
 import LoginForm from 'components/LoginForm';
+
+import Typography from '@material-ui/core/Typography';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+`;
+
+const FormContainer = styled.div`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const TitleContainer = styled.div`
+  margin-top: 80px;
+`;
 
 export function Login(props) {
   const strings = useContext(StringContext);
@@ -14,16 +35,21 @@ export function Login(props) {
     props.loginUser(formData);
   };
   return (
-    <div>
+    <Container>
       <Helmet>
         <meta charSet="utf-8" />
         <title>
           {strings.ttl__app_title} - {strings.ttl__sign_in}
         </title>
       </Helmet>
-      <Header title={strings.ttl__sign_in} centerTitle back="/" />
-      <LoginForm handleLoginSubmit={handleLoginSubmit} />
-    </div>
+      <Header centerTitle back="/" />
+      <TitleContainer>
+        <Typography variant="h4">{strings.ttl__sign_in}</Typography>
+      </TitleContainer>
+      <FormContainer>
+        <LoginForm handleLoginSubmit={handleLoginSubmit} />
+      </FormContainer>
+    </Container>
   );
 }
 

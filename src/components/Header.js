@@ -8,9 +8,10 @@ import BackArrow from '@material-ui/icons/ArrowBack';
 
 const Container = styled.div`
   display: flex;
-  // padding: 10px;
+  ${'' /* padding: 10px; */}
   padding: 18px;
-  background: ${({ background }) => background};
+  background: ${({ background }) => background || '#fff'};
+  ${'' /* height: 48px; */}
 `;
 
 const TitleContainer = styled.div`
@@ -22,10 +23,23 @@ const ActionsContainer = styled.div`
 `;
 
 export default function Header(props) {
-  const { title, centerTitle, back, background, headerActions } = props;
+  const { title, centerTitle, back, background, headerActions, sticky } = props;
 
   return (
-    <Container background={background}>
+    <Container
+      background={background}
+      style={
+        sticky
+          ? {
+              position: 'sticky',
+              top: 0,
+              left: 0,
+              right: 0
+              // borderBottom: 'solid #e0e0e0 1px'
+            }
+          : null
+      }
+    >
       {back && (
         <IconButton
           style={{ marginRight: 10 }}
