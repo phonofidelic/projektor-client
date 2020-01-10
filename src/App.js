@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
+import useWindowSize from 'hooks/useWindowSize';
 
 import Landing from 'views/Landing';
 import Registration from 'views/Registration';
@@ -16,6 +17,10 @@ import Dashboard from 'views/Dashboard';
 import Nav from 'components/Nav';
 
 function App() {
+  const windowSize = useWindowSize();
+
+  // console.log('*** window width:', windowSize.width);
+
   return (
     <div className="App" style={{ display: 'flex' }}>
       <div>

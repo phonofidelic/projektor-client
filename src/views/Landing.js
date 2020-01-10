@@ -79,10 +79,10 @@ export function Landing(props) {
       <Header headerActions={<HeaderActions />} />
       <HeroContainer>
         <Logo src={logoSrc} alt={strings.ttl__app_title} />
-        <Typography>Simple project planing and time management</Typography>
+        <Typography>{strings.msg__tagline}</Typography>
         <HeroFormContainer>
           <div style={{ margin: 20 }}>
-            <Typography>Get started:</Typography>
+            <Typography>{strings.msg__get_started}</Typography>
           </div>
           <RegistrationForm
             handleRegistrationSubmit={handleRegistrationSubmit}

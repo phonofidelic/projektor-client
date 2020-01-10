@@ -87,5 +87,7 @@
     "lbl__day_sat": "Sat.",
     "lbl__day_sun": "Sun.",
     "ttl__this__week": "This Week:",
-    "ttl__app_title": "Projektor"
+    "ttl__app_title": "Projektor",
+    "msg__tagline": "Simple project planing and time management",
+    "msg__get_started": "Get started:"
 }
