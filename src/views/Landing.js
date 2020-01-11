@@ -15,28 +15,57 @@ import Typography from '@material-ui/core/Typography';
 
 const Container = styled.div``;
 
+const Background = styled.div`
+  background: linear-gradient(
+      45deg,
+      rgba(255, 0, 0, 0.5) 50%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(255, 255, 255, 0) 50%
+    ),
+    linear-gradient(
+      -40deg,
+      rgba(0, 255, 0, 0.5) 50%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(255, 255, 255, 0) 50%
+    ),
+    linear-gradient(
+      25deg,
+      rgba(0, 0, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(255, 255, 255, 0) 50%
+    );
+  background-blend-mode: lighten;
+  // filter: blur(2px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+`;
+
 const HeroContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;
+  height: 80vh;
 `;
 
 const Logo = styled.img`
   margin: 30px auto;
   max-width: 800px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 840px) {
     margin: 20px;
   }
 `;
 
-const HeroFormContainer = styled.div`
+const FormContainer = styled.div`
   margin: 80px auto;
 
-  @media (max-width: 768px) {
-    margin: 0;
-  }
+  // @media (max-width: 768px) {
+  //   margin: 0;
+  // }
 `;
 
 function HeaderActions(props) {
@@ -72,23 +101,22 @@ export function Landing(props) {
 
   return (
     <Container>
+      {/* <Background /> */}
       <Helmet>
         <meta charSet="utf-8" />
         <title>{strings.ttl__app_title}</title>
       </Helmet>
-      <Header headerActions={<HeaderActions />} />
+      <Header background="none" headerActions={<HeaderActions />} />
       <HeroContainer>
         <Logo src={logoSrc} alt={strings.ttl__app_title} />
         <Typography>{strings.msg__tagline}</Typography>
-        <HeroFormContainer>
-          <div style={{ margin: 20 }}>
-            <Typography>{strings.msg__get_started}</Typography>
-          </div>
-          <RegistrationForm
-            handleRegistrationSubmit={handleRegistrationSubmit}
-          />
-        </HeroFormContainer>
       </HeroContainer>
+      <FormContainer id="get-started">
+        <div style={{ margin: 20 }}>
+          <Typography>{strings.msg__get_started}</Typography>
+        </div>
+        <RegistrationForm handleRegistrationSubmit={handleRegistrationSubmit} />
+      </FormContainer>
     </Container>
   );
 }
