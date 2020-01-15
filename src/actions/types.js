@@ -30,14 +30,14 @@ export const SELECT_PROJECT = 'select_project',
   CREATE_WORK_FAILURE = 'create_work_failure',
   UPDATE_WORK = 'update_work',
   UPDATE_WORK_SUCCESS = 'update_work_success',
-  UPATE_WORK_FAILURE = 'update_work_failure',
+  UPDATE_WORK_FAILURE = 'update_work_failure',
   REMOVE_WORK = 'remove_work',
   REMOVE_WORK_SUCCESS = 'remove_work_success',
   REMOVE_WORK_FAILURE = 'remove_work_failure',
   GET_WORK_BY_INTERVAL = 'get_work_by_interval',
   GET_WORK_BY_INTERVAL_SUCCESS = 'get_work_by_interval_success',
   GET_WORK_BY_INTERVAL_FAILURE = 'get_work_by_interval_failure',
-  //** USER ACTIONS **//
+  //** AUTH ACTIONS **//
   POST_REGISTRATION = 'post_registration',
   POST_REGISTRATION_SUCCESS = 'post_registration_success',
   POST_REGISTRATION_FAILURE = 'post_registration_failure',
@@ -47,7 +47,14 @@ export const SELECT_PROJECT = 'select_project',
   POST_LOGOUT = 'post_logout',
   POST_LOGOUT_SUCCESS = 'post_logout_success',
   POST_LOGOUT_FAILURE = 'post_logout_failure',
-  SET_NEW_TOKEN = 'set_new_token',
   GET_USER_INFO = 'get_user_info',
   GET_USER_INFO_SUCCESS = 'get_user_info_success',
-  GET_USERINFO_FAILURE = 'get_user_info_failure';
+  GET_USER_INFO_FAILURE = 'get_user_info_failure',
+  RESEND_VERIFICATION = 'resend_verification',
+  RESEND_VERIFICATION_SUCCESS = 'resend_verification_success',
+  RESEND_VERIFICATION_FAILURE = 'resend_verification_failure',
+  // ** MESSAGE ACTIONS ** //
+  DISMISS_MESSAGE = 'dismiss_message',
+  // ** UTILITY ACTIONS ** //
+  SET_NEW_TOKEN = 'set_new_token',
+  VERIFICATION_FAILURE = 'verification_failure'; // Message action?

@@ -10,7 +10,11 @@ import {
   POST_LOGOUT_FAILURE,
   GET_USER_INFO,
   GET_USER_INFO_SUCCESS,
-  GET_USERINFO_FAILURE
+  GET_USER_INFO_FAILURE,
+  RESEND_VERIFICATION,
+  RESEND_VERIFICATION_SUCCESS,
+  RESEND_VERIFICATION_FAILURE,
+  DISMISS_MESSAGE
 } from 'actions/types';
 import { history } from 'config';
 import { api, handleError, handleResponse } from 'actions/utils';
@@ -121,7 +125,25 @@ export const getUserInfo = () => {
       handleResponse(response, dispatch, GET_USER_INFO_SUCCESS);
     } catch (err) {
       console.error(err);
-      handleError(err, dispatch, GET_USERINFO_FAILURE);
+      handleError(err, dispatch, GET_USER_INFO_FAILURE);
+    }
+  };
+};
+
+export const resendVerificationEmail = () => {
+  return async dispatch => {
+    dispatch({
+      type: RESEND_VERIFICATION
+    });
+
+    let response;
+    try {
+      response = await api().post('auth/resend');
+      console.log('resendVerificationEmail, response:', response);
+      handleResponse(response, dispatch, RESEND_VERIFICATION_SUCCESS);
+    } catch (err) {
+      console.error(err);
+      handleError(err, dispatch, RESEND_VERIFICATION_FAILURE);
     }
   };
 };

@@ -8,7 +8,10 @@ import {
   SET_NEW_TOKEN,
   GET_USER_INFO,
   GET_USER_INFO_SUCCESS,
-  GET_USERINFO_FAILURE
+  GET_USER_INFO_FAILURE,
+  RESEND_VERIFICATION,
+  RESEND_VERIFICATION_SUCCESS,
+  RESEND_VERIFICATION_FAILURE
 } from 'actions/types';
 import {
   MSG__POST_REGISTRATION_ERROR,
@@ -85,11 +88,11 @@ export default function(state = defaultState, action) {
         userInfo: action.payload
       };
 
-    case GET_USERINFO_FAILURE:
+    case GET_USER_INFO_FAILURE:
       return {
         ...state,
         loading: false,
-        error: { message: 'Could not retreive user info' }
+        error: { message: 'Could not retrieve user info' }
       };
 
     default:

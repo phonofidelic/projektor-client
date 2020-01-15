@@ -17,7 +17,7 @@ import {
   CREATE_WORK_FAILURE,
   UPDATE_WORK,
   UPDATE_WORK_SUCCESS,
-  UPATE_WORK_FAILURE,
+  UPDATE_WORK_FAILURE,
   REMOVE_WORK,
   REMOVE_WORK_SUCCESS,
   REMOVE_WORK_FAILURE,
@@ -268,7 +268,7 @@ export default function(state = defaultState, action) {
         }
       };
 
-    case UPATE_WORK_FAILURE: {
+    case UPDATE_WORK_FAILURE: {
       return {
         ...state,
         loading: false,

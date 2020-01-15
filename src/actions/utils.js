@@ -1,4 +1,4 @@
-import { SET_NEW_TOKEN } from 'actions/types';
+import { SET_NEW_TOKEN, VERIFICATION_FAILURE } from 'actions/types';
 import axios from 'axios';
 import { history, apiBaseUrl } from 'config';
 
@@ -18,6 +18,17 @@ export const handleError = (err, dispatch, errorType) => {
       // payload: err
     });
     history.push('/');
+  } else if (err.response && err.response.status === 403) {
+    dispatch({
+      type: VERIFICATION_FAILURE,
+      payload: {
+        title: 'Email verification required',
+        body:
+          // TODO: Use string key
+          'We have sent you a verification email. Please follow the link in the email to verify your account.\n\n If you did not receive this email, try clicking the Resend button below.',
+        actionButton: 'Resend Verification Link'
+      }
+    });
   } else {
     dispatch({
       type: errorType

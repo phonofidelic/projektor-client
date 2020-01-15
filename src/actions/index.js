@@ -22,7 +22,8 @@ import {
   registerNewUser,
   loginUser,
   logoutUser,
-  getUserInfo
+  getUserInfo,
+  resendVerificationEmail
 } from 'actions/authActions';
 
 export {
@@ -40,5 +41,6 @@ export {
   registerNewUser,
   loginUser,
   logoutUser,
-  getUserInfo
+  getUserInfo,
+  resendVerificationEmail
 };

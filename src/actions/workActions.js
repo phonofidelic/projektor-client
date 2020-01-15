@@ -4,7 +4,7 @@ import {
   CREATE_WORK_FAILURE,
   UPDATE_WORK,
   UPDATE_WORK_SUCCESS,
-  UPATE_WORK_FAILURE,
+  UPDATE_WORK_FAILURE,
   REMOVE_WORK,
   REMOVE_WORK_SUCCESS,
   REMOVE_WORK_FAILURE,
@@ -45,7 +45,7 @@ export const updateWork = workData => {
       handleResponse(response, dispatch, UPDATE_WORK_SUCCESS);
     } catch (err) {
       console.error(err);
-      handleError(err, dispatch, UPATE_WORK_FAILURE);
+      handleError(err, dispatch, UPDATE_WORK_FAILURE);
     }
   };
 };
