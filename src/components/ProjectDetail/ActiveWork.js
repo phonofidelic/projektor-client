@@ -14,6 +14,9 @@ import AddIcon from '@material-ui/icons/Add';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import PublishIcon from '@material-ui/icons/Publish';
 import CloseIcon from '@material-ui/icons/Close';
+import activeColor from '@material-ui/core/colors/green';
+
+const SHADE = 400;
 
 const Container = styled.div`
   display: flex;
@@ -142,7 +145,9 @@ export default function ActiveWork(props) {
             enterDelay={400}
           >
             <IconButton onClick={() => handleOpenWork()}>
-              <PostAddIcon />
+              <PostAddIcon
+                style={{ color: activeNote ? activeColor[SHADE] : 'inherit' }}
+              />
             </IconButton>
           </Tooltip>
         )}
