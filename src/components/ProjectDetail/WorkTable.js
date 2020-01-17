@@ -115,8 +115,8 @@ export default function WorkTable(props) {
             <TableCell>{strings.lbl__work_tbl_start_date}</TableCell>
             <TableCell>{strings.lbl__work_tbl_start_time}</TableCell>
             <TableCell>{strings.lbl__work_tbl_end_time}</TableCell>
-            <TableCell>{strings.lbl__work_tble_duration}</TableCell>
-            <TableCell>{strings.lbl__work_tble_notes}</TableCell>
+            <TableCell>{strings.lbl__work_tbl_duration}</TableCell>
+            <TableCell>{strings.lbl__work_tbl_notes}</TableCell>
             {/* <TableCell style={{ width: 71 }}></TableCell> */}
           </TableRow>
         </TableHead>
