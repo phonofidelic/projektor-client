@@ -54,7 +54,7 @@ export default function ActiveWork(props) {
     setActiveNote(note);
   };
 
-  const hadleOpenWork = work => {
+  const handleOpenWork = work => {
     // if (work) setWorkItem(work);
     setNoteOpen(true);
   };
@@ -89,6 +89,7 @@ export default function ActiveWork(props) {
       notes: activeNote
     });
 
+    setActiveNote(null);
     setWorkActive(false);
     setWorkStarted(false);
     setTime(0);
@@ -140,7 +141,7 @@ export default function ActiveWork(props) {
             placement="top-start"
             enterDelay={400}
           >
-            <IconButton onClick={() => hadleOpenWork()}>
+            <IconButton onClick={() => handleOpenWork()}>
               <PostAddIcon />
             </IconButton>
           </Tooltip>
