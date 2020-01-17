@@ -23,13 +23,13 @@ function ContextMenu(props) {
     contextPos,
     workItem,
     handleCloseContextMenu,
-    hadleOpenWork,
+    handleOpenWork,
     removeWork
   } = props;
   const strings = useContext(StringContext);
 
   const selectEdit = () => {
-    hadleOpenWork(workItem);
+    handleOpenWork(workItem);
     handleCloseContextMenu();
   };
 
@@ -76,7 +76,7 @@ function ContextMenu(props) {
 }
 
 export default function WorkTable(props) {
-  const { project, hadleOpenWork, removeWork } = props;
+  const { project, handleOpenWork, removeWork } = props;
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
   const [selectedWork, setSelectedWork] = useState({ _id: null });
@@ -105,7 +105,7 @@ export default function WorkTable(props) {
         open={contextOpen}
         contextPos={contextPos}
         workItem={selectedWork}
-        hadleOpenWork={hadleOpenWork}
+        handleOpenWork={handleOpenWork}
         handleCloseContextMenu={handleCloseContextMenu}
         removeWork={removeWork}
       />
@@ -134,7 +134,7 @@ export default function WorkTable(props) {
               selected={workItem._id === selectedWork._id}
               onClick={() => handleSelectWork(workItem)}
               onContextMenu={e => handleOpenContextMenu(e, workItem)}
-              onDoubleClick={() => hadleOpenWork(workItem)}
+              onDoubleClick={() => handleOpenWork(workItem)}
             >
               <TableCell>
                 <Typography>
@@ -187,7 +187,7 @@ export default function WorkTable(props) {
                     >
                       <IconButton
                         size="small"
-                        onClick={() => hadleOpenWork(workItem)}
+                        onClick={() => handleOpenWork(workItem)}
                       >
                         <EditIcon />
                       </IconButton>
@@ -199,7 +199,7 @@ export default function WorkTable(props) {
                     >
                       <IconButton
                         size="small"
-                        onClick={() => hadleOpenWork(workItem)}
+                        onClick={() => handleOpenWork(workItem)}
                       >
                         <DeleteIcon />
                       </IconButton>
