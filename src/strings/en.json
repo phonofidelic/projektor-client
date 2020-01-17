@@ -89,5 +89,8 @@
     "ttl__this__week": "This Week:",
     "ttl__work": "Tasks",
     "ttl__work_details": "Task Details",
-    "ttl__work_notes": "Notes "
+    "ttl__work_notes": "Notes ",
+    "ttl__verification_failure": "Email verification required",
+    "msg__verification_failure": "We have sent you a verification email. Please follow the link in the email to verify your account.\n\nIf you did not receive this email, try clicking the button below.",
+    "btn__resend_verification": "Resend Verification Link"
 }

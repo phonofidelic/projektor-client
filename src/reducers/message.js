@@ -11,7 +11,7 @@ export const defaultState = {
   errorContext: null,
   title: null,
   body: null,
-  actionButton: null
+  actionButtonKey: null
 };
 
 export default function(state = defaultState, action) {
@@ -21,9 +21,9 @@ export default function(state = defaultState, action) {
         ...state,
         showDialog: true,
         errorContext: VERIFICATION_FAILURE,
-        title: action.payload.title,
-        body: action.payload.body,
-        actionButton: action.payload.actionButton
+        titleKey: 'ttl__verification_failure',
+        bodyKey: 'msg__verification_failure',
+        actionButtonKey: 'btn__resend_verification'
       };
 
     case RESEND_VERIFICATION:

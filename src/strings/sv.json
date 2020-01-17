@@ -89,5 +89,8 @@
     "ttl__this__week": "Denna vecka:",
     "ttl__work": "Utfört arbete",
     "ttl__work_details": "Arbetsdetaljer",
-    "ttl__work_notes": "Anteckingar"
+    "ttl__work_notes": "Anteckingar",
+    "ttl__verification_failure": "E-post verifiering krävs",
+    "msg__verification_failure": "Vi har skickat dig en verifieringslänk till din e-post. Följ länken i meddelandet för att verifiera ditt konto. \n\nOm du inte har fått detta meddelande, tryck på knappen nedan så skickar vi den på nytt.",
+    "btn__resend_verification": "Återsänd verifieringslänk"
 }

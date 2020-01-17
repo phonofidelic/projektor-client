@@ -16,6 +16,7 @@ import EditProject from 'views/EditProject';
 import Dashboard from 'views/Dashboard';
 import Nav from 'components/Nav';
 import ErrorDialog from 'components/ErrorDialog';
+import MessageContainer from 'views/MessageContainer';
 
 function App() {
   const windowSize = useWindowSize();
@@ -24,7 +25,7 @@ function App() {
 
   return (
     <div className="App" style={{ display: 'flex' }}>
-      <ErrorDialog />
+      <MessageContainer />
       <div>
         <Nav />
       </div>
