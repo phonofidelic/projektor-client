@@ -23,7 +23,7 @@ export default function WorkSection(props) {
   const [noteOpen, setNoteOpen] = useState(false);
   const [workItem, setWorkItem] = useState(null);
 
-  const hadleOpenWork = work => {
+  const handleOpenWork = work => {
     if (work) setWorkItem(work);
     setNoteOpen(true);
   };
@@ -50,7 +50,7 @@ export default function WorkSection(props) {
         {project.work.length > 0 ? (
           <WorkTable
             project={project}
-            hadleOpenWork={hadleOpenWork}
+            handleOpenWork={handleOpenWork}
             removeWork={removeWork}
           />
         ) : (
