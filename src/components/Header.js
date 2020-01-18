@@ -23,15 +23,22 @@ const ActionsContainer = styled.div`
 `;
 
 export default function Header(props) {
-  const { title, centerTitle, back, background, headerActions, sticky } = props;
+  const {
+    title,
+    centerTitle,
+    back,
+    background,
+    headerActions,
+    position
+  } = props;
 
   return (
     <Container
       background={background}
       style={
-        sticky
+        position
           ? {
-              position: 'sticky',
+              position: position,
               top: 0,
               left: 0,
               right: 0

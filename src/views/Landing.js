@@ -48,7 +48,7 @@ const HeroContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 80vh;
+  height: 100vh;
 `;
 
 const Logo = styled.img`
@@ -82,7 +82,7 @@ function HeaderActions(props) {
       </Button> */}
       <Button
         variant="outlined"
-        style={{ textDecoratino: 'none' }}
+        style={{ textDecoratino: 'none', backgroundColor: '#fff' }}
         component={Link}
         to="/login"
       >
@@ -106,7 +106,11 @@ export function Landing(props) {
         <meta charSet="utf-8" />
         <title>{strings.ttl__app_title}</title>
       </Helmet>
-      <Header background="none" headerActions={<HeaderActions />} />
+      <Header
+        position="fixed"
+        background="none"
+        headerActions={<HeaderActions />}
+      />
       <HeroContainer>
         <Logo src={logoSrc} alt={strings.ttl__app_title} />
         <Typography>{strings.msg__tagline}</Typography>
