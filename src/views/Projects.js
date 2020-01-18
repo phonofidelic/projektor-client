@@ -18,7 +18,13 @@ function HeaderActions(props) {
   const strings = useContext(StringContext);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        transition: 'opacity 1s'
+      }}
+    >
       <Tooltip
         arrow
         title={strings.hnt__create_project}

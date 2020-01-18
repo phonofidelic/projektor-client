@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import moment from 'moment';
 import { StringContext } from 'strings';
 import styled from 'styled-components';
+import { Prompt } from 'react-router';
 
 import Timer from 'components/Timer';
 import WorkModal from 'components/ProjectDetail/WorkModal';
@@ -98,6 +99,18 @@ export default function ActiveWork(props) {
     setTime(0);
   };
 
+  /**
+   * Warn user before reloading page if work is started
+   * Source: https://stackoverflow.com/a/49163569
+   */
+  useEffect(() => {
+    if (workStarted) {
+      window.onbeforeunload = () => true;
+    } else {
+      window.onbeforeunload = undefined;
+    }
+  });
+
   return (
     <Container>
       <WorkModal
@@ -105,6 +118,7 @@ export default function ActiveWork(props) {
         handleClose={handleCloseWork}
         handleSetActiveNote={handleSetActiveNote}
       />
+      <Prompt when={workStarted} message="Are you sure you want to leave?" />
       <div>
         {/**
          * Cancel work
