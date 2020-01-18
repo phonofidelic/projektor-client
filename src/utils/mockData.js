@@ -4,9 +4,17 @@ export const mockProject = {
   timeUsed: 559011,
   status: 'active',
   work: [
-    '5deccf552d02734c53016500',
-    '5decd0492d02734c53016501',
-    '5dee0ed9ceab8853d5c83650'
+    {
+      _id: '5df68683c1181c125b671ef1',
+      userId: '5deae94a77d40a110ddb30ea',
+      projectId: '5df5e2d85032413df009eebc',
+      date: '2019-12-15T19:15:30.327Z',
+      start: '2019-12-15T19:15:30.327Z',
+      end: '2019-12-15T19:16:18.786Z',
+      duration: 48459,
+      created: '2019-12-15T19:16:19.291Z',
+      __v: 0
+    }
   ],
   _id: '5deccf102d02734c530164ff',
   userId: '5deae2fc0538f147d0eace3c',

@@ -1,7 +1,9 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import { mockProject } from 'utils/mockData';
 import { Project } from 'views/Project';
 import Header from 'components/Header';
+import Root from 'Root';
 import ProjectDetail from 'components/ProjectDetail';
 
 /**
@@ -17,8 +19,13 @@ jest.mock('react-router-dom', () => ({
 
 describe('Project view', () => {
   let wrapper;
+  const getProject = jest.fn();
   beforeEach(() => {
-    wrapper = shallow(<Project />);
+    wrapper = mount(
+      <Root>
+        <Project project={mockProject} getProject={getProject} />
+      </Root>
+    );
   });
 
   afterEach(() => {
