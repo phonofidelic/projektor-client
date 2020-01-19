@@ -11,11 +11,11 @@ import UserInfo from 'components/UserInfo';
 import Button from '@material-ui/core/Button';
 
 export function Settings(props) {
-  const { userInfo, getUserInfo } = props;
+  const { preload, userInfo, getUserInfo } = props;
   const strings = useContext(StringContext);
 
   useEffect(() => {
-    getUserInfo();
+    !preload && getUserInfo();
   }, [getUserInfo]);
 
   return (

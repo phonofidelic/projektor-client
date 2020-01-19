@@ -11,14 +11,25 @@ import ProjectMenu from 'components/ProjectMenu';
 
 export function Project(props) {
   const { projectId } = useParams();
-  const { project, getProject, createWork, updateWork, removeWork } = props;
+  const {
+    preload,
+    project,
+    getProject,
+    createWork,
+    updateWork,
+    removeWork
+  } = props;
   const strings = useContext(StringContext);
 
+  console.log('====================================');
+  console.log('Project, preload:', preload);
+  console.log('====================================');
+
   useEffect(() => {
-    getProject(projectId);
+    !preload && getProject(projectId);
   }, [getProject, projectId]);
 
-  return project ? (
+  return !project ? null : (
     <div>
       <Helmet>
         <meta charSet="utf-8" />
@@ -38,8 +49,6 @@ export function Project(props) {
         removeWork={removeWork}
       />
     </div>
-  ) : (
-    <div>loading...</div>
   );
 }
 

@@ -10,19 +10,15 @@ import Header from 'components/Header';
 import WeekOverview from 'components/WeekOverview';
 
 export function Dashboard(props) {
-  const { work, getAllWorkByInterval } = props;
+  const { preload, work, getAllWorkByInterval } = props;
   const strings = useContext(StringContext);
 
   const start = moment(moment().day(0)).format();
   const end = moment(moment().day(6)).format();
 
   useEffect(() => {
-    getAllWorkByInterval(start, end);
+    !preload && getAllWorkByInterval(start, end);
   }, []);
-
-  console.log('====================================');
-  console.log('Dashboard, work:', work);
-  console.log('====================================');
 
   return (
     <div>

@@ -48,14 +48,18 @@ function HeaderActions(props) {
 }
 
 export function Projects(props) {
-  const { projects, getProjects } = props;
+  const { preload, projects, getProjects } = props;
   const strings = useContext(StringContext);
 
+  console.log('====================================');
+  console.log('Projects, preload:', preload);
+  console.log('====================================');
+
   useEffect(() => {
-    getProjects('active');
+    !preload && getProjects('active');
   }, [getProjects]);
 
-  return (
+  return !projects ? null : (
     <div>
       <Helmet>
         <meta charSet="utf-8" />

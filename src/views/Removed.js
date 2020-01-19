@@ -35,7 +35,7 @@ function HeaderActions(props) {
 }
 
 export function Removed(props) {
-  const { projects, getProjects, deleteAllTrash } = props;
+  const { preload, projects, getProjects, deleteAllTrash } = props;
   const strings = useContext(StringContext);
 
   const emptyTrash = () => {
@@ -43,7 +43,7 @@ export function Removed(props) {
   };
 
   useEffect(() => {
-    getProjects('deleted');
+    !preload && getProjects('deleted');
   }, [getProjects]);
 
   return (

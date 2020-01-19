@@ -10,11 +10,11 @@ import Header from 'components/Header';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 
 export function Archived(props) {
-  const { projects, getProjects } = props;
+  const { preload, projects, getProjects } = props;
   const strings = useContext(StringContext);
 
   useEffect(() => {
-    getProjects('archived');
+    !preload && getProjects('archived');
   }, [getProjects]);
 
   return (

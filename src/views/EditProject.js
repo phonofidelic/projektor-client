@@ -11,11 +11,11 @@ import ProjectForm from 'components/ProjectForm';
 
 export function EditProject(props) {
   const { projectId } = useParams();
-  const { project, getProject, editProject } = props;
+  const { preload, project, getProject, editProject } = props;
   const strings = useContext(StringContext);
 
   useEffect(() => {
-    getProject(projectId);
+    !preload && getProject(projectId);
   }, [getProject, projectId]);
 
   const handleFormSubmit = data => {
