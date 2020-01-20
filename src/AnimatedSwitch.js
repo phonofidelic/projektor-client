@@ -85,3 +85,4 @@ export function AnimatedSwitch({ history, location, children, ...rest }) {
 }
 
 export default React.memo(AnimatedSwitch);
+// export default AnimatedSwitch;
