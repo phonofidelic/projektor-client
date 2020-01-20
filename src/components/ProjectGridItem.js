@@ -26,7 +26,7 @@ const PosedContainer = posed(Container)({
   },
   exit: {
     opacity: 0,
-    x: '100%'
+    x: '-100%'
   },
   hoverable: true,
   init: { scale: 1 },

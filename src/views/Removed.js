@@ -43,8 +43,8 @@ export function Removed(props) {
   };
 
   useEffect(() => {
-    !preload && getProjects('deleted');
-  }, [getProjects]);
+    !preload && getProjects();
+  }, [preload, getProjects]);
 
   return !projects ? null : (
     <div>

@@ -56,7 +56,7 @@ export function Projects(props) {
   console.log('====================================');
 
   useEffect(() => {
-    !preload && getProjects('active');
+    !preload && getProjects();
   }, [preload, getProjects]);
 
   return !projects ? null : (

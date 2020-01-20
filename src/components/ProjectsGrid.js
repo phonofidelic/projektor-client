@@ -40,7 +40,7 @@ const Container = styled.div`
   padding: 10px;
 `;
 
-export default function ProjectGrid(props) {
+function ProjectGrid(props) {
   const { projects } = props;
   const projectsWithLocation = withProjectLocation(projects);
 
@@ -48,7 +48,7 @@ export default function ProjectGrid(props) {
     <Container>
       <Grid container>
         {/* <PoseGroup> */}
-        {projectsWithLocation.map(project => (
+        {projects.map(project => (
           <ProjectGridItem key={project._id} project={project} />
         ))}
         {/* </PoseGroup> */}
@@ -56,3 +56,5 @@ export default function ProjectGrid(props) {
     </Container>
   );
 }
+
+export default ProjectGrid;

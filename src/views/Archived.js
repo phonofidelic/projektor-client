@@ -14,7 +14,7 @@ export function Archived(props) {
   const strings = useContext(StringContext);
 
   useEffect(() => {
-    !preload && getProjects('archived');
+    !preload && getProjects();
   }, [preload, getProjects]);
 
   return !projects ? null : (
