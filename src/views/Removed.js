@@ -46,7 +46,7 @@ export function Removed(props) {
     !preload && getProjects('deleted');
   }, [getProjects]);
 
-  return (
+  return !projects ? null : (
     <div>
       <Helmet>
         <meta charSet="utf-8" />
@@ -72,7 +72,7 @@ export function Removed(props) {
 
 const mapStateToProps = state => {
   return {
-    projects: state.projects.projectList
+    projects: state.projects.removedProjects
   };
 };
 

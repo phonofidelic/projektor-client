@@ -96,7 +96,16 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         loading: false,
-        projectList: action.payload
+        projectList: action.payload,
+        activeProjects: action.payload.filter(
+          project => project.status === ACTIVE
+        ),
+        archivedProjects: action.payload.filter(
+          project => project.status === ARCHIVED
+        ),
+        removedProjects: action.payload.filter(
+          project => project.status === DELETED
+        )
       };
 
     case GET_PROJECTS_FAILURE:

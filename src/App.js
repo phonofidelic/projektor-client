@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import useWindowSize from 'hooks/useWindowSize';
 
-import PreloadLayztComponents from 'PreloadLayzyComponents';
+import PreloadLazyComponents from 'PreloadLazyComponents';
 import Routes from 'Routes';
 
 import Nav from 'components/Nav';
@@ -21,7 +21,7 @@ function App() {
       </div>
       <div style={{ width: '100%' }}>
         <React.Suspense fallback={<div>Loading........</div>}>
-          <PreloadLayztComponents />
+          <PreloadLazyComponents />
           <Routes />
         </React.Suspense>
       </div>

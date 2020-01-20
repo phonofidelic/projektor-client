@@ -15,9 +15,9 @@ export function Archived(props) {
 
   useEffect(() => {
     !preload && getProjects('archived');
-  }, [getProjects]);
+  }, [preload, getProjects]);
 
-  return (
+  return !projects ? null : (
     <div>
       <Helmet>
         <meta charSet="utf-8" />
@@ -39,7 +39,7 @@ export function Archived(props) {
 
 const mapStateToProps = state => {
   return {
-    projects: state.projects.projectList
+    projects: state.projects.archivedProjects
   };
 };
 
