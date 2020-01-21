@@ -1,26 +1,58 @@
 import React from 'react';
 import styled from 'styled-components';
+import posed from 'react-pose';
 
-import logoSrc from 'assets/logo.svg';
+// import logoSrc from 'assets/logo.svg';
 
-const Container = styled.div`
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const Container = styled(
+  posed.div({
+    enter: {
+      // x: 0,
+      // y: 0,
+      opacity: 1,
+      // scale: 1,
+      transition: {
+        type: 'tween',
+        ease: 'easeInOut',
+        duration: 400
+      }
+    },
+    exit: {
+      opacity: 0,
+      // scale: 1.5,
+      transition: {
+        type: 'tween',
+        ease: 'easeInOut',
+        duration: 400
+      }
+    }
+  })
+)`
   display: flex;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 5000;
 `;
 
-const Logo = styled.img`
-  margin: 30px auto;
-  max-width: 800px;
-  position: absolute;
-  @media (max-width: 840px) {
-    margin: 20px;
-  }
+// const Logo = styled.img`
+//   margin: auto;
+//   max-width: 800px;
+//   position: absolute;
+//   @media (max-width: 840px) {
+//     margin: 20px;
+//   }
+// `;
+
+const ProgressContainer = styled.div`
+  width: 100px;
+  height: 100px;
+  margin: auto;
 `;
 
 const CircleContainer = styled.div`
@@ -140,11 +172,14 @@ const Blue = styled.div`
 export default function Loader(props) {
   return (
     <Container>
-      <CircleContainer>
+      <ProgressContainer>
+        <CircularProgress />
+      </ProgressContainer>
+      {/* <CircleContainer>
         <Red />
         <Green />
         <Blue />
-      </CircleContainer>
+      </CircleContainer> */}
     </Container>
   );
 }
