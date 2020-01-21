@@ -5,6 +5,7 @@ import { StringContext } from 'strings';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 
+import logoSrc from 'assets/logo.svg';
 import Header from 'components/Header';
 import LoginForm from 'components/LoginForm';
 
@@ -28,6 +29,15 @@ const TitleContainer = styled.div`
   margin-top: 80px;
 `;
 
+const Logo = styled.img`
+  margin: 30px auto;
+  max-width: 400px;
+
+  @media (max-width: 840px) {
+    margin: 20px;
+  }
+`;
+
 export function Login(props) {
   const strings = useContext(StringContext);
 
@@ -44,7 +54,8 @@ export function Login(props) {
       </Helmet>
       <Header centerTitle back="/" />
       <TitleContainer>
-        <Typography variant="h4">{strings.ttl__sign_in}</Typography>
+        <Logo src={logoSrc} alt={strings.ttl__app_title} />
+        {/* <Typography variant="h4">{strings.ttl__sign_in}</Typography> */}
       </TitleContainer>
       <FormContainer>
         <LoginForm handleLoginSubmit={handleLoginSubmit} />
