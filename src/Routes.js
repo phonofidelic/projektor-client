@@ -46,7 +46,7 @@ export const routes = [
   },
   {
     Component: Project,
-    path: '/arcived/:projectId'
+    path: '/archived/:projectId'
   },
   {
     Component: Archived,
