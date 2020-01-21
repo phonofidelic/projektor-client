@@ -4,9 +4,9 @@ import useWindowSize from 'hooks/useWindowSize';
 
 import PreloadLazyComponents from 'PreloadLazyComponents';
 import Routes from 'Routes';
-
 import Nav from 'components/Nav';
 import MessageContainer from 'views/MessageContainer';
+import Loader from 'components/Loader';
 
 function App() {
   const windowSize = useWindowSize();
@@ -15,12 +15,13 @@ function App() {
 
   return (
     <div className="App" style={{ display: 'flex' }}>
+      {/* <Loader /> */}
       <MessageContainer />
       <div>
         <Nav />
       </div>
       <div style={{ width: '100%' }}>
-        <React.Suspense fallback={<div>Loading........</div>}>
+        <React.Suspense fallback={<Loader />}>
           <PreloadLazyComponents />
           <Routes />
         </React.Suspense>
