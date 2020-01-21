@@ -25,6 +25,7 @@ import { history } from 'config';
 import { api, handleError, handleResponse } from 'actions/utils';
 
 export const getProjects = status => {
+  console.log('*** getProjects ***');
   return async dispatch => {
     dispatch({
       type: GET_PROJECTS

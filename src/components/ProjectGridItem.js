@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { StringContext } from 'strings';
 import moment from 'moment';
+import posed from 'react-pose';
 
 import ProjectMenu from 'components/ProjectMenu';
 
@@ -17,6 +18,20 @@ const Container = styled(Grid)`
   // border: 1px solid red;
   text-decoration: none;
 `;
+
+const PosedContainer = posed(Container)({
+  enter: {
+    opacity: 1,
+    x: 0
+  },
+  exit: {
+    opacity: 0,
+    x: '-100%'
+  },
+  hoverable: true,
+  init: { scale: 1 },
+  hover: { scale: 1.05 }
+});
 
 const CardContainer = styled(Card)`
   position: relative;
@@ -55,7 +70,7 @@ export default function ProjectGridItem(props) {
   const currentLocaleData = moment.localeData();
 
   return (
-    <Container key={project._id} item xs={12} sm={6} md={4}>
+    <PosedContainer key={project._id} item xs={12} sm={6} md={4}>
       <CardContainer>
         <CardHeader>
           <Typography
@@ -118,6 +133,6 @@ export default function ProjectGridItem(props) {
           )}
         </div>
       </CardContainer>
-    </Container>
+    </PosedContainer>
   );
 }

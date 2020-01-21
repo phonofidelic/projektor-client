@@ -56,8 +56,8 @@ export function Projects(props) {
   console.log('====================================');
 
   useEffect(() => {
-    !preload && getProjects('active');
-  }, [getProjects]);
+    !preload && getProjects();
+  }, [preload, getProjects]);
 
   return !projects ? null : (
     <div>
@@ -85,7 +85,7 @@ export function Projects(props) {
 
 const mapStateToProps = state => {
   return {
-    projects: state.projects.projectList
+    projects: state.projects.activeProjects
   };
 };
 

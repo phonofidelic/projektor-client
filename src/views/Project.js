@@ -21,10 +21,6 @@ export function Project(props) {
   } = props;
   const strings = useContext(StringContext);
 
-  console.log('====================================');
-  console.log('Project, preload:', preload);
-  console.log('====================================');
-
   useEffect(() => {
     !preload && getProject(projectId);
   }, [getProject, projectId]);

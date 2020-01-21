@@ -5,7 +5,7 @@ import React, { useState, useEffect, memo } from 'react';
 
 import { routes } from 'Routes';
 
-function PreloadLayztComponents() {
+function PreloadLazyComponents() {
   const [actPreload, setActPreload] = useState(true);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function PreloadLayztComponents() {
   }
 }
 
-export default memo(PreloadLayztComponents);
+export default memo(PreloadLazyComponents);
 
 const preloadStyles = {
   maxHeight: 0,

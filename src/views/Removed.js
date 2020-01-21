@@ -43,10 +43,10 @@ export function Removed(props) {
   };
 
   useEffect(() => {
-    !preload && getProjects('deleted');
-  }, [getProjects]);
+    !preload && getProjects();
+  }, [preload, getProjects]);
 
-  return (
+  return !projects ? null : (
     <div>
       <Helmet>
         <meta charSet="utf-8" />
@@ -72,7 +72,7 @@ export function Removed(props) {
 
 const mapStateToProps = state => {
   return {
-    projects: state.projects.projectList
+    projects: state.projects.removedProjects
   };
 };
 

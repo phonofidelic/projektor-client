@@ -48,6 +48,9 @@ format.extend(String.prototype, {});
 
 export const defaultState = {
   projectList: [],
+  activeProjects: [],
+  archivedProjects: [],
+  removedProjects: [],
   selectedProject: null,
   loading: false,
   error: null
@@ -75,7 +78,8 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         loading: false,
-        projectList: [...state.projectList, action.payload]
+        // projectList: [...state.projectList, action.payload]
+        activeProjects: [...state.activeProjects, action.payload]
       };
 
     case CREATE_PROJECT_FAILURE:
@@ -96,7 +100,16 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         loading: false,
-        projectList: action.payload
+        // projectList: action.payload,
+        activeProjects: action.payload.filter(
+          project => project.status === ACTIVE
+        ),
+        archivedProjects: action.payload.filter(
+          project => project.status === ARCHIVED
+        ),
+        removedProjects: action.payload.filter(
+          project => project.status === DELETED
+        )
       };
 
     case GET_PROJECTS_FAILURE:
@@ -136,7 +149,7 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         loading: false,
-        projectList: state.projectList.filter(
+        removedProjects: state.removedProjects.filter(
           project => project._id !== action.payload
         )
       };
@@ -159,6 +172,15 @@ export default function(state = defaultState, action) {
         ...state,
         loading: false,
         projectList: state.projectList.filter(
+          project => project._id !== action.payload
+        ),
+        activeProjects: state.activeProjects.filter(
+          project => project._id !== action.payload
+        ),
+        archivedProjects: state.archivedProjects.filter(
+          project => project._id !== action.payload
+        ),
+        removedProjects: state.removedProjects.filter(
           project => project._id !== action.payload
         )
       };
@@ -216,7 +238,7 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         loading: false,
-        projectList: []
+        removedProjects: []
       };
 
     case DELETE_ALL_REMOVED_PROJECTS_FAILURE:

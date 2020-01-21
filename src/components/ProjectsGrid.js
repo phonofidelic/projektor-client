@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ACTIVE, ARCHIVED, DELETED } from 'constants/status';
+import { PoseGroup } from 'react-pose';
 
 import ProjectGridItem from 'components/ProjectGridItem';
 
@@ -39,17 +40,21 @@ const Container = styled.div`
   padding: 10px;
 `;
 
-export default function ProjectGrid(props) {
+function ProjectGrid(props) {
   const { projects } = props;
   const projectsWithLocation = withProjectLocation(projects);
 
   return (
     <Container>
       <Grid container>
-        {projectsWithLocation.map(project => (
+        {/* <PoseGroup> */}
+        {projects.map(project => (
           <ProjectGridItem key={project._id} project={project} />
         ))}
+        {/* </PoseGroup> */}
       </Grid>
     </Container>
   );
 }
+
+export default ProjectGrid;

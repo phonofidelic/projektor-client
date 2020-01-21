@@ -106,7 +106,10 @@ describe('projects reducer', () => {
     const newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
-      projectList: [mockProject]
+      projectList: [mockProject],
+      activeProjects: [mockProject],
+      archivedProjects: [],
+      removedProjects: []
     });
   });
 
