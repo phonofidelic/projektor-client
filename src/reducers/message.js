@@ -3,7 +3,8 @@ import {
   DISMISS_MESSAGE,
   RESEND_VERIFICATION,
   RESEND_VERIFICATION_SUCCESS,
-  RESEND_VERIFICATION_FAILURE
+  RESEND_VERIFICATION_FAILURE,
+  POST_LOGIN_FAILURE
 } from 'actions/types';
 
 export const defaultState = {
@@ -38,6 +39,15 @@ export default function(state = defaultState, action) {
         loading: false,
         actionButton: 'Email sent',
         showDialog: false
+      };
+
+    case POST_LOGIN_FAILURE:
+      return {
+        ...state,
+        showDialog: false,
+        errorContext: POST_LOGIN_FAILURE,
+        titleKey: 'ttl__login_failure',
+        bodyKey: 'msg__login_failure'
       };
 
     case DISMISS_MESSAGE:
