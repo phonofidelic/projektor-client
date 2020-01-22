@@ -29,75 +29,92 @@ const Container = styled.div`
 `;
 
 export default function ActiveWork(props) {
-  const { project, createWork } = props;
+  const {
+    project,
+    workStarted,
+    workActive,
+    activeNote,
+    noteOpen,
+    time,
+    setTime,
+    handleStartWork,
+    handlePauseWork,
+    handleResumeWork,
+    handleSetActiveNote,
+    handleOpenWork,
+    handleCloseWork,
+    handleCancelWork,
+    handleSubmitWork,
+    createWork
+  } = props;
   const strings = useContext(StringContext);
-  const [time, setTime] = useState(0);
-  const [startTime, setStartTime] = useState(0);
-  const [workStarted, setWorkStarted] = useState(false);
-  const [workActive, setWorkActive] = useState(false);
-  const [activeNote, setActiveNote] = useState(null);
-  const [noteOpen, setNoteOpen] = useState(false);
+  // const [time, setTime] = useState(0);
+  // const [startTime, setStartTime] = useState(0);
+  // const [workStarted, setWorkStarted] = useState(false);
+  // const [workActive, setWorkActive] = useState(false);
+  // const [activeNote, setActiveNote] = useState(null);
+  // const [noteOpen, setNoteOpen] = useState(false);
 
-  const handleStartWork = () => {
-    setStartTime(Date.now());
-    setWorkStarted(true);
-    setWorkActive(true);
-    setTime(time);
-  };
+  // const handleStartWork = () => {
+  //   setStartTime(Date.now());
+  //   setWorkStarted(true);
+  //   setWorkActive(true);
+  //   setTime(time);
+  // };
 
-  const handlePauseWork = () => {
-    setWorkActive(false);
-    setTime(time);
-  };
+  // const handlePauseWork = () => {
+  //   setWorkActive(false);
+  //   setTime(time);
+  // };
 
-  const handleResumeWork = () => {
-    setWorkActive(true);
-  };
+  // const handleResumeWork = () => {
+  //   setWorkActive(true);
+  // };
 
-  const handleSetActiveNote = note => {
-    setActiveNote(note);
-  };
+  // const handleSetActiveNote = note => {
+  //   setActiveNote(note);
+  // };
 
-  const handleOpenWork = work => {
-    // if (work) setWorkItem(work);
-    setNoteOpen(true);
-  };
+  // const handleOpenWork = work => {
+  //   // if (work) setWorkItem(work);
+  //   setNoteOpen(true);
+  // };
 
-  const handleCloseWork = () => {
-    setNoteOpen(false);
-    // setWorkItem(null);
-  };
+  // const handleCloseWork = () => {
+  //   setNoteOpen(false);
+  //   // setWorkItem(null);
+  // };
 
-  const handleCancelWork = () => {
-    if (window.confirm(strings.msg__cancel_work_confirm)) {
-      setWorkActive(false);
-      setWorkStarted(false);
-      setTime(0);
-    }
-  };
+  // const handleCancelWork = () => {
+  //   if (window.confirm(strings.msg__cancel_work_confirm)) {
+  //     setWorkActive(false);
+  //     setWorkStarted(false);
+  //     setTime(0);
+  //   }
+  // };
 
-  const handleSubmitWork = () => {
-    console.log('====================================');
-    console.log('start:', startTime);
-    console.log('end:', moment(time + startTime).format('hh:mm:ss'));
-    console.log('duration:', time);
-    console.log('notes:', activeNote);
-    console.log('====================================');
+  // const handleSubmitWork = () => {
+  //   console.log('====================================');
+  //   console.log('start:', startTime);
+  //   console.log('end:', moment(time + startTime).format('hh:mm:ss'));
+  //   console.log('duration:', time);
+  //   console.log('notes:', activeNote);
+  //   console.log('====================================');
 
-    createWork({
-      projectId: project._id,
-      date: startTime,
-      start: startTime,
-      end: startTime + time,
-      duration: time,
-      notes: activeNote
-    });
+  //   createWork({
+  //     projectId: project._id,
+  //     date: startTime,
+  //     start: startTime,
+  //     end: startTime + time,
+  //     duration: time,
+  //     notes: activeNote
+  //   });
 
-    setActiveNote(null);
-    setWorkActive(false);
-    setWorkStarted(false);
-    setTime(0);
-  };
+  //   setActiveNote(null);
+  //   setWorkActive(false);
+  //   setWorkStarted(false);
+  //   setTime(0);
+  // };
 
   /**
    * Warn user before reloading page if work is started
@@ -115,6 +132,7 @@ export default function ActiveWork(props) {
     <Container>
       <WorkModal
         open={noteOpen}
+        activeNote={activeNote}
         handleClose={handleCloseWork}
         handleSetActiveNote={handleSetActiveNote}
       />

@@ -22,6 +22,7 @@ export function WorkModal(props) {
   const {
     open,
     workItem,
+    activeNote,
     handleClose,
     handleSetActiveNote,
     updateWork
@@ -78,7 +79,7 @@ export function WorkModal(props) {
                     label={strings.ttl__work_notes}
                     fullWidth
                     name="note"
-                    value={values.note}
+                    value={values.note || activeNote || ''}
                     onChange={handleChange}
                   />
                 </Grid>
