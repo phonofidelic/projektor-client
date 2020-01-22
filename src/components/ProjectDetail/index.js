@@ -47,6 +47,10 @@ export default function ProjectDetail(props) {
   const [activeNote, setActiveNote] = useState(null);
   const [noteOpen, setNoteOpen] = useState(false);
 
+  const handleSetTime = time => {
+    setTime(time);
+  };
+
   const handleStartWork = () => {
     setStartTime(Date.now());
     setWorkStarted(true);
@@ -108,7 +112,7 @@ export default function ProjectDetail(props) {
     setTime(0);
   };
 
-  return project ? (
+  return !project ? null : (
     <Container>
       <InfoContainer container>
         <Description item xs={12} sm={6} lg={8}>
@@ -122,7 +126,7 @@ export default function ProjectDetail(props) {
           )}
         </Description>
         <ProjectInfoContainer item xs={12} sm={6} lg={4}>
-          <ProjectInfo project={project} />
+          <ProjectInfo project={project} time={time} />
         </ProjectInfoContainer>
       </InfoContainer>
       <WorkSection
@@ -139,6 +143,7 @@ export default function ProjectDetail(props) {
         noteOpen={noteOpen}
         time={time}
         setTime={setTime}
+        handleSetTime={handleSetTime}
         handleStartWork={handleStartWork}
         handlePauseWork={handlePauseWork}
         handleResumeWork={handleResumeWork}
@@ -149,7 +154,5 @@ export default function ProjectDetail(props) {
         handleSubmitWork={handleSubmitWork}
       />
     </Container>
-  ) : (
-    <div>Loading...</div>
   );
 }

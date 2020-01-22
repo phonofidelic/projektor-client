@@ -37,6 +37,7 @@ export default function ActiveWork(props) {
     noteOpen,
     time,
     setTime,
+    handleSetTime,
     handleStartWork,
     handlePauseWork,
     handleResumeWork,
@@ -158,7 +159,12 @@ export default function ActiveWork(props) {
         {workStarted && (
           <div>
             {workActive ? (
-              <Timer format="hh:mm:ss" currentTime={time} setTime={setTime} />
+              <Timer
+                format="hh:mm:ss"
+                currentTime={time}
+                active={workActive}
+                setTime={setTime}
+              />
             ) : (
               moment.duration(time, 'ms').format('hh:mm:ss', { trim: false })
             )}
