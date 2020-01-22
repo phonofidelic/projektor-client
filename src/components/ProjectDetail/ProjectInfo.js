@@ -23,6 +23,8 @@ const ProgressContainer = styled.div`
   background-color: #ccc;
   height: 10px;
   width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
 `;
 
 const Progress = styled.div`
