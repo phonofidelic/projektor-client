@@ -7,7 +7,6 @@ import { StringContext } from 'strings';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import Green from '@material-ui/core/colors/green';
 
 const SHADE = 400;
@@ -17,6 +16,27 @@ const Container = styled(Grid)`
   // max-height: 300px;
   // overflow-y: auto;
   // white-space: pre-wrap;
+`;
+
+const ProgressContainer = styled.div`
+  display: flex;
+  background-color: #ccc;
+  height: 10px;
+  width: 100%;
+`;
+
+const Progress = styled.div`
+  background-color: #000;
+  width: ${({ project }) =>
+    (project.timeUsed / (project.budgetedTime * 3.6e6)) * 100}%;
+  height: 10px;
+`;
+
+const CurrentProgress = styled.div`
+  background-color: ${Green[SHADE]};
+  width: ${({ time, project }) =>
+    (time / (project.budgetedTime * 3.6e6)) * 100}%;
+  height: 10px;
 `;
 
 export default function ProjectInfo(props) {
@@ -59,35 +79,10 @@ export default function ProjectInfo(props) {
           .format('hh:mm:ss', { trim: false })}
       </div>
       <div>
-        {/* <LinearProgress
-          value={(project.timeUsed / (project.budgetedTime * 3.6e6)) * 100}
-          variant="determinate"
-          style={{ height: 10 }}
-        /> */}
-        <div
-          style={{
-            display: 'flex',
-            backgroundColor: '#ccc',
-            height: 10,
-            width: '100%'
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: '#000',
-              width: `${(project.timeUsed / (project.budgetedTime * 3.6e6)) *
-                100}%`,
-              height: 10
-            }}
-          />
-          <div
-            style={{
-              backgroundColor: Green[SHADE],
-              width: `${(time / (project.budgetedTime * 3.6e6)) * 100}%`,
-              height: 10
-            }}
-          />
-        </div>
+        <ProgressContainer>
+          <Progress project={project} />
+          <CurrentProgress project={project} time={time} />
+        </ProgressContainer>
       </div>
     </Container>
   );
