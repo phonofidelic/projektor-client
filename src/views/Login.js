@@ -39,6 +39,7 @@ const Logo = styled.img`
 `;
 
 export function Login(props) {
+  const { error } = props;
   const strings = useContext(StringContext);
 
   const handleLoginSubmit = formData => {
@@ -57,6 +58,12 @@ export function Login(props) {
         <Logo src={logoSrc} alt={strings.ttl__app_title} />
         {/* <Typography variant="h4">{strings.ttl__sign_in}</Typography> */}
       </TitleContainer>
+      {error.errorTitleKey && (
+        <div>
+          {/* <Typography variant="h5">{strings[error.errorTitleKey]}</Typography> */}
+          <Typography>{strings[error.errorBodyKey]}</Typography>
+        </div>
+      )}
       <FormContainer>
         <LoginForm handleLoginSubmit={handleLoginSubmit} />
       </FormContainer>
@@ -64,4 +71,13 @@ export function Login(props) {
   );
 }
 
-export default connect(null, actions)(Login);
+const mapStateToProps = state => {
+  return {
+    error: {
+      errorTitleKey: state.message.titleKey,
+      errorBodyKey: state.message.bodyKey
+    }
+  };
+};
+
+export default connect(mapStateToProps, actions)(Login);
