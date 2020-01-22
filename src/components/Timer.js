@@ -29,10 +29,6 @@ class Timer extends Component {
     }, 1000);
   };
 
-  stopTimer = () => {
-    clearInterval(this.timer);
-  };
-
   render() {
     return moment
       .duration(this.props.currentTime, 'ms')
@@ -40,26 +36,26 @@ class Timer extends Component {
   }
 }
 
+/**
+ * Not working
+ */
 function _Timer(props) {
-  const { currentTime, active, setTime } = props;
-  // const [start, setStart] = useState(0);
-  // const [time, setTime] = useState(0);
+  const { currentTime, setTime } = props;
+  const [delta, setDelta] = useState(0);
 
   console.log('====================================');
+  console.log('Timer, delta:', delta);
   console.log('Timer, currentTime:', currentTime);
   console.log('====================================');
 
   useEffect(() => {
     let interval = null;
-    if (active) {
-      interval = setInterval(() => {
-        setTime(() => Date.now() - currentTime);
-      }, 1000);
-    } else if (!active && currentTime !== 0) {
-      clearInterval(interval);
-    }
-    return clearInterval(interval);
-  }, [active, currentTime]);
+    setDelta(Date.now() - currentTime);
+    interval = setInterval(() => {
+      setTime(Date.now() - delta);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   return moment.duration(currentTime, 'ms').format('hh:mm:ss', { trim: false });
 }

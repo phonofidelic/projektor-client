@@ -55,7 +55,7 @@ export default function ProjectInfo(props) {
       <div>
         <Typography variant="overline">{strings.lbl__time_used}</Typography>{' '}
         {moment
-          .duration(project.timeUsed, 'ms')
+          .duration(project.timeUsed + time, 'ms')
           .format('hh:mm:ss', { trim: false })}
       </div>
       <div>
