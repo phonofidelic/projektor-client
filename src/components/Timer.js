@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import moment from 'moment';
 // import momentDurationFormatSetup from 'moment-duration-format';
 
@@ -7,9 +7,7 @@ class Timer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timerOn: false,
-      time: props.time || 0,
-      start: 0
+      delta: 0
     };
   }
 
@@ -19,51 +17,47 @@ class Timer extends Component {
 
   componentWillUnmount() {
     if (this.timer) clearInterval(this.timer);
-
-    this.props.setTime(this.state.time + this.props.currentTime);
   }
 
   startTimer = () => {
     this.setState({
-      time: this.state.time,
-      timerOn: true,
-      start: Date.now() - this.state.time
+      delta: Date.now() - this.props.currentTime
     });
 
-    this.timer = setInterval(
-      () =>
-        this.setState({
-          time: Date.now() - this.state.start
-        }),
-      10
-    );
-  };
-
-  stopTimer = () => {
-    this.setState({ timerOn: false });
-    clearInterval(this.timer);
-  };
-
-  resetTimer = () => {
-    this.setState({
-      time: 0,
-      start: 0
-    });
+    this.timer = setInterval(() => {
+      this.props.setTime(Date.now() - this.state.delta);
+    }, 1000);
   };
 
   render() {
-    const { time } = this.state;
-
-    return (
-      // <div>
-      //   {moment(time + this.props.currentTime).format(this.props.format)}
-      // </div>
-      // <FormattedTime time={time + this.props.currentTime} />
-      moment
-        .duration(time + this.props.currentTime, 'ms')
-        .format('hh:mm:ss', { trim: false })
-    );
+    return moment
+      .duration(this.props.currentTime, 'ms')
+      .format('hh:mm:ss', { trim: false });
   }
+}
+
+/**
+ * Not working
+ */
+function _Timer(props) {
+  const { currentTime, setTime } = props;
+  const [delta, setDelta] = useState(0);
+
+  console.log('====================================');
+  console.log('Timer, delta:', delta);
+  console.log('Timer, currentTime:', currentTime);
+  console.log('====================================');
+
+  useEffect(() => {
+    let interval = null;
+    setDelta(Date.now() - currentTime);
+    interval = setInterval(() => {
+      setTime(Date.now() - delta);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return moment.duration(currentTime, 'ms').format('hh:mm:ss', { trim: false });
 }
 
 export default Timer;

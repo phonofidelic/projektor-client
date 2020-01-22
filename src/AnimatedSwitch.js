@@ -62,9 +62,6 @@ export const ContextRouteAnimation = posed.div({
 });
 
 export function AnimatedSwitch({ history, location, children, ...rest }) {
-  console.log('====================================');
-  console.log('AnimatedSwitch, location:', location);
-  console.log('====================================');
   const reverse = location.pathname === '/';
 
   return (
