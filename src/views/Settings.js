@@ -16,7 +16,7 @@ export function Settings(props) {
 
   useEffect(() => {
     !preload && getUserInfo();
-  }, [getUserInfo]);
+  }, [preload, getUserInfo]);
 
   return (
     <div>

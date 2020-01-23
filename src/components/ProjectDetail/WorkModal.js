@@ -103,7 +103,7 @@ export function WorkModal(props) {
                     </div>
                     <div>
                       <Typography variant="overline">
-                        {strings.lbl__work_tble_duration}:
+                        {strings.lbl__work_tbl_duration}:
                       </Typography>{' '}
                       {moment
                         .duration(workItem.duration, 'ms')

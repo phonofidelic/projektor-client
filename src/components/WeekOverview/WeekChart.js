@@ -1,13 +1,11 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
-import { StringContext } from 'strings';
+import React from 'react';
 import moment from 'moment';
 
 import {
   Chart,
   ArgumentAxis,
   ValueAxis,
-  LineSeries,
+  // LineSeries,
   BarSeries
 } from '@devexpress/dx-react-chart-material-ui';
 

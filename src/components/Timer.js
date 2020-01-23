@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import { Component } from 'react';
 import moment from 'moment';
 // import momentDurationFormatSetup from 'moment-duration-format';
 
@@ -39,25 +39,25 @@ class Timer extends Component {
 /**
  * Not working
  */
-function _Timer(props) {
-  const { currentTime, setTime } = props;
-  const [delta, setDelta] = useState(0);
+// function _Timer(props) {
+//   const { currentTime, setTime } = props;
+//   const [delta, setDelta] = useState(0);
 
-  console.log('====================================');
-  console.log('Timer, delta:', delta);
-  console.log('Timer, currentTime:', currentTime);
-  console.log('====================================');
+//   console.log('====================================');
+//   console.log('Timer, delta:', delta);
+//   console.log('Timer, currentTime:', currentTime);
+//   console.log('====================================');
 
-  useEffect(() => {
-    let interval = null;
-    setDelta(Date.now() - currentTime);
-    interval = setInterval(() => {
-      setTime(Date.now() - delta);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+//   useEffect(() => {
+//     let interval = null;
+//     setDelta(Date.now() - currentTime);
+//     interval = setInterval(() => {
+//       setTime(Date.now() - delta);
+//     }, 1000);
+//     return () => clearInterval(interval);
+//   }, []);
 
-  return moment.duration(currentTime, 'ms').format('hh:mm:ss', { trim: false });
-}
+//   return moment.duration(currentTime, 'ms').format('hh:mm:ss', { trim: false });
+// }
 
 export default Timer;

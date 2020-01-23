@@ -16,7 +16,7 @@ export function EditProject(props) {
 
   useEffect(() => {
     !preload && getProject(projectId);
-  }, [getProject, projectId]);
+  }, [preload, getProject, projectId]);
 
   const handleFormSubmit = data => {
     editProject(projectId, data);

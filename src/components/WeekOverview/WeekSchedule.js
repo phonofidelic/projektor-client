@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 
 import {
   Scheduler,
-  DayView,
+  // DayView,
   Appointments,
   AppointmentTooltip,
   WeekView

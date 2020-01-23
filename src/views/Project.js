@@ -23,7 +23,7 @@ export function Project(props) {
 
   useEffect(() => {
     !preload && getProject(projectId);
-  }, [getProject, projectId]);
+  }, [preload, getProject, projectId]);
 
   return !project ? null : (
     <div>

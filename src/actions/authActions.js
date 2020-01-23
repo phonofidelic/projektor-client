@@ -13,8 +13,7 @@ import {
   GET_USER_INFO_FAILURE,
   RESEND_VERIFICATION,
   RESEND_VERIFICATION_SUCCESS,
-  RESEND_VERIFICATION_FAILURE,
-  DISMISS_MESSAGE
+  RESEND_VERIFICATION_FAILURE
 } from 'actions/types';
 import { history } from 'config';
 import { api, handleError, handleResponse } from 'actions/utils';
