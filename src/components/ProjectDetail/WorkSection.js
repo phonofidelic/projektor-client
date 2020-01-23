@@ -18,7 +18,7 @@ const WorkContainer = styled.div`
 `;
 
 export default function WorkSection(props) {
-  const { project, createWork, updateWork, removeWork } = props;
+  const { project, updateWork, removeWork } = props;
   const strings = useContext(StringContext);
   const [noteOpen, setNoteOpen] = useState(false);
   const [workItem, setWorkItem] = useState(null);

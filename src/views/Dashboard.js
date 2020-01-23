@@ -18,7 +18,7 @@ export function Dashboard(props) {
 
   useEffect(() => {
     !preload && getAllWorkByInterval(start, end);
-  }, []);
+  }, [preload, getAllWorkByInterval, start, end]);
 
   return (
     <div>

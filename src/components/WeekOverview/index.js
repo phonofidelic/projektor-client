@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { StringContext } from 'strings';
-import moment from 'moment';
 
-import WeekChart from 'components/WeekOverview/WeekChart';
+// import WeekChart from 'components/WeekOverview/WeekChart';
 import WeekSchedule from 'components/WeekOverview/WeekSchedule';
 
 import Typography from '@material-ui/core/Typography';

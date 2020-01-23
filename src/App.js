@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import useWindowSize from 'hooks/useWindowSize';
+// import useWindowSize from 'hooks/useWindowSize';
 
 import PreloadLazyComponents from 'PreloadLazyComponents';
 import Routes from 'Routes';
@@ -9,7 +9,7 @@ import MessageContainer from 'views/MessageContainer';
 import Loader from 'components/Loader';
 
 function App() {
-  const windowSize = useWindowSize();
+  // const windowSize = useWindowSize();
 
   // console.log('*** window width:', windowSize.width);
 
