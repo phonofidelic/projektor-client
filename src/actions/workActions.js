@@ -10,7 +10,10 @@ import {
   REMOVE_WORK_FAILURE,
   GET_WORK_BY_INTERVAL,
   GET_WORK_BY_INTERVAL_SUCCESS,
-  GET_WORK_BY_INTERVAL_FAILURE
+  GET_WORK_BY_INTERVAL_FAILURE,
+  GET_ALL_WORK,
+  GET_ALL_WORK_SUCCESS,
+  GET_ALL_WORK_FAILURE
 } from 'actions/types';
 import { api, handleError, handleResponse } from 'actions/utils';
 
@@ -64,6 +67,24 @@ export const removeWork = workId => {
     } catch (err) {
       console.error(err);
       handleError(err, dispatch, REMOVE_WORK_FAILURE);
+    }
+  };
+};
+
+export const getAllWork = () => {
+  return async dispatch => {
+    dispatch({
+      type: GET_ALL_WORK
+    });
+
+    let response;
+    try {
+      response = await api().get('/work');
+      console.log('getAllWork, response:', response);
+      handleResponse(response, dispatch, GET_ALL_WORK_SUCCESS);
+    } catch (err) {
+      console.log(err);
+      handleError(err, dispatch, GET_ALL_WORK_FAILURE);
     }
   };
 };

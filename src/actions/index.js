@@ -14,6 +14,7 @@ import {
   createWork,
   updateWork,
   removeWork,
+  getAllWork,
   getAllWorkByInterval
 } from 'actions/workActions';
 
@@ -37,6 +38,7 @@ export {
   createWork,
   updateWork,
   removeWork,
+  getAllWork,
   getAllWorkByInterval,
   registerNewUser,
   loginUser,
