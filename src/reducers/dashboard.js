@@ -1,7 +1,10 @@
 import {
   GET_WORK_BY_INTERVAL,
   GET_WORK_BY_INTERVAL_SUCCESS,
-  GET_WORK_BY_INTERVAL_FAILURE
+  GET_WORK_BY_INTERVAL_FAILURE,
+  GET_ALL_WORK,
+  GET_ALL_WORK_SUCCESS,
+  GET_ALL_WORK_FAILURE
 } from 'actions/types';
 
 export const defaultState = {
@@ -27,6 +30,26 @@ export default function(state = defaultState, action) {
       };
 
     case GET_WORK_BY_INTERVAL_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: { message: 'Could not load data' }
+      };
+
+    case GET_ALL_WORK:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case GET_ALL_WORK_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        work: action.payload
+      };
+
+    case GET_ALL_WORK_FAILURE:
       return {
         ...state,
         loading: false,

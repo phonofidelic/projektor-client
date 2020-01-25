@@ -94,5 +94,6 @@
     "msg__verification_failure": "Vi har skickat dig en verifieringslänk till din e-post. Följ länken i meddelandet för att verifiera ditt konto. \n\nOm du inte har fått detta meddelande, tryck på knappen nedan så skickar vi den på nytt.",
     "btn__resend_verification": "Återsänd verifieringslänk",
     "ttl__login_failure": "Kunde inte logga in",
-    "msg__login_failure": "Kontrollera e-post och lösenord och försök igen"
+    "msg__login_failure": "Kontrollera e-post och lösenord och försök igen",
+    "btn__today": "idag"
 }
