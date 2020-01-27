@@ -12,6 +12,11 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Green from '@material-ui/core/colors/green';
+import Grey from '@material-ui/core/colors/grey';
+const SHADE = 400;
+const defaultProjectColor = Grey;
+const projectColor = false;
 
 const Container = styled(Grid)`
   padding: 10px;
@@ -35,10 +40,17 @@ const PosedContainer = posed(Container)({
 
 const CardContainer = styled(Card)`
   position: relative;
-  // height: 287px;
+
+  &.MuiPaper-root {
+    background-color: ${projectColor
+      ? projectColor[SHADE]
+      : defaultProjectColor[50]};
+  }
   &:hover {
-    background-color: #e0e0e0
-    // background-color: #ffc107
+    // background-color: #e0e0e0;
+    background-color: ${projectColor
+      ? projectColor[600]
+      : defaultProjectColor[300]};
     transition: background-color 0.6s;
   }
 `;
@@ -46,6 +58,7 @@ const CardContainer = styled(Card)`
 const CardHeader = styled.div`
   display: flex;
   padding: 16px;
+  color: #000;
 `;
 
 const CardLink = styled(Link)`
@@ -65,6 +78,22 @@ const ProjectInfoContainer = styled.div`
   // justify-content: space-around;
 `;
 
+const ProgressContainer = styled.div`
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 5px;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+`;
+
+const Progress = styled.div`
+  background-color: #000;
+  width: ${({ project }) =>
+    (project.timeUsed / (project.budgetedTime * 3.6e6)) * 100}%;
+  height: 5px;
+`;
+
 export default function ProjectGridItem(props) {
   const { project } = props;
   const strings = useContext(StringContext);
@@ -75,7 +104,7 @@ export default function ProjectGridItem(props) {
       <CardContainer>
         <CardLink
           to={`${project.location}/${project._id}`}
-          // style={{ textDecoration: 'none' }}
+          style={{ textDecoration: 'none' }}
         >
           <CardHeader>
             <Typography
@@ -157,7 +186,7 @@ export default function ProjectGridItem(props) {
             </div>
           </CardContent> */}
         </CardLink>
-        <div style={{ height: 5 }}>
+        {/* <div style={{ height: 5 }}>
           {project.budgetedTime && (
             <LinearProgress
               value={(project.timeUsed / (project.budgetedTime * 3.6e6)) * 100}
@@ -165,6 +194,11 @@ export default function ProjectGridItem(props) {
               style={{ height: 5 }}
             />
           )}
+        </div> */}
+        <div>
+          <ProgressContainer>
+            <Progress project={project} />
+          </ProgressContainer>
         </div>
       </CardContainer>
     </PosedContainer>
