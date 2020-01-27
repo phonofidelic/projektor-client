@@ -35,6 +35,7 @@ const PosedContainer = posed(Container)({
 
 const CardContainer = styled(Card)`
   position: relative;
+  // height: 287px;
   &:hover {
     background-color: #e0e0e0
     // background-color: #ffc107
@@ -72,56 +73,89 @@ export default function ProjectGridItem(props) {
   return (
     <PosedContainer key={project._id} item xs={12} sm={6} md={4}>
       <CardContainer>
-        <CardHeader>
-          <Typography
-            style={{ flexGrow: 1, lineHeight: '2em' }}
-            variant="h5"
-            component="h2"
-            noWrap
-          >
-            {project.title}
-          </Typography>
-          <ProjectMenu project={project} />
-        </CardHeader>
         <CardLink
           to={`${project.location}/${project._id}`}
           // style={{ textDecoration: 'none' }}
         >
-          <CardContent>
-            <ProjectInfoContainer>
-              <Typography variant="overline">
-                {strings.lbl__start_date}
-              </Typography>{' '}
-              {project.startDate
-                ? moment(project.startDate).format(
-                    currentLocaleData.longDateFormat('L')
-                  )
-                : strings.msc__tbd_short}
-              <br />
-              <Typography variant="overline">
-                {strings.lbl__deadline}
-              </Typography>{' '}
-              {project.deadline
-                ? moment(project.deadline).format(
-                    currentLocaleData.longDateFormat('L')
-                  )
-                : strings.msc__open}
-            </ProjectInfoContainer>
+          <CardHeader>
             <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              style={{
-                height: 100,
-                overflowY: 'auto',
-                whiteSpace: 'pre-wrap'
-              }}
+              style={{ flexGrow: 1, lineHeight: '2em' }}
+              variant="h6"
+              // component="h2"
+              noWrap
             >
-              {project.description === 'No description provided'
-                ? strings.msg__empty_project_description
-                : project.description}
+              {project.title}
             </Typography>
-          </CardContent>
+            {/* <ProjectMenu
+              project={project}
+            /> */}
+          </CardHeader>
+
+          {/* <CardContent>
+            <ProjectInfoContainer>
+              {project.client && (
+                <div>
+                  <Typography variant="overline">
+                    {strings.lbl__client}
+                  </Typography>{' '}
+                  {project.client}
+                </div>
+              )}
+              <div>
+                <Typography variant="overline">
+                  {strings.lbl__start_date}
+                </Typography>{' '}
+                {project.startDate
+                  ? moment(project.startDate).format(
+                      currentLocaleData.longDateFormat('L')
+                    )
+                  : strings.msc__tbd_short}
+              </div>
+              <div>
+                <Typography variant="overline">
+                  {strings.lbl__deadline}
+                </Typography>{' '}
+                {project.deadline
+                  ? moment(project.deadline).format(
+                      currentLocaleData.longDateFormat('L')
+                    )
+                  : strings.msc__open}
+              </div>
+              {project.budgetedTime && (
+                <div>
+                  <Typography variant="overline">
+                    {strings.lbl__budgeted_time}
+                  </Typography>
+                  {project.budgetedTime.toLocaleString(navigator.language) +
+                    strings.frg__hours_short}
+                </div>
+              )}
+              <div>
+                <Typography variant="overline">
+                  {strings.lbl__time_used}
+                </Typography>{' '}
+                {moment
+                  .duration(project.timeUsed, 'ms')
+                  .format('hh:mm:ss', { trim: false })}
+              </div>
+            </ProjectInfoContainer>
+            <div>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                style={{
+                  height: 100,
+                  overflowY: 'auto',
+                  whiteSpace: 'pre-wrap'
+                }}
+              >
+                {project.description === 'No description provided'
+                  ? strings.msg__empty_project_description
+                  : project.description}
+              </Typography>
+            </div>
+          </CardContent> */}
         </CardLink>
         <div style={{ height: 5 }}>
           {project.budgetedTime && (
