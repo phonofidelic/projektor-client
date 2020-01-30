@@ -40,6 +40,7 @@ const PosedContainer = posed(Container)({
 
 const CardContainer = styled(Card)`
   position: relative;
+  height: 77px;
 
   &.MuiPaper-root {
     background-color: ${projectColor
@@ -195,11 +196,13 @@ export default function ProjectGridItem(props) {
             />
           )}
         </div> */}
-        <div>
-          <ProgressContainer>
-            <Progress project={project} />
-          </ProgressContainer>
-        </div>
+        {project.budgetedTime && (
+          <div>
+            <ProgressContainer>
+              <Progress project={project} />
+            </ProgressContainer>
+          </div>
+        )}
       </CardContainer>
     </PosedContainer>
   );
