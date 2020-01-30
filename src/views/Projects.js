@@ -48,12 +48,16 @@ function HeaderActions(props) {
 }
 
 export function Projects(props) {
-  const { preload, projects, getProjects } = props;
+  const { preload, projects, pathname, getProjects } = props;
   const strings = useContext(StringContext);
 
   useEffect(() => {
     !preload && getProjects();
   }, [preload, getProjects]);
+
+  console.log('====================================');
+  console.log('Projects, pathname:', pathname);
+  console.log('====================================');
 
   return !projects ? null : (
     <div>
@@ -68,6 +72,11 @@ export function Projects(props) {
         title={strings.ttl__active}
         headerActions={<HeaderActions />}
       />
+      <div
+        style={{ textAlign: 'left', padding: 10, margin: 10, display: 'flex' }}
+      >
+        Toolbar {pathname}
+      </div>
       <div>
         {projects.length ? (
           <ProjectsGrid projects={projects} />
@@ -81,7 +90,8 @@ export function Projects(props) {
 
 const mapStateToProps = state => {
   return {
-    projects: state.projects.activeProjects
+    projects: state.projects.activeProjects,
+    pathname: state.router.location.pathname
   };
 };
 

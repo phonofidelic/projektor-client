@@ -24,7 +24,7 @@ import {
 import { history } from 'config';
 import { api, handleError, handleResponse } from 'actions/utils';
 
-export const getProjects = status => {
+export const getProjects = () => {
   console.log('*** getProjects ***');
   return async dispatch => {
     dispatch({
@@ -33,7 +33,7 @@ export const getProjects = status => {
 
     let response;
     try {
-      response = await api().get('/projects', { params: { status } });
+      response = await api().get('/projects');
 
       handleResponse(response, dispatch, GET_PROJECTS_SUCCESS);
     } catch (err) {
