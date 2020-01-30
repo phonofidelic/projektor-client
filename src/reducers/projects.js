@@ -12,6 +12,7 @@ import {
   DELETE_PROJECT,
   DELETE_PROJECT_SUCCESS,
   DELETE_PROJECT_FAILURE,
+  SET_PROJECT_STATUS_VIEW,
   CREATE_WORK,
   CREATE_WORK_SUCCESS,
   CREATE_WORK_FAILURE,
@@ -51,6 +52,7 @@ export const defaultState = {
   activeProjects: [],
   archivedProjects: [],
   removedProjects: [],
+  projectStatusView: 'active',
   selectedProject: null,
   loading: false,
   error: null
@@ -117,6 +119,12 @@ export default function(state = defaultState, action) {
         ...state,
         loading: false,
         error: { message: MSG__GET_PROJECTS_ERROR }
+      };
+
+    case SET_PROJECT_STATUS_VIEW:
+      return {
+        ...state,
+        projectStatusView: action.payload
       };
 
     case GET_PROJECT:

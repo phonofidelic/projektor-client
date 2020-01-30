@@ -48,7 +48,17 @@ function HeaderActions(props) {
 }
 
 export function Projects(props) {
-  const { preload, projects, pathname, getProjects } = props;
+  const {
+    preload,
+    projects,
+    activeProjects,
+    archivedProjects,
+    removedProjects,
+    projectStatusView,
+    pathname,
+    getProjects,
+    setProjectStatusView
+  } = props;
   const strings = useContext(StringContext);
 
   useEffect(() => {
@@ -75,7 +85,7 @@ export function Projects(props) {
       <div
         style={{ textAlign: 'left', padding: 10, margin: 10, display: 'flex' }}
       >
-        Toolbar {pathname}
+        Toolbar {projectStatusView}
       </div>
       <div>
         {projects.length ? (
@@ -91,6 +101,10 @@ export function Projects(props) {
 const mapStateToProps = state => {
   return {
     projects: state.projects.activeProjects,
+    activeProjects: state.projects.activeProjects,
+    archivedProjects: state.projects.archivedProjects,
+    removedProjects: state.projects.removedProjects,
+    projectStatusView: state.projects.projectStatusView,
     pathname: state.router.location.pathname
   };
 };

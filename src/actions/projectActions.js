@@ -5,6 +5,7 @@ import {
   GET_PROJECTS,
   GET_PROJECTS_SUCCESS,
   GET_PROJECTS_FAILURE,
+  SET_PROJECT_STATUS_VIEW,
   GET_PROJECT,
   GET_PROJECT_SUCCESS,
   GET_PROJECT_FAILURE,
@@ -41,6 +42,15 @@ export const getProjects = () => {
 
       handleError(err, dispatch, GET_PROJECTS_FAILURE);
     }
+  };
+};
+
+export const setProjectStatusView = status => {
+  return dispatch => {
+    dispatch({
+      type: SET_PROJECT_STATUS_VIEW,
+      payload: status
+    });
   };
 };
 
