@@ -6,9 +6,10 @@ import * as actions from 'actions';
 import { Helmet } from 'react-helmet';
 import requireAuth from 'hocs/requireAuth';
 
-import ProjectsGrid from 'components/ProjectsGrid';
 import Header from 'components/Header';
+import ProjectsGrid from 'components/ProjectsGrid';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
+import ProjectsToolbar from 'components/ProjectsToolbar';
 
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -82,11 +83,7 @@ export function Projects(props) {
         title={strings.ttl__active}
         headerActions={<HeaderActions />}
       />
-      <div
-        style={{ textAlign: 'left', padding: 10, margin: 10, display: 'flex' }}
-      >
-        Toolbar {projectStatusView}
-      </div>
+      <ProjectsToolbar projectStatusView={projectStatusView} />
       <div>
         {projects.length ? (
           <ProjectsGrid projects={projects} />
