@@ -6,7 +6,8 @@ import {
   editProject,
   setProjectStatus,
   deleteProject,
-  deleteAllTrash
+  deleteAllTrash,
+  setProjectStatusView
 } from 'actions/projectActions';
 
 /** WORK ACTIONS */
@@ -29,6 +30,7 @@ import {
 
 export {
   getProjects,
+  setProjectStatusView,
   getProject,
   createProject,
   editProject,

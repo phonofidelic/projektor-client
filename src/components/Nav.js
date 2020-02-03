@@ -86,26 +86,27 @@ export function Nav(props) {
       contrast: '#fff'
     },
     {
-      title: strings.ttl__active,
+      title: strings.ttl__projects,
       icon: <AppsIcon />,
+      // link: '/projects/active',
       link: '/projects',
       color: activeColor[SHADE],
       contrast: '#fff'
     },
-    {
-      title: strings.ttl__archived,
-      icon: <BookIcon />,
-      link: '/archived',
-      color: archivedColor[SHADE],
-      contrast: '#222'
-    },
-    {
-      title: strings.ttl__removed,
-      icon: <DeleteIcon />,
-      link: '/removed',
-      color: removedColor[SHADE],
-      contrast: '#fff'
-    },
+    // {
+    //   title: strings.ttl__archived,
+    //   icon: <BookIcon />,
+    //   link: '/projects/archived',
+    //   color: archivedColor[SHADE],
+    //   contrast: '#222'
+    // },
+    // {
+    //   title: strings.ttl__removed,
+    //   icon: <DeleteIcon />,
+    //   link: '/projects/removed',
+    //   color: removedColor[SHADE],
+    //   contrast: '#fff'
+    // },
     {
       title: strings.ttl__settings,
       icon: <SettingsIcon />,
@@ -129,7 +130,7 @@ export function Nav(props) {
               activeStyle={{ color: navItem.contrast }}
               key={i}
               to={navItem.link}
-              selected={pathname.match(navItem.link)}
+              selected={pathname.includes(navItem.link)}
               color={navItem.color}
               contrast={navItem.contrast}
               // onClick={() => handleNavChange(navItem)}

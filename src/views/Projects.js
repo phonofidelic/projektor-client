@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { StringContext } from 'strings';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -14,6 +14,7 @@ import ProjectsToolbar from 'components/ProjectsToolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import AddIcon from '@material-ui/icons/Add';
+import { ACTIVE } from 'constants/status';
 
 function HeaderActions(props) {
   const strings = useContext(StringContext);
@@ -56,18 +57,21 @@ export function Projects(props) {
     archivedProjects,
     removedProjects,
     projectStatusView,
-    pathname,
+    pathname, // TODO: Remove
     getProjects,
     setProjectStatusView
   } = props;
   const strings = useContext(StringContext);
+  // const [filteredProjects, setFilteredProjects] = useState(
+  //   projects.filter(project => project.status === ACTIVE)
+  // );
 
   useEffect(() => {
     !preload && getProjects();
   }, [preload, getProjects]);
 
   console.log('====================================');
-  console.log('Projects, pathname:', pathname);
+  console.log('Projects, projectStatusView:', projectStatusView);
   console.log('====================================');
 
   return !projects ? null : (
@@ -75,15 +79,18 @@ export function Projects(props) {
       <Helmet>
         <meta charSet="utf-8" />
         <title>
-          {strings.ttl__app_title} - {strings.ttl__active}
+          {strings.ttl__app_title} - {strings.ttl__projects}
         </title>
       </Helmet>
       <Header
         nav
-        title={strings.ttl__active}
+        title={strings.ttl__projects}
         headerActions={<HeaderActions />}
       />
-      <ProjectsToolbar projectStatusView={projectStatusView} />
+      <ProjectsToolbar
+        projectStatusView={projectStatusView}
+        setProjectStatusView={setProjectStatusView}
+      />
       <div>
         {projects.length ? (
           <ProjectsGrid projects={projects} />
@@ -97,7 +104,7 @@ export function Projects(props) {
 
 const mapStateToProps = state => {
   return {
-    projects: state.projects.activeProjects,
+    projects: state.projects.projectListByStatus,
     activeProjects: state.projects.activeProjects,
     archivedProjects: state.projects.archivedProjects,
     removedProjects: state.projects.removedProjects,

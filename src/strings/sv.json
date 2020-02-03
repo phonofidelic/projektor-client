@@ -33,7 +33,7 @@
     "inp_lbl__project_description": "Beskrivning",
     "inp_lbl__project_start_date": "Startdatum",
     "inp_lbl__project_title": "Titel",
-    "lbl__budgeted_time": "Budgeterad tid:",
+    "lbl__budgeted_time": "Åsidosatt tid:",
     "lbl__client": "Uppdragsgivare:",
     "lbl__day_fri": "fre",
     "lbl__day_mon": "mån",
@@ -76,7 +76,7 @@
     "msg__required": "Obligatorisk",
     "msg__set_project_status_error": "Det gick inte att ändra projektstatus",
     "msg__tagline": "Enkel projektplanering och tidshantering",
-    "ttl__active": "Projekt",
+    "ttl__active": "Aktiva",
     "ttl__app_title": "Projektor",
     "ttl__archived": "Arkiverade",
     "ttl__complete": "Slutförda",
@@ -95,5 +95,6 @@
     "btn__resend_verification": "Återsänd verifieringslänk",
     "ttl__login_failure": "Kunde inte logga in",
     "msg__login_failure": "Kontrollera e-post och lösenord och försök igen",
-    "btn__today": "idag"
+    "btn__today": "idag",
+    "ttl__projects": "Projekt"
 }

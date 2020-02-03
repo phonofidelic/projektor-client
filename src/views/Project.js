@@ -34,7 +34,7 @@ export function Project(props) {
         </title>
       </Helmet>
       <Header
-        back="/projects"
+        back
         title={project.title}
         headerActions={<ProjectMenu project={project} />}
       />

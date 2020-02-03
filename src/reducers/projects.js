@@ -49,10 +49,11 @@ format.extend(String.prototype, {});
 
 export const defaultState = {
   projectList: [],
-  activeProjects: [],
-  archivedProjects: [],
-  removedProjects: [],
-  projectStatusView: 'active',
+  projectListByStatus: [],
+  // activeProjects: [],
+  // archivedProjects: [],
+  // removedProjects: [],
+  projectStatusView: ACTIVE,
   selectedProject: null,
   loading: false,
   error: null
@@ -81,7 +82,7 @@ export default function(state = defaultState, action) {
         ...state,
         loading: false,
         // projectList: [...state.projectList, action.payload]
-        activeProjects: [...state.activeProjects, action.payload]
+        projectListByStatus: [...state.projectListByStatus, action.payload]
       };
 
     case CREATE_PROJECT_FAILURE:
@@ -102,16 +103,19 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         loading: false,
-        // projectList: action.payload,
-        activeProjects: action.payload.filter(
-          project => project.status === ACTIVE
-        ),
-        archivedProjects: action.payload.filter(
-          project => project.status === ARCHIVED
-        ),
-        removedProjects: action.payload.filter(
-          project => project.status === DELETED
+        projectList: action.payload,
+        projectListByStatus: action.payload.filter(
+          project => project.status === state.projectStatusView
         )
+        // activeProjects: action.payload.filter(
+        //   project => project.status === ACTIVE
+        // ),
+        // archivedProjects: action.payload.filter(
+        //   project => project.status === ARCHIVED
+        // ),
+        // removedProjects: action.payload.filter(
+        //   project => project.status === DELETED
+        // )
       };
 
     case GET_PROJECTS_FAILURE:
@@ -124,7 +128,10 @@ export default function(state = defaultState, action) {
     case SET_PROJECT_STATUS_VIEW:
       return {
         ...state,
-        projectStatusView: action.payload
+        projectStatusView: action.payload,
+        projectListByStatus: state.projectList.filter(
+          project => project.status === action.payload
+        )
       };
 
     case GET_PROJECT:
@@ -178,19 +185,19 @@ export default function(state = defaultState, action) {
     case SET_PROJECT_STATUS_SUCCESS:
       return {
         ...state,
-        loading: false,
-        projectList: state.projectList.filter(
-          project => project._id !== action.payload
-        ),
-        activeProjects: state.activeProjects.filter(
-          project => project._id !== action.payload
-        ),
-        archivedProjects: state.archivedProjects.filter(
-          project => project._id !== action.payload
-        ),
-        removedProjects: state.removedProjects.filter(
-          project => project._id !== action.payload
-        )
+        loading: false
+        // projectList: state.projectList.filter(
+        //   project => project._id !== action.payload
+        // ),
+        // activeProjects: state.activeProjects.filter(
+        //   project => project._id !== action.payload
+        // ),
+        // archivedProjects: state.archivedProjects.filter(
+        //   project => project._id !== action.payload
+        // ),
+        // removedProjects: state.removedProjects.filter(
+        //   project => project._id !== action.payload
+        // )
       };
 
     case SET_PROJECT_STATUS_FAILURE:

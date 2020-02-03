@@ -13,15 +13,15 @@ const withProjectLocation = projects => {
   return projects.map(project => {
     switch (project.status) {
       case ACTIVE:
-        project.location = '/projects';
+        project.location = 'active';
         return project;
 
       case ARCHIVED:
-        project.location = '/archived';
+        project.location = 'archived';
         return project;
 
       case DELETED:
-        project.location = '/removed';
+        project.location = 'removed';
         return project;
 
       default:

@@ -104,7 +104,8 @@ export default function ProjectGridItem(props) {
     <PosedContainer key={project._id} item xs={12} sm={6} md={4}>
       <CardContainer>
         <CardLink
-          to={`${project.location}/${project._id}`}
+          // to={`${project.location}/${project._id}`}
+          to={`projects/${project._id}`}
           style={{ textDecoration: 'none' }}
         >
           <CardHeader>

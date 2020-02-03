@@ -76,7 +76,7 @@
     "msg__required": "Required",
     "msg__set_project_status_error": "Sorry, could not set project status",
     "msg__tagline": "Simple project planing and time management",
-    "ttl__active": "Projects",
+    "ttl__active": "Active",
     "ttl__app_title": "Projektor",
     "ttl__archived": "Archived",
     "ttl__complete": "Completed",
@@ -95,5 +95,6 @@
     "btn__resend_verification": "Resend Verification Link",
     "ttl__login_failure": "Could not sign in",
     "msg__login_failure": "Please check the email and password you provided and try again",
-    "btn__today": "today"
+    "btn__today": "today",
+    "ttl__projects": "Projects"
 }
