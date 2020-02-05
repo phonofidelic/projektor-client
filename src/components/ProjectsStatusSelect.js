@@ -14,9 +14,12 @@ const SHADE = 400;
 
 const Container = styled.div`
   text-align: left;
-  padding: 10px;
-  margin: 10px;
+  // padding: 10px;
+  // margin: 10px;
   display: flex;
+  height: 40px;
+  margin: 4px;
+  margin-right: 10px;
 `;
 
 export default function(props) {
@@ -71,37 +74,35 @@ export default function(props) {
 
   return (
     <Container>
-      <div>
-        <Button
-          // variant="outlined"
-          style={{ backgroundColor: getStatusButtonBGColor(), color: '#fff' }}
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={handleOpenMenu}
+      <Button
+        // variant="outlined"
+        style={{ backgroundColor: getStatusButtonBGColor(), color: '#fff' }}
+        aria-controls="simple-menu"
+        aria-haspopup="true"
+        onClick={handleOpenMenu}
+      >
+        {getProjectStatusViewString()}
+      </Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleCloseMenu}
+      >
+        <MenuItem
+          // style={{ backgroundColor: activeColor[SHADE], color: '#fff' }}
+          onClick={() => handleStatusViewSelect(ACTIVE)}
         >
-          {getProjectStatusViewString()}
-        </Button>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleCloseMenu}
-        >
-          <MenuItem
-            // style={{ backgroundColor: activeColor[SHADE], color: '#fff' }}
-            onClick={() => handleStatusViewSelect(ACTIVE)}
-          >
-            {strings.ttl__active}
-          </MenuItem>
-          <MenuItem onClick={() => handleStatusViewSelect(ARCHIVED)}>
-            {strings.ttl__archived}
-          </MenuItem>
-          <MenuItem onClick={() => handleStatusViewSelect(DELETED)}>
-            {strings.ttl__removed}
-          </MenuItem>
-        </Menu>
-      </div>
+          {strings.ttl__active}
+        </MenuItem>
+        <MenuItem onClick={() => handleStatusViewSelect(ARCHIVED)}>
+          {strings.ttl__archived}
+        </MenuItem>
+        <MenuItem onClick={() => handleStatusViewSelect(DELETED)}>
+          {strings.ttl__removed}
+        </MenuItem>
+      </Menu>
     </Container>
   );
 }

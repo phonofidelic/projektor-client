@@ -5,6 +5,7 @@ import { StringContext } from 'strings';
 import moment from 'moment';
 // import posed, { PoseGroup } from 'react-pose';
 import { motion, AnimatePresence } from 'framer-motion';
+import { COMPACT, EXPANDED, TABLE } from 'constants/projectsDisplayModes';
 
 import ProjectMenu from 'components/ProjectMenu';
 
@@ -26,27 +27,10 @@ const Container = styled(Grid)`
   text-decoration: none;
 `;
 
-// const PosedContainer = posed(Container)({
-//   before: {
-//     opacity: 0,
-//     x: '-100%'
-//   },
-//   enter: {
-//     opacity: 1,
-//     x: 0
-//   },
-//   exit: {
-//     opacity: 0,
-//     x: '-100%'
-//   },
-//   hoverable: true,
-//   init: { scale: 1 },
-//   hover: { scale: 1.05 }
-// });
-
 const CardContainer = styled(Card)`
   position: relative;
-  height: 77px;
+  height: ${({ projectsDisplayMode }) =>
+    projectsDisplayMode === EXPANDED ? 372 : 77}px;
 
   &.MuiPaper-root {
     background-color: ${projectColor
@@ -102,7 +86,7 @@ const Progress = styled.div`
 `;
 
 export default function ProjectGridItem(props) {
-  const { project } = props;
+  const { project, projectsDisplayMode } = props;
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
 
@@ -119,7 +103,7 @@ export default function ProjectGridItem(props) {
       transition={{ ease: 'easeOut', duration: 0.2 }}
       positionTransition
     >
-      <CardContainer>
+      <CardContainer projectsDisplayMode={projectsDisplayMode}>
         <CardLink
           // to={`${project.location}/${project._id}`}
           to={`projects/${project._id}`}
@@ -139,71 +123,73 @@ export default function ProjectGridItem(props) {
             /> */}
           </CardHeader>
 
-          {/* <CardContent>
-            <ProjectInfoContainer>
-              {project.client && (
+          {projectsDisplayMode === EXPANDED && (
+            <CardContent>
+              <ProjectInfoContainer>
+                {project.client && (
+                  <div>
+                    <Typography variant="overline">
+                      {strings.lbl__client}
+                    </Typography>{' '}
+                    {project.client}
+                  </div>
+                )}
                 <div>
                   <Typography variant="overline">
-                    {strings.lbl__client}
+                    {strings.lbl__start_date}
                   </Typography>{' '}
-                  {project.client}
+                  {project.startDate
+                    ? moment(project.startDate).format(
+                        currentLocaleData.longDateFormat('L')
+                      )
+                    : strings.msc__tbd_short}
                 </div>
-              )}
-              <div>
-                <Typography variant="overline">
-                  {strings.lbl__start_date}
-                </Typography>{' '}
-                {project.startDate
-                  ? moment(project.startDate).format(
-                      currentLocaleData.longDateFormat('L')
-                    )
-                  : strings.msc__tbd_short}
-              </div>
-              <div>
-                <Typography variant="overline">
-                  {strings.lbl__deadline}
-                </Typography>{' '}
-                {project.deadline
-                  ? moment(project.deadline).format(
-                      currentLocaleData.longDateFormat('L')
-                    )
-                  : strings.msc__open}
-              </div>
-              {project.budgetedTime && (
                 <div>
                   <Typography variant="overline">
-                    {strings.lbl__budgeted_time}
-                  </Typography>
-                  {project.budgetedTime.toLocaleString(navigator.language) +
-                    strings.frg__hours_short}
+                    {strings.lbl__deadline}
+                  </Typography>{' '}
+                  {project.deadline
+                    ? moment(project.deadline).format(
+                        currentLocaleData.longDateFormat('L')
+                      )
+                    : strings.msc__open}
                 </div>
-              )}
+                {project.budgetedTime && (
+                  <div>
+                    <Typography variant="overline">
+                      {strings.lbl__budgeted_time}
+                    </Typography>
+                    {project.budgetedTime.toLocaleString(navigator.language) +
+                      strings.frg__hours_short}
+                  </div>
+                )}
+                <div>
+                  <Typography variant="overline">
+                    {strings.lbl__time_used}
+                  </Typography>{' '}
+                  {moment
+                    .duration(project.timeUsed, 'ms')
+                    .format('hh:mm:ss', { trim: false })}
+                </div>
+              </ProjectInfoContainer>
               <div>
-                <Typography variant="overline">
-                  {strings.lbl__time_used}
-                </Typography>{' '}
-                {moment
-                  .duration(project.timeUsed, 'ms')
-                  .format('hh:mm:ss', { trim: false })}
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                  style={{
+                    height: 100,
+                    overflowY: 'auto',
+                    whiteSpace: 'pre-wrap'
+                  }}
+                >
+                  {project.description === 'No description provided'
+                    ? strings.msg__empty_project_description
+                    : project.description}
+                </Typography>
               </div>
-            </ProjectInfoContainer>
-            <div>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                style={{
-                  height: 100,
-                  overflowY: 'auto',
-                  whiteSpace: 'pre-wrap'
-                }}
-              >
-                {project.description === 'No description provided'
-                  ? strings.msg__empty_project_description
-                  : project.description}
-              </Typography>
-            </div>
-          </CardContent> */}
+            </CardContent>
+          )}
         </CardLink>
         {/* <div style={{ height: 5 }}>
           {project.budgetedTime && (

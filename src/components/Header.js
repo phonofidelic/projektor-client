@@ -61,6 +61,7 @@ export default function Header(props) {
         </Typography>
       </TitleContainer>
       {!centerTitle && <div style={{ flexGrow: 1 }}></div>}
+      {props.children}
       <ActionsContainer>{headerActions}</ActionsContainer>
     </Container>
   );

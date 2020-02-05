@@ -10,12 +10,13 @@ import { motion } from 'framer-motion';
 import Header from 'components/Header';
 import ProjectsGrid from 'components/ProjectsGrid';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
-import ProjectsToolbar from 'components/ProjectsToolbar';
+import ProjectsStatusSelect from 'components/ProjectsStatusSelect';
 
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import AddIcon from '@material-ui/icons/Add';
 import { ACTIVE } from 'constants/status';
+import { COMPACT, EXPANDED, TABLE } from 'constants/projectsDisplayModes';
 import { pageVariants, getPageVariant } from 'constants/pageVariants';
 
 function HeaderActions(props) {
@@ -63,18 +64,14 @@ export function Projects(props) {
     getProjects,
     setProjectStatusView
   } = props;
+
   const strings = useContext(StringContext);
-  // const [filteredProjects, setFilteredProjects] = useState(
-  //   projects.filter(project => project.status === ACTIVE)
-  // );
+
+  const [projectsDisplayMode, setProjectsDisplayMode] = useState(COMPACT);
 
   useEffect(() => {
     !preload && getProjects();
   }, [preload, getProjects]);
-
-  console.log('====================================');
-  console.log('Projects, projectStatusView:', projectStatusView);
-  console.log('====================================');
 
   return !projects ? null : (
     <motion.div
@@ -93,14 +90,24 @@ export function Projects(props) {
         nav
         title={strings.ttl__projects}
         headerActions={<HeaderActions />}
-      />
-      <ProjectsToolbar
-        projectStatusView={projectStatusView}
-        setProjectStatusView={setProjectStatusView}
-      />
+      >
+        <ProjectsStatusSelect
+          projectStatusView={projectStatusView}
+          setProjectStatusView={setProjectStatusView}
+        />
+      </Header>
+
       <div>
         {projects.length ? (
-          <ProjectsGrid key="projects-grid" projects={projects} />
+          projectsDisplayMode === TABLE ? (
+            <div>Table display</div>
+          ) : (
+            <ProjectsGrid
+              key="projects-grid"
+              projects={projects}
+              projectsDisplayMode={projectsDisplayMode}
+            />
+          )
         ) : (
           <DefaultEmptyMessage
             key="default-empry-message"

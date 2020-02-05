@@ -30,9 +30,6 @@ export const pageVariants = {
 };
 
 export const getPageVariant = startPos => {
-  console.log('====================================');
-  console.log('getPageVariant, startPos:', startPos);
-  console.log('====================================');
   const x = startPos === 'right' ? 500 : -500;
   return {
     initial: {

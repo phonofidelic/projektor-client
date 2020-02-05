@@ -38,19 +38,24 @@ const Container = styled.div`
   overflow: 'hidden';
   text-align: left;
   padding: 10px;
+  padding-top: 0px;
   transition: all 5s;
 `;
 
 function ProjectGrid(props) {
-  const { projects } = props;
-  const projectsWithLocation = withProjectLocation(projects);
+  const { projects, projectsDisplayMode } = props;
+  // const projectsWithLocation = withProjectLocation(projects);
 
   return (
     <Container>
       <Grid container>
         <AnimatePresence>
           {projects.map(project => (
-            <ProjectGridItem key={project._id} project={project} />
+            <ProjectGridItem
+              key={project._id}
+              project={project}
+              projectsDisplayMode={projectsDisplayMode}
+            />
           ))}
         </AnimatePresence>
       </Grid>
