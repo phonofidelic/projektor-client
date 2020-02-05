@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import posed, { PoseGroup } from 'react-pose';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const ContextRouteAnimation = posed.div({
   enter: {
@@ -61,23 +62,39 @@ export const ContextRouteAnimation = posed.div({
   }
 });
 
+const pageVariants = {
+  initial: {
+    opacity: 0
+  },
+  in: {
+    opacity: 1
+  },
+  out: {
+    opacity: 0
+  }
+};
+
 export function AnimatedSwitch({ history, location, children, ...rest }) {
   const reverse = location.pathname === '/';
 
   return (
-    <PoseGroup
-    // flipMove={false}
-    // preEnterPose={reverse ? 'leftSide' : 'rightSide'}
-    // exitPose={reverse ? 'rightSide' : 'leftSide'}
-    // preEnterPose={reverse ? 'bottom' : 'top'}
-    // exitPose={reverse ? 'top' : 'bottom'}
-    >
-      <ContextRouteAnimation key={location.pathname} reverse={reverse}>
+    <AnimatePresence>
+      {/* <ContextRouteAnimation key={location.pathname} reverse={reverse}> */}
+      <motion.div
+        // enter={{ opacity: 1 }}
+        // exit={{ opacity: 0 }}
+        // transition={{ ease: 'easeInOut', duration: 400 }}
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariants}
+      >
         <Switch location={location} {...rest}>
           {children}
         </Switch>
-      </ContextRouteAnimation>
-    </PoseGroup>
+      </motion.div>
+      {/* </ContextRouteAnimation> */}
+    </AnimatePresence>
   );
 }
 

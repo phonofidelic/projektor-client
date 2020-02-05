@@ -4,6 +4,8 @@ import * as actions from 'actions';
 import { useParams } from 'react-router-dom';
 import { StringContext } from 'strings';
 import { Helmet } from 'react-helmet';
+import { motion } from 'framer-motion';
+import { getPageVariant } from 'constants/pageVariants';
 
 import Header from 'components/Header';
 import ProjectDetail from 'components/ProjectDetail';
@@ -26,7 +28,7 @@ export function Project(props) {
   }, [preload, getProject, projectId]);
 
   return !project ? null : (
-    <div>
+    <motion.div variants={getPageVariant('right')}>
       <Helmet>
         <meta charSet="utf-8" />
         <title>
@@ -44,7 +46,7 @@ export function Project(props) {
         updateWork={updateWork}
         removeWork={removeWork}
       />
-    </div>
+    </motion.div>
   );
 }
 

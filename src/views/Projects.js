@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from 'actions';
 import { Helmet } from 'react-helmet';
 import requireAuth from 'hocs/requireAuth';
+import { motion } from 'framer-motion';
 
 import Header from 'components/Header';
 import ProjectsGrid from 'components/ProjectsGrid';
@@ -15,6 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import AddIcon from '@material-ui/icons/Add';
 import { ACTIVE } from 'constants/status';
+import { pageVariants, getPageVariant } from 'constants/pageVariants';
 
 function HeaderActions(props) {
   const strings = useContext(StringContext);
@@ -75,7 +77,12 @@ export function Projects(props) {
   console.log('====================================');
 
   return !projects ? null : (
-    <div>
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={getPageVariant('left')}
+    >
       <Helmet>
         <meta charSet="utf-8" />
         <title>
@@ -93,12 +100,15 @@ export function Projects(props) {
       />
       <div>
         {projects.length ? (
-          <ProjectsGrid projects={projects} />
+          <ProjectsGrid key="projects-grid" projects={projects} />
         ) : (
-          <DefaultEmptyMessage text={strings.msg__default_empty_active} />
+          <DefaultEmptyMessage
+            key="default-empry-message"
+            text={strings.msg__default_empty_active}
+          />
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

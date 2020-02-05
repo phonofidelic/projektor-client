@@ -4,6 +4,8 @@ import * as actions from 'actions';
 import { StringContext } from 'strings';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
+import { motion } from 'framer-motion';
+import { pageVariants, getPageVariant } from 'constants/pageVariants';
 
 import logoSrc from 'assets/logo.svg';
 import Header from 'components/Header';
@@ -46,28 +48,35 @@ export function Login(props) {
     props.loginUser(formData);
   };
   return (
-    <Container>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>
-          {strings.ttl__app_title} - {strings.ttl__sign_in}
-        </title>
-      </Helmet>
-      <Header centerTitle back="/" />
-      <TitleContainer>
-        <Logo src={logoSrc} alt={strings.ttl__app_title} />
-        {/* <Typography variant="h4">{strings.ttl__sign_in}</Typography> */}
-      </TitleContainer>
-      {error.errorTitleKey && (
-        <div>
-          {/* <Typography variant="h5">{strings[error.errorTitleKey]}</Typography> */}
-          <Typography>{strings[error.errorBodyKey]}</Typography>
-        </div>
-      )}
-      <FormContainer>
-        <LoginForm handleLoginSubmit={handleLoginSubmit} />
-      </FormContainer>
-    </Container>
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={getPageVariant('right')}
+    >
+      <Container>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>
+            {strings.ttl__app_title} - {strings.ttl__sign_in}
+          </title>
+        </Helmet>
+        <Header centerTitle back="/" />
+        <TitleContainer>
+          <Logo src={logoSrc} alt={strings.ttl__app_title} />
+          {/* <Typography variant="h4">{strings.ttl__sign_in}</Typography> */}
+        </TitleContainer>
+        {error.errorTitleKey && (
+          <div>
+            {/* <Typography variant="h5">{strings[error.errorTitleKey]}</Typography> */}
+            <Typography>{strings[error.errorBodyKey]}</Typography>
+          </div>
+        )}
+        <FormContainer>
+          <LoginForm handleLoginSubmit={handleLoginSubmit} />
+        </FormContainer>
+      </Container>
+    </motion.div>
   );
 }
 

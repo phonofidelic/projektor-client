@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { StringContext } from 'strings';
 import moment from 'moment';
-import posed from 'react-pose';
+// import posed, { PoseGroup } from 'react-pose';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import ProjectMenu from 'components/ProjectMenu';
 
@@ -18,25 +19,30 @@ const SHADE = 400;
 const defaultProjectColor = Grey;
 const projectColor = false;
 
+// const Container = styled(motion.custom(Grid))`
 const Container = styled(Grid)`
   padding: 10px;
   // border: 1px solid red;
   text-decoration: none;
 `;
 
-const PosedContainer = posed(Container)({
-  enter: {
-    opacity: 1,
-    x: 0
-  },
-  exit: {
-    opacity: 0,
-    x: '-100%'
-  },
-  hoverable: true,
-  init: { scale: 1 },
-  hover: { scale: 1.05 }
-});
+// const PosedContainer = posed(Container)({
+//   before: {
+//     opacity: 0,
+//     x: '-100%'
+//   },
+//   enter: {
+//     opacity: 1,
+//     x: 0
+//   },
+//   exit: {
+//     opacity: 0,
+//     x: '-100%'
+//   },
+//   hoverable: true,
+//   init: { scale: 1 },
+//   hover: { scale: 1.05 }
+// });
 
 const CardContainer = styled(Card)`
   position: relative;
@@ -101,7 +107,18 @@ export default function ProjectGridItem(props) {
   const currentLocaleData = moment.localeData();
 
   return (
-    <PosedContainer key={project._id} item xs={12} sm={6} md={4}>
+    // <motion.span key={project._id} exit={{ opacity: 0 }} positionTransition>
+    <Container
+      item
+      xs={12}
+      sm={6}
+      md={4}
+      component={motion.div}
+      exit={{ opacity: 0, x: -500 }}
+      enter={{ opacity: 1, x: 0 }}
+      transition={{ ease: 'easeOut', duration: 0.2 }}
+      positionTransition
+    >
       <CardContainer>
         <CardLink
           // to={`${project.location}/${project._id}`}
@@ -205,6 +222,7 @@ export default function ProjectGridItem(props) {
           </div>
         )}
       </CardContainer>
-    </PosedContainer>
+    </Container>
+    // </motion.span>
   );
 }

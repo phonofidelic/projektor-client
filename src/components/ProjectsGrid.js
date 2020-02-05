@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ACTIVE, ARCHIVED, DELETED } from 'constants/status';
 
 import ProjectGridItem from 'components/ProjectGridItem';
@@ -37,6 +38,7 @@ const Container = styled.div`
   overflow: 'hidden';
   text-align: left;
   padding: 10px;
+  transition: all 5s;
 `;
 
 function ProjectGrid(props) {
@@ -46,9 +48,11 @@ function ProjectGrid(props) {
   return (
     <Container>
       <Grid container>
-        {projectsWithLocation.map(project => (
-          <ProjectGridItem key={project._id} project={project} />
-        ))}
+        <AnimatePresence>
+          {projects.map(project => (
+            <ProjectGridItem key={project._id} project={project} />
+          ))}
+        </AnimatePresence>
       </Grid>
     </Container>
   );
