@@ -14,12 +14,10 @@ const SHADE = 400;
 
 const Container = styled.div`
   text-align: left;
-  // padding: 10px;
-  // margin: 10px;
   display: flex;
   height: 40px;
   margin: 4px;
-  margin-right: 10px;
+  margin-right: 20px;
 `;
 
 export default function(props) {

@@ -96,5 +96,8 @@
     "ttl__login_failure": "Could not sign in",
     "msg__login_failure": "Please check the email and password you provided and try again",
     "btn__today": "today",
-    "ttl__projects": "Projects"
+    "ttl__projects": "Projects",
+    "hnt__expanded_view": "Expanded view",
+    "hnt__compact_view": "Compact view",
+    "hnt__table_view": "Table view"
 }

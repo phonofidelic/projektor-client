@@ -96,5 +96,8 @@
     "ttl__login_failure": "Kunde inte logga in",
     "msg__login_failure": "Kontrollera e-post och lösenord och försök igen",
     "btn__today": "idag",
-    "ttl__projects": "Projekt"
+    "ttl__projects": "Projekt",
+    "hnt__expanded_view": "Expanderad vy",
+    "hnt__compact_view": "Kompakt vy",
+    "hnt__table_view": "Tabell vy"
 }

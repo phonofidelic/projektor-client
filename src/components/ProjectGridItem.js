@@ -29,8 +29,7 @@ const Container = styled(Grid)`
 
 const CardContainer = styled(Card)`
   position: relative;
-  height: ${({ projectsDisplayMode }) =>
-    projectsDisplayMode === EXPANDED ? 372 : 77}px;
+  height: ${({ display }) => (display === EXPANDED ? 372 : 77)}px;
 
   &.MuiPaper-root {
     background-color: ${projectColor
@@ -103,7 +102,7 @@ export default function ProjectGridItem(props) {
       transition={{ ease: 'easeOut', duration: 0.2 }}
       positionTransition
     >
-      <CardContainer projectsDisplayMode={projectsDisplayMode}>
+      <CardContainer display={projectsDisplayMode}>
         <CardLink
           // to={`${project.location}/${project._id}`}
           to={`projects/${project._id}`}

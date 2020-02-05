@@ -11,6 +11,7 @@ import Header from 'components/Header';
 import ProjectsGrid from 'components/ProjectsGrid';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import ProjectsStatusSelect from 'components/ProjectsStatusSelect';
+import ProjectsDisplayControls from 'components/ProjectsDisplayControls';
 
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -69,6 +70,13 @@ export function Projects(props) {
 
   const [projectsDisplayMode, setProjectsDisplayMode] = useState(COMPACT);
 
+  const handleSelectDisplayMode = displayMode => {
+    console.log('====================================');
+    console.log('handleSelectDisplayMode, displayMode:', displayMode);
+    console.log('====================================');
+    setProjectsDisplayMode(displayMode);
+  };
+
   useEffect(() => {
     !preload && getProjects();
   }, [preload, getProjects]);
@@ -91,6 +99,10 @@ export function Projects(props) {
         title={strings.ttl__projects}
         headerActions={<HeaderActions />}
       >
+        <ProjectsDisplayControls
+          projectsDisplayMode={projectsDisplayMode}
+          selectDisplayMode={handleSelectDisplayMode}
+        />
         <ProjectsStatusSelect
           projectStatusView={projectStatusView}
           setProjectStatusView={setProjectStatusView}
