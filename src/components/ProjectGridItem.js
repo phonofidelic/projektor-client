@@ -99,8 +99,8 @@ export default function ProjectGridItem(props) {
       component={motion.div}
       exit={{ opacity: 0, x: -500 }}
       enter={{ opacity: 1, x: 0 }}
-      whileHover={{ scale: 1.07 }}
-      transition={{ ease: 'easeOut', duration: 0.2 }}
+      whileHover={{ scale: 1.03 }}
+      transition={{ ease: 'easeInOut', duration: 0.2 }}
       positionTransition
     >
       <CardContainer display={projectsDisplayMode}>
