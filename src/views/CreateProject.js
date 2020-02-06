@@ -5,6 +5,8 @@ import Header from 'components/Header';
 import ProjectForm from 'components/ProjectForm';
 import { StringContext } from 'strings';
 import { Helmet } from 'react-helmet';
+import { motion } from 'framer-motion';
+import { getPageVariant } from 'constants/pageVariants';
 
 export function CreateProject(props) {
   const strings = useContext(StringContext);
@@ -13,7 +15,7 @@ export function CreateProject(props) {
     props.createProject(data);
   };
   return (
-    <div>
+    <motion.div variants={getPageVariant('right')}>
       <Helmet>
         <meta charSet="utf-8" />
         <title>
@@ -22,7 +24,7 @@ export function CreateProject(props) {
       </Helmet>
       <Header back title={strings.ttl__create_project} />
       <ProjectForm handleFormSubmit={handleFormSubmit} />
-    </div>
+    </motion.div>
   );
 }
 

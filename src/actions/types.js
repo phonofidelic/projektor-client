@@ -21,6 +21,7 @@ export const SELECT_PROJECT = 'select_project',
   DELETE_ALL_REMOVED_PROJECTS = 'delete_all_removed_projects',
   DELETE_ALL_REMOVED_PROJECTS_SUCCESS = 'delete_all_removed_projects_success',
   DELETE_ALL_REMOVED_PROJECTS_FAILURE = 'delete_all_removed_projects_failure',
+  SET_PROJECT_STATUS_VIEW = 'set_project_status_view',
   /** WORK ACTIONS */
   START_WORK = 'start_work',
   // STOP_WORK = 'stop_work',

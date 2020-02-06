@@ -5,6 +5,7 @@ import {
   GET_PROJECTS,
   GET_PROJECTS_SUCCESS,
   GET_PROJECTS_FAILURE,
+  SET_PROJECT_STATUS_VIEW,
   GET_PROJECT,
   GET_PROJECT_SUCCESS,
   GET_PROJECT_FAILURE,
@@ -23,8 +24,9 @@ import {
 } from 'actions/types';
 import { history } from 'config';
 import { api, handleError, handleResponse } from 'actions/utils';
+import { DELETED } from 'constants/status';
 
-export const getProjects = status => {
+export const getProjects = () => {
   console.log('*** getProjects ***');
   return async dispatch => {
     dispatch({
@@ -33,7 +35,7 @@ export const getProjects = status => {
 
     let response;
     try {
-      response = await api().get('/projects', { params: { status } });
+      response = await api().get('/projects');
 
       handleResponse(response, dispatch, GET_PROJECTS_SUCCESS);
     } catch (err) {
@@ -41,6 +43,16 @@ export const getProjects = status => {
 
       handleError(err, dispatch, GET_PROJECTS_FAILURE);
     }
+  };
+};
+
+export const setProjectStatusView = status => {
+  return dispatch => {
+    dispatch({
+      type: SET_PROJECT_STATUS_VIEW,
+      payload: status
+    });
+    // history.push(status === DELETED ? 'removed' : status);
   };
 };
 

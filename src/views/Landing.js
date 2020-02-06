@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { StringContext } from 'strings';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
+import { motion } from 'framer-motion';
+import { pageVariants, getPageVariant } from 'constants/pageVariants';
 
 import logoSrc from 'assets/logo.svg';
 import Header from 'components/Header';
@@ -100,7 +102,12 @@ export function Landing(props) {
   };
 
   return (
-    <Container>
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={getPageVariant('left')}
+    >
       {/* <Background /> */}
       <Helmet>
         <meta charSet="utf-8" />
@@ -121,7 +128,7 @@ export function Landing(props) {
         </div>
         <RegistrationForm handleRegistrationSubmit={handleRegistrationSubmit} />
       </FormContainer>
-    </Container>
+    </motion.div>
   );
 }
 

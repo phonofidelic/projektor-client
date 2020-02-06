@@ -37,28 +37,12 @@ export const routes = [
     path: '/projects/edit/:projectId'
   },
   {
-    Component: Project,
-    path: '/projects/:projectId'
-  },
-  {
     Component: Projects,
     path: '/projects'
   },
   {
     Component: Project,
-    path: '/archived/:projectId'
-  },
-  {
-    Component: Archived,
-    path: '/archived'
-  },
-  {
-    Component: Project,
-    path: '/removed/:projectId'
-  },
-  {
-    Component: Removed,
-    path: '/removed'
+    path: '/projects/:projectId'
   },
   {
     Component: Settings,

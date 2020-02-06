@@ -5,6 +5,8 @@ import * as actions from 'actions';
 import { StringContext } from 'strings';
 import { Helmet } from 'react-helmet';
 import requireAuth from 'hocs/requireAuth';
+import { motion } from 'framer-motion';
+import { getPageVariant } from 'constants/pageVariants';
 
 import Header from 'components/Header';
 import ProjectForm from 'components/ProjectForm';
@@ -23,7 +25,7 @@ export function EditProject(props) {
   };
 
   return project ? (
-    <div>
+    <motion.div variants={getPageVariant('left')}>
       <Helmet>
         <meta charSet="utf-8" />
         <title>
@@ -32,7 +34,7 @@ export function EditProject(props) {
       </Helmet>
       <Header back title={project.title} />
       <ProjectForm project={project} handleFormSubmit={handleFormSubmit} />
-    </div>
+    </motion.div>
   ) : (
     <div>loading...</div>
   );

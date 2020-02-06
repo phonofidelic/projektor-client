@@ -5,6 +5,8 @@ import { StringContext } from 'strings';
 import moment from 'moment';
 import { Helmet } from 'react-helmet';
 import requireAuth from 'hocs/requireAuth';
+import { motion } from 'framer-motion';
+import { pageVariants, getPageVariant } from 'constants/pageVariants';
 
 import Header from 'components/Header';
 import WeekOverview from 'components/WeekOverview';
@@ -64,7 +66,12 @@ export function Dashboard(props) {
   }, [preload, getAllWork, week]);
 
   return (
-    <div>
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={getPageVariant('left')}
+    >
       <Helmet>
         <meta charSet="utf-8" />
         <title>
@@ -78,7 +85,7 @@ export function Dashboard(props) {
         handleSelectNextWeek={handleSelectNextWeek}
         handleWeekNavigation={handleWeekNavigation}
       />
-    </div>
+    </motion.div>
   );
 }
 

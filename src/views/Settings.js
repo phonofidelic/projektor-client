@@ -4,6 +4,8 @@ import * as actions from 'actions';
 import { StringContext } from 'strings';
 import { Helmet } from 'react-helmet';
 import requireAuth from 'hocs/requireAuth';
+import { motion } from 'framer-motion';
+import { pageVariants, getPageVariant } from 'constants/pageVariants';
 
 import Header from 'components/Header';
 import UserInfo from 'components/UserInfo';
@@ -19,7 +21,12 @@ export function Settings(props) {
   }, [preload, getUserInfo]);
 
   return (
-    <div>
+    <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      variants={getPageVariant('left')}
+    >
       <Helmet>
         <meta charSet="utf-8" />
         <title>
@@ -31,7 +38,7 @@ export function Settings(props) {
       <div>
         <Button onClick={props.logoutUser}>{strings.btn__sign_out}</Button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
