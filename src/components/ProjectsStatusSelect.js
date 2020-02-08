@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import activeColor from '@material-ui/core/colors/green';
-import archivedColor from '@material-ui/core/colors/yellow';
+import archivedColor from '@material-ui/core/colors/orange';
 import removedColor from '@material-ui/core/colors/red';
 
 const SHADE = 400;
@@ -20,10 +20,24 @@ const Container = styled.div`
   margin-right: 20px;
 `;
 
+const SelectButton = styled(Button)`
+  color: #fff;
+  background-color: ${({ bgcolor }) => bgcolor};
+`;
+
 export default function(props) {
   const { projectStatusView, setProjectStatusView } = props;
   const strings = useContext(StringContext);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [selectButtonHovered, setSelectButtonHovered] = useState(false);
+
+  const handleSelectButtonEnter = () => {
+    setSelectButtonHovered(true);
+  };
+
+  const handleSelectButtonLeave = () => {
+    setSelectButtonHovered(false);
+  };
 
   const handleOpenMenu = e => {
     setAnchorEl(e.currentTarget);
@@ -54,16 +68,16 @@ export default function(props) {
     }
   };
 
-  const getStatusButtonBGColor = () => {
+  const getStatusButtonBGColor = shade => {
     switch (projectStatusView) {
       case ACTIVE:
-        return activeColor[SHADE];
+        return activeColor[shade];
 
       case ARCHIVED:
-        return archivedColor[800];
+        return archivedColor[shade];
 
       case DELETED:
-        return removedColor[SHADE];
+        return removedColor[shade];
 
       default:
         return strings.ttl__active;
@@ -74,10 +88,18 @@ export default function(props) {
     <Container>
       <Button
         // variant="outlined"
-        style={{ backgroundColor: getStatusButtonBGColor(), color: '#fff' }}
+        style={{
+          backgroundColor: selectButtonHovered
+            ? getStatusButtonBGColor(SHADE + 200)
+            : getStatusButtonBGColor(SHADE),
+          color: '#fff'
+        }}
+        bgcolor={getStatusButtonBGColor(SHADE)}
         aria-controls="simple-menu"
         aria-haspopup="true"
         onClick={handleOpenMenu}
+        onMouseEnter={handleSelectButtonEnter}
+        onMouseLeave={handleSelectButtonLeave}
       >
         {getProjectStatusViewString()}
       </Button>
