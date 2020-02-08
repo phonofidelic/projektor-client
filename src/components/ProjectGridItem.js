@@ -118,9 +118,7 @@ export default function ProjectGridItem(props) {
             >
               {project.title}
             </Typography>
-            {/* <ProjectMenu
-              project={project}
-            /> */}
+            {/* <ProjectMenu project={project} /> */}
           </CardHeader>
 
           {projectsDisplayMode === EXPANDED && (
