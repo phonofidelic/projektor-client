@@ -35,6 +35,7 @@ const CardContainer = styled(Card)`
     background-color: ${projectColor
       ? projectColor[SHADE]
       : defaultProjectColor[50]};
+    transition: all 0.1s ease-in-out;
   }
   &:hover {
     // background-color: #e0e0e0;
@@ -90,7 +91,6 @@ export default function ProjectGridItem(props) {
   const currentLocaleData = moment.localeData();
 
   return (
-    // <motion.span key={project._id} exit={{ opacity: 0 }} positionTransition>
     <Container
       item
       xs={12}
@@ -189,15 +189,6 @@ export default function ProjectGridItem(props) {
             </CardContent>
           )}
         </CardLink>
-        {/* <div style={{ height: 5 }}>
-          {project.budgetedTime && (
-            <LinearProgress
-              value={(project.timeUsed / (project.budgetedTime * 3.6e6)) * 100}
-              variant="determinate"
-              style={{ height: 5 }}
-            />
-          )}
-        </div> */}
         {project.budgetedTime && (
           <div>
             <ProgressContainer>
@@ -207,6 +198,5 @@ export default function ProjectGridItem(props) {
         )}
       </CardContainer>
     </Container>
-    // </motion.span>
   );
 }

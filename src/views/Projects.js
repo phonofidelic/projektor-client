@@ -71,9 +71,6 @@ export function Projects(props) {
   const [projectsDisplayMode, setProjectsDisplayMode] = useState(COMPACT);
 
   const handleSelectDisplayMode = displayMode => {
-    console.log('====================================');
-    console.log('handleSelectDisplayMode, displayMode:', displayMode);
-    console.log('====================================');
     setProjectsDisplayMode(displayMode);
   };
 
@@ -122,7 +119,7 @@ export function Projects(props) {
           )
         ) : (
           <DefaultEmptyMessage
-            key="default-empry-message"
+            key="default-empty-message"
             text={strings.msg__default_empty_active}
           />
         )}
