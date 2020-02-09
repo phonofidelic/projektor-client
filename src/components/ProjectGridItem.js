@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { StringContext } from 'strings';
@@ -32,24 +32,38 @@ const CardContainer = styled(Card)`
   height: ${({ display }) => (display === EXPANDED ? 372 : 77)}px;
 
   &.MuiPaper-root {
-    background-color: ${projectColor
-      ? projectColor[SHADE]
-      : defaultProjectColor[50]};
+    background-color: ${({ projectColor }) =>
+      projectColor ? projectColor[SHADE] : defaultProjectColor[50]};
+    color: ${({ projectColor }) => (projectColor ? '#fff' : '#000')};
     transition: all 0.1s ease-in-out;
   }
   &:hover {
     // background-color: #e0e0e0;
-    background-color: ${projectColor
-      ? projectColor[600]
-      : defaultProjectColor[300]};
+    background-color: ${({ projectColor }) =>
+      projectColor ? projectColor[600] : defaultProjectColor[300]};
     transition: background-color 0.6s;
   }
 `;
 
-const CardHeader = styled.div`
+const CardHeaderContainer = styled.div`
   display: flex;
-  padding: 16px;
+  // padding: 16px;
   color: #000;
+  background-color: ${({ projectColor }) =>
+    projectColor ? projectColor : 'none'};
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 0 10px ${defaultProjectColor[300]};
+`;
+
+const CardHeader = styled.div`
+  // display: flex;
+  padding: 16px;
+  flex: 1;
+  color: #000;
+  background-color: ${({ hovered }) =>
+    hovered ? defaultProjectColor[300] : defaultProjectColor[50]};
+  border-radius: 0 4px 4px 0;
+  transition: background-color 0.6s;
 `;
 
 const CardLink = styled(Link)`
@@ -74,7 +88,7 @@ const ProgressContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
   height: 5px;
   width: 100%;
-  border-radius: 4px;
+  border-radius: 0 0 4px 4px;
   overflow: hidden;
 `;
 
@@ -89,6 +103,15 @@ export default function ProjectGridItem(props) {
   const { project, projectsDisplayMode } = props;
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
+  const [hovered, setHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
 
   return (
     <Container
@@ -102,6 +125,8 @@ export default function ProjectGridItem(props) {
       whileHover={{ scale: 1.03 }}
       transition={{ ease: 'easeInOut', duration: 0.2 }}
       positionTransition
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <CardContainer display={projectsDisplayMode}>
         <CardLink
@@ -109,17 +134,20 @@ export default function ProjectGridItem(props) {
           to={`projects/${project._id}`}
           style={{ textDecoration: 'none' }}
         >
-          <CardHeader>
-            <Typography
-              style={{ flexGrow: 1, lineHeight: '2em' }}
-              variant="h6"
-              // component="h2"
-              noWrap
-            >
-              {project.title}
-            </Typography>
-            {/* <ProjectMenu project={project} /> */}
-          </CardHeader>
+          <CardHeaderContainer projectColor={Green[SHADE]} hovered={hovered}>
+            <CardHeader hovered={hovered}>
+              <Typography
+                style={{ flexGrow: 1, lineHeight: '2em' }}
+                variant="h6"
+                // component="h2"
+                noWrap
+              >
+                {project.title}
+              </Typography>
+              {/* <ProjectMenu project={project} /> */}
+            </CardHeader>
+            <div style={{ width: 4 }}></div>
+          </CardHeaderContainer>
 
           {projectsDisplayMode === EXPANDED && (
             <CardContent>
@@ -190,11 +218,9 @@ export default function ProjectGridItem(props) {
           )}
         </CardLink>
         {project.budgetedTime && (
-          <div>
-            <ProgressContainer>
-              <Progress project={project} />
-            </ProgressContainer>
-          </div>
+          <ProgressContainer>
+            <Progress project={project} />
+          </ProgressContainer>
         )}
       </CardContainer>
     </Container>
