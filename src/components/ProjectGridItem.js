@@ -29,7 +29,7 @@ const Container = styled(Grid)`
 
 const CardContainer = styled(Card)`
   position: relative;
-  height: ${({ display }) => (display === EXPANDED ? 372 : 77)}px;
+  height: ${({ display }) => (display === EXPANDED ? 372 : 74)}px;
 
   &.MuiPaper-root {
     background-color: ${({ projectColor }) =>
