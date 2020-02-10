@@ -134,7 +134,7 @@ export default function ProjectGridItem(props) {
           to={`projects/${project._id}`}
           style={{ textDecoration: 'none' }}
         >
-          <CardHeaderContainer projectColor={Green[SHADE]} hovered={hovered}>
+          <CardHeaderContainer projectColor={project.color} hovered={hovered}>
             <CardHeader hovered={hovered}>
               <Typography
                 style={{ flexGrow: 1, lineHeight: '2em' }}

@@ -27,7 +27,6 @@ import { api, handleError, handleResponse } from 'actions/utils';
 import { DELETED } from 'constants/status';
 
 export const getProjects = () => {
-  console.log('*** getProjects ***');
   return async dispatch => {
     dispatch({
       type: GET_PROJECTS
