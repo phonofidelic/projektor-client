@@ -51,7 +51,7 @@ export default function ProjectsDisplayControls(props) {
                 color:
                   projectsDisplayMode === displayMode.type ? '#666' : '#212121',
                 backgroundColor:
-                  projectsDisplayMode === displayMode.type ? Grey[200] : null,
+                  projectsDisplayMode === displayMode.type ? Grey[300] : null,
                 cursor:
                   projectsDisplayMode === displayMode.type
                     ? 'default'
