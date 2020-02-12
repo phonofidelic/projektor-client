@@ -3,67 +3,55 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { StringContext } from 'strings';
 import moment from 'moment';
-// import posed, { PoseGroup } from 'react-pose';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { COMPACT, EXPANDED, TABLE } from 'constants/projectsDisplayModes';
 
-import ProjectMenu from 'components/ProjectMenu';
+// import ProjectMenu from 'components/ProjectMenu';
 
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Green from '@material-ui/core/colors/green';
 import Grey from '@material-ui/core/colors/grey';
-const SHADE = 400;
-const defaultProjectColor = Grey;
-const projectColor = false;
+const Gray = Grey;
 
-// const Container = styled(motion.custom(Grid))`
 const Container = styled(Grid)`
   padding: 10px;
-  // border: 1px solid red;
   text-decoration: none;
 `;
 
 const CardContainer = styled(Card)`
   position: relative;
-  height: ${({ display }) => (display === EXPANDED ? 372 : 74)}px;
+  height: ${({ display }) => (display === EXPANDED ? 372 : 72)}px;
 
   &.MuiPaper-root {
-    background-color: ${({ projectColor }) =>
-      projectColor ? projectColor[SHADE] : defaultProjectColor[50]};
-    color: ${({ projectColor }) => (projectColor ? '#fff' : '#000')};
-    transition: all 0.1s ease-in-out;
+    background-color: ${Gray[50]};
+    transition: background-color 0.6s ease-in-out;
   }
   &:hover {
-    // background-color: #e0e0e0;
-    background-color: ${({ projectColor }) =>
-      projectColor ? projectColor[600] : defaultProjectColor[300]};
-    transition: background-color 0.6s;
+    background-color: ${Gray[300]};
+    transition: background-color 0.6s ease-in-out;
   }
 `;
 
 const CardHeaderContainer = styled.div`
   display: flex;
-  // padding: 16px;
-  color: #000;
-  background-color: ${({ projectColor }) =>
-    projectColor ? projectColor : 'none'};
-  border-radius: 0 4px 4px 0;
-  box-shadow: 0 0 10px ${defaultProjectColor[300]};
+  background-color: ${({ projectColor, hovered }) =>
+    (projectColor === Gray[50]) & hovered ? Gray[300] : projectColor};
+  border-radius: 0 4px 4px 4px;
+  box-shadow: 0 0 10px ${Gray[300]};
+  transition: background-color 0.6s ease-in-out;
 `;
 
 const CardHeader = styled.div`
-  // display: flex;
   padding: 16px;
   flex: 1;
   color: #000;
-  background-color: ${({ hovered }) =>
-    hovered ? defaultProjectColor[300] : defaultProjectColor[50]};
-  border-radius: 0 4px 4px 0;
+  background-color: ${({ hovered }) => (hovered ? Gray[300] : Gray[50])};
+  border-radius: 0 4px 4px 4px;
   transition: background-color 0.6s;
+  overflow: hidden;
+  transition: background-color 0.6s ease-in-out;
 `;
 
 const CardLink = styled(Link)`
@@ -89,7 +77,7 @@ const ProgressContainer = styled.div`
   height: 5px;
   width: 100%;
   border-radius: 0 0 4px 4px;
-  overflow: hidden;
+  // overflow: hidden;
 `;
 
 const Progress = styled.div`
@@ -114,23 +102,20 @@ export default function ProjectGridItem(props) {
   };
 
   return (
-    <Container
-      item
-      xs={12}
-      sm={6}
-      md={4}
-      component={motion.div}
-      exit={{ opacity: 0, x: -500 }}
-      enter={{ opacity: 1, x: 0 }}
-      whileHover={{ scale: 1.03 }}
-      transition={{ ease: 'easeInOut', duration: 0.2 }}
-      positionTransition
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <CardContainer display={projectsDisplayMode}>
+    <Container item xs={12} sm={6} md={4}>
+      <CardContainer
+        display={projectsDisplayMode}
+        component={motion.div}
+        exit={{ opacity: 0, x: -500 }}
+        enter={{ opacity: 1, x: 0 }}
+        animate={{ height: projectsDisplayMode === EXPANDED ? 372 : 72 }}
+        whileHover={{ scale: 1.03 }}
+        transition={{ ease: 'easeInOut', duration: 0.2 }}
+        positionTransition
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <CardLink
-          // to={`${project.location}/${project._id}`}
           to={`projects/${project._id}`}
           style={{ textDecoration: 'none' }}
         >
@@ -139,83 +124,80 @@ export default function ProjectGridItem(props) {
               <Typography
                 style={{ flexGrow: 1, lineHeight: '2em' }}
                 variant="h6"
-                // component="h2"
                 noWrap
               >
                 {project.title}
               </Typography>
               {/* <ProjectMenu project={project} /> */}
             </CardHeader>
-            <div style={{ width: 4 }}></div>
+            <div style={{ width: 10 }}></div>
           </CardHeaderContainer>
 
-          {projectsDisplayMode === EXPANDED && (
-            <CardContent>
-              <ProjectInfoContainer>
-                {project.client && (
-                  <div>
-                    <Typography variant="overline">
-                      {strings.lbl__client}
-                    </Typography>{' '}
-                    {project.client}
-                  </div>
-                )}
+          <CardContent>
+            <ProjectInfoContainer>
+              {project.client && (
                 <div>
                   <Typography variant="overline">
-                    {strings.lbl__start_date}
+                    {strings.lbl__client}
                   </Typography>{' '}
-                  {project.startDate
-                    ? moment(project.startDate).format(
-                        currentLocaleData.longDateFormat('L')
-                      )
-                    : strings.msc__tbd_short}
+                  {project.client}
                 </div>
-                <div>
-                  <Typography variant="overline">
-                    {strings.lbl__deadline}
-                  </Typography>{' '}
-                  {project.deadline
-                    ? moment(project.deadline).format(
-                        currentLocaleData.longDateFormat('L')
-                      )
-                    : strings.msc__open}
-                </div>
-                {project.budgetedTime && (
-                  <div>
-                    <Typography variant="overline">
-                      {strings.lbl__budgeted_time}
-                    </Typography>
-                    {project.budgetedTime.toLocaleString(navigator.language) +
-                      strings.frg__hours_short}
-                  </div>
-                )}
-                <div>
-                  <Typography variant="overline">
-                    {strings.lbl__time_used}
-                  </Typography>{' '}
-                  {moment
-                    .duration(project.timeUsed, 'ms')
-                    .format('hh:mm:ss', { trim: false })}
-                </div>
-              </ProjectInfoContainer>
+              )}
               <div>
-                <Typography
-                  variant="body2"
-                  color="textSecondary"
-                  component="p"
-                  style={{
-                    height: 100,
-                    overflowY: 'auto',
-                    whiteSpace: 'pre-wrap'
-                  }}
-                >
-                  {project.description === 'No description provided'
-                    ? strings.msg__empty_project_description
-                    : project.description}
-                </Typography>
+                <Typography variant="overline">
+                  {strings.lbl__start_date}
+                </Typography>{' '}
+                {project.startDate
+                  ? moment(project.startDate).format(
+                      currentLocaleData.longDateFormat('L')
+                    )
+                  : strings.msc__tbd_short}
               </div>
-            </CardContent>
-          )}
+              <div>
+                <Typography variant="overline">
+                  {strings.lbl__deadline}
+                </Typography>{' '}
+                {project.deadline
+                  ? moment(project.deadline).format(
+                      currentLocaleData.longDateFormat('L')
+                    )
+                  : strings.msc__open}
+              </div>
+              {project.budgetedTime && (
+                <div>
+                  <Typography variant="overline">
+                    {strings.lbl__budgeted_time}
+                  </Typography>
+                  {project.budgetedTime.toLocaleString(navigator.language) +
+                    strings.frg__hours_short}
+                </div>
+              )}
+              <div>
+                <Typography variant="overline">
+                  {strings.lbl__time_used}
+                </Typography>{' '}
+                {moment
+                  .duration(project.timeUsed, 'ms')
+                  .format('hh:mm:ss', { trim: false })}
+              </div>
+            </ProjectInfoContainer>
+            <div>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                style={{
+                  height: 100,
+                  overflowY: 'auto',
+                  whiteSpace: 'pre-wrap'
+                }}
+              >
+                {project.description === 'No description provided'
+                  ? strings.msg__empty_project_description
+                  : project.description}
+              </Typography>
+            </div>
+          </CardContent>
         </CardLink>
         {project.budgetedTime && (
           <ProgressContainer>
