@@ -78,7 +78,9 @@ export function Projects(props) {
     !preload && getProjects();
   }, [preload, getProjects]);
 
-  return !projects ? null : (
+  return !projects ? (
+    <div>Loading...</div>
+  ) : (
     <motion.div
       initial="initial"
       animate="in"
