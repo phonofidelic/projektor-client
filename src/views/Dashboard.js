@@ -63,18 +63,23 @@ export function Dashboard(props) {
     !preload && getProjects();
   }, [preload, getAllWork, getProjects, week]);
 
-  const workWithProjectColor = work.map(workItem => {
+  const workWithProjectInfo = work.map(workItem => {
     if (!(projects.length & work.length)) return;
     const project = projects.find(
       project => project._id === workItem.projectId
     );
-    workItem.projectColor = project.color;
-    return workItem;
+    // workItem.projectColor = project.color;
+    // return workItem;
+    return {
+      ...workItem,
+      projectColor: project.color,
+      projectTitle: project.title
+    };
   });
 
-  console.log('====================================');
-  console.log('workWithProjectColor.length:', workWithProjectColor.length);
-  console.log('====================================');
+  // console.log('====================================');
+  // console.log('workWithProjectColor.length:', workWithProjectInfo.length);
+  // console.log('====================================');
 
   return !(projects.length & work.length) ? (
     <div>Loading...</div>
@@ -93,7 +98,7 @@ export function Dashboard(props) {
       </Helmet>
       <Header title={strings.ttl__dashboard} />
       <WeekOverview
-        work={workWithProjectColor}
+        work={workWithProjectInfo}
         handleSelectPrevWeek={handleSelectPrevWeek}
         handleSelectNextWeek={handleSelectNextWeek}
         handleWeekNavigation={handleWeekNavigation}

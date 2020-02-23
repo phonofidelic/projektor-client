@@ -1,7 +1,11 @@
 import React, { useContext } from 'react';
 import { StringContext } from 'strings';
 import styled from 'styled-components';
-
+import moment from 'moment';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import {
   Scheduler,
   Toolbar,
@@ -26,6 +30,44 @@ const Appointment = ({ children, data, ...restProps }) => {
   );
 };
 
+const AppointmentHeader = ({ appointmentData }) => {
+  return (
+    <CardHeader
+      style={{ backgroundColor: appointmentData.projectColor }}
+    ></CardHeader>
+  );
+};
+
+const TooltipContent = ({ appointmentData }) => {
+  console.log('====================================');
+  console.log('TooltipContent, appointmentData:', appointmentData);
+  console.log('====================================');
+  const currentLocaleData = moment.localeData();
+
+  return (
+    <Card>
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="h2" noWrap>
+          {appointmentData.projectTitle}
+        </Typography>
+        <Typography>
+          {moment(appointmentData.startDate).format(
+            currentLocaleData.longDateFormat('L')
+          )}
+        </Typography>
+        <Typography
+          style={{ wrap: 'pre-wrap' }}
+          variant="body2"
+          color="textSecondary"
+          component="p"
+        >
+          {appointmentData.notes}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
+};
+
 export default function WeekSchedule(props) {
   const { work, handleWeekNavigation } = props;
   const strings = useContext(StringContext);
@@ -38,7 +80,9 @@ export default function WeekSchedule(props) {
     return {
       startDate: workItem.start,
       endDate: workItem.end,
-      title: workItem.notes,
+      title: workItem.projectTitle,
+      projectTitle: workItem.projectTitle,
+      notes: workItem.notes,
       projectColor: workItem.projectColor
     };
   });
@@ -51,7 +95,10 @@ export default function WeekSchedule(props) {
       <DateNavigator />
       <WeekView />
       <Appointments appointmentComponent={Appointment} />
-      <AppointmentTooltip />
+      <AppointmentTooltip
+        headerComponent={AppointmentHeader}
+        contentComponent={TooltipContent}
+      />
     </Scheduler>
   );
 }
