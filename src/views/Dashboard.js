@@ -12,7 +12,14 @@ import Header from 'components/Header';
 import WeekOverview from 'components/WeekOverview';
 
 export function Dashboard(props) {
-  const { preload, work, getAllWorkByInterval, getAllWork } = props;
+  const {
+    preload,
+    work,
+    projects,
+    getAllWorkByInterval,
+    getAllWork,
+    getProjects
+  } = props;
   const strings = useContext(StringContext);
   const [week, setWeek] = useState({
     start: 0,
@@ -51,21 +58,32 @@ export function Dashboard(props) {
     direction === 'forward' ? handleSelectNextWeek() : handleSelectPrevWeek();
   };
 
-  // console.log('====================================');
-  // console.log('start:', moment(moment().day(week.start)).format());
-  // console.log('end:', moment(moment().day(week.end)).format());
-  // console.log('====================================');
-
   useEffect(() => {
-    !preload &&
-      // getAllWorkByInterval(
-      //   moment(moment().day(week.start)).format(),
-      //   moment(moment().day(week.end)).format()
-      // );
-      getAllWork();
-  }, [preload, getAllWork, week]);
+    !preload && getAllWork();
+    !preload && getProjects();
+  }, [preload, getAllWork, getProjects, week]);
 
-  return (
+  const workWithProjectInfo = work.map(workItem => {
+    if (!(projects.length & work.length)) return;
+    const project = projects.find(
+      project => project._id === workItem.projectId
+    );
+    // workItem.projectColor = project.color;
+    // return workItem;
+    return {
+      ...workItem,
+      projectColor: project.color,
+      projectTitle: project.title
+    };
+  });
+
+  // console.log('====================================');
+  // console.log('workWithProjectColor.length:', workWithProjectInfo.length);
+  // console.log('====================================');
+
+  return !(projects.length & work.length) ? (
+    <div>Loading...</div>
+  ) : (
     <motion.div
       initial="initial"
       animate="in"
@@ -80,7 +98,7 @@ export function Dashboard(props) {
       </Helmet>
       <Header title={strings.ttl__dashboard} />
       <WeekOverview
-        work={work}
+        work={workWithProjectInfo}
         handleSelectPrevWeek={handleSelectPrevWeek}
         handleSelectNextWeek={handleSelectNextWeek}
         handleWeekNavigation={handleWeekNavigation}
@@ -91,7 +109,8 @@ export function Dashboard(props) {
 
 const mapStateToProps = state => {
   return {
-    work: state.dashboard.work
+    work: state.dashboard.work,
+    projects: state.projects.projectList
   };
 };
 
