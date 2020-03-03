@@ -294,14 +294,22 @@ export default function(state = defaultState, action) {
       };
 
     case UPDATE_WORK_SUCCESS:
+      const updatedWork = state.selectedProject.work.map(workItem =>
+        workItem._id === action.payload._id ? action.payload : workItem
+      );
+
+      const updatedTimeUsed = updatedWork.reduce(
+        (acc, cur) => acc + cur.duration,
+        0
+      );
+
       return {
         ...state,
         loading: false,
         selectedProject: {
           ...state.selectedProject,
-          work: state.selectedProject.work.map(workItem =>
-            workItem._id === action.payload._id ? action.payload : workItem
-          )
+          timeUsed: updatedTimeUsed,
+          work: updatedWork
         }
       };
 

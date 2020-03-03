@@ -5,6 +5,8 @@ import moment from 'moment';
 import ProjectInfo from 'components/ProjectDetail/ProjectInfo';
 import WorkSection from 'components/ProjectDetail/WorkSection';
 import ActiveWork from 'components/ProjectDetail/ActiveWork';
+import WorkModal from 'components/ProjectDetail/WorkModal';
+import WorkForm from 'components/WorkForm';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -71,12 +73,12 @@ export default function ProjectDetail(props) {
     setActiveNote(note);
   };
 
-  const handleOpenWork = work => {
+  const handleOpenWorkNote = work => {
     // if (work) setWorkItem(work);
     setNoteOpen(true);
   };
 
-  const handleCloseWork = () => {
+  const handleCloseWorkNote = () => {
     setNoteOpen(false);
     // setWorkItem(null);
   };
@@ -114,6 +116,14 @@ export default function ProjectDetail(props) {
 
   return !project ? null : (
     <Container>
+      {/* <WorkModal
+        open={noteOpen}
+        // workItem={workItem}
+        handleClose={handleCloseWork}
+        updateWork={updateWork}
+      >
+        <WorkForm />
+      </WorkModal> */}
       <InfoContainer container>
         <Description item xs={12} sm={6} lg={8}>
           {project.description === 'No description provided' ||
@@ -148,8 +158,8 @@ export default function ProjectDetail(props) {
         handlePauseWork={handlePauseWork}
         handleResumeWork={handleResumeWork}
         handleSetActiveNote={handleSetActiveNote}
-        handleOpenWork={handleOpenWork}
-        handleCloseWork={handleCloseWork}
+        handleOpenWorkNote={handleOpenWorkNote}
+        handleCloseWorkNote={handleCloseWorkNote}
         handleCancelWork={handleCancelWork}
         handleSubmitWork={handleSubmitWork}
       />

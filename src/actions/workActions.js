@@ -18,6 +18,8 @@ import {
 import { api, handleError, handleResponse } from 'actions/utils';
 
 export const createWork = work => {
+  console.log('createWork, work:', work);
+
   return async dispatch => {
     dispatch({
       type: CREATE_WORK
