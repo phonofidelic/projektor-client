@@ -5,7 +5,9 @@ import styled from 'styled-components';
 import WorkTable from 'components/ProjectDetail/WorkTable';
 import WorkModal from 'components/ProjectDetail/WorkModal';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
+import WorkForm from 'components/WorkForm';
 
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 const Container = styled.div`
@@ -18,33 +20,47 @@ const WorkContainer = styled.div`
 `;
 
 export default function WorkSection(props) {
-  const { project, updateWork, removeWork } = props;
+  const { project, createWork, updateWork, removeWork } = props;
   const strings = useContext(StringContext);
-  const [noteOpen, setNoteOpen] = useState(false);
   const [workItem, setWorkItem] = useState(null);
+  const [workFormOpen, setWorkFormOpen] = useState(false);
 
-  const handleOpenWork = work => {
-    if (work) setWorkItem(work);
-    setNoteOpen(true);
+  const handleOpenWork = workItem => {
+    workItem ? setWorkItem(workItem) : setWorkItem(null);
+
+    setWorkFormOpen(true);
   };
 
   const handleCloseWork = () => {
-    setNoteOpen(false);
     setWorkItem(null);
+    setWorkFormOpen(false);
   };
 
   return (
     <Container>
       <WorkModal
-        open={noteOpen}
-        workItem={workItem}
+        open={workFormOpen}
+        // workItem={workItem}
         handleClose={handleCloseWork}
         updateWork={updateWork}
-      />
-      <div style={{ margin: 18, display: 'flex' }}>
+      >
+        <WorkForm
+          project={project}
+          workItem={workItem}
+          handleClose={handleCloseWork}
+          createWork={createWork}
+          updateWork={updateWork}
+        />
+      </WorkModal>
+      <div
+        style={{ margin: 18, display: 'flex', justifyContent: 'space-between' }}
+      >
         <Typography variant="h5" align="left">
           {strings.ttl__work}
         </Typography>
+        <Button variant="outlined" onClick={() => handleOpenWork(false)}>
+          Add new Task
+        </Button>
       </div>
       <WorkContainer>
         {project.work.length > 0 ? (

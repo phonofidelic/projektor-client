@@ -65,6 +65,7 @@ export const getProject = projectId => {
     let response;
     try {
       response = await api().get(`/projects/${projectId}`);
+      console.log('getProject, response:', response);
 
       handleResponse(response, dispatch, GET_PROJECT_SUCCESS);
     } catch (err) {

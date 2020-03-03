@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import moment from 'moment';
 import { StringContext } from 'strings';
 import styled from 'styled-components';
@@ -6,6 +6,7 @@ import { Prompt } from 'react-router';
 
 import Timer from 'components/Timer';
 import WorkModal from 'components/ProjectDetail/WorkModal';
+import NoteForm from 'components/NoteForm';
 
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
@@ -32,20 +33,36 @@ export default function ActiveWork(props) {
   const {
     workStarted,
     workActive,
-    activeNote,
-    noteOpen,
+    // activeNote,
+    // noteOpen,
     time,
     setTime,
     handleStartWork,
     handlePauseWork,
     handleResumeWork,
-    handleSetActiveNote,
-    handleOpenWork,
+    // handleSetActiveNote,
+    // handleOpenWorkNote,
     handleCloseWork,
     handleCancelWork,
     handleSubmitWork
   } = props;
   const strings = useContext(StringContext);
+
+  const [activeNote, setActiveNote] = useState(null);
+  const [noteOpen, setNoteOpen] = useState(false);
+
+  const openWorkNote = () => {
+    setNoteOpen(true);
+  };
+
+  const closeWorkNote = () => {
+    setNoteOpen(false);
+  };
+
+  const handleSetActiveNote = note => {
+    setActiveNote(note);
+    setNoteOpen(false);
+  };
 
   /**
    * Warn user before reloading page if work is started
@@ -63,10 +80,16 @@ export default function ActiveWork(props) {
     <Container>
       <WorkModal
         open={noteOpen}
-        activeNote={activeNote}
-        handleClose={handleCloseWork}
-        handleSetActiveNote={handleSetActiveNote}
-      />
+        // activeNote={activeNote}
+        handleClose={closeWorkNote}
+        // handleSetActiveNote={handleSetActiveNote}
+      >
+        <NoteForm
+          activeNote={activeNote}
+          handleClose={closeWorkNote}
+          handleSetActiveNote={handleSetActiveNote}
+        />
+      </WorkModal>
       <Prompt when={workStarted} message="Are you sure you want to leave?" />
       <div>
         {/**
@@ -112,7 +135,7 @@ export default function ActiveWork(props) {
             placement="top-start"
             enterDelay={400}
           >
-            <IconButton onClick={() => handleOpenWork()}>
+            <IconButton onClick={openWorkNote}>
               <PostAddIcon
                 style={{ color: activeNote ? activeColor[SHADE] : 'inherit' }}
               />
