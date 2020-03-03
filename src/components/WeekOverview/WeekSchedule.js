@@ -81,9 +81,11 @@ export default function WeekSchedule(props) {
       startDate: workItem.start,
       endDate: workItem.end,
       title: workItem.projectTitle,
-      projectTitle: workItem.projectTitle,
+      // projectTitle: workItem.projectTitle,
+      projectTitle: workItem.project.title,
       notes: workItem.notes,
-      projectColor: workItem.projectColor
+      // projectColor: workItem.projectColor
+      projectColor: workItem.project.color
     };
   });
 

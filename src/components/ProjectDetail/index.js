@@ -101,6 +101,7 @@ export default function ProjectDetail(props) {
 
     createWork({
       projectId: project._id,
+      project: project._id,
       date: startTime,
       start: startTime,
       end: startTime + time,

@@ -49,6 +49,7 @@ export function WorkForm(props) {
     <Formik
       initialValues={{
         projectId: project._id,
+        project: project._id,
         date: workItem ? workItem.date : Date.now(),
         start: workItem ? workItem.start : Date.now(),
         end: workItem ? workItem.end : Date.now(),
