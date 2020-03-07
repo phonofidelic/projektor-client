@@ -39,10 +39,12 @@ const AppointmentHeader = ({ appointmentData }) => {
 };
 
 const TooltipContent = ({ appointmentData }) => {
-  console.log('====================================');
-  console.log('TooltipContent, appointmentData:', appointmentData);
-  console.log('====================================');
+  const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
+
+  console.log('====================================');
+  console.log('appointmentData:', appointmentData);
+  console.log('====================================');
 
   return (
     <Card>
@@ -50,19 +52,48 @@ const TooltipContent = ({ appointmentData }) => {
         <Typography gutterBottom variant="h5" component="h2" noWrap>
           {appointmentData.projectTitle}
         </Typography>
-        <Typography>
+        <div>
+          <Typography variant="overline">
+            {strings.lbl__work_tbl_start_date}:
+          </Typography>{' '}
           {moment(appointmentData.startDate).format(
             currentLocaleData.longDateFormat('L')
           )}
-        </Typography>
-        <Typography
-          style={{ wrap: 'pre-wrap' }}
-          variant="body2"
-          color="textSecondary"
-          component="p"
-        >
-          {appointmentData.notes}
-        </Typography>
+        </div>
+        <div>
+          <Typography variant="overline">
+            {strings.lbl__work_tbl_start_time}:
+          </Typography>{' '}
+          {moment(appointmentData.start).format(
+            currentLocaleData.longDateFormat('LT')
+          )}
+        </div>
+        <div>
+          <Typography variant="overline">
+            {strings.lbl__work_tbl_end_time}:
+          </Typography>{' '}
+          {moment(appointmentData.end).format(
+            currentLocaleData.longDateFormat('LT')
+          )}
+        </div>
+        <div>
+          <Typography variant="overline">
+            {strings.lbl__work_tbl_duration}:
+          </Typography>{' '}
+          {moment
+            .duration(appointmentData.duration, 'ms')
+            .format('hh:mm:ss', { trim: false })}
+        </div>
+        <div>
+          <Typography
+            style={{ wrap: 'pre-wrap' }}
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
+            {appointmentData.notes}
+          </Typography>
+        </div>
       </CardContent>
     </Card>
   );
@@ -80,11 +111,9 @@ export default function WeekSchedule(props) {
     return {
       startDate: workItem.start,
       endDate: workItem.end,
-      title: workItem.projectTitle,
-      // projectTitle: workItem.projectTitle,
+      duration: workItem.duration,
       projectTitle: workItem.project.title,
       notes: workItem.notes,
-      // projectColor: workItem.projectColor
       projectColor: workItem.project.color
     };
   });
