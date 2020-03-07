@@ -16,7 +16,7 @@
     "@devexpress/dx-react-scheduler-material-ui": "^2.3.2",
     "@material-ui/core": "^4.7.0",
     "@material-ui/icons": "^4.5.1",
-    "@material-ui/pickers": "^3.2.8",
+    "@material-ui/pickers": "^3.2.9",
     "axios": "^0.19.0",
     "connected-react-router": "^6.6.1",
     "csvtojson": "^2.0.10",
