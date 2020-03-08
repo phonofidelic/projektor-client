@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import { StringContext } from 'strings';
 import { KeyboardDateTimePicker } from '@material-ui/pickers';
 
+/**
+ * https://stackoverflow.com/a/27648032
+ */
 const isAMPM = () => {
   var date = new Date(Date.UTC(2012, 11, 12, 3, 0, 0));
   var dateString = date.toLocaleTimeString();

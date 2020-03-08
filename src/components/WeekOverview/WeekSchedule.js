@@ -64,7 +64,7 @@ const TooltipContent = ({ appointmentData }) => {
           <Typography variant="overline">
             {strings.lbl__work_tbl_start_time}:
           </Typography>{' '}
-          {moment(appointmentData.start).format(
+          {moment(appointmentData.startDate).format(
             currentLocaleData.longDateFormat('LT')
           )}
         </div>
@@ -72,7 +72,7 @@ const TooltipContent = ({ appointmentData }) => {
           <Typography variant="overline">
             {strings.lbl__work_tbl_end_time}:
           </Typography>{' '}
-          {moment(appointmentData.end).format(
+          {moment(appointmentData.endDate).format(
             currentLocaleData.longDateFormat('LT')
           )}
         </div>
