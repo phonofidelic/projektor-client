@@ -8,14 +8,15 @@ import { KeyboardDateTimePicker } from '@material-ui/pickers';
 const isAMPM = () => {
   var date = new Date(Date.UTC(2012, 11, 12, 3, 0, 0));
   var dateString = date.toLocaleTimeString();
+  console.log('====================================');
+  console.log('dateString:', dateString);
+  console.log('date.toString():', date.toString());
+  console.log('====================================');
 
-  //apparently toLocaleTimeString() has a bug in Chrome. toString() however returns 12/24 hour formats. If one of two contains AM/PM execute 12 hour coding.
-  if (dateString.match(/am|pm/i) || date.toString().match(/am|pm/i)) {
-    //12 hour clock
+  if (dateString.match(/am|pm/i)) {
     console.log('12 hour');
     return true;
   } else {
-    //24 hour clock
     console.log('24 hour');
     return false;
   }
