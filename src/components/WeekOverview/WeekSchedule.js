@@ -44,6 +44,7 @@ const TooltipContent = ({ appointmentData }) => {
 
   console.log('====================================');
   console.log('appointmentData:', appointmentData);
+  console.log('currentLocaleData:', currentLocaleData);
   console.log('====================================');
 
   return (
