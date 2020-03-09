@@ -18,9 +18,15 @@ import {
 } from '@devexpress/dx-react-scheduler-material-ui';
 import { ViewState } from '@devexpress/dx-react-scheduler';
 
+moment.locale(navigator.language);
+
 const Appointment = ({ children, data, ...restProps }) => {
+  console.log('====================================');
+  console.log('Appointment, data:', data);
+  console.log('====================================');
   return (
     <Appointments.Appointment
+      key={'bajs'}
       {...restProps}
       data={data}
       style={{ backgroundColor: data.projectColor }}
@@ -51,7 +57,7 @@ const TooltipContent = ({ appointmentData }) => {
     <Card>
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2" noWrap>
-          {appointmentData.projectTitle}
+          {appointmentData.title}
         </Typography>
         <div>
           <Typography variant="overline">
@@ -112,8 +118,9 @@ export default function WeekSchedule(props) {
     return {
       startDate: workItem.start,
       endDate: workItem.end,
+      title: workItem.project.title,
+      id: workItem._id,
       duration: workItem.duration,
-      projectTitle: workItem.project.title,
       notes: workItem.notes,
       projectColor: workItem.project.color
     };
