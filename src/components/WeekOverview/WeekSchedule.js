@@ -21,12 +21,8 @@ import { ViewState } from '@devexpress/dx-react-scheduler';
 moment.locale(navigator.language);
 
 const Appointment = ({ children, data, ...restProps }) => {
-  console.log('====================================');
-  console.log('Appointment, data:', data);
-  console.log('====================================');
   return (
     <Appointments.Appointment
-      key={'bajs'}
       {...restProps}
       data={data}
       style={{ backgroundColor: data.projectColor }}
@@ -40,7 +36,18 @@ const AppointmentHeader = ({ appointmentData }) => {
   return (
     <CardHeader
       style={{ backgroundColor: appointmentData.projectColor }}
-    ></CardHeader>
+      title={
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="h2"
+          noWrap
+          style={{ color: '#fff' }}
+        >
+          {appointmentData.title}
+        </Typography>
+      }
+    />
   );
 };
 
@@ -48,17 +55,12 @@ const TooltipContent = ({ appointmentData }) => {
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
 
-  console.log('====================================');
-  console.log('appointmentData:', appointmentData);
-  console.log('currentLocaleData:', currentLocaleData);
-  console.log('====================================');
-
   return (
     <Card>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="h2" noWrap>
+        {/* <Typography gutterBottom variant="h5" component="h2" noWrap>
           {appointmentData.title}
-        </Typography>
+        </Typography> */}
         <div>
           <Typography variant="overline">
             {strings.lbl__work_tbl_start_date}:
@@ -110,10 +112,6 @@ export default function WeekSchedule(props) {
   const { work, handleWeekNavigation } = props;
   const strings = useContext(StringContext);
 
-  console.log('====================================');
-  console.log('WeekSchedule, work:', work);
-  console.log('====================================');
-
   const schedulerData = work.map(workItem => {
     return {
       startDate: workItem.start,
@@ -129,10 +127,10 @@ export default function WeekSchedule(props) {
   return (
     <Scheduler locale={navigator.language} data={schedulerData}>
       <ViewState />
+      <WeekView />
       <Toolbar />
       <TodayButton messages={{ today: strings.btn__today }} />
       <DateNavigator />
-      <WeekView />
       <Appointments appointmentComponent={Appointment} />
       <AppointmentTooltip
         headerComponent={AppointmentHeader}
