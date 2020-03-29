@@ -15,6 +15,8 @@ import Typography from '@material-ui/core/Typography';
 import Grey from '@material-ui/core/colors/grey';
 const Gray = Grey;
 
+const CARD_RADIUS = 2;
+
 const Container = styled(Grid)`
   padding: 10px;
   text-decoration: none;
@@ -23,6 +25,7 @@ const Container = styled(Grid)`
 const CardContainer = styled(Card)`
   position: relative;
   height: ${({ display }) => (display === EXPANDED ? 372 : 72)}px;
+  border-radius: ${CARD_RADIUS}px;
 
   &.MuiPaper-root {
     background-color: ${Gray[50]};
@@ -38,7 +41,7 @@ const CardHeaderContainer = styled.div`
   display: flex;
   background-color: ${({ projectColor, hovered }) =>
     (projectColor === Gray[50]) & hovered ? Gray[300] : projectColor};
-  border-radius: 0 4px 4px 4px;
+  border-radius: 0 ${CARD_RADIUS}px ${CARD_RADIUS}px ${CARD_RADIUS}px;
   box-shadow: 0 0 10px ${Gray[300]};
   transition: background-color 0.6s ease-in-out;
 `;
@@ -48,7 +51,7 @@ const CardHeader = styled.div`
   flex: 1;
   color: #000;
   background-color: ${({ hovered }) => (hovered ? Gray[300] : Gray[50])};
-  border-radius: 0 4px 4px 4px;
+  border-radius: 0 ${CARD_RADIUS}px ${CARD_RADIUS}px ${CARD_RADIUS}px;
   transition: background-color 0.6s;
   overflow: hidden;
   transition: background-color 0.6s ease-in-out;
@@ -104,6 +107,7 @@ export default function ProjectGridItem(props) {
   return (
     <Container item xs={12} sm={6} md={4}>
       <CardContainer
+        square={true}
         display={projectsDisplayMode}
         component={motion.div}
         exit={{ opacity: 0, x: -500 }}
