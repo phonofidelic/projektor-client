@@ -52,20 +52,26 @@ const Navlist = styled.ul`
 const NavlistItem = styled(NavLink)`
   display: flex;
   padding: 12px;
-  background-color: #fff;
-  transition: background-color 0.3s;
+  // background-color: #fff;
+  // transition: background-color 0.3s;
+  transition: background 0.3s;
   text-decoration: none;
+  color: #212121;
 
   :link,
   :visited,
   :active {
-    color: inherit;
-    background-color: ${props => (props.selected ? props.color : '#fff')};
+    // color: inherit;
+    // background-color: ${props => (props.selected ? props.color : '#fff')};
+    background: linear-gradient(to right, #fff 97%, ${props =>
+      props.selected ? props.color : '#fff'} 10%)
   }
 
   :hover {
-    background-color: ${props => props.color};
-    color: ${props => props.contrast};
+    // background-color: ${props => props.color};
+    background: linear-gradient(to right, #fff 97%, ${props =>
+      props.selected ? props.color : '#fff'} 10%)
+    // color: ${props => props.contrast};
   }
 `;
 
@@ -82,16 +88,16 @@ export function Nav(props) {
       title: strings.ttl__dashboard,
       icon: <DashboardIcon />,
       link: '/dashboard',
-      color: dashboardColor[SHADE],
-      contrast: '#fff'
+      color: dashboardColor[SHADE]
+      // contrast: '#fff'
     },
     {
       title: strings.ttl__projects,
       icon: <AppsIcon />,
       // link: '/projects/active',
       link: '/projects',
-      color: activeColor[SHADE],
-      contrast: '#fff'
+      color: activeColor[SHADE]
+      // contrast: '#fff'
     },
     // {
     //   title: strings.ttl__archived,
@@ -111,8 +117,8 @@ export function Nav(props) {
       title: strings.ttl__settings,
       icon: <SettingsIcon />,
       link: '/settings',
-      color: settingsColor[SHADE],
-      contrast: '#fff'
+      color: settingsColor[SHADE]
+      // contrast: '#fff'
     }
   ];
 

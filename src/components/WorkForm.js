@@ -13,6 +13,8 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
+moment.locale(navigator.language);
+
 const parseDateString = string => {
   if (typeof string === 'number') return string;
   return Date.parse(string);

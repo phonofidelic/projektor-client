@@ -18,6 +18,8 @@ import {
 } from '@devexpress/dx-react-scheduler-material-ui';
 import { ViewState } from '@devexpress/dx-react-scheduler';
 
+moment.locale(navigator.language);
+
 const Appointment = ({ children, data, ...restProps }) => {
   return (
     <Appointments.Appointment
@@ -34,7 +36,18 @@ const AppointmentHeader = ({ appointmentData }) => {
   return (
     <CardHeader
       style={{ backgroundColor: appointmentData.projectColor }}
-    ></CardHeader>
+      title={
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="h2"
+          noWrap
+          style={{ color: '#fff' }}
+        >
+          {appointmentData.title}
+        </Typography>
+      }
+    />
   );
 };
 
@@ -42,16 +55,12 @@ const TooltipContent = ({ appointmentData }) => {
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
 
-  console.log('====================================');
-  console.log('appointmentData:', appointmentData);
-  console.log('====================================');
-
   return (
     <Card>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="h2" noWrap>
-          {appointmentData.projectTitle}
-        </Typography>
+        {/* <Typography gutterBottom variant="h5" component="h2" noWrap>
+          {appointmentData.title}
+        </Typography> */}
         <div>
           <Typography variant="overline">
             {strings.lbl__work_tbl_start_date}:
@@ -64,7 +73,7 @@ const TooltipContent = ({ appointmentData }) => {
           <Typography variant="overline">
             {strings.lbl__work_tbl_start_time}:
           </Typography>{' '}
-          {moment(appointmentData.start).format(
+          {moment(appointmentData.startDate).format(
             currentLocaleData.longDateFormat('LT')
           )}
         </div>
@@ -72,7 +81,7 @@ const TooltipContent = ({ appointmentData }) => {
           <Typography variant="overline">
             {strings.lbl__work_tbl_end_time}:
           </Typography>{' '}
-          {moment(appointmentData.end).format(
+          {moment(appointmentData.endDate).format(
             currentLocaleData.longDateFormat('LT')
           )}
         </div>
@@ -103,16 +112,13 @@ export default function WeekSchedule(props) {
   const { work, handleWeekNavigation } = props;
   const strings = useContext(StringContext);
 
-  console.log('====================================');
-  console.log('WeekSchedule, work:', work);
-  console.log('====================================');
-
   const schedulerData = work.map(workItem => {
     return {
       startDate: workItem.start,
       endDate: workItem.end,
+      title: workItem.project.title,
+      id: workItem._id,
       duration: workItem.duration,
-      projectTitle: workItem.project.title,
       notes: workItem.notes,
       projectColor: workItem.project.color
     };
@@ -121,10 +127,10 @@ export default function WeekSchedule(props) {
   return (
     <Scheduler locale={navigator.language} data={schedulerData}>
       <ViewState />
+      <WeekView />
       <Toolbar />
       <TodayButton messages={{ today: strings.btn__today }} />
       <DateNavigator />
-      <WeekView />
       <Appointments appointmentComponent={Appointment} />
       <AppointmentTooltip
         headerComponent={AppointmentHeader}
