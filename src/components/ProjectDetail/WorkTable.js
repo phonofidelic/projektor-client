@@ -26,7 +26,7 @@ function ContextMenu(props) {
     workItem,
     handleCloseContextMenu,
     handleOpenWork,
-    removeWork
+    removeWork,
   } = props;
   const strings = useContext(StringContext);
 
@@ -51,7 +51,7 @@ function ContextMenu(props) {
       anchorEl={document.body}
       anchorOrigin={{
         vertical: contextPos.y + window.scrollY || 0,
-        horizontal: contextPos.x || 0
+        horizontal: contextPos.x || 0,
       }}
       getContentAnchorEl={null}
       onClose={handleCloseContextMenu}
@@ -85,7 +85,7 @@ export default function WorkTable(props) {
   const [contextOpen, setContextMenuOpen] = useState(false);
   const [contextPos, setContextPos] = useState({});
 
-  const handleSelectWork = work => {
+  const handleSelectWork = (work) => {
     setSelectedWork(work);
   };
 
@@ -123,7 +123,7 @@ export default function WorkTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {project.work.map(workItem => (
+          {project.work.map((workItem) => (
             // <Tooltip
             //   key={workItem._id}
             //   title="Right-click for options"
@@ -135,12 +135,12 @@ export default function WorkTable(props) {
               hover
               selected={workItem._id === selectedWork._id}
               onClick={() => handleSelectWork(workItem)}
-              onContextMenu={e => handleOpenContextMenu(e, workItem)}
+              onContextMenu={(e) => handleOpenContextMenu(e, workItem)}
               onDoubleClick={() => handleOpenWork(workItem)}
             >
               <TableCell>
                 <Typography>
-                  {moment(workItem.date).format(
+                  {moment(workItem.start).format(
                     currentLocaleData.longDateFormat('L')
                   )}
                 </Typography>
