@@ -11,6 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import Typography from '@material-ui/core/Typography';
 
 export default function ProjectTable(props) {
   const { projects } = props;
@@ -96,6 +97,11 @@ export default function ProjectTable(props) {
                   />
                 </TableCell>
               ))}
+              {/* <TableCell
+                style={{
+                  width: '10px',
+                }}
+              ></TableCell> */}
             </TableRow>
           ))}
         </TableHead>
@@ -105,7 +111,11 @@ export default function ProjectTable(props) {
             return (
               <TableRow
                 {...row.getRowProps()}
-                style={{ cursor: 'pointer' }}
+                style={{
+                  cursor: 'pointer',
+                  background: `linear-gradient(to right, #fff 99.5%, ${row.original.color} 10%)`,
+                  // background: `linear-gradient(0.12turn, #fff 98%, ${row.original.color} 10%)`,
+                }}
                 key={row.original._id}
                 hover
                 selected={row.original._id === selectedProject._id}
@@ -116,9 +126,16 @@ export default function ProjectTable(props) {
               >
                 {row.cells.map((cell) => (
                   <TableCell {...cell.getCellProps()}>
-                    {cell.render('Cell')}
+                    <Typography noWrap>{cell.render('Cell')}</Typography>
                   </TableCell>
                 ))}
+                {/* <TableCell
+                  style={{
+                    width: '2px',
+                    backgroundColor: row.original.color,
+                  }}
+                  size="small"
+                ></TableCell> */}
               </TableRow>
             );
           })}

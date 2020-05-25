@@ -170,7 +170,7 @@ export default function WorkTable(props) {
         handleCloseContextMenu={handleCloseContextMenu}
         removeWork={removeWork}
       />
-      <Table size="small" {...getTableProps()}>
+      <Table size="small" {...getTableProps()} stickyHeader>
         <TableHead>
           {headerGroups.map((headerGroup) => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
