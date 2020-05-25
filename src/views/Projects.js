@@ -71,9 +71,12 @@ export function Projects(props) {
 
   const strings = useContext(StringContext);
 
-  const [projectsDisplayMode, setProjectsDisplayMode] = useState(COMPACT);
+  const [projectsDisplayMode, setProjectsDisplayMode] = useState(
+    localStorage.getItem('projectsDisplayMode') || COMPACT
+  );
 
   const handleSelectDisplayMode = (displayMode) => {
+    localStorage.setItem('projectsDisplayMode', displayMode);
     setProjectsDisplayMode(displayMode);
   };
 
