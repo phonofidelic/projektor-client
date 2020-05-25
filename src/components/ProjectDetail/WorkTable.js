@@ -182,17 +182,7 @@ export default function WorkTable(props) {
                   <TableSortLabel
                     active={column.isSorted}
                     direction={column.isSortedDesc ? 'desc' : 'asc'}
-                  >
-                    {/* {column.isSorted ? (
-                      column.isSortedDesc ? (
-                        <ExpandMoreIcon style={{ lineHeight: '16px' }} />
-                      ) : (
-                        <ExpandLessIcon style={{ lineHeight: '16px' }} />
-                      )
-                    ) : (
-                      ''
-                    )} */}
-                  </TableSortLabel>
+                  />
                 </TableCell>
               ))}
             </TableRow>

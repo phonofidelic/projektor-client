@@ -27,18 +27,18 @@ export default function ProjectsDisplayControls(props) {
     {
       type: COMPACT,
       title: strings.hnt__compact_view,
-      icon: <CompactIcon />
+      icon: <CompactIcon />,
     },
     {
       type: EXPANDED,
       title: strings.hnt__expanded_view,
-      icon: <ExpandedIcon />
-    }
-    // {
-    //   type: TABLE,
-    //   title: strings.hnt__table_view,
-    //   icon: <TableIcon />
-    // }
+      icon: <ExpandedIcon />,
+    },
+    {
+      type: TABLE,
+      title: strings.hnt__table_view,
+      icon: <TableIcon />,
+    },
   ];
 
   return (
@@ -55,7 +55,7 @@ export default function ProjectsDisplayControls(props) {
                 cursor:
                   projectsDisplayMode === displayMode.type
                     ? 'default'
-                    : 'pointer'
+                    : 'pointer',
               }}
               // disabled={projectsDisplayMode === displayMode.type}
               onClick={() => selectDisplayMode(displayMode.type)}
