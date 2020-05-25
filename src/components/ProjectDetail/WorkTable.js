@@ -178,11 +178,13 @@ export default function WorkTable(props) {
                 <TableCell
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
-                  {column.render('Header')}
-                  <TableSortLabel
-                    active={column.isSorted}
-                    direction={column.isSortedDesc ? 'desc' : 'asc'}
-                  />
+                  <div style={{ display: 'flex' }}>
+                    {column.render('Header')}
+                    <TableSortLabel
+                      active={column.isSorted}
+                      direction={column.isSortedDesc ? 'desc' : 'asc'}
+                    />
+                  </div>
                 </TableCell>
               ))}
             </TableRow>
@@ -204,7 +206,7 @@ export default function WorkTable(props) {
               >
                 {row.cells.map((cell) => (
                   <TableCell {...cell.getCellProps()}>
-                    {cell.render('Cell')}
+                    <Typography noWrap>{cell.render('Cell')}</Typography>
                   </TableCell>
                 ))}
               </TableRow>
