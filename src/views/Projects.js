@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, useMemo } from 'react';
 import { StringContext } from 'strings';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 
 import Header from 'components/Header';
 import ProjectsGrid from 'components/ProjectsGrid';
+import ProjectTable from 'components/ProjectTable';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import ProjectsStatusSelect from 'components/ProjectsStatusSelect';
 import ProjectsDisplayControls from 'components/ProjectsDisplayControls';
@@ -28,7 +29,7 @@ function HeaderActions(props) {
       style={{
         display: 'flex',
         justifyContent: 'space-between',
-        transition: 'opacity 1s'
+        transition: 'opacity 1s',
       }}
     >
       <Tooltip
@@ -39,7 +40,7 @@ function HeaderActions(props) {
       >
         <IconButton
           style={{
-            textDecoration: 'none'
+            textDecoration: 'none',
             // backgroundColor: activeColor[400],
             // color: '#fff'
           }}
@@ -63,14 +64,19 @@ export function Projects(props) {
     projectStatusView,
     pathname, // TODO: Remove
     getProjects,
-    setProjectStatusView
+    setProjectStatusView,
   } = props;
+
+  // const memoizedProjects = useMemo(() => projects, []);
 
   const strings = useContext(StringContext);
 
-  const [projectsDisplayMode, setProjectsDisplayMode] = useState(COMPACT);
+  const [projectsDisplayMode, setProjectsDisplayMode] = useState(
+    localStorage.getItem('projectsDisplayMode') || COMPACT
+  );
 
-  const handleSelectDisplayMode = displayMode => {
+  const handleSelectDisplayMode = (displayMode) => {
+    localStorage.setItem('projectsDisplayMode', displayMode);
     setProjectsDisplayMode(displayMode);
   };
 
@@ -111,7 +117,7 @@ export function Projects(props) {
       <div>
         {projects.length ? (
           projectsDisplayMode === TABLE ? (
-            <div>Table display</div>
+            <ProjectTable key="projects-table" projects={projects} />
           ) : (
             <ProjectsGrid
               key="projects-grid"
@@ -130,14 +136,14 @@ export function Projects(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     projects: state.projects.projectListByStatus,
     activeProjects: state.projects.activeProjects,
     archivedProjects: state.projects.archivedProjects,
     removedProjects: state.projects.removedProjects,
     projectStatusView: state.projects.projectStatusView,
-    pathname: state.router.location.pathname
+    pathname: state.router.location.pathname,
   };
 };
 

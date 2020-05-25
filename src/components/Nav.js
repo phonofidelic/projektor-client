@@ -36,7 +36,7 @@ const Container = styled.div`
   width: ${NAV_WIDTH}px;
   background-color: #fff;
   border-right: solid #e0e0e0 1px;
-  z-index: 1;
+  z-index: 3;
 `;
 
 const LogoContainer = styled.div`
@@ -62,16 +62,16 @@ const NavlistItem = styled(NavLink)`
   :visited,
   :active {
     // color: inherit;
-    // background-color: ${props => (props.selected ? props.color : '#fff')};
-    background: linear-gradient(to right, #fff 97%, ${props =>
+    // background-color: ${(props) => (props.selected ? props.color : '#fff')};
+    background: linear-gradient(to right, #fff 97%, ${(props) =>
       props.selected ? props.color : '#fff'} 10%)
   }
 
   :hover {
-    // background-color: ${props => props.color};
-    background: linear-gradient(to right, #fff 97%, ${props =>
+    // background-color: ${(props) => props.color};
+    background: linear-gradient(to right, #fff 97%, ${(props) =>
       props.selected ? props.color : '#fff'} 10%)
-    // color: ${props => props.contrast};
+    // color: ${(props) => props.contrast};
   }
 `;
 
@@ -88,7 +88,7 @@ export function Nav(props) {
       title: strings.ttl__dashboard,
       icon: <DashboardIcon />,
       link: '/dashboard',
-      color: dashboardColor[SHADE]
+      color: dashboardColor[SHADE],
       // contrast: '#fff'
     },
     {
@@ -96,7 +96,7 @@ export function Nav(props) {
       icon: <AppsIcon />,
       // link: '/projects/active',
       link: '/projects',
-      color: activeColor[SHADE]
+      color: activeColor[SHADE],
       // contrast: '#fff'
     },
     // {
@@ -117,9 +117,9 @@ export function Nav(props) {
       title: strings.ttl__settings,
       icon: <SettingsIcon />,
       link: '/settings',
-      color: settingsColor[SHADE]
+      color: settingsColor[SHADE],
       // contrast: '#fff'
-    }
+    },
   ];
 
   return pathname === '/' ||
@@ -151,9 +151,9 @@ export function Nav(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    pathname: state.router.location.pathname
+    pathname: state.router.location.pathname,
   };
 };
 
