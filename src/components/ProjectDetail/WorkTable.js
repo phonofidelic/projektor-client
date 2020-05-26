@@ -1,7 +1,12 @@
 import React, { useContext, useState, useMemo } from 'react';
 import { StringContext } from 'strings';
 import moment from 'moment';
-import { useTable, useSortBy } from 'react-table';
+import {
+  useTable,
+  useSortBy,
+  useBlockLayout,
+  useResizeColumns,
+} from 'react-table';
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -105,7 +110,7 @@ export default function WorkTable(props) {
       {
         Header: strings.lbl__work_tbl_start_date,
         accessor: (row) =>
-          moment(row.date).format(currentLocaleData.longDateFormat('L')),
+          moment(row.start).format(currentLocaleData.longDateFormat('L')),
       },
       {
         Header: strings.lbl__work_tbl_start_time,
@@ -202,7 +207,7 @@ export default function WorkTable(props) {
                 classes={{ selected: classes.selected }}
               >
                 {row.cells.map((cell) => (
-                  <TableCell {...cell.getCellProps()}>
+                  <TableCell style={{ maxWidth: 100 }} {...cell.getCellProps()}>
                     <Typography noWrap>{cell.render('Cell')}</Typography>
                   </TableCell>
                 ))}
