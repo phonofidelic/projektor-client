@@ -90,43 +90,31 @@ export default function WorkTable(props) {
   const [contextOpen, setContextMenuOpen] = useState(false);
   const [contextPos, setContextPos] = useState({});
 
-  const data = useMemo(
-    () =>
-      project.work.map((workItem) => ({
-        ...workItem,
-        date: moment(workItem.start).format(
-          currentLocaleData.longDateFormat('L')
-        ),
-        start: moment(workItem.start).format(
-          currentLocaleData.longDateFormat('LT')
-        ),
-        stop: workItem.end
-          ? moment(workItem.end).format(currentLocaleData.longDateFormat('LT'))
-          : '--',
-        duration: moment
-          .duration(workItem.duration, 'ms')
-          .format('hh:mm:ss', { trim: false }),
-      })),
-    []
-  );
+  const data = useMemo(() => project.work, [project.work]);
 
   const columns = useMemo(
     () => [
       {
         Header: strings.lbl__work_tbl_start_date,
-        accessor: 'date',
+        accessor: (row) =>
+          moment(row.date).format(currentLocaleData.longDateFormat('L')),
       },
       {
         Header: strings.lbl__work_tbl_start_time,
-        accessor: 'start',
+        accessor: (row) =>
+          moment(row.start).format(currentLocaleData.longDateFormat('LT')),
       },
       {
         Header: strings.lbl__work_tbl_end_time,
-        accessor: 'stop',
+        accessor: (row) =>
+          moment(row.end).format(currentLocaleData.longDateFormat('LT')),
       },
       {
         Header: strings.lbl__work_tbl_duration,
-        accessor: 'duration',
+        accessor: (row) =>
+          moment
+            .duration(row.duration, 'ms')
+            .format('hh:mm:ss', { trim: false }),
       },
       {
         Header: strings.lbl__work_tbl_notes,

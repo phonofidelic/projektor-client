@@ -19,7 +19,7 @@ export function Project(props) {
     getProject,
     createWork,
     updateWork,
-    removeWork
+    removeWork,
   } = props;
   const strings = useContext(StringContext);
 
@@ -50,9 +50,9 @@ export function Project(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    project: state.projects.selectedProject
+    project: state.projects.selectedProject,
   };
 };
 

@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 
 moment.locale(navigator.language);
 
-const parseDateString = string => {
+const parseDateString = (string) => {
   if (typeof string === 'number') return string;
   return Date.parse(string);
 };
@@ -34,7 +34,7 @@ export function WorkForm(props) {
     handleClose,
     handleSetActiveNote,
     createWork,
-    updateWork
+    updateWork,
   } = props;
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
@@ -45,7 +45,7 @@ export function WorkForm(props) {
     setErrorNode(errorNode);
   };
 
-  // console.log('WorkForm, workItem:', workItem);
+  console.log('WorkForm, workItem:', workItem);
 
   return (
     <Formik
@@ -56,9 +56,9 @@ export function WorkForm(props) {
         start: workItem ? workItem.start : Date.now(),
         end: workItem ? workItem.end : Date.now(),
         duration: workItem ? workItem.duration : 0,
-        notes: workItem ? workItem.notes : ''
+        notes: workItem ? workItem.notes : '',
       }}
-      validate={values => {
+      validate={(values) => {
         const errors = {};
         if (parseDateString(values.end) <= parseDateString(values.start)) {
           errors.end = 'Stop must be after Start';
@@ -74,12 +74,12 @@ export function WorkForm(props) {
               ...values,
               _id: workItem._id,
               duration:
-                parseDateString(values.end) - parseDateString(values.start)
+                parseDateString(values.end) - parseDateString(values.start),
             })
           : createWork({
               ...values,
               duration:
-                parseDateString(values.end) - parseDateString(values.start)
+                parseDateString(values.end) - parseDateString(values.start),
             });
         handleClose();
       }}
@@ -91,7 +91,7 @@ export function WorkForm(props) {
         handleChange,
         handleBlur,
         handleSubmit,
-        isSubmitting
+        isSubmitting,
       }) => (
         <Form>
           {errorNode && errorNode}
