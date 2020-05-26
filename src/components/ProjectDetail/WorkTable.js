@@ -20,6 +20,13 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  selected: {
+    background: 'linear-gradient(180deg, #eee 100%, #fff 20%)',
+  },
+});
 
 moment.locale(navigator.language);
 
@@ -89,6 +96,7 @@ export default function WorkTable(props) {
   const [selectedWork, setSelectedWork] = useState({ _id: null });
   const [contextOpen, setContextMenuOpen] = useState(false);
   const [contextPos, setContextPos] = useState({});
+  const classes = useStyles();
 
   const data = useMemo(() => project.work, [project.work]);
 
@@ -191,6 +199,7 @@ export default function WorkTable(props) {
                 onClick={() => handleSelectWork(row.original)}
                 onContextMenu={(e) => handleOpenContextMenu(e, row.original)}
                 onDoubleClick={() => handleOpenWork(row.original)}
+                classes={{ selected: classes.selected }}
               >
                 {row.cells.map((cell) => (
                   <TableCell {...cell.getCellProps()}>
