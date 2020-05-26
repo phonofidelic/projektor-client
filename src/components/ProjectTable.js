@@ -90,11 +90,13 @@ export default function ProjectTable(props) {
                 <TableCell
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
-                  {column.render('Header')}
-                  <TableSortLabel
-                    active={column.isSorted}
-                    direction={column.isSortedDesc ? 'desc' : 'asc'}
-                  />
+                  <div style={{ display: 'flex' }}>
+                    {column.render('Header')}
+                    <TableSortLabel
+                      active={column.isSorted}
+                      direction={column.isSortedDesc ? 'desc' : 'asc'}
+                    />
+                  </div>
                 </TableCell>
               ))}
               {/* <TableCell
@@ -113,8 +115,7 @@ export default function ProjectTable(props) {
                 {...row.getRowProps()}
                 style={{
                   cursor: 'pointer',
-                  background: `linear-gradient(to right, #fff 99.5%, ${row.original.color} 10%)`,
-                  // background: `linear-gradient(0.12turn, #fff 98%, ${row.original.color} 10%)`,
+                  background: `linear-gradient(to right, rgba(0, 0, 0, 0.0) 99.5%, ${row.original.color} 10%)`,
                 }}
                 key={row.original._id}
                 hover
@@ -125,7 +126,13 @@ export default function ProjectTable(props) {
                 // onDoubleClick={() => handleOpenWork(row.original)}
               >
                 {row.cells.map((cell) => (
-                  <TableCell {...cell.getCellProps()}>
+                  <TableCell
+                    style={{
+                      // maxWidth: 200,
+                      minWidth: 100,
+                    }}
+                    {...cell.getCellProps()}
+                  >
                     <Typography noWrap>{cell.render('Cell')}</Typography>
                   </TableCell>
                 ))}
