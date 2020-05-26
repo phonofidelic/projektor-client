@@ -20,6 +20,13 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  selected: {
+    background: 'linear-gradient(180deg, #eee 100%, #fff 20%)',
+  },
+});
 
 moment.locale(navigator.language);
 
@@ -89,44 +96,33 @@ export default function WorkTable(props) {
   const [selectedWork, setSelectedWork] = useState({ _id: null });
   const [contextOpen, setContextMenuOpen] = useState(false);
   const [contextPos, setContextPos] = useState({});
+  const classes = useStyles();
 
-  const data = useMemo(
-    () =>
-      project.work.map((workItem) => ({
-        ...workItem,
-        date: moment(workItem.start).format(
-          currentLocaleData.longDateFormat('L')
-        ),
-        start: moment(workItem.start).format(
-          currentLocaleData.longDateFormat('LT')
-        ),
-        stop: workItem.end
-          ? moment(workItem.end).format(currentLocaleData.longDateFormat('LT'))
-          : '--',
-        duration: moment
-          .duration(workItem.duration, 'ms')
-          .format('hh:mm:ss', { trim: false }),
-      })),
-    []
-  );
+  const data = useMemo(() => project.work, [project.work]);
 
   const columns = useMemo(
     () => [
       {
         Header: strings.lbl__work_tbl_start_date,
-        accessor: 'date',
+        accessor: (row) =>
+          moment(row.date).format(currentLocaleData.longDateFormat('L')),
       },
       {
         Header: strings.lbl__work_tbl_start_time,
-        accessor: 'start',
+        accessor: (row) =>
+          moment(row.start).format(currentLocaleData.longDateFormat('LT')),
       },
       {
         Header: strings.lbl__work_tbl_end_time,
-        accessor: 'stop',
+        accessor: (row) =>
+          moment(row.end).format(currentLocaleData.longDateFormat('LT')),
       },
       {
         Header: strings.lbl__work_tbl_duration,
-        accessor: 'duration',
+        accessor: (row) =>
+          moment
+            .duration(row.duration, 'ms')
+            .format('hh:mm:ss', { trim: false }),
       },
       {
         Header: strings.lbl__work_tbl_notes,
@@ -178,11 +174,13 @@ export default function WorkTable(props) {
                 <TableCell
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
-                  {column.render('Header')}
-                  <TableSortLabel
-                    active={column.isSorted}
-                    direction={column.isSortedDesc ? 'desc' : 'asc'}
-                  />
+                  <div style={{ display: 'flex' }}>
+                    {column.render('Header')}
+                    <TableSortLabel
+                      active={column.isSorted}
+                      direction={column.isSortedDesc ? 'desc' : 'asc'}
+                    />
+                  </div>
                 </TableCell>
               ))}
             </TableRow>
@@ -201,10 +199,11 @@ export default function WorkTable(props) {
                 onClick={() => handleSelectWork(row.original)}
                 onContextMenu={(e) => handleOpenContextMenu(e, row.original)}
                 onDoubleClick={() => handleOpenWork(row.original)}
+                classes={{ selected: classes.selected }}
               >
                 {row.cells.map((cell) => (
                   <TableCell {...cell.getCellProps()}>
-                    {cell.render('Cell')}
+                    <Typography noWrap>{cell.render('Cell')}</Typography>
                   </TableCell>
                 ))}
               </TableRow>
