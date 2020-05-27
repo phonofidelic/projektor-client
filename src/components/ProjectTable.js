@@ -15,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 
 export default function ProjectTable(props) {
   const { projects } = props;
-  const [selectedProject, setSelectedProject] = useState({ _id: null });
+  const [hovered, setHovered] = useState(null);
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
   const history = useHistory();
@@ -45,7 +45,7 @@ export default function ProjectTable(props) {
   const columns = useMemo(
     () => [
       {
-        Header: 'Project',
+        Header: strings.lbl__project_title,
         accessor: 'title',
       },
       {
@@ -76,10 +76,6 @@ export default function ProjectTable(props) {
     prepareRow,
   } = useTable({ columns, data }, useSortBy);
 
-  const handleSelectProject = (project) => {
-    setSelectedProject(project);
-  };
-
   return (
     <Paper style={{ margin: 18, flex: 1 }}>
       <Table {...getTableProps()} stickyHeader>
@@ -99,11 +95,6 @@ export default function ProjectTable(props) {
                   </div>
                 </TableCell>
               ))}
-              {/* <TableCell
-                style={{
-                  width: '10px',
-                }}
-              ></TableCell> */}
             </TableRow>
           ))}
         </TableHead>
@@ -115,15 +106,15 @@ export default function ProjectTable(props) {
                 {...row.getRowProps()}
                 style={{
                   cursor: 'pointer',
-                  background: `linear-gradient(to right, rgba(0, 0, 0, 0.0) 99.5%, ${row.original.color} 10%)`,
+                  background: `linear-gradient(to right, rgba(0, 0, 0, ${
+                    hovered === row.original._id ? 0.04 : 0.0
+                  }) 99.5%, ${row.original.color || '#fff'} 10%)`,
                 }}
                 key={row.original._id}
-                hover
-                selected={row.original._id === selectedProject._id}
-                // onClick={() => handleSelectProject(row.original)}
                 onClick={() => history.push('projects/' + row.original._id)}
                 // onContextMenu={(e) => handleOpenContextMenu(e, row.original)}
-                // onDoubleClick={() => handleOpenWork(row.original)}
+                onMouseEnter={() => setHovered(row.original._id)}
+                onMouseLeave={() => setHovered(null)}
               >
                 {row.cells.map((cell) => (
                   <TableCell
@@ -136,13 +127,6 @@ export default function ProjectTable(props) {
                     <Typography noWrap>{cell.render('Cell')}</Typography>
                   </TableCell>
                 ))}
-                {/* <TableCell
-                  style={{
-                    width: '2px',
-                    backgroundColor: row.original.color,
-                  }}
-                  size="small"
-                ></TableCell> */}
               </TableRow>
             );
           })}
