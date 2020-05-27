@@ -108,7 +108,7 @@ export default function ProjectTable(props) {
                   cursor: 'pointer',
                   background: `linear-gradient(to right, rgba(0, 0, 0, ${
                     hovered === row.original._id ? 0.04 : 0.0
-                  }) 99.5%, ${row.original.color} 10%)`,
+                  }) 99.5%, ${row.original.color || '#fff'} 10%)`,
                 }}
                 key={row.original._id}
                 onClick={() => history.push('projects/' + row.original._id)}
