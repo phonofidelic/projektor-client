@@ -143,7 +143,7 @@ export default function WorkTable(props) {
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({ columns, data }, useSortBy);
+  } = useTable({ columns, data, autoResetSortBy: false }, useSortBy);
 
   const handleSelectWork = (work) => {
     setSelectedWork(work);
