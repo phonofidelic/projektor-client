@@ -8,7 +8,7 @@ const Login = React.lazy(() => import('views/Login'));
 const Projects = React.lazy(() => import('views/Projects'));
 const Archived = React.lazy(() => import('views/Archived'));
 const Removed = React.lazy(() => import('views/Removed'));
-const Dashboard = React.lazy(() => import('views/Dashboard'));
+const Calendar = React.lazy(() => import('views/Calendar'));
 const Settings = React.lazy(() => import('views/Settings'));
 const CreateProject = React.lazy(() => import('views/CreateProject'));
 const EditProject = React.lazy(() => import('views/EditProject'));
@@ -18,42 +18,42 @@ export const routes = [
   {
     Component: Landing,
     path: '/',
-    exact: true
+    exact: true,
   },
   {
     Component: Login,
-    path: '/login'
+    path: '/login',
   },
   {
-    Component: Dashboard,
-    path: '/dashboard'
+    Component: Calendar,
+    path: '/calendar',
   },
   {
     Component: CreateProject,
-    path: '/projects/create'
+    path: '/projects/create',
   },
   {
     Component: EditProject,
-    path: '/projects/edit/:projectId'
+    path: '/projects/edit/:projectId',
   },
   {
     Component: Projects,
-    path: '/projects'
+    path: '/projects',
   },
   {
     Component: Project,
-    path: '/projects/:projectId'
+    path: '/projects/:projectId',
   },
   {
     Component: Settings,
-    path: '/settings'
-  }
+    path: '/settings',
+  },
 ];
 
 const Routes = withRouter(({ location }) => {
   return (
     <AnimatedSwitch location={location}>
-      {routes.map(route => {
+      {routes.map((route) => {
         return (
           <Route
             exact

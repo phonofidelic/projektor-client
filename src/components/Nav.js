@@ -9,9 +9,10 @@ import AppsIcon from '@material-ui/icons/Apps';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DeleteIcon from '@material-ui/icons/Delete';
 import BookIcon from '@material-ui/icons/Book';
+import EventIcon from '@material-ui/icons/Event';
 import Typography from '@material-ui/core/Typography';
 
-import dashboardColor from '@material-ui/core/colors/blue';
+import calendarColor from '@material-ui/core/colors/blue';
 import activeColor from '@material-ui/core/colors/green';
 import archivedColor from '@material-ui/core/colors/yellow';
 import removedColor from '@material-ui/core/colors/red';
@@ -85,10 +86,10 @@ export function Nav(props) {
 
   const navItems = [
     {
-      title: strings.ttl__dashboard,
-      icon: <DashboardIcon />,
-      link: '/dashboard',
-      color: dashboardColor[SHADE],
+      title: strings.ttl__calendar,
+      icon: <EventIcon />,
+      link: '/calendar',
+      color: calendarColor[SHADE],
       // contrast: '#fff'
     },
     {

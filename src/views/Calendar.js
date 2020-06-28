@@ -11,19 +11,19 @@ import { pageVariants, getPageVariant } from 'constants/pageVariants';
 import Header from 'components/Header';
 import WeekOverview from 'components/WeekOverview';
 
-export function Dashboard(props) {
+export function Calendar(props) {
   const {
     preload,
     work,
     projects,
     getAllWorkByInterval,
     getAllWork,
-    getProjects
+    getProjects,
   } = props;
   const strings = useContext(StringContext);
   const [week, setWeek] = useState({
     start: 0,
-    end: 6
+    end: 6,
   });
 
   // const start = moment(moment().day(0)).format();
@@ -32,7 +32,7 @@ export function Dashboard(props) {
   const handleSelectPrevWeek = () => {
     setWeek({
       start: week.start - 7,
-      end: week.end - 7
+      end: week.end - 7,
     });
 
     getAllWorkByInterval(
@@ -44,7 +44,7 @@ export function Dashboard(props) {
   const handleSelectNextWeek = () => {
     setWeek({
       start: week.start + 7,
-      end: week.end + 7
+      end: week.end + 7,
     });
 
     getAllWorkByInterval(
@@ -53,7 +53,7 @@ export function Dashboard(props) {
     );
   };
 
-  const handleWeekNavigation = direction => {
+  const handleWeekNavigation = (direction) => {
     console.log('handleWeekNavigation, direction:', direction);
     direction === 'forward' ? handleSelectNextWeek() : handleSelectPrevWeek();
   };
@@ -94,7 +94,7 @@ export function Dashboard(props) {
           {strings.ttl__app_title} - {strings.ttl__dashboard}
         </title>
       </Helmet>
-      <Header title={strings.ttl__dashboard} />
+      <Header title={strings.ttl__calendar} />
       <WeekOverview
         work={work}
         handleSelectPrevWeek={handleSelectPrevWeek}
@@ -105,11 +105,11 @@ export function Dashboard(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     work: state.dashboard.work,
-    projects: state.projects.projectList
+    projects: state.projects.projectList,
   };
 };
 
-export default connect(mapStateToProps, actions)(requireAuth(Dashboard));
+export default connect(mapStateToProps, actions)(requireAuth(Calendar));

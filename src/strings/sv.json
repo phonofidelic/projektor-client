@@ -100,5 +100,6 @@
     "ttl__verification_failure": "E-post verifiering krävs",
     "ttl__work": "Utfört arbete",
     "ttl__work_details": "Arbetsdetaljer",
-    "ttl__work_notes": "Anteckingar"
+    "ttl__work_notes": "Anteckingar",
+    "ttl__calendar": "Kalender"
 }
