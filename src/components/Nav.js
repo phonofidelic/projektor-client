@@ -101,18 +101,10 @@ export function Nav(props) {
       // contrast: '#fff'
     },
     // {
-    //   title: strings.ttl__archived,
-    //   icon: <BookIcon />,
-    //   link: '/projects/archived',
-    //   color: archivedColor[SHADE],
-    //   contrast: '#222'
-    // },
-    // {
-    //   title: strings.ttl__removed,
-    //   icon: <DeleteIcon />,
-    //   link: '/projects/removed',
-    //   color: removedColor[SHADE],
-    //   contrast: '#fff'
+    //   title: strings.ttl__dashboard,
+    //   icon: <DashboardIcon />,
+    //   link: '/dashboard',
+    //   color: calendarColor[SHADE],
     // },
     {
       title: strings.ttl__settings,

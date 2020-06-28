@@ -9,6 +9,7 @@ const Projects = React.lazy(() => import('views/Projects'));
 const Archived = React.lazy(() => import('views/Archived'));
 const Removed = React.lazy(() => import('views/Removed'));
 const Calendar = React.lazy(() => import('views/Calendar'));
+const Dashboard = React.lazy(() => import('views/Dashboard'));
 const Settings = React.lazy(() => import('views/Settings'));
 const CreateProject = React.lazy(() => import('views/CreateProject'));
 const EditProject = React.lazy(() => import('views/EditProject'));
@@ -27,6 +28,10 @@ export const routes = [
   {
     Component: Calendar,
     path: '/calendar',
+  },
+  {
+    Component: Dashboard,
+    path: '/dashboard',
   },
   {
     Component: CreateProject,

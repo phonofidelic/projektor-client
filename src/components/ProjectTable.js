@@ -38,6 +38,9 @@ export default function ProjectTable(props) {
           ? project.budgetedTime.toLocaleString(navigator.language) +
             strings.frg__hours_short
           : '',
+        timeUsed: moment
+          .duration(project.timeUsed, 'milliseconds')
+          .format('h:mm'),
       })),
     [projects]
   );
@@ -63,6 +66,10 @@ export default function ProjectTable(props) {
       {
         Header: strings.lbl__budgeted_time,
         accessor: 'budgetedTime',
+      },
+      {
+        Header: strings.lbl__time_used,
+        accessor: 'timeUsed',
       },
     ],
     []
