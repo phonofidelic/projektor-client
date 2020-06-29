@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { StringContext } from 'strings';
 import moment from 'moment';
 import { motion } from 'framer-motion';
-import { COMPACT, EXPANDED, TABLE } from 'constants/projectsDisplayModes';
+import { EXPANDED } from 'constants/projectsDisplayModes';
 
 // import ProjectMenu from 'components/ProjectMenu';
 
@@ -193,7 +193,7 @@ export default function ProjectGridItem(props) {
                 style={{
                   height: 100,
                   overflowY: 'auto',
-                  whiteSpace: 'pre-wrap'
+                  whiteSpace: 'pre-wrap',
                 }}
               >
                 {project.description === 'No description provided'

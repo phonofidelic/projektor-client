@@ -5,8 +5,6 @@ import moment from 'moment';
 import ProjectInfo from 'components/ProjectDetail/ProjectInfo';
 import WorkSection from 'components/ProjectDetail/WorkSection';
 import ActiveWork from 'components/ProjectDetail/ActiveWork';
-import WorkModal from 'components/ProjectDetail/WorkModal';
-import WorkForm from 'components/WorkForm';
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -49,7 +47,7 @@ export default function ProjectDetail(props) {
   const [activeNote, setActiveNote] = useState(null);
   const [noteOpen, setNoteOpen] = useState(false);
 
-  const handleSetTime = time => {
+  const handleSetTime = (time) => {
     setTime(time);
   };
 
@@ -69,11 +67,11 @@ export default function ProjectDetail(props) {
     setWorkActive(true);
   };
 
-  const handleSetActiveNote = note => {
+  const handleSetActiveNote = (note) => {
     setActiveNote(note);
   };
 
-  const handleOpenWorkNote = work => {
+  const handleOpenWorkNote = (work) => {
     // if (work) setWorkItem(work);
     setNoteOpen(true);
   };
@@ -106,7 +104,7 @@ export default function ProjectDetail(props) {
       start: startTime,
       end: startTime + time,
       duration: time,
-      notes: activeNote
+      notes: activeNote,
     });
 
     setActiveNote(null);

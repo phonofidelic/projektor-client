@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState, useMemo } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { StringContext } from 'strings';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -18,9 +18,8 @@ import SearchBar from 'components/SearchBar';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import AddIcon from '@material-ui/icons/Add';
-import { ACTIVE } from 'constants/status';
-import { COMPACT, EXPANDED, TABLE } from 'constants/projectsDisplayModes';
-import { pageVariants, getPageVariant } from 'constants/pageVariants';
+import { COMPACT, TABLE } from 'constants/projectsDisplayModes';
+import { getPageVariant } from 'constants/pageVariants';
 
 function HeaderActions(props) {
   const strings = useContext(StringContext);
@@ -59,11 +58,7 @@ export function Projects(props) {
   const {
     preload,
     projects,
-    activeProjects,
-    archivedProjects,
-    removedProjects,
     projectStatusView,
-    pathname, // TODO: Remove
     getProjects,
     setProjectStatusView,
     searchProjects,

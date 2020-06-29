@@ -1,12 +1,7 @@
 import React, { useContext, useState, useMemo } from 'react';
 import { StringContext } from 'strings';
 import moment from 'moment';
-import {
-  useTable,
-  useSortBy,
-  useBlockLayout,
-  useResizeColumns,
-} from 'react-table';
+import { useTable, useSortBy } from 'react-table';
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -23,8 +18,6 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -103,7 +96,7 @@ export default function WorkTable(props) {
   const [contextPos, setContextPos] = useState({});
   const classes = useStyles();
 
-  const data = useMemo(() => work, [work]);
+  const data = useMemo(() => work.map((workItem) => workItem), [work]);
 
   const columns = useMemo(
     () => [
@@ -134,7 +127,7 @@ export default function WorkTable(props) {
         accessor: 'notes',
       },
     ],
-    []
+    [currentLocaleData, strings]
   );
 
   const {

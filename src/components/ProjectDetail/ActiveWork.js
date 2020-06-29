@@ -42,9 +42,8 @@ export default function ActiveWork(props) {
     handleResumeWork,
     // handleSetActiveNote,
     // handleOpenWorkNote,
-    handleCloseWork,
     handleCancelWork,
-    handleSubmitWork
+    handleSubmitWork,
   } = props;
   const strings = useContext(StringContext);
 
@@ -59,7 +58,7 @@ export default function ActiveWork(props) {
     setNoteOpen(false);
   };
 
-  const handleSetActiveNote = note => {
+  const handleSetActiveNote = (note) => {
     setActiveNote(note);
     setNoteOpen(false);
   };

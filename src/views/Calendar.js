@@ -6,7 +6,7 @@ import moment from 'moment';
 import { Helmet } from 'react-helmet';
 import requireAuth from 'hocs/requireAuth';
 import { motion } from 'framer-motion';
-import { pageVariants, getPageVariant } from 'constants/pageVariants';
+import { getPageVariant } from 'constants/pageVariants';
 
 import Header from 'components/Header';
 import WeekOverview from 'components/WeekOverview';
@@ -15,7 +15,6 @@ export function Calendar(props) {
   const {
     preload,
     work,
-    projects,
     getAllWorkByInterval,
     getAllWork,
     getProjects,
@@ -108,7 +107,6 @@ export function Calendar(props) {
 const mapStateToProps = (state) => {
   return {
     work: state.dashboard.work,
-    projects: state.projects.projectList,
   };
 };
 

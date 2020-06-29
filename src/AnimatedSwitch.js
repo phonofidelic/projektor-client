@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
-import posed, { PoseGroup } from 'react-pose';
+import posed from 'react-pose';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const ContextRouteAnimation = posed.div({
@@ -12,8 +12,8 @@ export const ContextRouteAnimation = posed.div({
     transition: {
       type: 'tween',
       ease: 'easeInOut',
-      duration: 400
-    }
+      duration: 400,
+    },
   },
   exit: {
     opacity: 0,
@@ -21,8 +21,8 @@ export const ContextRouteAnimation = posed.div({
     transition: {
       type: 'tween',
       ease: 'easeInOut',
-      duration: 400
-    }
+      duration: 400,
+    },
   },
   leftSide: {
     // x: '-100%',
@@ -31,8 +31,8 @@ export const ContextRouteAnimation = posed.div({
     transition: {
       type: 'tween',
       ease: 'easeInOut',
-      duration: 400
-    }
+      duration: 400,
+    },
   },
   rightSide: {
     // x: '100%',
@@ -41,41 +41,41 @@ export const ContextRouteAnimation = posed.div({
     transition: {
       type: 'tween',
       ease: 'easeInOut',
-      duration: 400
-    }
+      duration: 400,
+    },
   },
   top: {
     y: '-100%',
     transition: {
       type: 'tween',
       eas: 'easeInOut',
-      duration: 400
-    }
+      duration: 400,
+    },
   },
   bottom: {
     y: '100%',
     transition: {
       type: 'tween',
       eas: 'easeInOut',
-      duration: 400
-    }
-  }
+      duration: 400,
+    },
+  },
 });
 
 const pageVariants = {
   initial: {
-    opacity: 0
+    opacity: 0,
   },
   in: {
-    opacity: 1
+    opacity: 1,
   },
   out: {
-    opacity: 0
-  }
+    opacity: 0,
+  },
 };
 
 export function AnimatedSwitch({ history, location, children, ...rest }) {
-  const reverse = location.pathname === '/';
+  // const reverse = location.pathname === '/';
 
   return (
     <AnimatePresence>

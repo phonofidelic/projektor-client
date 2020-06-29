@@ -4,7 +4,6 @@ import { StringContext } from 'strings';
 import moment from 'moment';
 import { useTable, useSortBy } from 'react-table';
 
-import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -47,7 +46,7 @@ export default function ProjectTable(props) {
           .duration(project.timeUsed, 'milliseconds')
           .format('h:mm'),
       })),
-    [projects]
+    [projects, strings, currentLocaleData]
   );
 
   const columns = useMemo(
@@ -77,7 +76,7 @@ export default function ProjectTable(props) {
         accessor: 'timeUsed',
       },
     ],
-    []
+    [strings]
   );
 
   const {

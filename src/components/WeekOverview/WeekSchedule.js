@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { StringContext } from 'strings';
-import styled from 'styled-components';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
@@ -114,15 +113,8 @@ const TooltipContent = ({ appointmentData }) => {
   );
 };
 
-const DayScaleComponent = (props) => {
-  const { cellsData, cellComponent, rowComponent } = props;
-  console.log('DayScaleComponent props:', props);
-
-  return <div>test</div>;
-};
-
 export default function WeekSchedule(props) {
-  const { work, handleWeekNavigation } = props;
+  const { work } = props;
   const strings = useContext(StringContext);
 
   const schedulerData = work.map((workItem) => {

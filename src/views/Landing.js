@@ -6,7 +6,7 @@ import { StringContext } from 'strings';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { pageVariants, getPageVariant } from 'constants/pageVariants';
+import { getPageVariant } from 'constants/pageVariants';
 
 import logoSrc from 'assets/logo.svg';
 import Header from 'components/Header';
@@ -14,8 +14,6 @@ import RegistrationForm from 'components/RegistrationForm';
 
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
-const Container = styled.div``;
 
 // const Background = styled.div`
 //   background: linear-gradient(
@@ -97,7 +95,7 @@ function HeaderActions(props) {
 export function Landing(props) {
   const strings = useContext(StringContext);
 
-  const handleRegistrationSubmit = formData => {
+  const handleRegistrationSubmit = (formData) => {
     props.registerNewUser(formData);
   };
 

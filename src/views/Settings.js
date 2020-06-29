@@ -5,7 +5,7 @@ import { StringContext } from 'strings';
 import { Helmet } from 'react-helmet';
 import requireAuth from 'hocs/requireAuth';
 import { motion } from 'framer-motion';
-import { pageVariants, getPageVariant } from 'constants/pageVariants';
+import { getPageVariant } from 'constants/pageVariants';
 
 import Header from 'components/Header';
 import UserInfo from 'components/UserInfo';
@@ -42,9 +42,9 @@ export function Settings(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    userInfo: state.user.userInfo
+    userInfo: state.user.userInfo,
   };
 };
 

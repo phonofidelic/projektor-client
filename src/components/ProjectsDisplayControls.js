@@ -5,7 +5,6 @@ import { COMPACT, EXPANDED, TABLE } from 'constants/projectsDisplayModes';
 
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import CompactIcon from '@material-ui/icons/Crop75';
 import ExpandedIcon from '@material-ui/icons/CropPortrait';
