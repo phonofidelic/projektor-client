@@ -114,6 +114,13 @@ const TooltipContent = ({ appointmentData }) => {
   );
 };
 
+const DayScaleComponent = (props) => {
+  const { cellsData, cellComponent, rowComponent } = props;
+  console.log('DayScaleComponent props:', props);
+
+  return <div>test</div>;
+};
+
 export default function WeekSchedule(props) {
   const { work, handleWeekNavigation } = props;
   const strings = useContext(StringContext);
@@ -132,7 +139,7 @@ export default function WeekSchedule(props) {
   });
 
   return (
-    <Scheduler locale={navigator.language} data={schedulerData}>
+    <Scheduler locale={navigator.language} data={schedulerData} height="auto">
       <ViewState />
       <WeekView />
       <Toolbar />

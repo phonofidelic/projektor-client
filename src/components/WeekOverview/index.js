@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 const Container = styled.div`
   padding: 1px;
   text-align: left;
+  height: 85vh;
 `;
 
 export default function WeekOverview(props) {
@@ -17,7 +18,7 @@ export default function WeekOverview(props) {
     work,
     handleSelectPrevWeek,
     handleSelectNextWeek,
-    handleWeekNavigation
+    handleWeekNavigation,
   } = props;
   const strings = useContext(StringContext);
 
