@@ -95,7 +95,7 @@ function ContextMenu(props) {
 }
 
 export default function WorkTable(props) {
-  const { project, handleOpenWork, removeWork } = props;
+  const { work, handleOpenWork, removeWork } = props;
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
   const [selectedWork, setSelectedWork] = useState({ _id: null });
@@ -103,7 +103,7 @@ export default function WorkTable(props) {
   const [contextPos, setContextPos] = useState({});
   const classes = useStyles();
 
-  const data = useMemo(() => project.work, [project.work]);
+  const data = useMemo(() => work, [work]);
 
   const columns = useMemo(
     () => [

@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { StringContext } from 'strings';
 import styled from 'styled-components';
+import matchSorter from 'match-sorter';
 
 import WorkTable from 'components/ProjectDetail/WorkTable';
 import WorkModal from 'components/ProjectDetail/WorkModal';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import WorkForm from 'components/WorkForm';
+import SearchBar from 'components/SearchBar';
 
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -24,8 +26,9 @@ export default function WorkSection(props) {
   const strings = useContext(StringContext);
   const [workItem, setWorkItem] = useState(null);
   const [workFormOpen, setWorkFormOpen] = useState(false);
+  const [filterdWork, setFilteredWork] = useState(project.work);
 
-  const handleOpenWork = workItem => {
+  const handleOpenWork = (workItem) => {
     workItem ? setWorkItem(workItem) : setWorkItem(null);
 
     setWorkFormOpen(true);
@@ -34,6 +37,10 @@ export default function WorkSection(props) {
   const handleCloseWork = () => {
     setWorkItem(null);
     setWorkFormOpen(false);
+  };
+
+  const handleSearch = (query) => {
+    setFilteredWork(matchSorter(project.work, query, { keys: ['notes'] }));
   };
 
   return (
@@ -53,19 +60,31 @@ export default function WorkSection(props) {
         />
       </WorkModal>
       <div
-        style={{ margin: 18, display: 'flex', justifyContent: 'space-between' }}
+        style={{
+          margin: 18,
+          display: 'flex',
+          // justifyContent: 'space-between'
+        }}
       >
         <Typography variant="h5" align="left">
           {strings.ttl__work}
         </Typography>
+        <div
+          style={{
+            flex: 1,
+            marginLeft: 5,
+          }}
+        >
+          <SearchBar handleSearch={handleSearch} />
+        </div>
         <Button variant="outlined" onClick={() => handleOpenWork(false)}>
           Add new Task
         </Button>
       </div>
       <WorkContainer>
-        {project.work.length > 0 ? (
+        {filterdWork.length > 0 ? (
           <WorkTable
-            project={project}
+            work={filterdWork}
             handleOpenWork={handleOpenWork}
             removeWork={removeWork}
           />
