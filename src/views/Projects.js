@@ -13,6 +13,7 @@ import ProjectTable from 'components/ProjectTable';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import ProjectsStatusSelect from 'components/ProjectsStatusSelect';
 import ProjectsDisplayControls from 'components/ProjectsDisplayControls';
+import SearchBar from 'components/SearchBar';
 
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -65,6 +66,7 @@ export function Projects(props) {
     pathname, // TODO: Remove
     getProjects,
     setProjectStatusView,
+    searchProjects,
   } = props;
 
   // const memoizedProjects = useMemo(() => projects, []);
@@ -104,6 +106,7 @@ export function Projects(props) {
         title={strings.ttl__projects}
         headerActions={<HeaderActions />}
       >
+        <SearchBar handleSearch={searchProjects} />
         <ProjectsDisplayControls
           projectsDisplayMode={projectsDisplayMode}
           selectDisplayMode={handleSelectDisplayMode}

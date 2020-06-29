@@ -20,16 +20,19 @@ import {
   SET_PROJECT_STATUS_FAILURE,
   DELETE_ALL_REMOVED_PROJECTS,
   DELETE_ALL_REMOVED_PROJECTS_SUCCESS,
-  DELETE_ALL_REMOVED_PROJECTS_FAILURE
+  DELETE_ALL_REMOVED_PROJECTS_FAILURE,
+  SEARCH_PROJECTS,
+  SEARCH_PROJECTS_SUCCESS,
+  SEARCH_PROJECTS_FAILURE,
 } from 'actions/types';
 import { history } from 'config';
 import { api, handleError, handleResponse } from 'actions/utils';
 import { DELETED } from 'constants/status';
 
 export const getProjects = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
-      type: GET_PROJECTS
+      type: GET_PROJECTS,
     });
 
     let response;
@@ -45,21 +48,21 @@ export const getProjects = () => {
   };
 };
 
-export const setProjectStatusView = status => {
-  return dispatch => {
+export const setProjectStatusView = (status) => {
+  return (dispatch) => {
     dispatch({
       type: SET_PROJECT_STATUS_VIEW,
-      payload: status
+      payload: status,
     });
     // history.push(status === DELETED ? 'removed' : status);
   };
 };
 
-export const getProject = projectId => {
+export const getProject = (projectId) => {
   console.log('getProject, projectId:', projectId);
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
-      type: GET_PROJECT
+      type: GET_PROJECT,
     });
 
     let response;
@@ -85,10 +88,10 @@ export const getProject = projectId => {
 //   };
 // };
 
-export const createProject = formData => {
-  return async dispatch => {
+export const createProject = (formData) => {
+  return async (dispatch) => {
     dispatch({
-      type: POST_CREATE_PROJECT
+      type: POST_CREATE_PROJECT,
     });
 
     let response;
@@ -105,15 +108,15 @@ export const createProject = formData => {
 };
 
 export const editProject = (projectId, projectInfo) => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
-      type: UPDATE_PROJECT
+      type: UPDATE_PROJECT,
     });
 
     let response;
     try {
       response = await api().put(`/projects/${projectId}`, {
-        projectInfo
+        projectInfo,
       });
       console.log('editProject, response:', response);
       handleResponse(response, dispatch, UPDATE_PROJECT_SUCCESS);
@@ -126,16 +129,16 @@ export const editProject = (projectId, projectInfo) => {
 };
 
 export const setProjectStatus = (projectId, status, location) => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
-      type: SET_PROJECT_STATUS
+      type: SET_PROJECT_STATUS,
     });
 
     let response;
     try {
       response = await api().put(`/projects/${projectId}/status`, {
         projectId,
-        status
+        status,
       });
 
       handleResponse(response, dispatch, SET_PROJECT_STATUS_SUCCESS);
@@ -150,16 +153,16 @@ export const setProjectStatus = (projectId, status, location) => {
       handleError(err, dispatch, SET_PROJECT_STATUS_FAILURE);
       dispatch({
         type: SET_PROJECT_STATUS_FAILURE,
-        payload: status
+        payload: status,
       });
     }
   };
 };
 
 export const deleteProject = (projectId, location) => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
-      type: DELETE_PROJECT
+      type: DELETE_PROJECT,
     });
 
     let response;
@@ -181,9 +184,9 @@ export const deleteProject = (projectId, location) => {
 };
 
 export const deleteAllTrash = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
-      type: DELETE_ALL_REMOVED_PROJECTS
+      type: DELETE_ALL_REMOVED_PROJECTS,
     });
 
     let response;
@@ -194,6 +197,23 @@ export const deleteAllTrash = () => {
     } catch (err) {
       console.error(err);
       handleError(err, dispatch, DELETE_ALL_REMOVED_PROJECTS_FAILURE);
+    }
+  };
+};
+
+export const searchProjects = (query) => {
+  return async (dispatch) => {
+    dispatch({
+      type: 'search_jobs',
+    });
+
+    try {
+      const response = await api().get(`/projects/search?q=${query}`);
+      // console.log('searchJobs, response:', response.data);
+      handleResponse(response, dispatch, SEARCH_PROJECTS_SUCCESS);
+    } catch (err) {
+      console.error(err);
+      handleError(err, dispatch, SEARCH_PROJECTS_FAILURE);
     }
   };
 };
