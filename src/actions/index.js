@@ -7,7 +7,8 @@ import {
   setProjectStatus,
   deleteProject,
   deleteAllTrash,
-  setProjectStatusView
+  setProjectStatusView,
+  searchProjects,
 } from 'actions/projectActions';
 
 /** WORK ACTIONS */
@@ -16,7 +17,7 @@ import {
   updateWork,
   removeWork,
   getAllWork,
-  getAllWorkByInterval
+  getAllWorkByInterval,
 } from 'actions/workActions';
 
 /** AUTH ACTIONS */
@@ -25,7 +26,7 @@ import {
   loginUser,
   logoutUser,
   getUserInfo,
-  resendVerificationEmail
+  resendVerificationEmail,
 } from 'actions/authActions';
 
 export {
@@ -46,5 +47,6 @@ export {
   loginUser,
   logoutUser,
   getUserInfo,
-  resendVerificationEmail
+  resendVerificationEmail,
+  searchProjects,
 };

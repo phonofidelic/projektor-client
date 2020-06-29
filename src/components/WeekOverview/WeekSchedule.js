@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { StringContext } from 'strings';
 import styled from 'styled-components';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -14,7 +15,7 @@ import {
   Appointments,
   AppointmentTooltip,
   WeekView,
-  TodayButton
+  TodayButton,
 } from '@devexpress/dx-react-scheduler-material-ui';
 import { ViewState } from '@devexpress/dx-react-scheduler';
 
@@ -37,15 +38,20 @@ const AppointmentHeader = ({ appointmentData }) => {
     <CardHeader
       style={{ backgroundColor: appointmentData.projectColor }}
       title={
-        <Typography
-          gutterBottom
-          variant="h5"
-          component="h2"
-          noWrap
-          style={{ color: '#fff' }}
+        <Link
+          style={{ textDecoration: 'none' }}
+          to={`/projects/${appointmentData.projectId}`}
         >
-          {appointmentData.title}
-        </Typography>
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h2"
+            noWrap
+            style={{ color: '#fff' }}
+          >
+            {appointmentData.title}
+          </Typography>
+        </Link>
       }
     />
   );
@@ -108,11 +114,18 @@ const TooltipContent = ({ appointmentData }) => {
   );
 };
 
+const DayScaleComponent = (props) => {
+  const { cellsData, cellComponent, rowComponent } = props;
+  console.log('DayScaleComponent props:', props);
+
+  return <div>test</div>;
+};
+
 export default function WeekSchedule(props) {
   const { work, handleWeekNavigation } = props;
   const strings = useContext(StringContext);
 
-  const schedulerData = work.map(workItem => {
+  const schedulerData = work.map((workItem) => {
     return {
       startDate: workItem.start,
       endDate: workItem.end,
@@ -120,12 +133,13 @@ export default function WeekSchedule(props) {
       id: workItem._id,
       duration: workItem.duration,
       notes: workItem.notes,
-      projectColor: workItem.project.color
+      projectColor: workItem.project.color,
+      projectId: workItem.project._id,
     };
   });
 
   return (
-    <Scheduler locale={navigator.language} data={schedulerData}>
+    <Scheduler locale={navigator.language} data={schedulerData} height="auto">
       <ViewState />
       <WeekView />
       <Toolbar />

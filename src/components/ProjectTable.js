@@ -12,6 +12,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+
+const StyledTableCell = withStyles({
+  head: { background: '#fff' },
+})(TableCell);
 
 export default function ProjectTable(props) {
   const { projects } = props;
@@ -38,6 +43,9 @@ export default function ProjectTable(props) {
           ? project.budgetedTime.toLocaleString(navigator.language) +
             strings.frg__hours_short
           : '',
+        timeUsed: moment
+          .duration(project.timeUsed, 'milliseconds')
+          .format('h:mm'),
       })),
     [projects]
   );
@@ -64,6 +72,10 @@ export default function ProjectTable(props) {
         Header: strings.lbl__budgeted_time,
         accessor: 'budgetedTime',
       },
+      {
+        Header: strings.lbl__time_used,
+        accessor: 'timeUsed',
+      },
     ],
     []
   );
@@ -77,23 +89,24 @@ export default function ProjectTable(props) {
   } = useTable({ columns, data }, useSortBy);
 
   return (
-    <Paper style={{ margin: 18, flex: 1 }}>
+    <>
+      {/* <Paper style={{ margin: 18, flex: 1 }}> */}
       <Table {...getTableProps()} stickyHeader>
-        <TableHead>
+        <TableHead style={{ backgroundColor: '#fff' }}>
           {headerGroups.map((headerGroup) => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <TableCell
+                <StyledTableCell
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   <div style={{ display: 'flex' }}>
-                    {column.render('Header')}
+                    <Typography noWrap>{column.render('Header')}</Typography>
                     <TableSortLabel
                       active={column.isSorted}
                       direction={column.isSortedDesc ? 'desc' : 'asc'}
                     />
                   </div>
-                </TableCell>
+                </StyledTableCell>
               ))}
             </TableRow>
           ))}
@@ -119,7 +132,7 @@ export default function ProjectTable(props) {
                 {row.cells.map((cell) => (
                   <TableCell
                     style={{
-                      // maxWidth: 200,
+                      maxWidth: 200,
                       minWidth: 100,
                     }}
                     {...cell.getCellProps()}
@@ -132,6 +145,7 @@ export default function ProjectTable(props) {
           })}
         </TableBody>
       </Table>
-    </Paper>
+      {/* </Paper> */}
+    </>
   );
 }

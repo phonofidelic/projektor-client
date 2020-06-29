@@ -27,7 +27,10 @@ import {
   SET_PROJECT_STATUS_FAILURE,
   DELETE_ALL_REMOVED_PROJECTS,
   DELETE_ALL_REMOVED_PROJECTS_SUCCESS,
-  DELETE_ALL_REMOVED_PROJECTS_FAILURE
+  DELETE_ALL_REMOVED_PROJECTS_FAILURE,
+  SEARCH_PROJECTS,
+  SEARCH_PROJECTS_SUCCESS,
+  SEARCH_PROJECTS_FAILURE,
 } from 'actions/types';
 import { ACTIVE, COMPLETE, ARCHIVED, DELETED } from 'constants/status';
 import {
@@ -42,7 +45,7 @@ import {
   TTL__ARCHIVED,
   TTL__DELETED,
   MSG__DELETE_ALL_REMOVED_PROJECTS_ERROR,
-  MSG__CREATE_WORK_ERROR
+  MSG__CREATE_WORK_ERROR,
 } from 'constants/strings';
 import format from 'string-format';
 format.extend(String.prototype, {});
@@ -56,10 +59,10 @@ export const defaultState = {
   projectStatusView: ACTIVE,
   selectedProject: null,
   loading: false,
-  error: null
+  error: null,
 };
 
-export default function(state = defaultState, action) {
+export default function (state = defaultState, action) {
   switch (action.type) {
     // case SELECT_PROJECT:
     //   // TODO: get project detils from API
@@ -74,7 +77,7 @@ export default function(state = defaultState, action) {
     case POST_CREATE_PROJECT:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
 
     case CREATE_PROJECT_SUCCESS:
@@ -82,21 +85,21 @@ export default function(state = defaultState, action) {
         ...state,
         loading: false,
         // projectList: [...state.projectList, action.payload]
-        projectListByStatus: [...state.projectListByStatus, action.payload]
+        projectListByStatus: [...state.projectListByStatus, action.payload],
       };
 
     case CREATE_PROJECT_FAILURE:
       return {
         ...state,
         loading: false,
-        error: { message: MSG__CREATE_PROJECT_ERROR }
+        error: { message: MSG__CREATE_PROJECT_ERROR },
       };
 
     case GET_PROJECTS:
       return {
         ...state,
         loading: true,
-        selectedProject: null
+        selectedProject: null,
       };
 
     case GET_PROJECTS_SUCCESS:
@@ -105,8 +108,8 @@ export default function(state = defaultState, action) {
         loading: false,
         projectList: action.payload,
         projectListByStatus: action.payload.filter(
-          project => project.status === state.projectStatusView
-        )
+          (project) => project.status === state.projectStatusView
+        ),
         // activeProjects: action.payload.filter(
         //   project => project.status === ACTIVE
         // ),
@@ -122,7 +125,7 @@ export default function(state = defaultState, action) {
       return {
         ...state,
         loading: false,
-        error: { message: MSG__GET_PROJECTS_ERROR }
+        error: { message: MSG__GET_PROJECTS_ERROR },
       };
 
     case SET_PROJECT_STATUS_VIEW:
@@ -130,34 +133,34 @@ export default function(state = defaultState, action) {
         ...state,
         projectStatusView: action.payload,
         projectListByStatus: state.projectList.filter(
-          project => project.status === action.payload
-        )
+          (project) => project.status === action.payload
+        ),
       };
 
     case GET_PROJECT:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
 
     case GET_PROJECT_SUCCESS:
       return {
         ...state,
         loading: false,
-        selectedProject: action.payload
+        selectedProject: action.payload,
       };
 
     case GET_PROJECT_FAILURE:
       return {
         ...state,
         loading: false,
-        error: { message: MSG__GET_PROJECT_ERROR }
+        error: { message: MSG__GET_PROJECT_ERROR },
       };
 
     case DELETE_PROJECT:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
 
     case DELETE_PROJECT_SUCCESS:
@@ -165,27 +168,27 @@ export default function(state = defaultState, action) {
         ...state,
         loading: false,
         removedProjects: state.removedProjects.filter(
-          project => project._id !== action.payload
-        )
+          (project) => project._id !== action.payload
+        ),
       };
 
     case DELETE_PROJECT_FAILURE:
       return {
         ...state,
         loading: false,
-        error: { message: MSG__DELETE_PROJECT_ERROR }
+        error: { message: MSG__DELETE_PROJECT_ERROR },
       };
 
     case SET_PROJECT_STATUS:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
 
     case SET_PROJECT_STATUS_SUCCESS:
       return {
         ...state,
-        loading: false
+        loading: false,
         // projectList: state.projectList.filter(
         //   project => project._id !== action.payload
         // ),
@@ -206,67 +209,67 @@ export default function(state = defaultState, action) {
           ...state,
           loading: false,
           error: {
-            message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__ACTIVE)
-          }
+            message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__ACTIVE),
+          },
         };
       } else if (action.payload === COMPLETE) {
         return {
           ...state,
           loading: false,
           error: {
-            message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__COMPLETE)
-          }
+            message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__COMPLETE),
+          },
         };
       } else if (action.payload === ARCHIVED) {
         return {
           ...state,
           loading: false,
           error: {
-            message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__ARCHIVED)
-          }
+            message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__ARCHIVED),
+          },
         };
       } else if (action.payload === DELETED) {
         return {
           ...state,
           loading: false,
           error: {
-            message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__DELETED)
-          }
+            message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__DELETED),
+          },
         };
       } else {
         return {
           ...state,
           loading: false,
           error: {
-            message: MSG__SET_PROJECT_STATUS_ERROR
-          }
+            message: MSG__SET_PROJECT_STATUS_ERROR,
+          },
         };
       }
 
     case DELETE_ALL_REMOVED_PROJECTS:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
 
     case DELETE_ALL_REMOVED_PROJECTS_SUCCESS:
       return {
         ...state,
         loading: false,
-        removedProjects: []
+        removedProjects: [],
       };
 
     case DELETE_ALL_REMOVED_PROJECTS_FAILURE:
       return {
         ...state,
         loading: false,
-        error: { message: MSG__DELETE_ALL_REMOVED_PROJECTS_ERROR }
+        error: { message: MSG__DELETE_ALL_REMOVED_PROJECTS_ERROR },
       };
 
     case CREATE_WORK:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
 
     case CREATE_WORK_SUCCESS:
@@ -276,25 +279,25 @@ export default function(state = defaultState, action) {
         selectedProject: {
           ...state.selectedProject,
           timeUsed: state.selectedProject.timeUsed + action.payload.duration,
-          work: [...state.selectedProject.work, action.payload]
-        }
+          work: [...state.selectedProject.work, action.payload],
+        },
       };
 
     case CREATE_WORK_FAILURE:
       return {
         ...state,
         loading: false,
-        error: { message: MSG__CREATE_WORK_ERROR }
+        error: { message: MSG__CREATE_WORK_ERROR },
       };
 
     case UPDATE_WORK:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
 
     case UPDATE_WORK_SUCCESS:
-      const updatedWork = state.selectedProject.work.map(workItem =>
+      const updatedWork = state.selectedProject.work.map((workItem) =>
         workItem._id === action.payload._id ? action.payload : workItem
       );
 
@@ -309,22 +312,22 @@ export default function(state = defaultState, action) {
         selectedProject: {
           ...state.selectedProject,
           timeUsed: updatedTimeUsed,
-          work: updatedWork
-        }
+          work: updatedWork,
+        },
       };
 
     case UPDATE_WORK_FAILURE: {
       return {
         ...state,
         loading: false,
-        error: { message: 'Could not update work entry' }
+        error: { message: 'Could not update work entry' },
       };
     }
 
     case REMOVE_WORK:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
 
     case REMOVE_WORK_SUCCESS:
@@ -335,16 +338,38 @@ export default function(state = defaultState, action) {
           ...state.selectedProject,
           timeUsed: state.selectedProject.timeUsed - action.payload.duration,
           work: state.selectedProject.work.filter(
-            workItem => workItem._id !== action.payload._id
-          )
-        }
+            (workItem) => workItem._id !== action.payload._id
+          ),
+        },
       };
 
     case REMOVE_WORK_FAILURE:
       return {
         ...state,
         loading: false,
-        error: { message: 'Could not remove work entry' }
+        error: { message: 'Could not remove work entry' },
+      };
+
+    case SEARCH_PROJECTS:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case SEARCH_PROJECTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        projectListByStatus: action.payload.filter(
+          (project) => project.status === state.projectStatusView
+        ),
+      };
+
+    case SEARCH_PROJECTS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: { message: 'Could not search projects' },
       };
 
     default:

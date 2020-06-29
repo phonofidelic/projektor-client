@@ -78,7 +78,7 @@ export default function ProjectInfo(props) {
         <Typography variant="overline">{strings.lbl__time_used}</Typography>{' '}
         {moment
           .duration(project.timeUsed + time, 'ms')
-          .format('hh:mm:ss', { trim: false })}
+          .format('h:mm', { trim: false })}
       </div>
       <div>
         <ProgressContainer>
