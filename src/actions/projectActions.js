@@ -27,7 +27,6 @@ import {
 } from 'actions/types';
 import { history } from 'config';
 import { api, handleError, handleResponse } from 'actions/utils';
-import { DELETED } from 'constants/status';
 
 export const getProjects = () => {
   return async (dispatch) => {
@@ -204,7 +203,7 @@ export const deleteAllTrash = () => {
 export const searchProjects = (query) => {
   return async (dispatch) => {
     dispatch({
-      type: 'search_jobs',
+      type: SEARCH_PROJECTS,
     });
 
     try {

@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ACTIVE, ARCHIVED, DELETED } from 'constants/status';
+import { AnimatePresence } from 'framer-motion';
 
 import ProjectGridItem from 'components/ProjectGridItem';
 
@@ -10,26 +9,26 @@ import Grid from '@material-ui/core/Grid';
 /**
  * Add location prop based on Project status
  */
-const withProjectLocation = projects => {
-  return projects.map(project => {
-    switch (project.status) {
-      case ACTIVE:
-        project.location = 'active';
-        return project;
+// const withProjectLocation = projects => {
+//   return projects.map(project => {
+//     switch (project.status) {
+//       case ACTIVE:
+//         project.location = 'active';
+//         return project;
 
-      case ARCHIVED:
-        project.location = 'archived';
-        return project;
+//       case ARCHIVED:
+//         project.location = 'archived';
+//         return project;
 
-      case DELETED:
-        project.location = 'removed';
-        return project;
+//       case DELETED:
+//         project.location = 'removed';
+//         return project;
 
-      default:
-        return project;
-    }
-  });
-};
+//       default:
+//         return project;
+//     }
+//   });
+// };
 
 const Container = styled.div`
   display: flex;
@@ -50,7 +49,7 @@ function ProjectGrid(props) {
     <Container>
       <Grid container>
         <AnimatePresence>
-          {projects.map(project => (
+          {projects.map((project) => (
             <ProjectGridItem
               key={project._id}
               project={project}

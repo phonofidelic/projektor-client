@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { StringContext } from 'strings';
-import { ACTIVE, COMPLETE, ARCHIVED, DELETED } from 'constants/status';
+import { ACTIVE, ARCHIVED, DELETED } from 'constants/status';
 
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
@@ -20,12 +20,7 @@ const Container = styled.div`
   margin-right: 20px;
 `;
 
-const SelectButton = styled(Button)`
-  color: #fff;
-  background-color: ${({ bgcolor }) => bgcolor};
-`;
-
-export default function(props) {
+export default function (props) {
   const { projectStatusView, setProjectStatusView } = props;
   const strings = useContext(StringContext);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -39,7 +34,7 @@ export default function(props) {
     setSelectButtonHovered(false);
   };
 
-  const handleOpenMenu = e => {
+  const handleOpenMenu = (e) => {
     setAnchorEl(e.currentTarget);
   };
 
@@ -47,7 +42,7 @@ export default function(props) {
     setAnchorEl(null);
   };
 
-  const handleStatusViewSelect = status => {
+  const handleStatusViewSelect = (status) => {
     setProjectStatusView(status);
     setAnchorEl(null);
   };
@@ -68,7 +63,7 @@ export default function(props) {
     }
   };
 
-  const getStatusButtonBGColor = shade => {
+  const getStatusButtonBGColor = (shade) => {
     switch (projectStatusView) {
       case ACTIVE:
         return activeColor[shade];
@@ -92,7 +87,7 @@ export default function(props) {
           backgroundColor: selectButtonHovered
             ? getStatusButtonBGColor(SHADE + 200)
             : getStatusButtonBGColor(SHADE),
-          color: '#fff'
+          color: '#fff',
         }}
         bgcolor={getStatusButtonBGColor(SHADE)}
         aria-controls="simple-menu"

@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 import { StringContext } from 'strings';
 import { Formik, Form } from 'formik';
-import moment from 'moment';
-import styled from 'styled-components';
 
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -11,15 +9,8 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 export function NoteForm(props) {
-  const {
-    workItem,
-    activeNote,
-    handleClose,
-    handleSetActiveNote,
-    updateWork
-  } = props;
+  const { workItem, activeNote, handleClose, handleSetActiveNote } = props;
   const strings = useContext(StringContext);
-  const currentLocaleData = moment.localeData();
 
   return (
     <Formik
@@ -36,7 +27,7 @@ export function NoteForm(props) {
         handleChange,
         handleBlur,
         handleSubmit,
-        isSubmitting
+        isSubmitting,
       }) => (
         <Form>
           <Grid container style={{ padding: 24, paddingBottom: 0 }}>

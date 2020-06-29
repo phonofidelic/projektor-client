@@ -28,7 +28,7 @@ const colors = [
   { value: Blue[400], hover: Blue[600] },
   { value: Green[400], hover: Green[600] },
   { value: Yellow[400], hover: Yellow[600] },
-  { value: Orange[400], hover: Orange[600] }
+  { value: Orange[400], hover: Orange[600] },
 ];
 
 const Container = styled.div`
@@ -71,9 +71,10 @@ export default function ProjectForm(props) {
   const strings = useContext(StringContext);
   const colorSelectLabel = useRef(null);
   const [colorSelectLabelWidth, setColorSelectLabelWidth] = useState(0);
+
   useEffect(() => {
     project && setColorSelectLabelWidth(colorSelectLabel.current.offsetWidth);
-  }, []);
+  }, [project]);
 
   return (
     <Container>
@@ -89,9 +90,9 @@ export default function ProjectForm(props) {
           startDate: project ? project.startDate : null,
           deadline: project ? project.deadline : null,
           client: project ? project.client : '',
-          budgetedTime: project ? project.budgetedTime : ''
+          budgetedTime: project ? project.budgetedTime : '',
         }}
-        validate={values => {
+        validate={(values) => {
           const errors = {};
           if (!values.title || values.title === '') {
             errors.title = strings.msg__required;
@@ -110,7 +111,7 @@ export default function ProjectForm(props) {
           handleBlur,
           handleSubmit,
           isSubmitting,
-          setFieldValue
+          setFieldValue,
         }) => (
           <Form onSubmit={handleSubmit}>
             <Grid container>
@@ -138,7 +139,7 @@ export default function ProjectForm(props) {
                       style={{
                         backgroundColor: '#fff',
                         borderRadius: '4px',
-                        padding: 2
+                        padding: 2,
                       }}
                       ref={colorSelectLabel}
                       htmlFor="project-color"
@@ -148,21 +149,21 @@ export default function ProjectForm(props) {
                     <Field
                       component={Select}
                       style={{
-                        backgroundColor: values.color
+                        backgroundColor: values.color,
                       }}
                       labelWidth={colorSelectLabelWidth}
                       MenuProps={{
                         MenuListProps: {
                           disablePadding: true,
-                          component: ColorMenu
-                        }
+                          component: ColorMenu,
+                        },
                       }}
                       id="project-color"
                       name="color"
                       label="Project color"
                       defaultValue={values.color}
                       value={values.color}
-                      onChange={e =>
+                      onChange={(e) =>
                         setFieldValue('color', e.target.value, false)
                       }
                     >

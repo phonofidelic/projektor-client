@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { StringContext } from 'strings';
 import { Formik, Form, Field } from 'formik';
 import moment from 'moment';
 import styled from 'styled-components';
 
-import FormikDatePicker from 'components/FormikDatePicker';
 import FormikDateTimePicker from 'components/FormikDateTimePicker';
 
 import Button from '@material-ui/core/Button';
@@ -27,25 +26,9 @@ const WorkInfoContainer = styled(Grid)`
 `;
 
 export function WorkForm(props) {
-  const {
-    project,
-    workItem,
-    activeNote,
-    handleClose,
-    handleSetActiveNote,
-    createWork,
-    updateWork,
-  } = props;
+  const { project, workItem, handleClose, createWork, updateWork } = props;
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
-  const [errorNode, setErrorNode] = useState(null);
-
-  const handleDateTimeError = (errorNode, value) => {
-    // console.log('*** handleDateTimeError');
-    setErrorNode(errorNode);
-  };
-
-  console.log('WorkForm, workItem:', workItem);
 
   return (
     <Formik
@@ -94,7 +77,6 @@ export function WorkForm(props) {
         isSubmitting,
       }) => (
         <Form>
-          {errorNode && errorNode}
           <Grid container style={{ padding: 24, paddingBottom: 0 }}>
             <Grid item xs={12}>
               <Typography

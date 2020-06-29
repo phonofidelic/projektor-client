@@ -6,8 +6,6 @@ const Landing = React.lazy(() => import('views/Landing'));
 // const Registration = React.lazy(() => import('views/Registration'))
 const Login = React.lazy(() => import('views/Login'));
 const Projects = React.lazy(() => import('views/Projects'));
-const Archived = React.lazy(() => import('views/Archived'));
-const Removed = React.lazy(() => import('views/Removed'));
 const Calendar = React.lazy(() => import('views/Calendar'));
 const Dashboard = React.lazy(() => import('views/Dashboard'));
 const Settings = React.lazy(() => import('views/Settings'));

@@ -1,11 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { StringContext } from 'strings';
 
 // import WeekChart from 'components/WeekOverview/WeekChart';
 import WeekSchedule from 'components/WeekOverview/WeekSchedule';
-
-import Typography from '@material-ui/core/Typography';
 
 const Container = styled.div`
   padding: 1px;
@@ -14,13 +11,7 @@ const Container = styled.div`
 `;
 
 export default function WeekOverview(props) {
-  const {
-    work,
-    handleSelectPrevWeek,
-    handleSelectNextWeek,
-    handleWeekNavigation,
-  } = props;
-  const strings = useContext(StringContext);
+  const { work, handleWeekNavigation } = props;
 
   // console.log('====================================');
   // console.log('WeekOverview, work:', work);

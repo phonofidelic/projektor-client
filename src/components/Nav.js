@@ -4,18 +4,13 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { StringContext } from 'strings';
 
-import DashboardIcon from '@material-ui/icons/Dashboard';
 import AppsIcon from '@material-ui/icons/Apps';
 import SettingsIcon from '@material-ui/icons/Settings';
-import DeleteIcon from '@material-ui/icons/Delete';
-import BookIcon from '@material-ui/icons/Book';
 import EventIcon from '@material-ui/icons/Event';
 import Typography from '@material-ui/core/Typography';
 
 import calendarColor from '@material-ui/core/colors/blue';
 import activeColor from '@material-ui/core/colors/green';
-import archivedColor from '@material-ui/core/colors/yellow';
-import removedColor from '@material-ui/core/colors/red';
 import settingsColor from '@material-ui/core/colors/purple';
 
 const NAV_WIDTH = 178;

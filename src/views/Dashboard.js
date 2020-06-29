@@ -3,22 +3,14 @@ import { connect } from 'react-redux';
 import * as actions from 'actions';
 import { StringContext } from 'strings';
 import { Helmet } from 'react-helmet';
-import requireAuth from 'hocs/requireAuth';
 import { motion } from 'framer-motion';
-import { pageVariants, getPageVariant } from 'constants/pageVariants';
+import { getPageVariant } from 'constants/pageVariants';
 
 import Header from 'components/Header';
 import WeekChart from 'components/WeekOverview/WeekChart';
 
 export const Dashboard = (props) => {
-  const {
-    preload,
-    work,
-    projects,
-    getAllWorkByInterval,
-    getAllWork,
-    getProjects,
-  } = props;
+  const { preload, work, getAllWork, getProjects } = props;
 
   const strings = useContext(StringContext);
 

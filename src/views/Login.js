@@ -5,7 +5,7 @@ import { StringContext } from 'strings';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { pageVariants, getPageVariant } from 'constants/pageVariants';
+import { getPageVariant } from 'constants/pageVariants';
 
 import logoSrc from 'assets/logo.svg';
 import Header from 'components/Header';
@@ -44,7 +44,7 @@ export function Login(props) {
   const { error } = props;
   const strings = useContext(StringContext);
 
-  const handleLoginSubmit = formData => {
+  const handleLoginSubmit = (formData) => {
     props.loginUser(formData);
   };
   return (
@@ -80,12 +80,12 @@ export function Login(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     error: {
       errorTitleKey: state.message.titleKey,
-      errorBodyKey: state.message.bodyKey
-    }
+      errorBodyKey: state.message.bodyKey,
+    },
   };
 };
 
