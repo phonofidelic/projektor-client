@@ -68,7 +68,14 @@ export default function WorkSection(props) {
           // justifyContent: 'space-between'
         }}
       >
-        <Typography variant="h5" align="left">
+        <Typography
+          variant="h5"
+          align="left"
+          style={{
+            height: 48,
+            lineHeight: '48px',
+          }}
+        >
           {strings.ttl__work}
         </Typography>
         <div
