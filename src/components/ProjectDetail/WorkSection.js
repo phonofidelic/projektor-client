@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StringContext } from 'strings';
 import styled from 'styled-components';
 import matchSorter from 'match-sorter';
@@ -42,6 +42,8 @@ export default function WorkSection(props) {
   const handleSearch = (query) => {
     setFilteredWork(matchSorter(project.work, query, { keys: ['notes'] }));
   };
+
+  useEffect(() => setFilteredWork(project.work), [project.work]);
 
   return (
     <Container>
