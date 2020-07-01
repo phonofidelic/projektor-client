@@ -24,10 +24,10 @@ export default function SearchBar(props) {
       <IconButton onClick={() => (open ? handleClose() : setOpen(true))}>
         {open ? <CloseIcon /> : <SearchIcon />}
       </IconButton>
-      <Grow in={open} mountOnEnter unmountOnExit>
+      <Grow style={{ maxWidth: 500 }} in={open} mountOnEnter unmountOnExit>
         <TextField
           style={{
-            margin: '0 10px',
+            margin: '5px 10px',
           }}
           autoFocus
           fullWidth
