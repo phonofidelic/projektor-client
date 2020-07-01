@@ -18,7 +18,11 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+
+const StyledTableCell = withStyles({
+  head: { background: '#fff' },
+})(TableCell);
 
 const useStyles = makeStyles({
   selected: {
@@ -155,7 +159,8 @@ export default function WorkTable(props) {
   };
 
   return (
-    <Paper style={{ margin: 18, flex: 1 }}>
+    <>
+      {/* <Paper style={{ margin: 18, flex: 1 }}> */}
       <ContextMenu
         open={contextOpen}
         contextPos={contextPos}
@@ -169,7 +174,7 @@ export default function WorkTable(props) {
           {headerGroups.map((headerGroup) => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <TableCell
+                <StyledTableCell
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   <div style={{ display: 'flex' }}>
@@ -179,7 +184,7 @@ export default function WorkTable(props) {
                       direction={column.isSortedDesc ? 'desc' : 'asc'}
                     />
                   </div>
-                </TableCell>
+                </StyledTableCell>
               ))}
             </TableRow>
           ))}
@@ -209,6 +214,7 @@ export default function WorkTable(props) {
           })}
         </TableBody>
       </Table>
-    </Paper>
+      {/* </Paper> */}
+    </>
   );
 }
