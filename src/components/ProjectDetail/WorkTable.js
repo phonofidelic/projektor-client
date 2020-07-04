@@ -1,14 +1,14 @@
 import React, { useContext, useState, useMemo } from 'react';
 import { StringContext } from 'strings';
 import moment from 'moment';
-import { useTable, useSortBy } from 'react-table';
+import { useTable, useSortBy, useExpanded } from 'react-table';
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -140,7 +140,12 @@ export default function WorkTable(props) {
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({ columns, data, autoResetSortBy: false }, useSortBy);
+    // state: { expanded },
+  } = useTable(
+    { columns, data, autoResetSortBy: false },
+    useSortBy,
+    useExpanded
+  );
 
   const handleSelectWork = (work) => {
     setSelectedWork(work);
