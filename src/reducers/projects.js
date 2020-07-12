@@ -157,27 +157,27 @@ export default function (state = defaultState, action) {
         error: { message: MSG__GET_PROJECT_ERROR },
       };
 
-    case DELETE_PROJECT:
-      return {
-        ...state,
-        loading: true,
-      };
+    // case DELETE_PROJECT:
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //   };
 
-    case DELETE_PROJECT_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        removedProjects: state.removedProjects.filter(
-          (project) => project._id !== action.payload
-        ),
-      };
+    // case DELETE_PROJECT_SUCCESS:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     removedProjects: state.removedProjects.filter(
+    //       (project) => project._id !== action.payload
+    //     ),
+    //   };
 
-    case DELETE_PROJECT_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: { message: MSG__DELETE_PROJECT_ERROR },
-      };
+    // case DELETE_PROJECT_FAILURE:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     error: { message: MSG__DELETE_PROJECT_ERROR },
+    //   };
 
     case SET_PROJECT_STATUS:
       return {
@@ -246,25 +246,25 @@ export default function (state = defaultState, action) {
         };
       }
 
-    case DELETE_ALL_REMOVED_PROJECTS:
-      return {
-        ...state,
-        loading: true,
-      };
+    // case DELETE_ALL_REMOVED_PROJECTS:
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //   };
 
-    case DELETE_ALL_REMOVED_PROJECTS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        removedProjects: [],
-      };
+    // case DELETE_ALL_REMOVED_PROJECTS_SUCCESS:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     removedProjects: [],
+    //   };
 
-    case DELETE_ALL_REMOVED_PROJECTS_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: { message: MSG__DELETE_ALL_REMOVED_PROJECTS_ERROR },
-      };
+    // case DELETE_ALL_REMOVED_PROJECTS_FAILURE:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     error: { message: MSG__DELETE_ALL_REMOVED_PROJECTS_ERROR },
+    //   };
 
     case CREATE_WORK:
       return {

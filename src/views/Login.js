@@ -66,7 +66,7 @@ export function Login(props) {
           <Logo src={logoSrc} alt={strings.ttl__app_title} />
           {/* <Typography variant="h4">{strings.ttl__sign_in}</Typography> */}
         </TitleContainer>
-        {error.errorTitleKey && (
+        {error && (
           <div>
             {/* <Typography variant="h5">{strings[error.errorTitleKey]}</Typography> */}
             <Typography>{strings[error.errorBodyKey]}</Typography>
