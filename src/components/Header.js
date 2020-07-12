@@ -18,19 +18,8 @@ const TitleContainer = styled.div`
   padding: 12px;
 `;
 
-const ActionsContainer = styled.div`
-  // padding: 12px;
-`;
-
 export default function Header(props) {
-  const {
-    title,
-    centerTitle,
-    back,
-    background,
-    headerActions,
-    position
-  } = props;
+  const { title, centerTitle, back, background, position } = props;
 
   return (
     <Container
@@ -41,7 +30,7 @@ export default function Header(props) {
               position: position,
               top: 0,
               left: 0,
-              right: 0
+              right: 0,
               // borderBottom: 'solid #e0e0e0 1px'
             }
           : null
@@ -62,7 +51,6 @@ export default function Header(props) {
       </TitleContainer>
       {!centerTitle && <div style={{ flexGrow: 1 }}></div>}
       {props.children}
-      <ActionsContainer>{headerActions}</ActionsContainer>
     </Container>
   );
 }

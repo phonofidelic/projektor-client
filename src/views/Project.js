@@ -39,7 +39,9 @@ export function Project(props) {
         back
         title={project.title}
         headerActions={<ProjectMenu project={project} />}
-      />
+      >
+        <ProjectMenu project={project} />
+      </Header>
       <ProjectDetail
         project={project}
         createWork={createWork}
