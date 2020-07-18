@@ -92,7 +92,7 @@ export function WorkForm(props) {
               </Typography>
             </Grid>
             <WorkInfoContainer container item xs={12} sm={6}>
-              <Grid item item xs={12} sm={12}>
+              <Grid item xs={12} sm={12}>
                 <Typography variant="overline">
                   {strings.lbl__work_tbl_start_date}:
                 </Typography>{' '}
@@ -100,7 +100,7 @@ export function WorkForm(props) {
                   currentLocaleData.longDateFormat('L')
                 )}
               </Grid>
-              <Grid item item xs={12} sm={12}>
+              <Grid item xs={12} sm={12}>
                 <Typography variant="overline">
                   {strings.lbl__work_tbl_duration}:
                 </Typography>{' '}
