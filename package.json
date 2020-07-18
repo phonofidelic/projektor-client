@@ -51,7 +51,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "trans": "node ./scripts/getMasterTranslations.js"
+    "trans": "node ./scripts/getTranslations.js"
   },
   "eslintConfig": {
     "extends": "react-app"
