@@ -25,6 +25,10 @@ const WorkInfoContainer = styled(Grid)`
   }
 `;
 
+const InputContainer = styled.div`
+  margin-top: 10px;
+`;
+
 export function WorkForm(props) {
   const { project, workItem, handleClose, createWork, updateWork } = props;
   const strings = useContext(StringContext);
@@ -78,7 +82,7 @@ export function WorkForm(props) {
       }) => (
         <Form>
           <Grid container style={{ padding: 24, paddingBottom: 0 }}>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <Typography
                 style={{ marginBottom: 24 }}
                 id="form-dialog-title"
@@ -87,11 +91,32 @@ export function WorkForm(props) {
                 {strings.ttl__work_details}
               </Typography>
             </Grid>
+            <WorkInfoContainer container item xs={12} sm={6}>
+              <Grid item item xs={12} sm={12}>
+                <Typography variant="overline">
+                  {strings.lbl__work_tbl_start_date}:
+                </Typography>{' '}
+                {moment(values.start).format(
+                  currentLocaleData.longDateFormat('L')
+                )}
+              </Grid>
+              <Grid item item xs={12} sm={12}>
+                <Typography variant="overline">
+                  {strings.lbl__work_tbl_duration}:
+                </Typography>{' '}
+                {moment
+                  .duration(
+                    parseDateString(values.end) - parseDateString(values.start),
+                    'ms'
+                  )
+                  .format('hh:mm:ss', { trim: false })}
+              </Grid>
+            </WorkInfoContainer>
             <Grid item xs={12} sm={workItem ? 6 : 12}>
               <TextField
                 autoFocus
                 multiline
-                rows={3}
+                rows={7}
                 variant="outlined"
                 margin="dense"
                 id="note"
@@ -103,29 +128,7 @@ export function WorkForm(props) {
               />
             </Grid>
             <WorkInfoContainer item xs={12} sm={6}>
-              <div>
-                <Typography variant="overline">
-                  {strings.lbl__work_tbl_start_date}:
-                </Typography>{' '}
-                {moment(values.start).format(
-                  currentLocaleData.longDateFormat('L')
-                )}
-              </div>
-              {/* <div>
-                <Field
-                  id="start-date"
-                  name="start"
-                  label={strings.lbl__work_tbl_start_date}
-                  component={FormikDatePicker}
-                />
-              </div> */}
-              <div>
-                {/* <Typography variant="overline">
-                  {strings.lbl__work_tbl_start_time}:
-                </Typography>{' '}
-                {moment(workItem.start).format(
-                  currentLocaleData.longDateFormat('LT')
-                )} */}
+              <InputContainer>
                 <Field
                   id="start-date"
                   name="start"
@@ -134,14 +137,8 @@ export function WorkForm(props) {
                   // handleDateTimeError={handleDateTimeError}
                   // onChange={handleChange}
                 />
-              </div>
-              <div>
-                {/* <Typography variant="overline">
-                  {strings.lbl__work_tbl_end_time}:
-                </Typography>{' '}
-                {moment(workItem.stop).format(
-                  currentLocaleData.longDateFormat('LT')
-                )} */}
+              </InputContainer>
+              <InputContainer>
                 <Field
                   id="end-date"
                   name="end"
@@ -152,18 +149,7 @@ export function WorkForm(props) {
                   // handleDateTimeError={handleDateTimeError}
                   // onChange={handleChange}
                 />
-              </div>
-              <div>
-                <Typography variant="overline">
-                  {strings.lbl__work_tbl_duration}:
-                </Typography>{' '}
-                {moment
-                  .duration(
-                    parseDateString(values.end) - parseDateString(values.start),
-                    'ms'
-                  )
-                  .format('hh:mm:ss', { trim: false })}
-              </div>
+              </InputContainer>
             </WorkInfoContainer>
             <Grid item xs={12}>
               <DialogActions>
