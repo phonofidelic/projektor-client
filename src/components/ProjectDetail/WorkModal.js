@@ -26,6 +26,7 @@ export function WorkModal(props) {
         style={{
           maxWidth: 800,
           margin: '100px auto',
+          outline: 0,
         }}
       >
         {children}
