@@ -9,9 +9,9 @@ import {
   GET_PROJECT,
   GET_PROJECT_SUCCESS,
   GET_PROJECT_FAILURE,
-  DELETE_PROJECT,
-  DELETE_PROJECT_SUCCESS,
-  DELETE_PROJECT_FAILURE,
+  // DELETE_PROJECT,
+  // DELETE_PROJECT_SUCCESS,
+  // DELETE_PROJECT_FAILURE,
   SET_PROJECT_STATUS_VIEW,
   CREATE_WORK,
   CREATE_WORK_SUCCESS,
@@ -25,9 +25,9 @@ import {
   SET_PROJECT_STATUS,
   SET_PROJECT_STATUS_SUCCESS,
   SET_PROJECT_STATUS_FAILURE,
-  DELETE_ALL_REMOVED_PROJECTS,
-  DELETE_ALL_REMOVED_PROJECTS_SUCCESS,
-  DELETE_ALL_REMOVED_PROJECTS_FAILURE,
+  // DELETE_ALL_REMOVED_PROJECTS,
+  // DELETE_ALL_REMOVED_PROJECTS_SUCCESS,
+  // DELETE_ALL_REMOVED_PROJECTS_FAILURE,
   SEARCH_PROJECTS,
   SEARCH_PROJECTS_SUCCESS,
   SEARCH_PROJECTS_FAILURE,
@@ -37,14 +37,14 @@ import {
   MSG__CREATE_PROJECT_ERROR,
   MSG__GET_PROJECT_ERROR,
   MSG__GET_PROJECTS_ERROR,
-  MSG__DELETE_PROJECT_ERROR,
+  // MSG__DELETE_PROJECT_ERROR,
   MSG__SET_PROJECT_STATUS_ERROR,
   MSG_FRG__SET_PROJECT_STATUS_ERROR,
   TTL__ACTIVE,
   TTL__COMPLETE,
   TTL__ARCHIVED,
   TTL__DELETED,
-  MSG__DELETE_ALL_REMOVED_PROJECTS_ERROR,
+  // MSG__DELETE_ALL_REMOVED_PROJECTS_ERROR,
   MSG__CREATE_WORK_ERROR,
 } from 'constants/strings';
 import format from 'string-format';
@@ -157,27 +157,27 @@ export default function (state = defaultState, action) {
         error: { message: MSG__GET_PROJECT_ERROR },
       };
 
-    case DELETE_PROJECT:
-      return {
-        ...state,
-        loading: true,
-      };
+    // case DELETE_PROJECT:
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //   };
 
-    case DELETE_PROJECT_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        removedProjects: state.removedProjects.filter(
-          (project) => project._id !== action.payload
-        ),
-      };
+    // case DELETE_PROJECT_SUCCESS:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     removedProjects: state.removedProjects.filter(
+    //       (project) => project._id !== action.payload
+    //     ),
+    //   };
 
-    case DELETE_PROJECT_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: { message: MSG__DELETE_PROJECT_ERROR },
-      };
+    // case DELETE_PROJECT_FAILURE:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     error: { message: MSG__DELETE_PROJECT_ERROR },
+    //   };
 
     case SET_PROJECT_STATUS:
       return {
@@ -246,25 +246,25 @@ export default function (state = defaultState, action) {
         };
       }
 
-    case DELETE_ALL_REMOVED_PROJECTS:
-      return {
-        ...state,
-        loading: true,
-      };
+    // case DELETE_ALL_REMOVED_PROJECTS:
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //   };
 
-    case DELETE_ALL_REMOVED_PROJECTS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        removedProjects: [],
-      };
+    // case DELETE_ALL_REMOVED_PROJECTS_SUCCESS:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     removedProjects: [],
+    //   };
 
-    case DELETE_ALL_REMOVED_PROJECTS_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: { message: MSG__DELETE_ALL_REMOVED_PROJECTS_ERROR },
-      };
+    // case DELETE_ALL_REMOVED_PROJECTS_FAILURE:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     error: { message: MSG__DELETE_ALL_REMOVED_PROJECTS_ERROR },
+    //   };
 
     case CREATE_WORK:
       return {

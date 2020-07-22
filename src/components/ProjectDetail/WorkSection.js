@@ -8,9 +8,11 @@ import WorkModal from 'components/ProjectDetail/WorkModal';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import WorkForm from 'components/WorkForm';
 import SearchBar from 'components/SearchBar';
+import TaskAnalysis from 'components/TaskAnalysis';
 
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import AddIcon from '@material-ui/icons/Add';
 
 const Container = styled.div`
   border-top: solid #e0e0e0 1px;
@@ -40,6 +42,7 @@ export default function WorkSection(props) {
   };
 
   const handleSearch = (query) => {
+    // console.log('handleSearch, query:', query);
     setFilteredWork(matchSorter(project.work, query, { keys: ['notes'] }));
   };
 
@@ -86,9 +89,10 @@ export default function WorkSection(props) {
         >
           <SearchBar handleSearch={handleSearch} />
         </div>
-        <Button variant="outlined" onClick={() => handleOpenWork(false)}>
-          Add new Task
-        </Button>
+        <TaskAnalysis project={project} handleSearch={handleSearch} />
+        <IconButton variant="outlined" onClick={() => handleOpenWork(false)}>
+          <AddIcon />
+        </IconButton>
       </div>
       <WorkContainer>
         {filterdWork.length > 0 ? (

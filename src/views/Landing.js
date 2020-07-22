@@ -68,30 +68,6 @@ const FormContainer = styled.div`
   // }
 `;
 
-function HeaderActions(props) {
-  const strings = useContext(StringContext);
-
-  return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      {/* <Button
-        style={{ textDecoratino: 'none' }}
-        component={Link}
-        to="/registration"
-      >
-        {strings.btn__create_account}
-      </Button> */}
-      <Button
-        variant="outlined"
-        style={{ textDecoratino: 'none', backgroundColor: '#fff' }}
-        component={Link}
-        to="/login"
-      >
-        {strings.btn__sign_in}
-      </Button>
-    </div>
-  );
-}
-
 export function Landing(props) {
   const strings = useContext(StringContext);
 
@@ -111,11 +87,18 @@ export function Landing(props) {
         <meta charSet="utf-8" />
         <title>{strings.ttl__app_title}</title>
       </Helmet>
-      <Header
-        position="fixed"
-        background="none"
-        headerActions={<HeaderActions />}
-      />
+      <Header position="fixed" background="none">
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Button
+            variant="outlined"
+            style={{ textDecoratino: 'none', backgroundColor: '#fff' }}
+            component={Link}
+            to="/login"
+          >
+            {strings.btn__sign_in}
+          </Button>
+        </div>
+      </Header>
       <HeroContainer>
         <Logo src={logoSrc} alt={strings.ttl__app_title} />
         <Typography>{strings.msg__tagline}</Typography>

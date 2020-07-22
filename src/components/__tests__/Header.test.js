@@ -23,7 +23,7 @@ describe('Header', () => {
 
   it('can have action buttons', () => {
     const mockHeaderActions = () => shallow(<button key="test">Test</button>);
-    wrapper = shallow(<Header headerActions={mockHeaderActions()} />);
+    wrapper = shallow(<Header>{mockHeaderActions()}</Header>);
     expect(wrapper.find('button').text()).toBe('Test');
   });
 });

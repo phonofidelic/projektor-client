@@ -20,39 +20,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import AddIcon from '@material-ui/icons/Add';
 import { COMPACT, TABLE } from 'constants/projectsDisplayModes';
 import { getPageVariant } from 'constants/pageVariants';
-
-function HeaderActions(props) {
-  const strings = useContext(StringContext);
-
-  return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        transition: 'opacity 1s',
-      }}
-    >
-      <Tooltip
-        arrow
-        title={strings.hnt__create_project}
-        placement="top-start"
-        enterDelay={400}
-      >
-        <IconButton
-          style={{
-            textDecoration: 'none',
-            // backgroundColor: activeColor[400],
-            // color: '#fff'
-          }}
-          component={Link}
-          to="/projects/create"
-        >
-          <AddIcon />
-        </IconButton>
-      </Tooltip>
-    </div>
-  );
-}
+import { ACTIVE } from 'constants/status';
 
 export function Projects(props) {
   const {
@@ -63,8 +31,6 @@ export function Projects(props) {
     setProjectStatusView,
     searchProjects,
   } = props;
-
-  // const memoizedProjects = useMemo(() => projects, []);
 
   const strings = useContext(StringContext);
 
@@ -81,6 +47,8 @@ export function Projects(props) {
     !preload && getProjects();
   }, [preload, getProjects]);
 
+  console.log('Projects view, setProjectStatusView:', projectStatusView);
+
   return !projects ? (
     <div>Loading...</div>
   ) : (
@@ -96,11 +64,7 @@ export function Projects(props) {
           {strings.ttl__app_title} - {strings.ttl__projects}
         </title>
       </Helmet>
-      <Header
-        nav
-        title={strings.ttl__projects}
-        headerActions={<HeaderActions />}
-      >
+      <Header nav title={strings.ttl__projects}>
         <SearchBar handleSearch={searchProjects} />
         <ProjectsDisplayControls
           projectsDisplayMode={projectsDisplayMode}
@@ -110,6 +74,24 @@ export function Projects(props) {
           projectStatusView={projectStatusView}
           setProjectStatusView={setProjectStatusView}
         />
+        {projectStatusView === ACTIVE && (
+          <Tooltip
+            arrow
+            title={strings.hnt__create_project}
+            placement="top-start"
+            enterDelay={400}
+          >
+            <IconButton
+              style={{
+                textDecoration: 'none',
+              }}
+              component={Link}
+              to="/projects/create"
+            >
+              <AddIcon />
+            </IconButton>
+          </Tooltip>
+        )}
       </Header>
 
       <div>

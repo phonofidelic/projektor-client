@@ -9,7 +9,7 @@ export function WorkModal(props) {
     open,
     // workItem,
     // activeNote,
-    handleClose
+    handleClose,
     // handleSetActiveNote,
     // updateWork
   } = props;
@@ -22,7 +22,15 @@ export function WorkModal(props) {
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
     >
-      <Paper style={{ maxWidth: 500, margin: '100px auto' }}>{children}</Paper>
+      <Paper
+        style={{
+          maxWidth: 800,
+          margin: '100px auto',
+          outline: 0,
+        }}
+      >
+        {children}
+      </Paper>
     </Modal>
   );
 }
