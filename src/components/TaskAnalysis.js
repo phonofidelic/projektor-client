@@ -183,6 +183,8 @@ export const TaskAnalysis = (props) => {
             style={{
               marginTop: 16,
               // textAlign: 'center',
+              maxHeight: '30vh',
+              overflowY: 'auto',
             }}
           >
             {taskTypes.map((task, i) => (
@@ -222,7 +224,6 @@ export const TaskAnalysis = (props) => {
           display: 'flex',
           overflowY: 'auto',
           maxWidth: 500,
-          // height: 48,
           pasddingTop: 5,
         }}
       >
