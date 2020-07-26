@@ -35,11 +35,7 @@ export function Project(props) {
           {strings.ttl__app_title} - {project.title}
         </title>
       </Helmet>
-      <Header
-        back
-        title={project.title}
-        headerActions={<ProjectMenu project={project} />}
-      >
+      <Header back title={project.title}>
         <ProjectMenu project={project} />
       </Header>
       <ProjectDetail

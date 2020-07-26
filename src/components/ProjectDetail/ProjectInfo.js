@@ -11,11 +11,24 @@ import Green from '@material-ui/core/colors/green';
 
 const SHADE = 400;
 
-const Container = styled(Grid)`
-  // padding: 18px;
-  // max-height: 300px;
-  // overflow-y: auto;
-  // white-space: pre-wrap;
+const InfoContainer = styled(Grid)`
+  margin-top: 40px;
+  margin-bottom: 20px;
+  text-align: left;
+`;
+
+const Description = styled(Grid)`
+  padding: 18px;
+  max-height: 300px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+`;
+
+const ProjectInfoContainer = styled(Grid)`
+  padding: 18px;
+  max-height: 300px;
+  overflow-y: auto;
+  white-space: pre-wrap;
 `;
 
 const ProgressContainer = styled.div`
@@ -47,45 +60,60 @@ export default function ProjectInfo(props) {
   const currentLocaleData = moment.localeData();
 
   return (
-    <Container>
-      <div>
-        <Typography variant="overline">{strings.lbl__client}</Typography>{' '}
-        {project.client}
-      </div>
-      <div>
-        <Typography variant="overline">{strings.lbl__start_date}</Typography>{' '}
-        {project.startDate
-          ? moment(project.startDate).format(
-              currentLocaleData.longDateFormat('LL')
-            )
-          : strings.msc_tbd_short}
-      </div>
-      <div>
-        <Typography variant="overline">{strings.lbl__deadline}</Typography>{' '}
-        {project.deadline
-          ? moment(project.deadline).format(
-              currentLocaleData.longDateFormat('LL')
-            )
-          : strings.msc_open}
-      </div>
-      <div>
-        <Typography variant="overline">{strings.lbl__budgeted_time}</Typography>{' '}
-        {project.budgetedTime &&
-          project.budgetedTime.toLocaleString(navigator.language) +
-            strings.frg__hours_short}
-      </div>
-      <div>
-        <Typography variant="overline">{strings.lbl__time_used}</Typography>{' '}
-        {moment
-          .duration(project.timeUsed + time, 'ms')
-          .format('h:mm', { trim: false })}
-      </div>
-      <div>
-        <ProgressContainer>
-          <Progress project={project} />
-          <CurrentProgress project={project} time={time} />
-        </ProgressContainer>
-      </div>
-    </Container>
+    <InfoContainer container>
+      <Description item xs={12} sm={6} lg={8}>
+        {project.description === 'No description provided' ||
+        project.description === '' ? (
+          <Typography color="textSecondary">
+            {strings.msg__empty_project_description}
+          </Typography>
+        ) : (
+          <Typography>{project.description}</Typography>
+        )}
+      </Description>
+
+      <ProjectInfoContainer item xs={12} sm={6} lg={4}>
+        <div>
+          <Typography variant="overline">{strings.lbl__client}</Typography>{' '}
+          {project.client}
+        </div>
+        <div>
+          <Typography variant="overline">{strings.lbl__start_date}</Typography>{' '}
+          {project.startDate
+            ? moment(project.startDate).format(
+                currentLocaleData.longDateFormat('LL')
+              )
+            : strings.msc_tbd_short}
+        </div>
+        <div>
+          <Typography variant="overline">{strings.lbl__deadline}</Typography>{' '}
+          {project.deadline
+            ? moment(project.deadline).format(
+                currentLocaleData.longDateFormat('LL')
+              )
+            : strings.msc_open}
+        </div>
+        <div>
+          <Typography variant="overline">
+            {strings.lbl__budgeted_time}
+          </Typography>{' '}
+          {project.budgetedTime &&
+            project.budgetedTime.toLocaleString(navigator.language) +
+              strings.frg__hours_short}
+        </div>
+        <div>
+          <Typography variant="overline">{strings.lbl__time_used}</Typography>{' '}
+          {moment
+            .duration(project.timeUsed + time, 'ms')
+            .format('h:mm', { trim: false })}
+        </div>
+        <div>
+          <ProgressContainer>
+            <Progress project={project} />
+            <CurrentProgress project={project} time={time} />
+          </ProgressContainer>
+        </div>
+      </ProjectInfoContainer>
+    </InfoContainer>
   );
 }
