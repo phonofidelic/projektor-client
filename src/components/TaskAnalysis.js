@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 // import { connect } from 'react-redux';
-import { api } from 'actions/utils';
+// import { api } from 'actions/utils';
+import useTaskKeywords from 'hooks/useTaskKeywords';
 
 import WorkModal from 'components/ProjectDetail/WorkModal';
 
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
+import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import BubbleChartIcon from '@material-ui/icons/BubbleChart';
@@ -98,31 +100,39 @@ export const TaskAnalysis = (props) => {
     handleSearch,
   } = props;
 
-  const [loadingTaskAnalysis, setLoadingTaskAnalysis] = useState(false);
-  const [taskTypesAnalyzed, setTaskTypesAnalyzed] = useState(false);
-  const [taskTypes, setTaskTypes] = useState([]);
+  // const [loadingTaskAnalysis, setLoadingTaskAnalysis] = useState(false);
+  // const [taskTypesAnalyzed, setTaskTypesAnalyzed] = useState(false);
+  // const [taskTypes, setTaskTypes] = useState([]);
   const [open, setOpen] = useState(false);
 
-  const getTaskKeywords = async (projectId) => {
-    let response;
+  const [
+    taskTypes,
+    loadingTaskAnalysis,
+    // error,
+    setTaskTypes,
+    getTaskKeywords,
+  ] = useTaskKeywords(project._id);
 
-    try {
-      response = await api().get(`/projects/keytasks/${projectId}`);
-    } catch (err) {
-      console.error(err);
-      setLoadingTaskAnalysis(false);
-    }
+  // const getTaskKeywords = async (projectId) => {
+  //   let response;
 
-    const taskTypes = response.data.data.map((taskType) => ({
-      ...taskType,
-      id: taskType.term.replace(' ', '_'),
-    }));
-    console.log('taskTypes:', taskTypes);
+  //   try {
+  //     response = await api().get(`/projects/keytasks/${projectId}`);
+  //   } catch (err) {
+  //     console.error(err);
+  //     setLoadingTaskAnalysis(false);
+  //   }
 
-    setTaskTypes(taskTypes);
-    setLoadingTaskAnalysis(false);
-    setTaskTypesAnalyzed(true);
-  };
+  //   const taskTypes = response.data.data.map((taskType) => ({
+  //     ...taskType,
+  //     id: taskType.term.replace(' ', '_'),
+  //   }));
+  //   console.log('taskTypes:', taskTypes);
+
+  //   setTaskTypes(taskTypes);
+  //   setLoadingTaskAnalysis(false);
+  //   setTaskTypesAnalyzed(true);
+  // };
 
   const deleteTaskType = (term) => {
     setTaskTypes(taskTypes.filter((taskType) => taskType.term !== term));
@@ -245,23 +255,21 @@ export const TaskAnalysis = (props) => {
       <Button
         size="small"
         // variant="outlined"
-        onClick={() =>
-          !taskTypesAnalyzed || !taskTypes.length
-            ? getTaskKeywords(project._id)
-            : openTaskAnalysis()
-        }
-        endIcon={
-          loadingTaskAnalysis ? (
-            <CircularProgress size={15} />
-          ) : (
-            <BubbleChartIcon />
-          )
-        }
+        onClick={() => openTaskAnalysis()}
       >
-        {!taskTypesAnalyzed || !taskTypes.length
-          ? 'Find Task Types'
-          : '...View all'}
+        View all
       </Button>
+      <IconButton
+        // size="small"
+        // variant="outlined"
+        onClick={() => getTaskKeywords(project._id)}
+      >
+        {loadingTaskAnalysis ? (
+          <CircularProgress size={15} />
+        ) : (
+          <BubbleChartIcon />
+        )}
+      </IconButton>
     </div>
   );
 };

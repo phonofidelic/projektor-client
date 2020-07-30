@@ -1,7 +1,8 @@
 import React, { useContext, useState, useMemo } from 'react';
 import { StringContext } from 'strings';
 import moment from 'moment';
-import { useTable, useSortBy, useExpanded } from 'react-table';
+import { useTable, useSortBy, useExpanded, usePagination } from 'react-table';
+import TablePaginationActions from 'components/TablePaginationActions';
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -13,12 +14,16 @@ import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
+import TableFooter from '@material-ui/core/TableFooter';
 import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+
+const MAX_ROWS = 10;
 
 const StyledTableCell = withStyles({
   head: { background: '#fff' },
@@ -140,11 +145,22 @@ export default function WorkTable(props) {
     headerGroups,
     rows,
     prepareRow,
-    // state: { expanded },
+    /** Pagination props */
+    page,
+    // canPreviousPage,
+    // canNextPage,
+    // pageOptions,
+    // pageCount,
+    gotoPage,
+    // nextPage,
+    // previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize },
   } = useTable(
     { columns, data, autoResetSortBy: false },
     useSortBy,
-    useExpanded
+    useExpanded,
+    usePagination
   );
 
   const handleSelectWork = (work) => {
@@ -161,6 +177,10 @@ export default function WorkTable(props) {
   const handleCloseContextMenu = () => {
     setContextPos({});
     setContextMenuOpen(false);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    gotoPage(newPage);
   };
 
   return (
@@ -195,7 +215,7 @@ export default function WorkTable(props) {
           ))}
         </TableHead>
         <TableBody {...getTableBodyProps()}>
-          {rows.map((row, i) => {
+          {page.map((row, i) => {
             prepareRow(row);
             return (
               <TableRow
@@ -218,6 +238,28 @@ export default function WorkTable(props) {
             );
           })}
         </TableBody>
+        {rows.length > MAX_ROWS && (
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[MAX_ROWS, MAX_ROWS + 15, MAX_ROWS + 40]}
+                colSpan={5}
+                count={rows.length}
+                rowsPerPage={pageSize}
+                page={pageIndex}
+                SelectProps={{
+                  inputProps: { 'aria-label': 'rows per page' },
+                  native: true,
+                }}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={(e) => {
+                  setPageSize(Number(e.target.value));
+                }}
+                ActionsComponent={TablePaginationActions}
+              />
+            </TableRow>
+          </TableFooter>
+        )}
       </Table>
       {/* </Paper> */}
     </>

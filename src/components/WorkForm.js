@@ -112,7 +112,12 @@ export function WorkForm(props) {
                   .format('hh:mm:ss', { trim: false })}
               </Grid>
             </WorkInfoContainer>
-            <Grid item xs={12} sm={workItem ? 6 : 12}>
+            <Grid
+              item
+              xs={12}
+              // sm={workItem ? 6 : 12}
+              sm={6}
+            >
               <TextField
                 autoFocus
                 multiline
@@ -150,6 +155,20 @@ export function WorkForm(props) {
                   // onChange={handleChange}
                 />
               </InputContainer>
+              {/* <InputContainer>
+                <Typography variant="overline">Tags</Typography>
+                <Field
+                  fullWidth
+                  id="end-date"
+                  name="end"
+                  label="Tags"
+                  helperText={touched.end && errors.end}
+                  error={Boolean(errors.end && touched.end)}
+                  component={TextField}
+                  // handleDateTimeError={handleDateTimeError}
+                  // onChange={handleChange}
+                />
+              </InputContainer> */}
             </WorkInfoContainer>
             <Grid item xs={12}>
               <DialogActions>

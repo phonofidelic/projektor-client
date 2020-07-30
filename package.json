@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/preset-create-react-app": "^3.1.4",
+    "@storybook/react": "^5.3.19",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "react-scripts": "^3.4.0"
@@ -51,7 +56,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "trans": "node ./scripts/getTranslations.js"
+    "trans": "node ./scripts/getTranslations.js",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
