@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import { connect } from 'react-redux';
-import { api } from 'actions/utils';
+// import { api } from 'actions/utils';
 import useTaskKeywords from 'hooks/useTaskKeywords';
 
 import WorkModal from 'components/ProjectDetail/WorkModal';
@@ -101,14 +101,14 @@ export const TaskAnalysis = (props) => {
   } = props;
 
   // const [loadingTaskAnalysis, setLoadingTaskAnalysis] = useState(false);
-  const [taskTypesAnalyzed, setTaskTypesAnalyzed] = useState(false);
+  // const [taskTypesAnalyzed, setTaskTypesAnalyzed] = useState(false);
   // const [taskTypes, setTaskTypes] = useState([]);
   const [open, setOpen] = useState(false);
 
   const [
     taskTypes,
     loadingTaskAnalysis,
-    error,
+    // error,
     setTaskTypes,
     getTaskKeywords,
   ] = useTaskKeywords(project._id);
