@@ -141,48 +141,58 @@ export default function ProjectGridItem(props) {
             <ProjectInfoContainer>
               {project.client && (
                 <div>
-                  <Typography variant="overline">
-                    {strings.lbl__client}
-                  </Typography>{' '}
-                  {project.client}
+                  <Typography>
+                    <Typography variant="overline">
+                      {strings.lbl__client}
+                    </Typography>{' '}
+                    {project.client}
+                  </Typography>
                 </div>
               )}
               <div>
-                <Typography variant="overline">
-                  {strings.lbl__start_date}
-                </Typography>{' '}
-                {project.startDate
-                  ? moment(project.startDate).format(
-                      currentLocaleData.longDateFormat('L')
-                    )
-                  : strings.msc__tbd_short}
+                <Typography>
+                  <Typography variant="overline">
+                    {strings.lbl__start_date}
+                  </Typography>{' '}
+                  {project.startDate
+                    ? moment(project.startDate).format(
+                        currentLocaleData.longDateFormat('L')
+                      )
+                    : strings.msc__tbd_short}
+                </Typography>
               </div>
               <div>
-                <Typography variant="overline">
-                  {strings.lbl__deadline}
-                </Typography>{' '}
-                {project.deadline
-                  ? moment(project.deadline).format(
-                      currentLocaleData.longDateFormat('L')
-                    )
-                  : strings.msc__open}
+                <Typography>
+                  <Typography variant="overline">
+                    {strings.lbl__deadline}
+                  </Typography>{' '}
+                  {project.deadline
+                    ? moment(project.deadline).format(
+                        currentLocaleData.longDateFormat('L')
+                      )
+                    : strings.msc__open}
+                </Typography>
               </div>
               {project.budgetedTime && (
                 <div>
-                  <Typography variant="overline">
-                    {strings.lbl__budgeted_time}
+                  <Typography>
+                    <Typography variant="overline">
+                      {strings.lbl__budgeted_time}
+                    </Typography>
+                    {project.budgetedTime.toLocaleString(navigator.language) +
+                      strings.frg__hours_short}
                   </Typography>
-                  {project.budgetedTime.toLocaleString(navigator.language) +
-                    strings.frg__hours_short}
                 </div>
               )}
               <div>
-                <Typography variant="overline">
-                  {strings.lbl__time_used}
-                </Typography>{' '}
-                {moment
-                  .duration(project.timeUsed, 'ms')
-                  .format('hh:mm:ss', { trim: false })}
+                <Typography>
+                  <Typography variant="overline">
+                    {strings.lbl__time_used}
+                  </Typography>{' '}
+                  {moment
+                    .duration(project.timeUsed, 'ms')
+                    .format('hh:mm:ss', { trim: false })}
+                </Typography>
               </div>
             </ProjectInfoContainer>
             <div>
