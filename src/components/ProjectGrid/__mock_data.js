@@ -1,6 +1,6 @@
 import createWorkItems from 'utils/createWorkItems';
 
-const mockProjects = [
+export const mockProjects = [
   {
     id: 1,
     title: 'Test Project 1',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ProjectGrid from 'components/ProjectsGrid';
+import ProjectGrid from 'components/ProjectGrid';
 import ProjectGridItem from 'components/ProjectGridItem';
 import { mockProject } from 'utils/mockData';
 

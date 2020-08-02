@@ -8,7 +8,7 @@ import requireAuth from 'hocs/requireAuth';
 import { motion } from 'framer-motion';
 
 import Header from 'components/Header';
-import ProjectsGrid from 'components/ProjectsGrid';
+import ProjectGrid from 'components/ProjectGrid';
 import ProjectTable from 'components/ProjectTable';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import ProjectsStatusSelect from 'components/ProjectsStatusSelect';
@@ -99,7 +99,7 @@ export function Projects(props) {
           projectsDisplayMode === TABLE ? (
             <ProjectTable key="projects-table" projects={projects} />
           ) : (
-            <ProjectsGrid
+            <ProjectGrid
               key="projects-grid"
               projects={projects}
               projectsDisplayMode={projectsDisplayMode}
