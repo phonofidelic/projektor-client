@@ -1,7 +1,6 @@
 import React from 'react';
 import ProjectGridItem from 'components/ProjectGridItem';
 import { mockProject } from './__mock_data';
-import 'moment-duration-format';
 
 // import moment from 'moment';
 // moment.locale(navigator.language);
