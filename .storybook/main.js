@@ -10,5 +10,6 @@ module.exports = {
         configureJSX: true,
       },
     },
+    '@storybook/addon-a11y',
   ],
 };

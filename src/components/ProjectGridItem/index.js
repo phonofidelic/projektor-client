@@ -205,6 +205,7 @@ export default function ProjectGridItem(props) {
                   overflowY: 'auto',
                   whiteSpace: 'pre-wrap',
                 }}
+                tabIndex="0"
               >
                 {project.description === 'No description provided'
                   ? strings.msg__empty_project_description

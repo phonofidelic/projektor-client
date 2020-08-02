@@ -3,8 +3,11 @@ import { mockProjects } from './__mock_data';
 import ProjectGrid from 'components/ProjectGrid';
 
 export default {
-  component: ProjectGrid,
   title: 'ProjectGrid',
+  parameters: {
+    component: ProjectGrid,
+    componentSubtitle: 'Displays a grid of ProjectGridItems',
+  },
   excludeStories: /.*Data$/,
 };
 

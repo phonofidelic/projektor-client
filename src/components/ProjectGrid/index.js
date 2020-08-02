@@ -41,6 +41,11 @@ const Container = styled.div`
   transition: all 5s;
 `;
 
+/**
+ * This component is displayed when the projectsDisplayMode is set to "compact" or "expanded".
+ * Grid tiles can be expanded by toggling the display mode in the Header component.
+ */
+
 function ProjectGrid(props) {
   const { projects, projectsDisplayMode } = props;
   // const projectsWithLocation = withProjectLocation(projects);
