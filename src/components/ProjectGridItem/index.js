@@ -16,6 +16,7 @@ import Grey from '@material-ui/core/colors/grey';
 const Gray = Grey;
 
 const CARD_RADIUS = 2;
+const TRANSITION_SPEED = 0.1;
 
 const Container = styled(Grid)`
   padding: 10px;
@@ -29,11 +30,11 @@ const CardContainer = styled(Card)`
 
   &.MuiPaper-root {
     background-color: ${Gray[50]};
-    transition: background-color 0.6s ease-in-out;
+    transition: background-color ${TRANSITION_SPEED}s ease-in-out;
   }
   &:hover {
     background-color: ${Gray[300]};
-    transition: background-color 0.6s ease-in-out;
+    transition: background-color ${TRANSITION_SPEED}s ease-in-out;
   }
 `;
 
@@ -43,18 +44,19 @@ const CardHeaderContainer = styled.div`
     (projectColor === Gray[50]) & hovered ? Gray[300] : projectColor};
   border-radius: 0 ${CARD_RADIUS}px ${CARD_RADIUS}px ${CARD_RADIUS}px;
   box-shadow: 0 0 10px ${Gray[300]};
-  transition: background-color 0.6s ease-in-out;
+  transition: background-color ${TRANSITION_SPEED}s ease-in-out;
 `;
 
 const CardHeader = styled.div`
   padding: 16px;
   flex: 1;
-  color: #000;
+  /* color: #000; */
   background-color: ${({ hovered }) => (hovered ? Gray[300] : Gray[50])};
   border-radius: 0 ${CARD_RADIUS}px ${CARD_RADIUS}px ${CARD_RADIUS}px;
-  transition: background-color 0.6s;
+  transition: background-color ${TRANSITION_SPEED}s;
   overflow: hidden;
-  transition: background-color 0.6s ease-in-out;
+  transition: background-color ${TRANSITION_SPEED}s ease-in-out;
+  /* border-bottom: 5px solid ${({ projectColor }) => projectColor}; */
 `;
 
 const CardLink = styled(Link)`
@@ -114,7 +116,7 @@ export default function ProjectGridItem(props) {
         enter={{ opacity: 1, x: 0 }}
         animate={{ height: projectsDisplayMode === EXPANDED ? 372 : 72 }}
         whileHover={{ scale: 1.03 }}
-        transition={{ ease: 'easeInOut', duration: 0.2 }}
+        transition={{ ease: 'easeInOut', duration: TRANSITION_SPEED }}
         positionTransition
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -124,7 +126,7 @@ export default function ProjectGridItem(props) {
           style={{ textDecoration: 'none' }}
         >
           <CardHeaderContainer projectColor={project.color} hovered={hovered}>
-            <CardHeader hovered={hovered}>
+            <CardHeader hovered={hovered} projectColor={project.color}>
               <Typography
                 style={{ flexGrow: 1, lineHeight: '2em' }}
                 variant="h6"
