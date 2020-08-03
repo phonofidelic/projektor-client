@@ -26,26 +26,32 @@ export default function ProjectsDisplayControls(props) {
     {
       type: COMPACT,
       title: strings.hnt__compact_view,
-      icon: <CompactIcon />,
+      icon: <CompactIcon color="action" />
     },
     {
       type: EXPANDED,
       title: strings.hnt__expanded_view,
-      icon: <ExpandedIcon />,
+      icon: <ExpandedIcon color="action" />
     },
     {
       type: TABLE,
       title: strings.hnt__table_view,
-      icon: <TableIcon />,
-    },
+      icon: <TableIcon color="action" />
+    }
   ];
 
   return (
     <Container>
-      <ButtonGroup color="primary" aria-label="Project display mode selection">
+      <ButtonGroup
+        color="primary"
+        size="small"
+        variant="text"
+        aria-label="Project display mode selection"
+      >
         {displayModes.map((displayMode, i) => (
           <Tooltip key={i} arrow title={displayMode.title} enterDelay={400}>
             <Button
+              size="small"
               style={{
                 color:
                   projectsDisplayMode === displayMode.type ? '#666' : '#212121',
@@ -54,7 +60,7 @@ export default function ProjectsDisplayControls(props) {
                 cursor:
                   projectsDisplayMode === displayMode.type
                     ? 'default'
-                    : 'pointer',
+                    : 'pointer'
               }}
               // disabled={projectsDisplayMode === displayMode.type}
               onClick={() => selectDisplayMode(displayMode.type)}
