@@ -1,8 +1,10 @@
 import React, { useContext, useState, useMemo } from 'react';
-import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { StringContext } from 'strings';
 import moment from 'moment';
 import { useTable, useSortBy } from 'react-table';
+
+import ProjectTableRow from 'components/ProjectTableRow';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,19 +16,22 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 const StyledTableCell = withStyles({
-  head: { background: '#fff' },
+  head: { background: '#fff' }
 })(TableCell);
 
-export default function ProjectTable(props) {
+export function ProjectTable(props) {
   const { projects } = props;
   const [hovered, setHovered] = useState(null);
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
-  const history = useHistory();
+
+  const handleRowHover = id => {
+    setHovered(id);
+  };
 
   const data = useMemo(
     () =>
-      projects.map((project) => ({
+      projects.map(project => ({
         ...project,
         startDate: project.startDate
           ? moment(project.startDate).format(
@@ -44,7 +49,7 @@ export default function ProjectTable(props) {
           : '',
         timeUsed: moment
           .duration(project.timeUsed, 'milliseconds')
-          .format('h:mm'),
+          .format('h:mm')
       })),
     [projects, strings, currentLocaleData]
   );
@@ -53,28 +58,28 @@ export default function ProjectTable(props) {
     () => [
       {
         Header: strings.lbl__project_title,
-        accessor: 'title',
+        accessor: 'title'
       },
       {
         Header: strings.lbl__client,
-        accessor: 'client',
+        accessor: 'client'
       },
       {
         Header: strings.lbl__start_date,
-        accessor: 'startDate',
+        accessor: 'startDate'
       },
       {
         Header: strings.lbl__deadline,
-        accessor: 'deadline',
+        accessor: 'deadline'
       },
       {
         Header: strings.lbl__budgeted_time,
-        accessor: 'budgetedTime',
+        accessor: 'budgetedTime'
       },
       {
         Header: strings.lbl__time_used,
-        accessor: 'timeUsed',
-      },
+        accessor: 'timeUsed'
+      }
     ],
     [strings]
   );
@@ -84,7 +89,7 @@ export default function ProjectTable(props) {
     getTableBodyProps,
     headerGroups,
     rows,
-    prepareRow,
+    prepareRow
   } = useTable({ columns, data }, useSortBy);
 
   return (
@@ -92,15 +97,18 @@ export default function ProjectTable(props) {
       {/* <Paper style={{ margin: 18, flex: 1 }}> */}
       <Table {...getTableProps()} stickyHeader>
         <TableHead style={{ backgroundColor: '#fff' }}>
-          {headerGroups.map((headerGroup) => (
+          {headerGroups.map(headerGroup => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
+              {headerGroup.headers.map(column => (
                 <StyledTableCell
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   <div style={{ display: 'flex' }}>
                     <Typography noWrap>{column.render('Header')}</Typography>
                     <TableSortLabel
+                      title={`Sort ${
+                        column.isSortedDesc ? 'ascending' : 'descending'
+                      }`}
                       active={column.isSorted}
                       direction={column.isSortedDesc ? 'desc' : 'asc'}
                     />
@@ -114,32 +122,11 @@ export default function ProjectTable(props) {
           {rows.map((row, i) => {
             prepareRow(row);
             return (
-              <TableRow
-                {...row.getRowProps()}
-                style={{
-                  cursor: 'pointer',
-                  background: `linear-gradient(to right, rgba(0, 0, 0, ${
-                    hovered === row.original._id ? 0.04 : 0.0
-                  }) 99.5%, ${row.original.color || '#fff'} 10%)`,
-                }}
-                key={row.original._id}
-                onClick={() => history.push('projects/' + row.original._id)}
-                // onContextMenu={(e) => handleOpenContextMenu(e, row.original)}
-                onMouseEnter={() => setHovered(row.original._id)}
-                onMouseLeave={() => setHovered(null)}
-              >
-                {row.cells.map((cell) => (
-                  <TableCell
-                    style={{
-                      maxWidth: 200,
-                      minWidth: 100,
-                    }}
-                    {...cell.getCellProps()}
-                  >
-                    <Typography noWrap>{cell.render('Cell')}</Typography>
-                  </TableCell>
-                ))}
-              </TableRow>
+              <ProjectTableRow
+                row={row}
+                hovered={hovered}
+                handleRowHover={handleRowHover}
+              />
             );
           })}
         </TableBody>
@@ -148,3 +135,9 @@ export default function ProjectTable(props) {
     </>
   );
 }
+
+ProjectTable.propTypes = {
+  projects: PropTypes.array
+};
+
+export default ProjectTable;

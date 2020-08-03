@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import * as actions from 'actions';
 import { connect } from 'react-redux';
 import { StringContext } from 'strings';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 // import STATUS from 'constants';
 
 import { ACTIVE, ARCHIVED, DELETED } from 'constants/status';
@@ -18,8 +18,10 @@ import CachedIcon from '@material-ui/icons/Cached';
 import EditIcon from '@material-ui/icons/Edit';
 
 function ProjectMenu(props) {
-  const { project, color, location, setProjectStatus, deleteProject } = props;
+  const { project, color, setProjectStatus, deleteProject } = props;
   const strings = useContext(StringContext);
+  const location = useLocation();
+  const history = useHistory();
 
   const [anchorEl, setAnchor] = useState(null);
   const handleMenuClick = e => {
@@ -32,9 +34,17 @@ function ProjectMenu(props) {
   const handleMenuSelection = (projectId, status) => {
     setProjectStatus(projectId, status, location);
     handleCloseMenu();
+
+    /**
+     * Go back to previous view if status was set from project detail
+     */
+    if (location.pathname.includes(projectId)) history.goBack();
   };
 
   const handleDelete = projectId => {
+    /**
+     * TODO: Use custom Confirm dialog component
+     */
     if (window.confirm(strings.msg__delete_perm_confirm)) {
       deleteProject(projectId, location);
     }

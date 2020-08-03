@@ -13,8 +13,8 @@ export const mockProject = {
       end: '2019-12-15T19:16:18.786Z',
       duration: 48459,
       created: '2019-12-15T19:16:19.291Z',
-      __v: 0
-    }
+      __v: 0,
+    },
   ],
   _id: '5deccf102d02734c530164ff',
   userId: '5deae2fc0538f147d0eace3c',
@@ -24,7 +24,8 @@ export const mockProject = {
   budgetedTime: 10,
   startDate: '2019-12-09T10:22:00.000Z',
   deadline: '2019-12-16T10:22:00.000Z',
-  __v: 3
+  color: '#66bb6a',
+  __v: 3,
 };
 
 export const mockSelectedProject = {
@@ -41,8 +42,8 @@ export const mockSelectedProject = {
       end: '2019-12-15T19:16:18.786Z',
       duration: 48459,
       created: '2019-12-15T19:16:19.291Z',
-      __v: 0
-    }
+      __v: 0,
+    },
   ],
   _id: '5df5e2d85032413df009eebc',
   userId: '5deae94a77d40a110ddb30ea',
@@ -52,7 +53,7 @@ export const mockSelectedProject = {
   budgetedTime: 0.5,
   startDate: null,
   deadline: null,
-  __v: 0
+  __v: 0,
 };
 
 export const mockWork = {
@@ -64,17 +65,17 @@ export const mockWork = {
   end: '2019-12-15T19:16:18.786Z',
   duration: 48459,
   created: '2019-12-15T19:16:19.291Z',
-  __v: 0
+  __v: 0,
 };
 
 export const mockError = {
   status: 500,
-  message: 'Something went wrong'
+  message: 'Something went wrong',
 };
 
 export const mockUserInfo = {
   _id: '5deae2fc0538f147d0eace3c',
   email: 'test1@test.com',
   token:
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGVhZTJmYzA1MzhmMTQ3ZDBlYWNlM2MiLCJlbWFpbCI6InRlc3QxQHRlc3QuY29tIiwicnQiOiI4MGY5OGNjMi04MjU4LTQzZGEtYjI0ZC1iMDlmNDgzYTQ3ZDUiLCJpYXQiOjE1NzY1NjcxNzUsImV4cCI6MTU3NjU2ODA3NSwiYXVkIjoicHJvamVrdG9yX2NsaWVudCIsImlzcyI6InByb2pla3Rvcl9hcGkiLCJzdWIiOiI1ZGVhZTJmYzA1MzhmMTQ3ZDBlYWNlM2MiLCJqdGkiOiJmOTZkMGVkZi1iYmY2LTQ1ZmQtYWYxMi1mNmYwYTkyODcxNWUifQ.-hqUCC-l1GGu6kl-yxsrph2TcCgE3r2MhFiyFWTTMdU'
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGVhZTJmYzA1MzhmMTQ3ZDBlYWNlM2MiLCJlbWFpbCI6InRlc3QxQHRlc3QuY29tIiwicnQiOiI4MGY5OGNjMi04MjU4LTQzZGEtYjI0ZC1iMDlmNDgzYTQ3ZDUiLCJpYXQiOjE1NzY1NjcxNzUsImV4cCI6MTU3NjU2ODA3NSwiYXVkIjoicHJvamVrdG9yX2NsaWVudCIsImlzcyI6InByb2pla3Rvcl9hcGkiLCJzdWIiOiI1ZGVhZTJmYzA1MzhmMTQ3ZDBlYWNlM2MiLCJqdGkiOiJmOTZkMGVkZi1iYmY2LTQ1ZmQtYWYxMi1mNmYwYTkyODcxNWUifQ.-hqUCC-l1GGu6kl-yxsrph2TcCgE3r2MhFiyFWTTMdU',
 };

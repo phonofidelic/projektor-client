@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AnimatePresence } from 'framer-motion';
+// import { AnimatePresence } from 'framer-motion';
 
 import ProjectGridItem from 'components/ProjectGridItem';
 
@@ -41,22 +41,27 @@ const Container = styled.div`
   transition: all 5s;
 `;
 
+/**
+ * This component is displayed when the projectsDisplayMode is set to "compact" or "expanded".
+ * Grid tiles can be expanded by toggling the display mode in the Header component.
+ */
+
 function ProjectGrid(props) {
   const { projects, projectsDisplayMode } = props;
   // const projectsWithLocation = withProjectLocation(projects);
 
   return (
     <Container>
-      <Grid container>
-        <AnimatePresence>
-          {projects.map((project) => (
-            <ProjectGridItem
-              key={project._id}
-              project={project}
-              projectsDisplayMode={projectsDisplayMode}
-            />
-          ))}
-        </AnimatePresence>
+      <Grid container spacing={1}>
+        {/* <AnimatePresence> */}
+        {projects.map((project) => (
+          <ProjectGridItem
+            key={project._id}
+            project={project}
+            projectsDisplayMode={projectsDisplayMode}
+          />
+        ))}
+        {/* </AnimatePresence> */}
       </Grid>
     </Container>
   );

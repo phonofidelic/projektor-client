@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@storybook/addon-a11y": "^5.3.19",
     "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-docs": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addons": "^5.3.19",
     "@storybook/preset-create-react-app": "^3.1.4",
     "@storybook/react": "^5.3.19",
+    "@testing-library/jest-dom": "^5.11.2",
+    "@testing-library/react": "^10.4.7",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "react-scripts": "^3.4.0"
@@ -55,6 +59,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "coverage": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject",
     "trans": "node ./scripts/getTranslations.js",
     "storybook": "start-storybook -p 9009 -s public",
