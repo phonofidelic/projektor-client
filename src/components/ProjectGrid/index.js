@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AnimatePresence } from 'framer-motion';
+// import { AnimatePresence } from 'framer-motion';
 
 import ProjectGridItem from 'components/ProjectGridItem';
 
@@ -52,16 +52,16 @@ function ProjectGrid(props) {
 
   return (
     <Container>
-      <Grid container>
-        <AnimatePresence>
-          {projects.map((project) => (
-            <ProjectGridItem
-              key={project._id}
-              project={project}
-              projectsDisplayMode={projectsDisplayMode}
-            />
-          ))}
-        </AnimatePresence>
+      <Grid container spacing={1}>
+        {/* <AnimatePresence> */}
+        {projects.map((project) => (
+          <ProjectGridItem
+            key={project._id}
+            project={project}
+            projectsDisplayMode={projectsDisplayMode}
+          />
+        ))}
+        {/* </AnimatePresence> */}
       </Grid>
     </Container>
   );

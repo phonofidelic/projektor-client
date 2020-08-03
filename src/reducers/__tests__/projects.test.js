@@ -22,7 +22,7 @@ import {
   DELETE_ALL_REMOVED_PROJECTS_FAILURE,
   CREATE_WORK,
   CREATE_WORK_SUCCESS,
-  CREATE_WORK_FAILURE,
+  CREATE_WORK_FAILURE
 } from 'actions/types';
 
 import { ACTIVE, COMPLETE, ARCHIVED, DELETED } from 'constants/status';
@@ -39,61 +39,61 @@ import {
   TTL__ARCHIVED,
   TTL__DELETED,
   MSG__DELETE_ALL_REMOVED_PROJECTS_ERROR,
-  MSG__CREATE_WORK_ERROR,
+  MSG__CREATE_WORK_ERROR
 } from 'constants/strings';
 
 import {
   mockProject,
   mockWork,
   mockSelectedProject,
-  mockError,
+  mockError
 } from 'utils/mockData';
 
 describe('projects reducer', () => {
   it('handles POST_CREATE_PROJECT', () => {
     const action = {
-      type: POST_CREATE_PROJECT,
+      type: POST_CREATE_PROJECT
     };
     const newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
-      loading: true,
+      loading: true
     });
   });
 
   it('handles CREATE_PROJECT_SUCCESS', () => {
     const action = {
       type: CREATE_PROJECT_SUCCESS,
-      payload: mockProject,
+      payload: mockProject
     };
     const newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
       loading: false,
-      projectListByStatus: [mockProject],
+      projectListByStatus: [mockProject]
     });
   });
 
   it('handles CREATE_PROJECT_FAILURE', () => {
     const action = {
-      type: CREATE_PROJECT_FAILURE,
+      type: CREATE_PROJECT_FAILURE
     };
     const newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
       loading: false,
-      error: { message: MSG__CREATE_PROJECT_ERROR },
+      error: { message: MSG__CREATE_PROJECT_ERROR }
     });
   });
 
   it('handles GET_PROJECTS', () => {
     const action = {
-      type: GET_PROJECTS,
+      type: GET_PROJECTS
     };
     const newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
-      loading: true,
+      loading: true
     });
   });
 
@@ -101,7 +101,7 @@ describe('projects reducer', () => {
     const action = {
       type: GET_PROJECTS_SUCCESS,
       loading: false,
-      payload: [mockProject],
+      payload: [mockProject]
     };
     const newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
@@ -112,55 +112,55 @@ describe('projects reducer', () => {
       // removedProjects: [],
       projectListByStatus: [mockProject],
       loading: false,
-      error: null,
+      error: null
     });
   });
 
   it('handles GET_PROJECTS_FAILURE', () => {
     const action = {
-      type: GET_PROJECTS_FAILURE,
+      type: GET_PROJECTS_FAILURE
     };
     const newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
       loading: false,
-      error: { message: MSG__GET_PROJECTS_ERROR },
+      error: { message: MSG__GET_PROJECTS_ERROR }
     });
   });
 
   it('handles GET_PROJECT', () => {
     const action = {
-      type: GET_PROJECT,
+      type: GET_PROJECT
     };
     const newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
-      loading: true,
+      loading: true
     });
   });
 
   it('handles GET_PROJECT_SUCCESS', () => {
     const action = {
       type: GET_PROJECT_SUCCESS,
-      payload: mockProject,
+      payload: mockProject
     };
     const newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
       loading: false,
-      selectedProject: mockProject,
+      selectedProject: mockProject
     });
   });
 
   it('handles GET_PROJECT_FAILURE', () => {
     const action = {
-      type: GET_PROJECT_FAILURE,
+      type: GET_PROJECT_FAILURE
     };
     const newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
       loading: false,
-      error: { message: MSG__GET_PROJECT_ERROR },
+      error: { message: MSG__GET_PROJECT_ERROR }
     });
   });
 
@@ -203,91 +203,96 @@ describe('projects reducer', () => {
 
   it('handles SET_PROJECT_STATUS', () => {
     const action = {
-      type: SET_PROJECT_STATUS,
+      type: SET_PROJECT_STATUS
     };
     const newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
-      loading: true,
+      loading: true
     });
   });
 
   it('handles SET_PROJECT_STATUS_SUCCESS', () => {
-    const mockState = { ...defaultState, projectList: [mockProject] };
+    const mockState = {
+      ...defaultState,
+      projectList: [mockProject],
+      projectListByStatus: [mockProject]
+    };
     const action = {
       type: SET_PROJECT_STATUS_SUCCESS,
-      payload: '5deccf102d02734c530164ff',
+      payload: mockProject
     };
     const newState = projectsReducer(mockState, action);
     expect(newState).toEqual({
       ...defaultState,
       loading: false,
       projectList: [mockProject],
+      projectListByStatus: []
     });
   });
 
   it('handles SET_PROJECT_STATUS_FAILURE', () => {
     let action = {
       type: SET_PROJECT_STATUS_FAILURE,
-      payload: ACTIVE,
+      payload: ACTIVE
     };
     let newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
       loading: false,
-      error: { message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__ACTIVE) },
+      error: { message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__ACTIVE) }
     });
 
     action = {
       type: SET_PROJECT_STATUS_FAILURE,
-      payload: COMPLETE,
+      payload: COMPLETE
     };
     newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
       loading: false,
       error: {
-        message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__COMPLETE),
-      },
+        message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__COMPLETE)
+      }
     });
 
     action = {
       type: SET_PROJECT_STATUS_FAILURE,
-      payload: ARCHIVED,
+      payload: ARCHIVED
     };
     newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
       loading: false,
       error: {
-        message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__ARCHIVED),
-      },
+        message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__ARCHIVED)
+      }
     });
 
     action = {
       type: SET_PROJECT_STATUS_FAILURE,
-      payload: DELETED,
+      payload: DELETED
     };
     newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
       loading: false,
       error: {
-        message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__DELETED),
-      },
+        message: MSG_FRG__SET_PROJECT_STATUS_ERROR.format(TTL__DELETED)
+      }
     });
 
     action = {
       type: SET_PROJECT_STATUS_FAILURE,
-      payload: '***',
+      payload: '***'
     };
     newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
       loading: false,
       error: {
-        message: MSG__SET_PROJECT_STATUS_ERROR,
-      },
+        message: MSG__SET_PROJECT_STATUS_ERROR
+      }
     });
   });
 
@@ -329,23 +334,23 @@ describe('projects reducer', () => {
 
   it('handles CREATE_WORK', () => {
     const action = {
-      type: CREATE_WORK,
+      type: CREATE_WORK
     };
     const newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
-      loading: true,
+      loading: true
     });
   });
 
   it('handles CREATE_WORK_SUCCESS', () => {
     const mockState = {
       ...defaultState,
-      selectedProject: mockSelectedProject,
+      selectedProject: mockSelectedProject
     };
     const action = {
       type: CREATE_WORK_SUCCESS,
-      payload: mockWork,
+      payload: mockWork
     };
     const newState = projectsReducer(mockState, action);
     expect(newState).toEqual({
@@ -354,26 +359,26 @@ describe('projects reducer', () => {
       selectedProject: {
         ...mockState.selectedProject,
         timeUsed: mockState.selectedProject.timeUsed + mockWork.duration,
-        work: [...mockState.selectedProject.work, mockWork],
-      },
+        work: [...mockState.selectedProject.work, mockWork]
+      }
     });
   });
 
   it('handles CREATE_WORK_FAILURE', () => {
     const action = {
-      type: CREATE_WORK_FAILURE,
+      type: CREATE_WORK_FAILURE
     };
     const newState = projectsReducer(defaultState, action);
     expect(newState).toEqual({
       ...defaultState,
       loading: false,
-      error: { message: MSG__CREATE_WORK_ERROR },
+      error: { message: MSG__CREATE_WORK_ERROR }
     });
   });
 
   it('handles action of unknown type', () => {
     const action = {
-      type: '***',
+      type: '***'
     };
     const newState = projectsReducer(defaultState, action);
     expect(newState).toEqual(defaultState);

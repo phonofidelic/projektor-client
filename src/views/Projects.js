@@ -45,6 +45,7 @@ export function Projects(props) {
 
   useEffect(() => {
     !preload && getProjects();
+    getProjects();
   }, [preload, getProjects]);
 
   console.log('Projects view, setProjectStatusView:', projectStatusView);
