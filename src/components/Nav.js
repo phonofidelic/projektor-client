@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { StringContext } from 'strings';
 
+import { useTheme } from '@material-ui/core/styles';
 import AppsIcon from '@material-ui/icons/Apps';
 import SettingsIcon from '@material-ui/icons/Settings';
 import EventIcon from '@material-ui/icons/Event';
@@ -48,8 +49,6 @@ const Navlist = styled.ul`
 const NavlistItem = styled(NavLink)`
   display: flex;
   padding: 12px;
-  // background-color: #fff;
-  // transition: background-color 0.3s;
   transition: background 0.3s;
   text-decoration: none;
   color: #212121;
@@ -57,17 +56,21 @@ const NavlistItem = styled(NavLink)`
   :link,
   :visited,
   :active {
-    // color: inherit;
-    // background-color: ${props => (props.selected ? props.color : '#fff')};
-    background: linear-gradient(to right, #fff 97%, ${props =>
-      props.selected ? props.color : '#fff'} 10%)
+    background: linear-gradient(
+      to right,
+      #fff 97%,
+      ${props => (props.selected ? props.color : '#fff')} 10%
+    );
   }
 
   :hover {
-    // background-color: ${props => props.color};
-    background: linear-gradient(to right, #fff 97%, ${props =>
-      props.selected ? props.color : '#fff'} 10%)
-    // color: ${props => props.contrast};
+    background: linear-gradient(
+      to right,
+      ${({ theme }) => theme.palette.action.hover} 97%,
+      ${props =>
+          props.selected ? props.color : props.theme.palette.action.hover}
+        10%
+    );
   }
 `;
 
@@ -75,9 +78,17 @@ const NavlistIcon = styled.div`
   margin-right: 12px;
 `;
 
+const ActiveMarker = styled.div`
+  position: absolute;
+  width: 10px;
+  background-color: ${({ color }) => color};
+  z-index: 2000;
+`;
+
 export function Nav(props) {
   const { pathname } = props;
   const strings = useContext(StringContext);
+  const theme = useTheme();
 
   const navItems = [
     {
@@ -110,9 +121,7 @@ export function Nav(props) {
     }
   ];
 
-  return pathname === '/' ||
-    pathname === '/registration' ||
-    pathname === '/login' ? null : (
+  return /registration|login/.test(pathname) || pathname === '/' ? null : (
     <Base>
       <Container>
         <LogoContainer>
@@ -121,16 +130,19 @@ export function Nav(props) {
         <Navlist>
           {navItems.map((navItem, i) => (
             <NavlistItem
+              theme={theme}
               activeStyle={{ color: navItem.contrast }}
               key={i}
               to={navItem.link}
               selected={pathname.includes(navItem.link)}
               color={navItem.color}
               contrast={navItem.contrast}
-              // onClick={() => handleNavChange(navItem)}
             >
               <NavlistIcon>{navItem.icon}</NavlistIcon>
               <Typography>{navItem.title}</Typography>
+              {pathname.includes(navItem.link) && (
+                <ActiveMarker color={navItem.color} />
+              )}
             </NavlistItem>
           ))}
         </Navlist>
