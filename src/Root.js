@@ -18,7 +18,7 @@ moment.locale(navigator.language);
 
 const localeMap = {
   en: enLocale,
-  sv: svLocale
+  sv: svLocale,
 };
 
 export default function Root({ children }) {
@@ -30,9 +30,10 @@ export default function Root({ children }) {
   const materialUITheme = createMuiTheme({
     palette: {
       primary: {
-        main: '#212121'
-      }
-    }
+        main: '#212121',
+        background: '#fff',
+      },
+    },
   });
 
   const store = createStore(reducers, {}, enhancer);

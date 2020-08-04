@@ -37,6 +37,7 @@ const Container = styled.div`
   overflow: 'hidden';
   text-align: left;
   padding: 10px;
+  padding-left: 30px;
   padding-top: 0px;
   transition: all 5s;
 `;
