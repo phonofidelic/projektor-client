@@ -15,14 +15,16 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardHeader from '@material-ui/core/CardHeader';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   cardHeader: {
     width: 100,
-    display: 'content',
+    display: 'content'
   },
   avatar: {
     backgroundColor: ({ projectColor }) => projectColor,
-  },
+    color: ({ projectColor }) =>
+      theme.palette.getContrastText(projectColor || '#fff')
+  }
 }));
 
 const ProgressContainer = styled.div`
@@ -54,7 +56,7 @@ export function ProjectGridItem(props) {
         variant="outlined"
         style={{
           position: 'relative',
-          transition: 'all 0.3 ease-in-out',
+          transition: 'all 0.3 ease-in-out'
         }}
       >
         <div
@@ -62,7 +64,7 @@ export function ProjectGridItem(props) {
             position: 'absolute',
             width: '100%',
             display: 'flex',
-            justifyContent: 'flex-end',
+            justifyContent: 'flex-end'
           }}
         >
           <div
@@ -70,7 +72,7 @@ export function ProjectGridItem(props) {
               visibility: hovered ? 'visible' : 'hidden',
               margin: 12,
               display: 'flex',
-              zIndex: 1,
+              zIndex: 1
             }}
           >
             <ProjectMenu project={project} />
@@ -85,13 +87,13 @@ export function ProjectGridItem(props) {
                 {project.title
                   .split(' ')
                   .slice(0, 2)
-                  .map((s) => s.charAt(0))
+                  .map(s => s.charAt(0))
                   .join('')}
               </Avatar>
             }
             title={project.title}
             titleTypographyProps={{
-              noWrap: true,
+              noWrap: true
             }}
             subheader={project.client}
             action={<div style={{ width: 50 }} />}
@@ -121,9 +123,9 @@ ProjectGridItem.propTypes = {
     created: PropTypes.string,
     userId: PropTypes.string,
     budgetedTime: PropTypes.number,
-    timeUsed: PropTypes.number,
+    timeUsed: PropTypes.number
   }),
-  projectsDisplayMode: PropTypes.string,
+  projectsDisplayMode: PropTypes.string
 };
 
 export default ProjectGridItem;

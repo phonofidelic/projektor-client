@@ -136,7 +136,6 @@ export function Nav(props) {
               to={navItem.link}
               selected={pathname.includes(navItem.link)}
               color={navItem.color}
-              contrast={navItem.contrast}
             >
               <NavlistIcon>{navItem.icon}</NavlistIcon>
               <Typography>{navItem.title}</Typography>
