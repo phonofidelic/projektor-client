@@ -26,11 +26,11 @@ export const materialUITheme = createMuiTheme({
     primary: {
       main: '#212121',
       background: '#fff'
-    },
+    }
     /**
      * WARNING: This setting may cause accessibility issues
      */
-    contrastThreshold: 2
+    // contrastThreshold: 2
   }
 });
 

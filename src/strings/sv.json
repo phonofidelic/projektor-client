@@ -101,5 +101,6 @@
     "ttl__work": "Utfört arbete",
     "ttl__work_details": "Arbetsdetaljer",
     "ttl__work_notes": "Anteckingar",
-    "ttl__calendar": "Kalender"
+    "ttl__calendar": "Kalender",
+    "hnt__status_select": "Visa project via status"
 }

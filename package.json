@@ -61,7 +61,7 @@
     "test": "react-scripts test",
     "coverage": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject",
-    "trans": "node ./scripts/getTranslations.js",
+    "translations": "node ./scripts/getTranslations.js",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
   },
