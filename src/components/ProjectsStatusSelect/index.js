@@ -82,6 +82,7 @@ export function ProjectsStatusSelect(props) {
     <Container>
       <Tooltip arrow title={strings.hnt__status_select}>
         <Chip
+          data-testid="project-status-select-button"
           component={Button}
           label={getProjectStatusViewString()}
           variant="outlined"
@@ -101,6 +102,7 @@ export function ProjectsStatusSelect(props) {
         />
       </Tooltip>
       <Menu
+        data-testid="project-status-select"
         id="project-status-select"
         anchorEl={anchorEl}
         keepMounted
@@ -164,7 +166,7 @@ export function ProjectsStatusSelect(props) {
 }
 
 ProjectsStatusSelect.propTypes = {
-  projectStatusView: PropTypes.string.isRequired,
+  projectStatusView: PropTypes.string,
   setProjectStatusView: PropTypes.func.isRequired
 };
 
