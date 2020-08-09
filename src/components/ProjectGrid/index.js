@@ -40,6 +40,11 @@ const Container = styled.div`
   padding-left: 30px;
   padding-top: 0px;
   transition: all 5s;
+
+  @media (max-width: 600px) {
+    padding: 10px;
+    padding-top: 94px;
+  }
 `;
 
 /**
@@ -55,7 +60,7 @@ function ProjectGrid(props) {
     <Container>
       <Grid container spacing={1}>
         {/* <AnimatePresence> */}
-        {projects.map((project) => (
+        {projects.map(project => (
           <ProjectGridItem
             key={project._id}
             project={project}

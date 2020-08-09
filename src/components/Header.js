@@ -1,6 +1,7 @@
 import React from 'react';
 import { history } from 'config';
 import styled from 'styled-components';
+import useMobileDetect from 'use-mobile-detect-hook';
 
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,10 +9,9 @@ import BackArrow from '@material-ui/icons/ArrowBack';
 
 const Container = styled.div`
   display: flex;
-  ${'' /* padding: 10px; */}
   padding: 18px;
+  ${({ isMobile }) => isMobile && 'padding-left: 60px'}
   background: ${({ background }) => background || '#fff'};
-  ${'' /* height: 48px; */}
 `;
 
 const TitleContainer = styled.div`
@@ -20,9 +20,11 @@ const TitleContainer = styled.div`
 
 export default function Header(props) {
   const { title, centerTitle, back, background, position } = props;
+  const { isMobile } = useMobileDetect();
 
   return (
     <Container
+      isMobile={isMobile()}
       background={background}
       style={
         position
@@ -31,7 +33,8 @@ export default function Header(props) {
               top: 0,
               left: 0,
               right: 0,
-              // borderBottom: 'solid #e0e0e0 1px'
+              zIndex: 1
+              // borderBottom: isMobile() ? 'solid #e0e0e0 1px' : 'none'
             }
           : null
       }

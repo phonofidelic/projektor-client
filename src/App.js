@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 // import useWindowSize from 'hooks/useWindowSize';
+import useMobileDetect from 'use-mobile-detect-hook';
 
 import PreloadLazyComponents from 'PreloadLazyComponents';
 import Routes from 'Routes';
@@ -10,6 +11,7 @@ import Loader from 'components/Loader';
 
 function App() {
   // const windowSize = useWindowSize();
+  const { isMobile } = useMobileDetect();
 
   // console.log('*** window width:', windowSize.width);
 
@@ -18,7 +20,7 @@ function App() {
       {/* <Loader /> */}
       <MessageContainer />
       <div>
-        <Nav />
+        <Nav isMobile={isMobile()} />
       </div>
       <div style={{ width: '100%' }}>
         <React.Suspense fallback={<Loader />}>
