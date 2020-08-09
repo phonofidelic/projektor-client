@@ -6,11 +6,7 @@ export default {
   component: Nav,
   title: 'Nav',
   decorators: [
-    storyFn => (
-      <div style={{ height: 500, width: 178, backgroundColor: '#222' }}>
-        {storyFn()}
-      </div>
-    )
+    storyFn => <div style={{ height: 500, width: 178 }}>{storyFn()}</div>
   ]
 };
 

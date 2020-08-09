@@ -2,8 +2,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import { StringContext } from 'strings';
 import styled from 'styled-components';
 import matchSorter from 'match-sorter';
+import useMobileDetect from 'use-mobile-detect-hook';
 
 import WorkTable from 'components/ProjectDetail/WorkTable';
+import WorkList from './WorkList';
 import WorkModal from 'components/ProjectDetail/WorkModal';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import WorkForm from 'components/WorkForm';
@@ -30,7 +32,9 @@ export default function WorkSection(props) {
   const [workFormOpen, setWorkFormOpen] = useState(false);
   const [filterdWork, setFilteredWork] = useState(project.work);
 
-  const handleOpenWork = (workItem) => {
+  const { isMobile } = useMobileDetect();
+
+  const handleOpenWork = workItem => {
     workItem ? setWorkItem(workItem) : setWorkItem(null);
 
     setWorkFormOpen(true);
@@ -41,7 +45,7 @@ export default function WorkSection(props) {
     setWorkFormOpen(false);
   };
 
-  const handleSearch = (query) => {
+  const handleSearch = query => {
     // console.log('handleSearch, query:', query);
     setFilteredWork(matchSorter(project.work, query, { keys: ['notes'] }));
   };
@@ -67,7 +71,7 @@ export default function WorkSection(props) {
       <div
         style={{
           margin: 18,
-          display: 'flex',
+          display: 'flex'
           // justifyContent: 'space-between'
         }}
       >
@@ -76,7 +80,7 @@ export default function WorkSection(props) {
           align="left"
           style={{
             height: 48,
-            lineHeight: '48px',
+            lineHeight: '48px'
           }}
         >
           {strings.ttl__work}
@@ -84,23 +88,33 @@ export default function WorkSection(props) {
         <div
           style={{
             flex: 1,
-            marginLeft: 5,
+            marginLeft: 5
           }}
         >
           <SearchBar handleSearch={handleSearch} />
         </div>
-        <TaskAnalysis project={project} handleSearch={handleSearch} />
+        {!isMobile() && (
+          <TaskAnalysis project={project} handleSearch={handleSearch} />
+        )}
         <IconButton variant="outlined" onClick={() => handleOpenWork(false)}>
           <AddIcon />
         </IconButton>
       </div>
       <WorkContainer>
         {filterdWork.length > 0 ? (
-          <WorkTable
-            work={filterdWork}
-            handleOpenWork={handleOpenWork}
-            removeWork={removeWork}
-          />
+          isMobile() ? (
+            <WorkList
+              work={filterdWork}
+              handleOpenWork={handleOpenWork}
+              removeWork={removeWork}
+            />
+          ) : (
+            <WorkTable
+              work={filterdWork}
+              handleOpenWork={handleOpenWork}
+              removeWork={removeWork}
+            />
+          )
         ) : (
           <DefaultEmptyMessage text={strings.msg__default_empty_work} />
         )}

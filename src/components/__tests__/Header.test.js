@@ -1,29 +1,41 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from 'test-utils';
 import Header from 'components/Header';
-import BackArrow from '@material-ui/icons/ArrowBack';
+import { Router } from 'react-router-dom';
+import { history } from 'config';
 
 describe('Header', () => {
-  let wrapper;
+  test('can display a title', () => {
+    const { container } = render(
+      <Router history={history}>
+        <Header title="Test" />
+      </Router>
+    );
 
-  it('can display a title', () => {
-    wrapper = shallow(<Header title="Test" />);
-    expect(wrapper.text()).toBe('Test');
+    expect(container).toHaveTextContent(/test/i);
   });
 
-  it('can have a back button', () => {
-    wrapper = shallow(<Header back="/test" />);
-    expect(wrapper.find(BackArrow).length).toBe(1);
+  test('can have a back button', () => {
+    const { container, getByTestId } = render(
+      <Router history={history}>
+        <Header title="Test" back="/test" />
+      </Router>
+    );
+
+    const backButton = getByTestId('header-back-button');
+
+    expect(backButton).toBeInTheDocument();
   });
 
-  // it('can have a nav drawer', () => {
-  //   wrapper = shallow(<Header nav />);
-  //   expect(wrapper.find(Nav).length).toBe(1);
-  // });
+  test('can render child components', () => {
+    const { container } = render(
+      <Router history={history}>
+        <Header title="Test" back="/test">
+          <span>Test Header children</span>
+        </Header>
+      </Router>
+    );
 
-  it('can have action buttons', () => {
-    const mockHeaderActions = () => shallow(<button key="test">Test</button>);
-    wrapper = shallow(<Header>{mockHeaderActions()}</Header>);
-    expect(wrapper.find('button').text()).toBe('Test');
+    expect(container).toHaveTextContent('Test Header children');
   });
 });

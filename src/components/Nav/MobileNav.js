@@ -27,6 +27,8 @@ export default function MobileNav() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
 
+  const isProjectDetail = /projects\/\w+/.test(pathname);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -41,9 +43,11 @@ export default function MobileNav() {
 
   return /registration|login/.test(pathname) || pathname === '/' ? null : (
     <Container>
-      <IconButton onClick={handleOpen}>
-        <MenuIcon />
-      </IconButton>
+      {!isProjectDetail && (
+        <IconButton onClick={handleOpen}>
+          <MenuIcon />
+        </IconButton>
+      )}
       <Drawer anchor="left" open={open} onClose={handleClose}>
         <LogoContainer>
           <Typography variant="h4">[projektor]</Typography>

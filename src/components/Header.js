@@ -1,5 +1,6 @@
 import React from 'react';
 import { history } from 'config';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import useMobileDetect from 'use-mobile-detect-hook';
 
@@ -10,7 +11,8 @@ import BackArrow from '@material-ui/icons/ArrowBack';
 const Container = styled.div`
   display: flex;
   padding: 18px;
-  ${({ isMobile }) => isMobile && 'padding-left: 60px'}
+  ${({ isMobile, isProjectDetail }) =>
+    isMobile && !isProjectDetail && 'padding-left: 60px'}
   background: ${({ background }) => background || '#fff'};
 `;
 
@@ -21,10 +23,14 @@ const TitleContainer = styled.div`
 export default function Header(props) {
   const { title, centerTitle, back, background, position } = props;
   const { isMobile } = useMobileDetect();
+  const { pathname } = useLocation();
+
+  const isProjectDetail = /projects\/\w+/.test(pathname);
 
   return (
     <Container
       isMobile={isMobile()}
+      isProjectDetail={isProjectDetail}
       background={background}
       style={
         position
@@ -41,6 +47,7 @@ export default function Header(props) {
     >
       {back && (
         <IconButton
+          data-testid="header-back-button"
           style={{ marginRight: 10 }}
           onClick={() => history.goBack()}
         >
@@ -48,7 +55,11 @@ export default function Header(props) {
         </IconButton>
       )}
       <TitleContainer>
-        <Typography variant="h5" style={{ lineHeight: '24px' }}>
+        <Typography
+          noWrap
+          variant="h5"
+          style={{ lineHeight: '24px', maxWidth: isMobile() ? '50vw' : '100%' }}
+        >
           {title}
         </Typography>
       </TitleContainer>
