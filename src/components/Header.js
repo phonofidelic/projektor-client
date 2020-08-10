@@ -1,17 +1,20 @@
 import React from 'react';
 import { history } from 'config';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import useMobileDetect from 'use-mobile-detect-hook';
 
+import { useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import BackArrow from '@material-ui/icons/ArrowBack';
 
 const Container = styled.div`
   display: flex;
-  ${'' /* padding: 10px; */}
   padding: 18px;
+  ${({ isMobile, isProjectDetail }) =>
+    isMobile && !isProjectDetail && 'padding-left: 60px'}
   background: ${({ background }) => background || '#fff'};
-  ${'' /* height: 48px; */}
 `;
 
 const TitleContainer = styled.div`
@@ -20,9 +23,16 @@ const TitleContainer = styled.div`
 
 export default function Header(props) {
   const { title, centerTitle, back, background, position } = props;
+  const { isMobile } = useMobileDetect();
+  const { pathname } = useLocation();
+  const theme = useTheme();
+
+  const isProjectDetail = /projects\/\w+/.test(pathname);
 
   return (
     <Container
+      isMobile={isMobile()}
+      isProjectDetail={isProjectDetail}
       background={background}
       style={
         position
@@ -31,13 +41,15 @@ export default function Header(props) {
               top: 0,
               left: 0,
               right: 0,
-              // borderBottom: 'solid #e0e0e0 1px'
+              zIndex: theme.zIndex.appBar
+              // borderBottom: isMobile() ? 'solid #e0e0e0 1px' : 'none'
             }
           : null
       }
     >
       {back && (
         <IconButton
+          data-testid="header-back-button"
           style={{ marginRight: 10 }}
           onClick={() => history.goBack()}
         >
@@ -45,7 +57,11 @@ export default function Header(props) {
         </IconButton>
       )}
       <TitleContainer>
-        <Typography variant="h5" style={{ lineHeight: '24px' }}>
+        <Typography
+          noWrap
+          variant="h5"
+          style={{ lineHeight: '24px', maxWidth: isMobile() ? '50vw' : '100%' }}
+        >
           {title}
         </Typography>
       </TitleContainer>

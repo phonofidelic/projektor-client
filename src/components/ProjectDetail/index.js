@@ -11,9 +11,14 @@ import WorkSection from 'components/ProjectDetail/WorkSection';
 // import { strings } from 'strings';
 
 const Container = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100vh; */
+
+  @media (max-width: 600px) {
+    padding: 0px;
+    padding-top: 94px;
+  }
 `;
 
 export default function ProjectDetail(props) {

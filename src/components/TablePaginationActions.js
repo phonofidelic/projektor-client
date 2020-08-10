@@ -10,11 +10,12 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
+    borderBottom: 'none',
     flexShrink: 0,
-    marginLeft: theme.spacing(2.5),
-  },
+    marginLeft: theme.spacing(2.5)
+  }
 }));
 
 export default function TablePaginationActions(props) {
@@ -22,19 +23,19 @@ export default function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onChangePage } = props;
 
-  const handleFirstPageButtonClick = (event) => {
+  const handleFirstPageButtonClick = event => {
     onChangePage(event, 0);
   };
 
-  const handleBackButtonClick = (event) => {
+  const handleBackButtonClick = event => {
     onChangePage(event, page - 1);
   };
 
-  const handleNextButtonClick = (event) => {
+  const handleNextButtonClick = event => {
     onChangePage(event, page + 1);
   };
 
-  const handleLastPageButtonClick = (event) => {
+  const handleLastPageButtonClick = event => {
     onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
   };
 

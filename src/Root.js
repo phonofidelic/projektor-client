@@ -21,19 +21,24 @@ const localeMap = {
   sv: svLocale
 };
 
+export const materialUITheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#212121',
+      background: '#fff'
+    }
+    /**
+     * WARNING: This setting may cause accessibility issues
+     */
+    // contrastThreshold: 2
+  }
+});
+
 export default function Root({ children }) {
   const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
   const enhancer = composeEnhancers(applyMiddleware(reduxThunk));
-
-  const materialUITheme = createMuiTheme({
-    palette: {
-      primary: {
-        main: '#212121'
-      }
-    }
-  });
 
   const store = createStore(reducers, {}, enhancer);
 

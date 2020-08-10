@@ -6,6 +6,7 @@ import { StringContext } from 'strings';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { getPageVariant } from 'constants/pageVariants';
+import useMobileDetect from 'use-mobile-detect-hook';
 
 import Header from 'components/Header';
 import ProjectDetail from 'components/ProjectDetail';
@@ -19,9 +20,11 @@ export function Project(props) {
     getProject,
     createWork,
     updateWork,
-    removeWork,
+    removeWork
   } = props;
   const strings = useContext(StringContext);
+
+  const { isMobile } = useMobileDetect();
 
   useEffect(() => {
     !preload && getProject(projectId);
@@ -35,7 +38,11 @@ export function Project(props) {
           {strings.ttl__app_title} - {project.title}
         </title>
       </Helmet>
-      <Header back title={project.title}>
+      <Header
+        back
+        title={project.title}
+        position={isMobile() ? 'fixed' : 'relative'}
+      >
         <ProjectMenu project={project} />
       </Header>
       <ProjectDetail
@@ -48,9 +55,9 @@ export function Project(props) {
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    project: state.projects.selectedProject,
+    project: state.projects.selectedProject
   };
 };
 
