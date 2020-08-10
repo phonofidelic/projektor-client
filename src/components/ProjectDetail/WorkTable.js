@@ -54,7 +54,7 @@ function ContextMenu(props) {
     handleCloseContextMenu();
   };
 
-  const handleSelectDelete = () => {
+  const selectDelete = () => {
     if (window.confirm(strings.msg__confirm_delete_work)) {
       removeWork(workItem._id);
       handleCloseContextMenu();
@@ -75,7 +75,12 @@ function ContextMenu(props) {
       getContentAnchorEl={null}
       onClose={handleCloseContextMenu}
     >
-      <MenuItem key="add-note" button component={ListItem} onClick={selectEdit}>
+      <MenuItem
+        key="edit-work"
+        button
+        component={ListItem}
+        onClick={selectEdit}
+      >
         <ListItemIcon>
           <EditIcon />
         </ListItemIcon>
@@ -85,7 +90,7 @@ function ContextMenu(props) {
         key="delete-work"
         button
         component={ListItem}
-        onClick={handleSelectDelete}
+        onClick={selectDelete}
       >
         <ListItemIcon>
           <DeleteIcon />

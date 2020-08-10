@@ -31,10 +31,12 @@ export default function MobileProjectMenu(props) {
       anchor="bottom"
       open={Boolean(anchorEl)}
       onClose={handleCloseMenu}
+      onOpen={() => console.log('### OPEN ###')}
     >
       <List>
         {project.status === ACTIVE && (
           <ListItem
+            button
             style={{
               color: theme.palette.text.primary,
               textDecoration: 'none'
@@ -53,6 +55,7 @@ export default function MobileProjectMenu(props) {
           (item, i) =>
             project.status !== item.status && (
               <ListItem
+                button
                 key={i}
                 onClick={() => handleMenuSelection(project._id, item.status)}
               >
@@ -62,7 +65,11 @@ export default function MobileProjectMenu(props) {
             )
         )}
         {project.status === DELETED && (
-          <ListItem key="perm_delete" onClick={() => handleDelete(project._id)}>
+          <ListItem
+            button
+            key="perm_delete"
+            onClick={() => handleDelete(project._id)}
+          >
             <ListItemIcon>
               <DeleteIcon />
             </ListItemIcon>

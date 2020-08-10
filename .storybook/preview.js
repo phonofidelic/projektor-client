@@ -8,6 +8,8 @@ import { MemoryRouter } from 'react-router-dom';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { materialUITheme } from 'Root';
 import 'moment-duration-format';
+import { addParameters } from '@storybook/client-api';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 const store = createStore(reducers, {});
 
@@ -19,3 +21,9 @@ addDecorator(story => (
     </MuiThemeProvider>
   </Provider>
 ));
+
+addParameters({
+  viewport: {
+    viewports: INITIAL_VIEWPORTS
+  }
+});
