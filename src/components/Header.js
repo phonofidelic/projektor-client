@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import useMobileDetect from 'use-mobile-detect-hook';
 
+import { useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import BackArrow from '@material-ui/icons/ArrowBack';
@@ -24,6 +25,7 @@ export default function Header(props) {
   const { title, centerTitle, back, background, position } = props;
   const { isMobile } = useMobileDetect();
   const { pathname } = useLocation();
+  const theme = useTheme();
 
   const isProjectDetail = /projects\/\w+/.test(pathname);
 
@@ -39,7 +41,7 @@ export default function Header(props) {
               top: 0,
               left: 0,
               right: 0,
-              zIndex: 1
+              zIndex: theme.zIndex.appBar
               // borderBottom: isMobile() ? 'solid #e0e0e0 1px' : 'none'
             }
           : null

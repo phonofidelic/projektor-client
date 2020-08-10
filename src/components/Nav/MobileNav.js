@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import NavList from './NavList';
 
+import { useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -16,7 +17,7 @@ const Container = styled.div`
   left: 0;
   padding: 18px;
   padding-left: 10px;
-  z-index: 2;
+  z-index: ${({ theme }) => theme.zIndex.appBar + 1};
 `;
 
 const LogoContainer = styled.div`
@@ -26,6 +27,7 @@ const LogoContainer = styled.div`
 export default function MobileNav() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
+  const theme = useTheme();
 
   const isProjectDetail = /projects\/\w+/.test(pathname);
 
@@ -42,9 +44,9 @@ export default function MobileNav() {
   };
 
   return /registration|login/.test(pathname) || pathname === '/' ? null : (
-    <Container>
+    <Container theme={theme}>
       {!isProjectDetail && (
-        <IconButton onClick={handleOpen}>
+        <IconButton id="mobile-nav-button" onClick={handleOpen}>
           <MenuIcon />
         </IconButton>
       )}

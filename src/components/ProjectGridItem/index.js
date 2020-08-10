@@ -4,6 +4,7 @@ import useHover from 'hooks/useHover';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { EXPANDED } from 'constants/projectsDisplayModes';
+import useMobileDetect from 'use-mobile-detect-hook';
 
 import ProjectCardContent from './ProjectCardContent';
 import ProjectMenu from 'components/ProjectMenu';
@@ -47,6 +48,7 @@ export function ProjectGridItem(props) {
   const { project, projectsDisplayMode } = props;
   const [hoverRef, hovered] = useHover();
   const history = useHistory();
+  const { isMobile } = useMobileDetect();
 
   const classes = useStyles({ projectColor: project.color });
 
@@ -69,7 +71,7 @@ export function ProjectGridItem(props) {
         >
           <div
             style={{
-              visibility: hovered ? 'visible' : 'hidden',
+              visibility: hovered || isMobile() ? 'visible' : 'hidden',
               margin: 12,
               display: 'flex',
               zIndex: 1

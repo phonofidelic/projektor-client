@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 // import moment from 'moment';
-import useMobileDetect from 'use-mobile-detect-hook';
 
 import ProjectInfo from 'components/ProjectDetail/ProjectInfo';
 import WorkSection from 'components/ProjectDetail/WorkSection';
@@ -24,8 +23,6 @@ const Container = styled.div`
 
 export default function ProjectDetail(props) {
   const { project, createWork, updateWork, removeWork } = props;
-
-  const { isMobile } = useMobileDetect();
 
   const time = 0;
   // const [time, setTime] = useState(0);
