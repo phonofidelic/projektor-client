@@ -102,5 +102,7 @@
     "ttl__work_details": "Task Details",
     "ttl__work_notes": "Notes ",
     "ttl__calendar": "Calendar",
-    "hnt__status_select": "Show projects by status"
+    "hnt__status_select": "Show projects by status",
+    "hnt__project_options": "Project options",
+    "hnt__project_options_for": "Project options for"
 }

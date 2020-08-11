@@ -123,6 +123,7 @@ export function ProjectTable(props) {
             prepareRow(row);
             return (
               <ProjectTableRow
+                key={`project-table-row_${i}`}
                 row={row}
                 hovered={hovered}
                 handleRowHover={handleRowHover}

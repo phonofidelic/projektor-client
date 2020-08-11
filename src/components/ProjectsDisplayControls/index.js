@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import { StringContext } from 'strings';
 import styled from 'styled-components';
+
+import { StringContext } from 'strings';
 import { COMPACT, EXPANDED, TABLE } from 'constants/projectsDisplayModes';
 
 import Button from '@material-ui/core/Button';

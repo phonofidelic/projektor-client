@@ -86,7 +86,7 @@ export function Projects(props) {
 
       <div>
         {projects.length ? (
-          projectsDisplayMode === TABLE ? (
+          !isMobile() && projectsDisplayMode === TABLE ? (
             <ProjectTable key="projects-table" projects={projects} />
           ) : (
             <ProjectGrid

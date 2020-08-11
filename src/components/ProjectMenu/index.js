@@ -10,6 +10,7 @@ import MobileProjectMenu from './MobileProjectMenu';
 import DesktopProjectMenu from './DesktopProjectMenu';
 
 import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import BookIcon from '@material-ui/icons/Book';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -73,9 +74,11 @@ export function ProjectMenu(props) {
 
   return (
     <div>
-      <IconButton onClick={handleMenuClick}>
-        <MoreVertIcon />
-      </IconButton>
+      <Tooltip arrow title={strings.hnt__project_options}>
+        <IconButton onClick={handleMenuClick}>
+          <MoreVertIcon />
+        </IconButton>
+      </Tooltip>
       {isMobile() ? (
         <MobileProjectMenu
           project={project}
