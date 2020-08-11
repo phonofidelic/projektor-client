@@ -102,5 +102,7 @@
     "ttl__work_details": "Arbetsdetaljer",
     "ttl__work_notes": "Anteckingar",
     "ttl__calendar": "Kalender",
-    "hnt__status_select": "Visa project via status"
+    "hnt__status_select": "Visa project via status",
+    "hnt__project_options": "Projektalternativ",
+    "hnt__project_options_for": "Projektalternativ för"
 }

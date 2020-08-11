@@ -34,6 +34,12 @@ export default function MobileProjectMenu(props) {
       onOpen={() => console.log('### OPEN ###')}
     >
       <List>
+        <ListItem key={`project-options_hint`} dense>
+          <ListItemText
+            primary={`${strings.hnt__project_options_for} "${project.title}"`}
+            primaryTypographyProps={{ noWrap: true }}
+          />
+        </ListItem>
         {project.status === ACTIVE && (
           <ListItem
             button

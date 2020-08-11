@@ -1,15 +1,15 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import useMobileDetect from 'use-mobile-detect-hook';
+
 import { StringContext } from 'strings';
 import { ACTIVE, ARCHIVED, DELETED } from 'constants/status';
+import MobileProjectStatusSelect from './MobileProjectStatusSelect';
+import DesktopProjectStatusSelect from './DesktopProjectStatusSelect';
 
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import Tooltip from '@material-ui/core/Tooltip';
 import activeColor from '@material-ui/core/colors/green';
 import archivedColor from '@material-ui/core/colors/orange';
@@ -32,6 +32,7 @@ export function ProjectsStatusSelect(props) {
   const { projectStatusView, setProjectStatusView } = props;
   const strings = useContext(StringContext);
   const [anchorEl, setAnchorEl] = useState(null);
+  const { isMobile } = useMobileDetect();
 
   const handleOpenMenu = e => {
     setAnchorEl(e.currentTarget);
@@ -78,6 +79,24 @@ export function ProjectsStatusSelect(props) {
     }
   };
 
+  const menuOptions = [
+    {
+      title: strings.ttl__active,
+      value: ACTIVE,
+      color: activeColor[SHADE]
+    },
+    {
+      title: strings.ttl__archived,
+      value: ARCHIVED,
+      color: archivedColor[SHADE]
+    },
+    {
+      title: strings.ttl__removed,
+      value: DELETED,
+      color: removedColor[SHADE]
+    }
+  ];
+
   return (
     <Container>
       <Tooltip arrow title={strings.hnt__status_select}>
@@ -101,66 +120,21 @@ export function ProjectsStatusSelect(props) {
           onClick={handleOpenMenu}
         />
       </Tooltip>
-      <Menu
-        data-testid="project-status-select"
-        id="project-status-select"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleCloseMenu}
-      >
-        <MenuItem
-          dense
-          component={Button}
-          onClick={() => handleStatusViewSelect(ACTIVE)}
-        >
-          <ListItemIcon>
-            <div
-              style={{
-                backgroundColor: activeColor[SHADE],
-                borderRadius: '100%',
-                width: 18,
-                height: 18
-              }}
-            />
-          </ListItemIcon>
-          <ListItemText>{strings.ttl__active}</ListItemText>
-        </MenuItem>
-        <MenuItem
-          dense
-          component={Button}
-          onClick={() => handleStatusViewSelect(ARCHIVED)}
-        >
-          <ListItemIcon>
-            <div
-              style={{
-                backgroundColor: archivedColor[SHADE],
-                borderRadius: '100%',
-                width: 18,
-                height: 18
-              }}
-            />
-          </ListItemIcon>
-          <ListItemText>{strings.ttl__archived}</ListItemText>
-        </MenuItem>
-        <MenuItem
-          dense
-          component={Button}
-          onClick={() => handleStatusViewSelect(DELETED)}
-        >
-          <ListItemIcon>
-            <div
-              style={{
-                backgroundColor: removedColor[SHADE],
-                borderRadius: '100%',
-                width: 18,
-                height: 18
-              }}
-            />
-          </ListItemIcon>
-          <ListItemText>{strings.ttl__removed}</ListItemText>
-        </MenuItem>
-      </Menu>
+      {isMobile() ? (
+        <MobileProjectStatusSelect
+          open={Boolean(anchorEl)}
+          menuOptions={menuOptions}
+          handleCloseMenu={handleCloseMenu}
+          handleStatusViewSelect={handleStatusViewSelect}
+        />
+      ) : (
+        <DesktopProjectStatusSelect
+          anchorEl={anchorEl}
+          menuOptions={menuOptions}
+          handleCloseMenu={handleCloseMenu}
+          handleStatusViewSelect={handleStatusViewSelect}
+        />
+      )}
     </Container>
   );
 }
