@@ -9,6 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import Typography from '@material-ui/core/Typography';
 
 export default function MobileWorkMenu(props) {
   const {
@@ -43,6 +44,19 @@ export default function MobileWorkMenu(props) {
       onOpen={() => console.log('### OPEN ###')}
     >
       <List>
+        <ListItem key="work-menu-header">
+          <ListItemText
+            primary={workItem.startDate}
+            secondary={
+              <>
+                <Typography variant="body2">
+                  {workItem.start} - {workItem.end}
+                </Typography>
+              </>
+            }
+            secondaryTypographyProps={{ component: 'span' }}
+          />
+        </ListItem>
         <ListItem key="edit-work" onClick={selectEdit}>
           <ListItemIcon>
             <EditIcon />

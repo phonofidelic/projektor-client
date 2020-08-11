@@ -15,7 +15,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 export default function WorkList(props) {
   const { work, handleOpenWork, removeWork } = props;
-  const [selectedWork, setSelectedWork] = useState(null);
+  const [selectedWork, setSelectedWork] = useState({ _id: null });
   const [workMenuOpen, setWorkMenuOpen] = useState(false);
 
   const currentLocaleData = moment.localeData();
@@ -42,7 +42,7 @@ export default function WorkList(props) {
   };
 
   const handleCloseWorkMenu = () => {
-    setSelectedWork(null);
+    setSelectedWork({ _id: null });
     setWorkMenuOpen(false);
   };
 
