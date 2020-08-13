@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import moment from 'moment';
 
 import { StringContext } from 'strings';
 
@@ -20,6 +21,7 @@ export default function MobileWorkMenu(props) {
     removeWork
   } = props;
 
+  const currentLocaleData = moment.localeData();
   const strings = useContext(StringContext);
 
   const selectEdit = () => {
@@ -46,11 +48,19 @@ export default function MobileWorkMenu(props) {
       <List>
         <ListItem key="work-menu-header">
           <ListItemText
-            primary={workItem.startDate}
+            primary={moment(workItem.start).format(
+              currentLocaleData.longDateFormat('L')
+            )}
             secondary={
               <>
                 <Typography variant="body2">
-                  {workItem.start} - {workItem.end}
+                  {moment(workItem.start).format(
+                    currentLocaleData.longDateFormat('LT')
+                  )}{' '}
+                  -{' '}
+                  {moment(workItem.end).format(
+                    currentLocaleData.longDateFormat('LT')
+                  )}
                 </Typography>
               </>
             }

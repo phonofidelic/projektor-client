@@ -1,7 +1,7 @@
-import React, { useState, useContext, useMemo } from 'react';
-import { StringContext } from 'strings';
+import React, { useState, useContext } from 'react';
 import moment from 'moment';
 
+import { StringContext } from 'strings';
 import MobileWorkMenu from './MobileWorkMenu';
 
 import IconButton from '@material-ui/core/IconButton';
@@ -21,20 +21,7 @@ export default function WorkList(props) {
   const currentLocaleData = moment.localeData();
   const strings = useContext(StringContext);
 
-  const workData = useMemo(
-    () =>
-      work.map(workItem => ({
-        ...workItem,
-        startDate: moment(workItem.start).format(
-          currentLocaleData.longDateFormat('L')
-        ),
-        start: moment(workItem.start).format(
-          currentLocaleData.longDateFormat('LT')
-        ),
-        end: moment(workItem.end).format(currentLocaleData.longDateFormat('LT'))
-      })),
-    [work, currentLocaleData]
-  );
+  const workData = work;
 
   const handleOpenWorkMenu = workItem => {
     setSelectedWork(workItem);
@@ -60,11 +47,19 @@ export default function WorkList(props) {
           <ListItem key={`work-item_${i}`} divider>
             <ListItemText
               // alignItems="flex-start"
-              primary={workItem.startDate}
+              primary={moment(workItem.start).format(
+                currentLocaleData.longDateFormat('L')
+              )}
               secondary={
                 <>
                   <Typography variant="body2">
-                    {workItem.start} - {workItem.end}
+                    {moment(workItem.start).format(
+                      currentLocaleData.longDateFormat('LT')
+                    )}{' '}
+                    -{' '}
+                    {moment(workItem.end).format(
+                      currentLocaleData.longDateFormat('LT')
+                    )}
                   </Typography>
                   {workItem.notes && (
                     <Typography variant="body2">
