@@ -9,9 +9,9 @@ import {
   GET_PROJECT,
   GET_PROJECT_SUCCESS,
   GET_PROJECT_FAILURE,
-  // DELETE_PROJECT,
-  // DELETE_PROJECT_SUCCESS,
-  // DELETE_PROJECT_FAILURE,
+  DELETE_PROJECT,
+  DELETE_PROJECT_SUCCESS,
+  DELETE_PROJECT_FAILURE,
   SET_PROJECT_STATUS_VIEW,
   CREATE_WORK,
   CREATE_WORK_SUCCESS,
@@ -37,7 +37,7 @@ import {
   MSG__CREATE_PROJECT_ERROR,
   MSG__GET_PROJECT_ERROR,
   MSG__GET_PROJECTS_ERROR,
-  // MSG__DELETE_PROJECT_ERROR,
+  MSG__DELETE_PROJECT_ERROR,
   MSG__SET_PROJECT_STATUS_ERROR,
   MSG_FRG__SET_PROJECT_STATUS_ERROR,
   TTL__ACTIVE,
@@ -157,27 +157,35 @@ export default function(state = defaultState, action) {
         error: { message: MSG__GET_PROJECT_ERROR }
       };
 
-    // case DELETE_PROJECT:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   };
+    case DELETE_PROJECT:
+      return {
+        ...state,
+        loading: true
+      };
 
-    // case DELETE_PROJECT_SUCCESS:
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     removedProjects: state.removedProjects.filter(
-    //       (project) => project._id !== action.payload
-    //     ),
-    //   };
+    case DELETE_PROJECT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        // removedProjects: state.removedProjects.filter(
+        //   project => project._id !== action.payload
+        // ),
+        projectList: state.projectList.filter(
+          project => project._id !== action.payload
+        ),
+        projectListByStatus: state.projectList.filter(
+          project =>
+            project.status === state.projectStatusView &&
+            project._id !== action.payload._id
+        )
+      };
 
-    // case DELETE_PROJECT_FAILURE:
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     error: { message: MSG__DELETE_PROJECT_ERROR },
-    //   };
+    case DELETE_PROJECT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: { message: MSG__DELETE_PROJECT_ERROR }
+      };
 
     case SET_PROJECT_STATUS:
       return {

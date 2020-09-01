@@ -17,7 +17,7 @@ import {
 } from 'actions/types';
 import { api, handleError, handleResponse } from 'actions/utils';
 
-export const createWork = work => {
+export const createWork = (work, token) => {
   console.log('createWork, work:', work);
 
   return async dispatch => {
@@ -27,7 +27,7 @@ export const createWork = work => {
 
     let response;
     try {
-      response = await api().post('/work/create', work);
+      response = await api(token).post('/work/create', work);
       handleResponse(response, dispatch, CREATE_WORK_SUCCESS);
     } catch (err) {
       console.error(err);
@@ -36,7 +36,7 @@ export const createWork = work => {
   };
 };
 
-export const updateWork = workData => {
+export const updateWork = (workData, token) => {
   console.log('updateWork, wordData:', workData);
   return async dispatch => {
     dispatch({
@@ -45,7 +45,9 @@ export const updateWork = workData => {
 
     let response;
     try {
-      response = await api().post(`/work/update/${workData._id}`, { workData });
+      response = await api(token).put(`/work/update/${workData._id}`, {
+        workData
+      });
       console.log('updateWork, response:', response);
       handleResponse(response, dispatch, UPDATE_WORK_SUCCESS);
     } catch (err) {
@@ -55,7 +57,7 @@ export const updateWork = workData => {
   };
 };
 
-export const removeWork = workId => {
+export const removeWork = (workId, token) => {
   return async dispatch => {
     dispatch({
       type: REMOVE_WORK
@@ -63,7 +65,7 @@ export const removeWork = workId => {
 
     let response;
     try {
-      response = await api().delete(`/work/delete/${workId}`);
+      response = await api(token).delete(`/work/delete/${workId}`);
       console.log('removeWork, response:', response);
       handleResponse(response, dispatch, REMOVE_WORK_SUCCESS);
     } catch (err) {
@@ -73,7 +75,7 @@ export const removeWork = workId => {
   };
 };
 
-export const getAllWork = () => {
+export const getAllWork = token => {
   return async dispatch => {
     dispatch({
       type: GET_ALL_WORK
@@ -81,7 +83,7 @@ export const getAllWork = () => {
 
     let response;
     try {
-      response = await api().get('/work');
+      response = await api(token).get('/work');
       console.log('getAllWork, response:', response);
       handleResponse(response, dispatch, GET_ALL_WORK_SUCCESS);
     } catch (err) {

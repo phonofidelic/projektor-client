@@ -1,6 +1,7 @@
 import React from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 import { AnimatedSwitch } from 'AnimatedSwitch';
+import { PrivateRoute, useAuth } from 'services/AuthProvider';
 
 const Landing = React.lazy(() => import('views/Landing'));
 // const Registration = React.lazy(() => import('views/Registration'))
@@ -14,53 +15,58 @@ const EditProject = React.lazy(() => import('views/EditProject'));
 const Project = React.lazy(() => import('views/Project'));
 
 export const routes = [
-  {
-    Component: Landing,
-    path: '/',
-    exact: true,
-  },
-  {
-    Component: Login,
-    path: '/login',
-  },
+  // {
+  //   Component: Landing,
+  //   path: '/',
+  //   exact: true
+  // },
+  // {
+  //   Component: Login,
+  //   path: '/login',
+  // },
   {
     Component: Calendar,
-    path: '/calendar',
+    path: '/calendar'
   },
   {
     Component: Dashboard,
-    path: '/dashboard',
+    path: '/dashboard'
   },
   {
     Component: CreateProject,
-    path: '/projects/create',
+    path: '/projects/create'
   },
   {
     Component: EditProject,
-    path: '/projects/edit/:projectId',
+    path: '/projects/edit/:projectId'
   },
   {
     Component: Projects,
     path: '/projects',
+    exact: true
   },
   {
     Component: Project,
-    path: '/projects/:projectId',
+    path: '/projects/:projectId'
   },
   {
     Component: Settings,
-    path: '/settings',
-  },
+    path: '/settings'
+  }
 ];
 
 const Routes = withRouter(({ location }) => {
+  const { isAuthenticated } = useAuth();
   return (
     <AnimatedSwitch location={location}>
-      {routes.map((route) => {
+      <Route exact key={'/'} path="/">
+        {isAuthenticated ? <Redirect to="/projects" /> : <Landing />}
+      </Route>
+      {routes.map(route => {
         return (
-          <Route
-            exact
+          <PrivateRoute
             key={route.path}
+            exact={route.exact}
             path={route.path}
             component={route.Component}
           />

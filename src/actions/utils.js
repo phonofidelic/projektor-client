@@ -2,11 +2,12 @@ import { SET_NEW_TOKEN, VERIFICATION_FAILURE } from 'actions/types';
 import axios from 'axios';
 import { history, apiBaseUrl } from 'config';
 
-export const api = () => {
-  const token = localStorage.getItem('token');
+export const api = token => {
+  // const token = localStorage.getItem('token');
+  console.log('### api, token:', token);
   return axios.create({
     baseURL: apiBaseUrl,
-    headers: { token }
+    headers: { token, Authorization: `Bearer ${token}` }
   });
 };
 
@@ -17,7 +18,7 @@ export const handleError = (err, dispatch, errorType) => {
       type: errorType
       // payload: err
     });
-    history.push('/');
+    // history.push('/');
   } else if (err.response && err.response.status === 403) {
     dispatch({
       type: VERIFICATION_FAILURE

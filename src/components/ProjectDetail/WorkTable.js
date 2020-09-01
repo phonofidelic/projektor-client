@@ -3,6 +3,7 @@ import { StringContext } from 'strings';
 import moment from 'moment';
 import { useTable, useSortBy, useExpanded, usePagination } from 'react-table';
 import TablePaginationActions from 'components/TablePaginationActions';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -49,14 +50,18 @@ function ContextMenu(props) {
 
   const strings = useContext(StringContext);
 
+  const { getAccessTokenSilently } = useAuth0();
+
   const selectEdit = () => {
     handleOpenWork(workItem);
     handleCloseContextMenu();
   };
 
-  const selectDelete = () => {
+  const selectDelete = async () => {
+    const token = await getAccessTokenSilently();
+
     if (window.confirm(strings.msg__confirm_delete_work)) {
-      removeWork(workItem._id);
+      removeWork(workItem._id, token);
       handleCloseContextMenu();
     } else {
       handleCloseContextMenu();

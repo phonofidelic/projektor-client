@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import moment from 'moment';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import { StringContext } from 'strings';
 
@@ -24,14 +25,17 @@ export default function MobileWorkMenu(props) {
   const currentLocaleData = moment.localeData();
   const strings = useContext(StringContext);
 
+  const { getAccessTokenSilently } = useAuth0();
+
   const selectEdit = () => {
     handleOpenWork(workItem);
     handleCloseWorkMenu();
   };
 
-  const selectDelete = () => {
+  const selectDelete = async () => {
+    const token = await getAccessTokenSilently();
     if (window.confirm(strings.msg__confirm_delete_work)) {
-      removeWork(workItem._id);
+      removeWork(workItem._id, token);
       handleCloseWorkMenu();
     } else {
       handleCloseWorkMenu();

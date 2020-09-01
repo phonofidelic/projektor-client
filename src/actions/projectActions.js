@@ -28,7 +28,8 @@ import {
 import { history } from 'config';
 import { api, handleError, handleResponse } from 'actions/utils';
 
-export const getProjects = () => {
+export const getProjects = token => {
+  // console.log('### getProjects, token:', token);
   return async dispatch => {
     dispatch({
       type: GET_PROJECTS
@@ -36,7 +37,7 @@ export const getProjects = () => {
 
     let response;
     try {
-      response = await api().get('/projects');
+      response = await api(token).get('/projects');
 
       handleResponse(response, dispatch, GET_PROJECTS_SUCCESS);
     } catch (err) {
@@ -57,7 +58,7 @@ export const setProjectStatusView = status => {
   };
 };
 
-export const getProject = projectId => {
+export const getProject = (projectId, token) => {
   console.log('getProject, projectId:', projectId);
   return async dispatch => {
     dispatch({
@@ -66,7 +67,7 @@ export const getProject = projectId => {
 
     let response;
     try {
-      response = await api().get(`/projects/${projectId}`);
+      response = await api(token).get(`/projects/${projectId}`);
       console.log('getProject, response:', response);
 
       handleResponse(response, dispatch, GET_PROJECT_SUCCESS);
@@ -87,7 +88,7 @@ export const getProject = projectId => {
 //   };
 // };
 
-export const createProject = formData => {
+export const createProject = (formData, token) => {
   return async dispatch => {
     dispatch({
       type: POST_CREATE_PROJECT
@@ -95,7 +96,7 @@ export const createProject = formData => {
 
     let response;
     try {
-      response = await api().post('/projects/create', formData);
+      response = await api(token).post('/projects/create', formData);
       console.log('createProject response:', response);
       handleResponse(response, dispatch, CREATE_PROJECT_SUCCESS);
       history.push(`/projects/${response.data.data._id}`);
@@ -106,7 +107,7 @@ export const createProject = formData => {
   };
 };
 
-export const editProject = (projectId, projectInfo) => {
+export const editProject = (projectId, projectInfo, token) => {
   return async dispatch => {
     dispatch({
       type: UPDATE_PROJECT
@@ -114,7 +115,7 @@ export const editProject = (projectId, projectInfo) => {
 
     let response;
     try {
-      response = await api().put(`/projects/${projectId}`, {
+      response = await api(token).put(`/projects/${projectId}`, {
         projectInfo
       });
       console.log('editProject, response:', response);
@@ -127,7 +128,7 @@ export const editProject = (projectId, projectInfo) => {
   };
 };
 
-export const setProjectStatus = (projectId, status, location) => {
+export const setProjectStatus = (projectId, status, token) => {
   return async dispatch => {
     dispatch({
       type: SET_PROJECT_STATUS
@@ -135,7 +136,7 @@ export const setProjectStatus = (projectId, status, location) => {
 
     let response;
     try {
-      response = await api().put(`/projects/${projectId}/status`, {
+      response = await api(token).put(`/projects/${projectId}/status`, {
         projectId,
         status
       });
@@ -155,7 +156,7 @@ export const setProjectStatus = (projectId, status, location) => {
   };
 };
 
-export const deleteProject = (projectId, location) => {
+export const deleteProject = (projectId, location, token) => {
   return async dispatch => {
     dispatch({
       type: DELETE_PROJECT
@@ -163,7 +164,9 @@ export const deleteProject = (projectId, location) => {
 
     let response;
     try {
-      response = await api().delete(`/projects/removed/delete/${projectId}`);
+      response = await api(token).delete(
+        `/projects/removed/delete/${projectId}`
+      );
 
       handleResponse(response, dispatch, DELETE_PROJECT_SUCCESS);
 

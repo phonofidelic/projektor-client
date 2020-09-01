@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import requireAuth from 'hocs/requireAuth';
 import { motion } from 'framer-motion';
 import useMobileDetect from 'use-mobile-detect-hook';
+import { withAuthenticationRequired, useAuth0 } from '@auth0/auth0-react';
 
 import Header from 'components/Header';
 import ProjectGrid from 'components/ProjectGrid';
@@ -30,6 +31,8 @@ export function Projects(props) {
     searchProjects
   } = props;
 
+  const { getAccessTokenSilently } = useAuth0();
+
   const { isMobile } = useMobileDetect();
 
   const strings = useContext(StringContext);
@@ -44,11 +47,18 @@ export function Projects(props) {
   };
 
   useEffect(() => {
-    !preload && getProjects();
-    getProjects();
+    // !preload && getProjects();
+    // getProjects();
+
+    const loadProjects = async () => {
+      const token = await getAccessTokenSilently();
+      getProjects(token);
+    };
+    !preload && loadProjects();
+    // loadProjects();
   }, [preload, getProjects]);
 
-  console.log('Projects view, setProjectStatusView:', projectStatusView);
+  // console.log('Projects view, setProjectStatusView:', projectStatusView);
 
   return !projects ? (
     <div>Loading...</div>
@@ -109,12 +119,16 @@ export function Projects(props) {
 const mapStateToProps = state => {
   return {
     projects: state.projects.projectListByStatus,
-    activeProjects: state.projects.activeProjects,
-    archivedProjects: state.projects.archivedProjects,
-    removedProjects: state.projects.removedProjects,
+    // activeProjects: state.projects.activeProjects,
+    // archivedProjects: state.projects.archivedProjects,
+    // removedProjects: state.projects.removedProjects,
     projectStatusView: state.projects.projectStatusView,
     pathname: state.router.location.pathname
   };
 };
 
-export default connect(mapStateToProps, actions)(requireAuth(Projects));
+// export default connect(mapStateToProps, actions)(requireAuth(Projects));
+export default connect(
+  mapStateToProps,
+  actions
+)(withAuthenticationRequired(Projects));
