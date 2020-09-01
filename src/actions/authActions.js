@@ -129,7 +129,8 @@ export const getUserInfo = () => {
   };
 };
 
-export const resendVerificationEmail = () => {
+export const resendVerificationEmail = token => {
+  console.log('### resendVerificationEmail, token:', token);
   return async dispatch => {
     dispatch({
       type: RESEND_VERIFICATION
@@ -137,7 +138,7 @@ export const resendVerificationEmail = () => {
 
     let response;
     try {
-      response = await api().post('auth/resend');
+      response = await api(token).post('auth/resend');
       console.log('resendVerificationEmail, response:', response);
       handleResponse(response, dispatch, RESEND_VERIFICATION_SUCCESS);
     } catch (err) {

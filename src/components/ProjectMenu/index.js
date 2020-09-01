@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { StringContext } from 'strings';
 import { useHistory, useLocation } from 'react-router-dom';
 import useMobileDetect from 'use-mobile-detect-hook';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import { ACTIVE, ARCHIVED, DELETED } from 'constants/status';
 import MobileProjectMenu from './MobileProjectMenu';
@@ -23,6 +24,8 @@ export function ProjectMenu(props) {
   const history = useHistory();
   const { isMobile } = useMobileDetect();
 
+  const { getAccessTokenSilently } = useAuth0();
+
   const [anchorEl, setAnchor] = useState(null);
   const handleMenuClick = e => {
     setAnchor(e.currentTarget);
@@ -31,8 +34,9 @@ export function ProjectMenu(props) {
     setAnchor(null);
   };
 
-  const handleMenuSelection = (projectId, status) => {
-    setProjectStatus(projectId, status, location);
+  const handleMenuSelection = async (projectId, status) => {
+    const token = await getAccessTokenSilently();
+    setProjectStatus(projectId, status, token);
     handleCloseMenu();
 
     /**
@@ -41,12 +45,13 @@ export function ProjectMenu(props) {
     if (location.pathname.includes(projectId)) history.goBack();
   };
 
-  const handleDelete = projectId => {
+  const handleDelete = async projectId => {
     /**
      * TODO: Use custom Confirm dialog component
      */
     if (window.confirm(strings.msg__delete_perm_confirm)) {
-      deleteProject(projectId, location);
+      const token = await getAccessTokenSilently();
+      deleteProject(projectId, location, token);
     }
     handleCloseMenu();
   };

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { StringContext } from 'strings';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
@@ -10,9 +10,11 @@ import { getPageVariant } from 'constants/pageVariants';
 
 import logoSrc from 'assets/logo.svg';
 import Header from 'components/Header';
-import RegistrationForm from 'components/RegistrationForm';
+// import RegistrationForm from 'components/RegistrationForm';
+import LoginButton from 'components/LoginButton';
+import RegistrationButton from 'components/RegistrationButton';
 
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 // const Background = styled.div`
@@ -71,9 +73,9 @@ const FormContainer = styled.div`
 export function Landing(props) {
   const strings = useContext(StringContext);
 
-  const handleRegistrationSubmit = (formData) => {
-    props.registerNewUser(formData);
-  };
+  // const handleRegistrationSubmit = formData => {
+  //   props.registerNewUser(formData);
+  // };
 
   return (
     <motion.div
@@ -89,14 +91,15 @@ export function Landing(props) {
       </Helmet>
       <Header position="fixed" background="none">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Button
+          {/* <Button
             variant="outlined"
             style={{ textDecoratino: 'none', backgroundColor: '#fff' }}
             component={Link}
             to="/login"
           >
             {strings.btn__sign_in}
-          </Button>
+          </Button> */}
+          <LoginButton />
         </div>
       </Header>
       <HeroContainer>
@@ -107,7 +110,8 @@ export function Landing(props) {
         <div style={{ margin: 20 }}>
           <Typography>{strings.msg__get_started}</Typography>
         </div>
-        <RegistrationForm handleRegistrationSubmit={handleRegistrationSubmit} />
+        {/* <RegistrationForm handleRegistrationSubmit={handleRegistrationSubmit} /> */}
+        <RegistrationButton />
       </FormContainer>
     </motion.div>
   );

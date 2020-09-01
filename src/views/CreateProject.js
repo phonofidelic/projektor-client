@@ -7,12 +7,16 @@ import { StringContext } from 'strings';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { getPageVariant } from 'constants/pageVariants';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export function CreateProject(props) {
   const strings = useContext(StringContext);
 
-  const handleFormSubmit = data => {
-    props.createProject(data);
+  const { getAccessTokenSilently } = useAuth0();
+
+  const handleFormSubmit = async data => {
+    const token = await getAccessTokenSilently();
+    props.createProject(data, token);
   };
   return (
     <motion.div variants={getPageVariant('right')}>

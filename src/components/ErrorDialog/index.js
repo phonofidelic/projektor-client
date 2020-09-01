@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useAuth } from 'services/AuthProvider';
+
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -9,13 +11,15 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function _Dialog(props) {
   const { showDialog, title, body, actionButton, action } = props;
+  const { getAccessTokenSilently } = useAuth();
 
   const handleClose = () => {
     console.log('close dialog');
   };
 
-  const handleAction = () => {
-    action();
+  const handleAction = async () => {
+    const token = await getAccessTokenSilently();
+    action(token);
   };
 
   return showDialog ? (

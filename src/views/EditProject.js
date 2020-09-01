@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom';
 import * as actions from 'actions';
 import { StringContext } from 'strings';
 import { Helmet } from 'react-helmet';
-import requireAuth from 'hocs/requireAuth';
+// import requireAuth from 'hocs/requireAuth';
+import { useAuth, requireAuth } from 'services/AuthProvider';
 import { motion } from 'framer-motion';
 import { getPageVariant } from 'constants/pageVariants';
 
@@ -15,13 +16,19 @@ export function EditProject(props) {
   const { projectId } = useParams();
   const { preload, project, getProject, editProject } = props;
   const strings = useContext(StringContext);
+  const { getAccessTokenSilently } = useAuth();
 
   useEffect(() => {
-    !preload && getProject(projectId);
-  }, [preload, getProject, projectId]);
+    const loadProject = async () => {
+      const token = await getAccessTokenSilently();
+      getProject(projectId, token);
+    };
+    !preload && loadProject();
+  }, [preload, getProject, projectId, getAccessTokenSilently]);
 
-  const handleFormSubmit = data => {
-    editProject(projectId, data);
+  const handleFormSubmit = async data => {
+    const token = await getAccessTokenSilently();
+    editProject(projectId, data, token);
   };
 
   return project ? (
@@ -47,3 +54,4 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, actions)(requireAuth(EditProject));
+// export default connect(mapStateToProps, actions)(EditProject);

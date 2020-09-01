@@ -4,9 +4,11 @@ import * as actions from 'actions';
 import { StringContext } from 'strings';
 import moment from 'moment';
 import { Helmet } from 'react-helmet';
-import requireAuth from 'hocs/requireAuth';
+// import requireAuth from 'hocs/requireAuth';
 import { motion } from 'framer-motion';
 import { getPageVariant } from 'constants/pageVariants';
+// import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth, requireAuth } from 'services/AuthProvider';
 
 import Header from 'components/Header';
 import WeekOverview from 'components/WeekOverview';
@@ -17,13 +19,15 @@ export function Calendar(props) {
     work,
     getAllWorkByInterval,
     getAllWork,
-    getProjects,
+    getProjects
   } = props;
   const strings = useContext(StringContext);
   const [week, setWeek] = useState({
     start: 0,
-    end: 6,
+    end: 6
   });
+
+  const { getAccessTokenSilently } = useAuth();
 
   // const start = moment(moment().day(0)).format();
   // const end = moment(moment().day(6)).format();
@@ -31,7 +35,7 @@ export function Calendar(props) {
   const handleSelectPrevWeek = () => {
     setWeek({
       start: week.start - 7,
-      end: week.end - 7,
+      end: week.end - 7
     });
 
     getAllWorkByInterval(
@@ -43,7 +47,7 @@ export function Calendar(props) {
   const handleSelectNextWeek = () => {
     setWeek({
       start: week.start + 7,
-      end: week.end + 7,
+      end: week.end + 7
     });
 
     getAllWorkByInterval(
@@ -52,15 +56,19 @@ export function Calendar(props) {
     );
   };
 
-  const handleWeekNavigation = (direction) => {
+  const handleWeekNavigation = direction => {
     console.log('handleWeekNavigation, direction:', direction);
     direction === 'forward' ? handleSelectNextWeek() : handleSelectPrevWeek();
   };
 
   useEffect(() => {
-    !preload && getAllWork();
-    !preload && getProjects();
-  }, [preload, getAllWork, getProjects, week]);
+    const loadCalendar = async () => {
+      const token = await getAccessTokenSilently();
+      getAllWork(token);
+      getProjects(token);
+    };
+    !preload && loadCalendar();
+  }, [preload, getAllWork, getProjects, week, getAccessTokenSilently]);
 
   // const workWithProjectInfo = work.map(workItem => {
   //   if (!(projects.length & work.length)) return;
@@ -104,9 +112,9 @@ export function Calendar(props) {
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    work: state.dashboard.work,
+    work: state.dashboard.work
   };
 };
 

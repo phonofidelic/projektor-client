@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-// import useWindowSize from 'hooks/useWindowSize';
 import useMobileDetect from 'use-mobile-detect-hook';
+
+import { useAuth } from 'services/AuthProvider';
 
 import PreloadLazyComponents from 'PreloadLazyComponents';
 import Routes from 'Routes';
@@ -10,10 +11,8 @@ import MessageContainer from 'views/MessageContainer';
 import Loader from 'components/Loader';
 
 function App() {
-  // const windowSize = useWindowSize();
   const { isMobile } = useMobileDetect();
-
-  // console.log('*** window width:', windowSize.width);
+  const { isAuthenticated } = useAuth();
 
   return (
     <div className="App" style={{ display: 'flex' }}>
@@ -24,7 +23,8 @@ function App() {
       </div>
       <div style={{ width: '100%' }}>
         <React.Suspense fallback={<Loader />}>
-          <PreloadLazyComponents />
+          {/* Only preload if user is authed */}
+          {isAuthenticated && <PreloadLazyComponents />}
           <Routes />
         </React.Suspense>
       </div>

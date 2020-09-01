@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { getPageVariant } from 'constants/pageVariants';
 import useMobileDetect from 'use-mobile-detect-hook';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import Header from 'components/Header';
 import ProjectDetail from 'components/ProjectDetail';
@@ -24,11 +25,19 @@ export function Project(props) {
   } = props;
   const strings = useContext(StringContext);
 
+  const { getAccessTokenSilently } = useAuth0();
+
   const { isMobile } = useMobileDetect();
 
   useEffect(() => {
-    !preload && getProject(projectId);
-  }, [preload, getProject, projectId]);
+    // !preload && getProject(projectId);
+
+    const loadProject = async () => {
+      const token = await getAccessTokenSilently();
+      !preload && getProject(projectId, token);
+    };
+    loadProject();
+  }, [preload, getProject, projectId, getAccessTokenSilently]);
 
   return !project ? null : (
     <motion.div variants={getPageVariant('right')}>

@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import moment from 'moment';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import { StringContext } from 'strings';
 
@@ -20,16 +22,20 @@ export default function MobileWorkMenu(props) {
     removeWork
   } = props;
 
+  const currentLocaleData = moment.localeData();
   const strings = useContext(StringContext);
+
+  const { getAccessTokenSilently } = useAuth0();
 
   const selectEdit = () => {
     handleOpenWork(workItem);
     handleCloseWorkMenu();
   };
 
-  const selectDelete = () => {
+  const selectDelete = async () => {
+    const token = await getAccessTokenSilently();
     if (window.confirm(strings.msg__confirm_delete_work)) {
-      removeWork(workItem._id);
+      removeWork(workItem._id, token);
       handleCloseWorkMenu();
     } else {
       handleCloseWorkMenu();
@@ -46,11 +52,19 @@ export default function MobileWorkMenu(props) {
       <List>
         <ListItem key="work-menu-header">
           <ListItemText
-            primary={workItem.startDate}
+            primary={moment(workItem.start).format(
+              currentLocaleData.longDateFormat('L')
+            )}
             secondary={
               <>
                 <Typography variant="body2">
-                  {workItem.start} - {workItem.end}
+                  {moment(workItem.start).format(
+                    currentLocaleData.longDateFormat('LT')
+                  )}{' '}
+                  -{' '}
+                  {moment(workItem.end).format(
+                    currentLocaleData.longDateFormat('LT')
+                  )}
                 </Typography>
               </>
             }

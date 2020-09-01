@@ -5,6 +5,7 @@ import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import AuthProvider from 'services/AuthProvider';
 import DateFnsUtils from '@date-io/date-fns';
 import { ConnectedRouter } from 'connected-react-router';
 import { StringProvider } from 'strings';
@@ -50,7 +51,9 @@ export default function Root({ children }) {
           locale={localeMap[navigator.language]}
         >
           <StringProvider>
-            <ConnectedRouter history={history}>{children}</ConnectedRouter>
+            <ConnectedRouter history={history}>
+              <AuthProvider>{children}</AuthProvider>
+            </ConnectedRouter>
           </StringProvider>
         </MuiPickersUtilsProvider>
       </MuiThemeProvider>

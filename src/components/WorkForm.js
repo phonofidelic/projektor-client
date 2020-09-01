@@ -3,6 +3,7 @@ import { StringContext } from 'strings';
 import { Formik, Form, Field } from 'formik';
 import moment from 'moment';
 import styled from 'styled-components';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import FormikDateTimePicker from 'components/FormikDateTimePicker';
 
@@ -14,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 
 moment.locale(navigator.language);
 
-const parseDateString = (string) => {
+const parseDateString = string => {
   if (typeof string === 'number') return string;
   return Date.parse(string);
 };
@@ -34,6 +35,10 @@ export function WorkForm(props) {
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
 
+  const { getAccessTokenSilently } = useAuth0();
+
+  console.log('### workItem:', workItem);
+
   return (
     <Formik
       initialValues={{
@@ -43,9 +48,9 @@ export function WorkForm(props) {
         start: workItem ? workItem.start : Date.now(),
         end: workItem ? workItem.end : Date.now(),
         duration: workItem ? workItem.duration : 0,
-        notes: workItem ? workItem.notes : '',
+        notes: workItem ? workItem.notes : ''
       }}
-      validate={(values) => {
+      validate={values => {
         const errors = {};
         if (parseDateString(values.end) <= parseDateString(values.start)) {
           errors.end = 'Stop must be after Start';
@@ -53,21 +58,29 @@ export function WorkForm(props) {
 
         return errors;
       }}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={async (values, { setSubmitting }) => {
         console.log('Posting note:', values.note);
         console.log('Posting workItem:', workItem);
+        const token = await getAccessTokenSilently();
+
         workItem
-          ? updateWork({
-              ...values,
-              _id: workItem._id,
-              duration:
-                parseDateString(values.end) - parseDateString(values.start),
-            })
-          : createWork({
-              ...values,
-              duration:
-                parseDateString(values.end) - parseDateString(values.start),
-            });
+          ? updateWork(
+              {
+                ...values,
+                _id: workItem._id,
+                duration:
+                  parseDateString(values.end) - parseDateString(values.start)
+              },
+              token
+            )
+          : createWork(
+              {
+                ...values,
+                duration:
+                  parseDateString(values.end) - parseDateString(values.start)
+              },
+              token
+            );
         handleClose();
       }}
     >
@@ -78,7 +91,7 @@ export function WorkForm(props) {
         handleChange,
         handleBlur,
         handleSubmit,
-        isSubmitting,
+        isSubmitting
       }) => (
         <Form>
           <Grid container style={{ padding: 24, paddingBottom: 0 }}>

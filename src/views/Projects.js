@@ -3,9 +3,9 @@ import { StringContext } from 'strings';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 import { Helmet } from 'react-helmet';
-import requireAuth from 'hocs/requireAuth';
 import { motion } from 'framer-motion';
 import useMobileDetect from 'use-mobile-detect-hook';
+import { useAuth, requireAuth } from 'services/AuthProvider';
 
 import Header from 'components/Header';
 import ProjectGrid from 'components/ProjectGrid';
@@ -30,6 +30,8 @@ export function Projects(props) {
     searchProjects
   } = props;
 
+  const { getAccessTokenSilently } = useAuth();
+
   const { isMobile } = useMobileDetect();
 
   const strings = useContext(StringContext);
@@ -44,11 +46,18 @@ export function Projects(props) {
   };
 
   useEffect(() => {
-    !preload && getProjects();
-    getProjects();
-  }, [preload, getProjects]);
+    // !preload && getProjects();
+    // getProjects();
 
-  console.log('Projects view, setProjectStatusView:', projectStatusView);
+    const loadProjects = async () => {
+      const token = await getAccessTokenSilently();
+      getProjects(token);
+    };
+    !preload && loadProjects();
+    // loadProjects();
+  }, [preload, getProjects, getAccessTokenSilently]);
+
+  // console.log('Projects view, setProjectStatusView:', projectStatusView);
 
   return !projects ? (
     <div>Loading...</div>
@@ -109,9 +118,9 @@ export function Projects(props) {
 const mapStateToProps = state => {
   return {
     projects: state.projects.projectListByStatus,
-    activeProjects: state.projects.activeProjects,
-    archivedProjects: state.projects.archivedProjects,
-    removedProjects: state.projects.removedProjects,
+    // activeProjects: state.projects.activeProjects,
+    // archivedProjects: state.projects.archivedProjects,
+    // removedProjects: state.projects.removedProjects,
     projectStatusView: state.projects.projectStatusView,
     pathname: state.router.location.pathname
   };
