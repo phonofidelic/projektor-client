@@ -4,10 +4,11 @@ import * as actions from 'actions';
 import { StringContext } from 'strings';
 import moment from 'moment';
 import { Helmet } from 'react-helmet';
-import requireAuth from 'hocs/requireAuth';
+// import requireAuth from 'hocs/requireAuth';
 import { motion } from 'framer-motion';
 import { getPageVariant } from 'constants/pageVariants';
-import { useAuth0 } from '@auth0/auth0-react';
+// import { useAuth0 } from '@auth0/auth0-react';
+import { useAuth, requireAuth } from 'services/AuthProvider';
 
 import Header from 'components/Header';
 import WeekOverview from 'components/WeekOverview';
@@ -26,7 +27,7 @@ export function Calendar(props) {
     end: 6
   });
 
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently } = useAuth();
 
   // const start = moment(moment().day(0)).format();
   // const end = moment(moment().day(6)).format();
@@ -67,7 +68,7 @@ export function Calendar(props) {
       getProjects(token);
     };
     !preload && loadCalendar();
-  }, [preload, getAllWork, getProjects, week]);
+  }, [preload, getAllWork, getProjects, week, getAccessTokenSilently]);
 
   // const workWithProjectInfo = work.map(workItem => {
   //   if (!(projects.length & work.length)) return;
@@ -117,5 +118,4 @@ const mapStateToProps = state => {
   };
 };
 
-// export default connect(mapStateToProps, actions)(requireAuth(Calendar));
-export default connect(mapStateToProps, actions)(Calendar);
+export default connect(mapStateToProps, actions)(requireAuth(Calendar));

@@ -3,10 +3,9 @@ import { StringContext } from 'strings';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 import { Helmet } from 'react-helmet';
-import requireAuth from 'hocs/requireAuth';
 import { motion } from 'framer-motion';
 import useMobileDetect from 'use-mobile-detect-hook';
-import { withAuthenticationRequired, useAuth0 } from '@auth0/auth0-react';
+import { useAuth, requireAuth } from 'services/AuthProvider';
 
 import Header from 'components/Header';
 import ProjectGrid from 'components/ProjectGrid';
@@ -31,7 +30,7 @@ export function Projects(props) {
     searchProjects
   } = props;
 
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently } = useAuth();
 
   const { isMobile } = useMobileDetect();
 
@@ -56,7 +55,7 @@ export function Projects(props) {
     };
     !preload && loadProjects();
     // loadProjects();
-  }, [preload, getProjects]);
+  }, [preload, getProjects, getAccessTokenSilently]);
 
   // console.log('Projects view, setProjectStatusView:', projectStatusView);
 
@@ -127,8 +126,4 @@ const mapStateToProps = state => {
   };
 };
 
-// export default connect(mapStateToProps, actions)(requireAuth(Projects));
-export default connect(
-  mapStateToProps,
-  actions
-)(withAuthenticationRequired(Projects));
+export default connect(mapStateToProps, actions)(requireAuth(Projects));

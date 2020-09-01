@@ -5,7 +5,7 @@ import { PrivateRoute, useAuth } from 'services/AuthProvider';
 
 const Landing = React.lazy(() => import('views/Landing'));
 // const Registration = React.lazy(() => import('views/Registration'))
-const Login = React.lazy(() => import('views/Login'));
+// const Login = React.lazy(() => import('views/Login'));
 const Projects = React.lazy(() => import('views/Projects'));
 const Calendar = React.lazy(() => import('views/Calendar'));
 const Dashboard = React.lazy(() => import('views/Dashboard'));

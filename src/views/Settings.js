@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 import { StringContext } from 'strings';
@@ -6,17 +6,14 @@ import { Helmet } from 'react-helmet';
 // import requireAuth from 'hocs/requireAuth';
 import { motion } from 'framer-motion';
 import { getPageVariant } from 'constants/pageVariants';
-import { useAuth0 } from '@auth0/auth0-react';
 import { useAuth, requireAuth } from 'services/AuthProvider';
 
 import Header from 'components/Header';
 import UserInfo from 'components/UserInfo';
 import LogoutButton from 'components/LogoutButton';
 
-import Button from '@material-ui/core/Button';
-
 export function Settings(props) {
-  const { preload, userInfo, getUserInfo } = props;
+  // const { preload, userInfo, getUserInfo } = props;
   const strings = useContext(StringContext);
 
   const { user } = useAuth();
@@ -55,5 +52,5 @@ const mapStateToProps = state => {
   };
 };
 
-// export default connect(mapStateToProps, actions)(requireAuth(Settings));
-export default connect(mapStateToProps, actions)(Settings);
+export default connect(mapStateToProps, actions)(requireAuth(Settings));
+// export default connect(mapStateToProps, actions)(Settings);

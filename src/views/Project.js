@@ -37,7 +37,7 @@ export function Project(props) {
       !preload && getProject(projectId, token);
     };
     loadProject();
-  }, [preload, getProject, projectId]);
+  }, [preload, getProject, projectId, getAccessTokenSilently]);
 
   return !project ? null : (
     <motion.div variants={getPageVariant('right')}>

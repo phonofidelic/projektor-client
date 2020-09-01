@@ -6,7 +6,7 @@ import { StringContext } from 'strings';
 import Button from '@material-ui/core/Button';
 
 export default function RegistrationButton() {
-  const { loginWithRedirect, loginWithPopup } = useAuth();
+  const { loginWithRedirect } = useAuth();
   const strings = useContext(StringContext);
 
   return (

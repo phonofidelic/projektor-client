@@ -1,6 +1,6 @@
 import { SET_NEW_TOKEN, VERIFICATION_FAILURE } from 'actions/types';
 import axios from 'axios';
-import { history, apiBaseUrl } from 'config';
+import { apiBaseUrl } from 'config';
 
 export const api = token => {
   // const token = localStorage.getItem('token');
