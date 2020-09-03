@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useAuth } from 'services/AuthProvider';
+
 import Grow from '@material-ui/core/Grow';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,12 +13,19 @@ const Container = styled.div`
   width: 100%;
 `;
 export default function SearchBar(props) {
-  const { handleSearch } = props;
+  const { searchProjects } = props;
+  const { getAccessTokenSilently } = useAuth();
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
     handleSearch('');
+  };
+
+  const handleSearch = async query => {
+    const token = await getAccessTokenSilently();
+
+    searchProjects(query, token);
   };
 
   return (
@@ -27,11 +36,11 @@ export default function SearchBar(props) {
       <Grow style={{ maxWidth: 500 }} in={open} mountOnEnter unmountOnExit>
         <TextField
           style={{
-            margin: '5px 10px',
+            margin: '5px 10px'
           }}
           autoFocus
           fullWidth
-          onChange={(e) => handleSearch(e.target.value)}
+          onChange={e => handleSearch(e.target.value)}
         />
       </Grow>
     </Container>

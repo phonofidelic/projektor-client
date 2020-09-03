@@ -79,7 +79,7 @@ export function Projects(props) {
         title={strings.ttl__projects}
         position={isMobile() ? 'fixed' : 'relative'}
       >
-        <SearchBar handleSearch={searchProjects} />
+        <SearchBar searchProjects={searchProjects} />
         {!isMobile() && (
           <ProjectsDisplayControls
             projectsDisplayMode={projectsDisplayMode}
