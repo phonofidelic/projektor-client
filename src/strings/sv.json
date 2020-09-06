@@ -104,5 +104,7 @@
     "ttl__calendar": "Kalender",
     "hnt__status_select": "Visa project via status",
     "hnt__project_options": "Projektalternativ",
-    "hnt__project_options_for": "Projektalternativ för"
+    "hnt__project_options_for": "Projektalternativ för",
+    "hnt__search_projects": "Sök efter projekt",
+    "hnt__search_work": "Sök i utfört arbete"
 }

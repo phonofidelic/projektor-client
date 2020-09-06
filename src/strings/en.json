@@ -104,5 +104,7 @@
     "ttl__calendar": "Calendar",
     "hnt__status_select": "Show projects by status",
     "hnt__project_options": "Project options",
-    "hnt__project_options_for": "Project options for"
+    "hnt__project_options_for": "Project options for",
+    "hnt__search_projects": "Search for Projects",
+    "hnt__search_work": "Search in Work notes"
 }

@@ -17,7 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 
 const Container = styled.div`
-  border-top: solid #e0e0e0 1px;
+  /* border-top: solid #e0e0e0 1px; */
   flex: 1;
 `;
 
@@ -31,6 +31,7 @@ export default function WorkSection(props) {
   const [workItem, setWorkItem] = useState(null);
   const [workFormOpen, setWorkFormOpen] = useState(false);
   const [filterdWork, setFilteredWork] = useState(project.work);
+  const [searchIsOpen, setSearchIsOpen] = useState(false);
 
   const { isMobile } = useMobileDetect();
 
@@ -70,28 +71,42 @@ export default function WorkSection(props) {
       </WorkModal>
       <div
         style={{
-          margin: 18,
-          display: 'flex'
-          // justifyContent: 'space-between'
+          borderTop: 'solid #e0e0e0 1px',
+          position: isMobile() ? 'sticky' : 'inherit',
+          top: 84,
+          backgroundColor: '#fff',
+          padding: '9px 18px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          zIndex: 1
         }}
       >
-        <Typography
-          variant="h5"
-          align="left"
-          style={{
-            height: 48,
-            lineHeight: '48px'
-          }}
-        >
-          {strings.ttl__work}
-        </Typography>
         <div
           style={{
-            flex: 1,
-            marginLeft: 5
+            flex: searchIsOpen ? 0 : 1,
+            width: searchIsOpen && isMobile() ? 0 : 'inherit',
+            transition: 'all ease-in-out 0.1s'
           }}
         >
-          <SearchBar handleSearch={handleSearch} />
+          <Typography
+            noWrap
+            variant="h6"
+            align="left"
+            style={{
+              height: 48,
+              lineHeight: '48px'
+            }}
+          >
+            {strings.ttl__work}
+          </Typography>
+        </div>
+        <div style={{ flex: searchIsOpen ? 1 : 0 }}>
+          <SearchBar
+            placeholderMessage={strings.hnt__search_work}
+            open={searchIsOpen}
+            setOpen={setSearchIsOpen}
+            handleSearch={handleSearch}
+          />
         </div>
         {!isMobile() && (
           <TaskAnalysis project={project} handleSearch={handleSearch} />

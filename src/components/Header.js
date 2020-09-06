@@ -56,15 +56,20 @@ export default function Header(props) {
           <BackArrow />
         </IconButton>
       )}
-      <TitleContainer>
-        <Typography
-          noWrap
-          variant="h5"
-          style={{ lineHeight: '24px', maxWidth: isMobile() ? '50vw' : '100%' }}
-        >
-          {title}
-        </Typography>
-      </TitleContainer>
+      {title && (
+        <TitleContainer>
+          <Typography
+            noWrap
+            variant="h5"
+            style={{
+              lineHeight: '24px',
+              maxWidth: isMobile() ? '50vw' : '100%'
+            }}
+          >
+            {title}
+          </Typography>
+        </TitleContainer>
+      )}
       {!centerTitle && <div style={{ flexGrow: 1 }}></div>}
       {props.children}
     </Container>
