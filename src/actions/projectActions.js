@@ -200,14 +200,14 @@ export const deleteAllTrash = () => {
   };
 };
 
-export const searchProjects = query => {
+export const searchProjects = (query, token) => {
   return async dispatch => {
     dispatch({
       type: SEARCH_PROJECTS
     });
 
     try {
-      const response = await api().get(`/projects/search?q=${query}`);
+      const response = await api(token).get(`/projects/search?q=${query}`);
       // console.log('searchJobs, response:', response.data);
       handleResponse(response, dispatch, SEARCH_PROJECTS_SUCCESS);
     } catch (err) {

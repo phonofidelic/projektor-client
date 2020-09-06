@@ -22,14 +22,16 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   text-align: left;
+  /* width: ${({ searchIsOpen, isMobile }) =>
+    searchIsOpen && isMobile ? '40px' : 'unset'}; */
   height: 40px;
   margin: 4px;
-  margin-right: 20px;
+  /* margin-right: 20px; */
   /* smax-width: 100px; */
 `;
 
 export function ProjectsStatusSelect(props) {
-  const { projectStatusView, setProjectStatusView } = props;
+  const { searchIsOpen, projectStatusView, setProjectStatusView } = props;
   const strings = useContext(StringContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const { isMobile } = useMobileDetect();
@@ -98,30 +100,58 @@ export function ProjectsStatusSelect(props) {
   ];
 
   return (
-    <Container>
+    <Container searchIsOpen={searchIsOpen} isMobile={isMobile()}>
       <Tooltip arrow title={strings.hnt__status_select}>
-        <Chip
-          data-testid="project-status-select-button"
-          component={Button}
-          label={getProjectStatusViewString()}
-          variant="outlined"
-          avatar={
+        {searchIsOpen && isMobile() ? (
+          <div
+            style={{
+              width: 32,
+              height: 32,
+              // padding: 7,
+              borderRadius: '100%',
+              // backgroundColor: activeColor[SHADE],
+              border: '1px solid #C4C4C4',
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+            onClick={handleOpenMenu}
+          >
             <div
               style={{
-                backgroundColor: getStatusColor(SHADE),
-                borderRadius: '100%',
                 width: 18,
-                height: 18
+                height: 18,
+                margin: 'auto',
+                borderRadius: '100%',
+                backgroundColor: getStatusColor(SHADE)
+                // bodrer: '1px solid #C4C4C4'
               }}
             />
-          }
-          aria-controls="project-status-select"
-          aria-haspopup="true"
-          onClick={handleOpenMenu}
-        />
+          </div>
+        ) : (
+          <Chip
+            data-testid="project-status-select-button"
+            component={Button}
+            label={getProjectStatusViewString()}
+            variant="outlined"
+            avatar={
+              <div
+                style={{
+                  backgroundColor: getStatusColor(SHADE),
+                  borderRadius: '100%',
+                  width: 18,
+                  height: 18
+                }}
+              />
+            }
+            aria-controls="project-status-select"
+            aria-haspopup="true"
+            onClick={handleOpenMenu}
+          />
+        )}
       </Tooltip>
       {isMobile() ? (
         <MobileProjectStatusSelect
+          searchIsOpen={searchIsOpen}
           open={Boolean(anchorEl)}
           menuOptions={menuOptions}
           handleCloseMenu={handleCloseMenu}

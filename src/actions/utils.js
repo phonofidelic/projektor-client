@@ -4,6 +4,7 @@ import { apiBaseUrl } from 'config';
 
 export const api = token => {
   // const token = localStorage.getItem('token');
+
   console.log('### api, token:', token);
   return axios.create({
     baseURL: apiBaseUrl,
