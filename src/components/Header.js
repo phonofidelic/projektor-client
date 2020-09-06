@@ -62,7 +62,7 @@ export default function Header(props) {
             noWrap
             variant="h5"
             style={{
-              lineHeight: '24px',
+              // lineHeight: '24px',
               maxWidth: isMobile() ? '50vw' : '100%'
             }}
           >
