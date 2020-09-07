@@ -15,6 +15,7 @@ import Header from 'components/Header';
 import LoginButton from 'components/LoginButton';
 import RegistrationButton from 'components/RegistrationButton';
 import Demo from 'components/Demo';
+import SVGLogo from 'components/Logo';
 
 // import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -62,6 +63,10 @@ const Logo = styled.img`
   @media (max-width: 840px) {
     margin: 20px auto;
   }
+`;
+
+const LogoContainer = styled.div`
+  margin: 30px auto;
 `;
 
 const FormContainer = styled.div`
@@ -112,19 +117,24 @@ export function Landing(props) {
         </div>
       </Header>
       <HeroContainer>
-        <Logo src={logoSrc} alt={strings.ttl__app_title} />
+        {/* <Logo src={logoSrc} alt={strings.ttl__app_title} /> */}
+        <LogoContainer>
+          <SVGLogo text={strings.ttl__app_title} />
+        </LogoContainer>
         <Typography>{strings.msg__tagline}</Typography>
       </HeroContainer>
       <SectionContainer>
         <Demo />
       </SectionContainer>
-      <FormContainer id="get-started">
-        <div style={{ margin: 20 }}>
-          <Typography>{strings.msg__get_started}</Typography>
-        </div>
-        {/* <RegistrationForm handleRegistrationSubmit={handleRegistrationSubmit} /> */}
-        <RegistrationButton />
-      </FormContainer>
+      <SectionContainer id="get-started">
+        <FormContainer>
+          <div style={{ margin: 20 }}>
+            <Typography>{strings.msg__get_started}</Typography>
+          </div>
+          {/* <RegistrationForm handleRegistrationSubmit={handleRegistrationSubmit} /> */}
+          <RegistrationButton />
+        </FormContainer>
+      </SectionContainer>
     </motion.div>
   );
 }
