@@ -8,11 +8,13 @@ import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { getPageVariant } from 'constants/pageVariants';
 
-import logoSrc from 'assets/logo.svg';
+// import logoSrc from 'assets/logo.svg';
+import logoSrc from 'assets/logo2.svg';
 import Header from 'components/Header';
 // import RegistrationForm from 'components/RegistrationForm';
 import LoginButton from 'components/LoginButton';
 import RegistrationButton from 'components/RegistrationButton';
+import Demo from 'components/Demo';
 
 // import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -55,10 +57,10 @@ const HeroContainer = styled.div`
 
 const Logo = styled.img`
   margin: 30px auto;
-  max-width: 800px;
+  max-width: 400px;
 
   @media (max-width: 840px) {
-    margin: 20px;
+    margin: 20px auto;
   }
 `;
 
@@ -68,6 +70,13 @@ const FormContainer = styled.div`
   // @media (max-width: 768px) {
   //   margin: 0;
   // }
+`;
+
+const SectionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
 `;
 
 export function Landing(props) {
@@ -106,6 +115,9 @@ export function Landing(props) {
         <Logo src={logoSrc} alt={strings.ttl__app_title} />
         <Typography>{strings.msg__tagline}</Typography>
       </HeroContainer>
+      <SectionContainer>
+        <Demo />
+      </SectionContainer>
       <FormContainer id="get-started">
         <div style={{ margin: 20 }}>
           <Typography>{strings.msg__get_started}</Typography>

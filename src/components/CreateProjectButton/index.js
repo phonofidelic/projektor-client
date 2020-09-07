@@ -59,9 +59,34 @@ function DesktopButton(props) {
   );
 }
 
-export default function CreateProjectButton() {
+function DemoButton(props) {
+  const strings = useContext(StringContext);
+
+  return (
+    <Tooltip
+      arrow
+      title={strings.hnt__create_project}
+      placement="top-start"
+      enterDelay={400}
+    >
+      <IconButton
+        style={{
+          textDecoration: 'none'
+        }}
+        component={Link}
+        to="/projects/create"
+      >
+        <AddIcon />
+      </IconButton>
+    </Tooltip>
+  );
+}
+
+export default function CreateProjectButton(props) {
+  const { demo } = props;
   const { isMobile } = useMobileDetect();
 
+  if (demo) return <DemoButton />;
   if (isMobile()) return <MobileButton />;
   return <DesktopButton />;
 }
