@@ -78,6 +78,8 @@ const FormContainer = styled.div`
 `;
 
 const SectionContainer = styled.div`
+  /* position: sticky;
+  top: 0; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -90,6 +92,10 @@ export function Landing(props) {
   // const handleRegistrationSubmit = formData => {
   //   props.registerNewUser(formData);
   // };
+
+  const handleLogoClick = () => {
+    window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+  };
 
   return (
     <motion.div
@@ -119,22 +125,24 @@ export function Landing(props) {
       <HeroContainer>
         {/* <Logo src={logoSrc} alt={strings.ttl__app_title} /> */}
         <LogoContainer>
-          <SVGLogo text={strings.ttl__app_title} />
+          <SVGLogo
+            text={strings.ttl__app_title}
+            handleClick={handleLogoClick}
+          />
         </LogoContainer>
         <Typography>{strings.msg__tagline}</Typography>
       </HeroContainer>
       <SectionContainer>
         <Demo />
       </SectionContainer>
-      <SectionContainer id="get-started">
+      {/* <SectionContainer id="get-started">
         <FormContainer>
           <div style={{ margin: 20 }}>
             <Typography>{strings.msg__get_started}</Typography>
           </div>
-          {/* <RegistrationForm handleRegistrationSubmit={handleRegistrationSubmit} /> */}
           <RegistrationButton />
         </FormContainer>
-      </SectionContainer>
+      </SectionContainer> */}
     </motion.div>
   );
 }

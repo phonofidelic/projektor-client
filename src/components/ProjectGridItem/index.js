@@ -45,15 +45,27 @@ const Progress = styled.div`
 `;
 
 export function ProjectGridItem(props) {
-  const { project, projectsDisplayMode } = props;
+  const { project, projectsDisplayMode, handleDemoAction } = props;
   const [hoverRef, hovered] = useHover();
   const history = useHistory();
   const { isMobile } = useMobileDetect();
 
   const classes = useStyles({ projectColor: project.color });
 
+  const handleClick = () => {
+    handleDemoAction
+      ? handleDemoAction()
+      : history.push(`projects/${project._id}`);
+  };
   return (
-    <Grid item xs={12} sm={6} md={4} ref={hoverRef}>
+    <Grid
+      style={{ textAlign: 'left' }}
+      item
+      xs={props.xs || 12}
+      sm={props.sm || 6}
+      md={props.md || 4}
+      ref={hoverRef}
+    >
       <Card
         variant="outlined"
         style={{
@@ -81,7 +93,7 @@ export function ProjectGridItem(props) {
           </div>
         </div>
 
-        <CardActionArea onClick={() => history.push(`projects/${project._id}`)}>
+        <CardActionArea onClick={handleClick}>
           <CardHeader
             classes={{ content: classes.cardHeader }}
             avatar={
