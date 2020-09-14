@@ -130,13 +130,12 @@ export function Projects(props) {
             selectDisplayMode={handleSelectDisplayMode}
           />
         )}
-
         <ProjectsStatusSelect
           searchIsOpen={searchIsOpen}
           projectStatusView={projectStatusView}
           setProjectStatusView={setProjectStatusView}
         />
-        {projectStatusView === ACTIVE && <CreateProjectButton />}
+        <div>{projectStatusView === ACTIVE && <CreateProjectButton />}</div>
       </Header>
 
       <div>

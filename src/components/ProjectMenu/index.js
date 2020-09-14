@@ -79,7 +79,7 @@ export function ProjectMenu(props) {
   ];
 
   return (
-    <div>
+    <div style={{ margin: 'auto' }}>
       <Tooltip arrow title={strings.hnt__project_options}>
         <IconButton ref={buttonRef} onClick={handleMenuClick}>
           <MoreVertIcon />

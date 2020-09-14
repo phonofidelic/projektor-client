@@ -48,13 +48,15 @@ export default function Header(props) {
       }
     >
       {back && (
-        <IconButton
-          data-testid="header-back-button"
-          style={{ marginRight: 10 }}
-          onClick={() => history.goBack()}
-        >
-          <BackArrow />
-        </IconButton>
+        <div style={{ margin: 'auto' }}>
+          <IconButton
+            data-testid="header-back-button"
+            style={{ marginRight: 10 }}
+            onClick={() => history.goBack()}
+          >
+            <BackArrow />
+          </IconButton>
+        </div>
       )}
       {title && (
         <TitleContainer>

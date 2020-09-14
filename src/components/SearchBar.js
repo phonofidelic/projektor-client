@@ -13,6 +13,8 @@ const Container = styled.div`
   display: flex;
   width: ${({ open, isMobile }) => (open && isMobile ? '100%' : 'unset')};
   /* z-index: 0; */
+  margin: auto;
+  margin-right: 8px;
 `;
 
 export default function SearchBar(props) {

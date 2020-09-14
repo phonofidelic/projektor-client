@@ -68,7 +68,7 @@ export function Project(props) {
       <Header
         back
         title={project.title}
-        position={isMobile() ? 'fixed' : 'relative'}
+        position={isMobile() ? 'fixed' : 'unset'}
       >
         <ProjectMenu project={project} />
       </Header>
