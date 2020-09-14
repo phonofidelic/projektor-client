@@ -8,14 +8,14 @@ const Text = styled.text`
 `;
 
 export default function Logo(props) {
-  const { text, handleClick } = props;
+  const { width = 400, height = 480, text, handleClick } = props;
 
   return (
     <svg
       style={{ cursor: 'pointer' }}
-      width={400}
-      height={480}
-      // viewBox="0 0 400 650"
+      width={width}
+      height={height}
+      viewBox={`0 0 ${400} ${text ? 480 : 400}`}
       aria-label="Logo for Projektor"
       onClick={() => handleClick()}
     >

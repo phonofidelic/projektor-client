@@ -87,7 +87,7 @@ export function Projects(props) {
       <Header
         nav
         // title={strings.ttl__projects}
-        position={isMobile() ? 'fixed' : 'relative'}
+        position={isMobile() ? 'fixed' : 'unset'}
       >
         <div
           style={{
