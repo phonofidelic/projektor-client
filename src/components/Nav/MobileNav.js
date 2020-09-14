@@ -8,7 +8,6 @@ import Logo from 'components/Logo';
 import { useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -57,8 +56,6 @@ export default function MobileNav() {
       <Drawer anchor="right" open={open} onClose={handleClose}>
         <div style={{ width: '100vw' }}>
           <NavHeader>
-            {/* <Typography variant="h4">[projektor]</Typography> */}
-
             <IconButton onClick={handleClose}>
               <CloseIcon />
             </IconButton>

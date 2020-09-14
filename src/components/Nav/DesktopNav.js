@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import NavList from './NavList';
 import Logo from 'components/Logo';
 
-import Typography from '@material-ui/core/Typography';
-
 const NAV_WIDTH = 178;
 
 /**
@@ -39,7 +37,6 @@ export default function DesktopNav() {
     <Base>
       <Container>
         <LogoContainer>
-          {/* <Typography variant="h4">[projektor]</Typography> */}
           <Logo width={50} height={50} />
         </LogoContainer>
         <NavList />
