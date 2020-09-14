@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import matchSorter from 'match-sorter';
 import useMobileDetect from 'use-mobile-detect-hook';
 
+import ContextualHelp from 'components/ContextualHelp';
 import WorkTable from 'components/ProjectDetail/WorkTable';
 import WorkList from './WorkList';
 import WorkModal from 'components/ProjectDetail/WorkModal';
@@ -12,6 +13,8 @@ import WorkForm from 'components/WorkForm';
 import SearchBar from 'components/SearchBar';
 import TaskAnalysis from 'components/TaskAnalysis';
 
+import { useTheme } from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
@@ -34,6 +37,8 @@ export default function WorkSection(props) {
   const [searchIsOpen, setSearchIsOpen] = useState(false);
 
   const { isMobile } = useMobileDetect();
+
+  const theme = useTheme();
 
   const handleOpenWork = workItem => {
     workItem ? setWorkItem(workItem) : setWorkItem(null);
@@ -69,12 +74,13 @@ export default function WorkSection(props) {
           updateWork={updateWork}
         />
       </WorkModal>
+      <Divider />
       <div
         style={{
-          borderTop: 'solid #e0e0e0 1px',
+          backgroundColor: theme.palette.background.default,
+          // borderTop: 'solid #e0e0e0 1px',
           position: isMobile() ? 'sticky' : 'inherit',
-          top: 84,
-          backgroundColor: '#fff',
+          top: theme.dimensions.projectDetailHeader.height,
           padding: '9px 18px',
           display: 'flex',
           justifyContent: 'space-between',
@@ -108,12 +114,21 @@ export default function WorkSection(props) {
             handleSearch={handleSearch}
           />
         </div>
-        {!isMobile() && (
+        {!isMobile() && !project.isDemo && (
           <TaskAnalysis project={project} handleSearch={handleSearch} />
         )}
-        <IconButton variant="outlined" onClick={() => handleOpenWork(false)}>
-          <AddIcon />
-        </IconButton>
+        <ContextualHelp
+          open={project.isDemo}
+          text={'Add Tasks to track your progress'}
+          uiBackground={theme.palette.background.default}
+          backdropBackground={theme.palette.action.active}
+          // tooltipBackground={theme.palette.secondary.main}
+          tooltipBackground={theme.palette.background.default}
+        >
+          <IconButton variant="outlined" onClick={() => handleOpenWork(false)}>
+            <AddIcon />
+          </IconButton>
+        </ContextualHelp>
       </div>
       <WorkContainer>
         {filterdWork.length > 0 ? (

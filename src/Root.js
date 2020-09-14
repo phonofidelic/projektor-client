@@ -24,14 +24,33 @@ const localeMap = {
 
 export const materialUITheme = createMuiTheme({
   palette: {
+    // primary: {
+    //   main: '#212121',
+    //   background: '#fff'
+    // },
     primary: {
+      light: '#484848',
       main: '#212121',
-      background: '#fff'
+      dark: '#000000'
+    },
+    // primary: {
+    //   light: '#4f5b62',
+    //   main: '#263238',
+    //   dark: '#000a12'
+    // },
+    secondary: {
+      light: '#fff2bf',
+      main: '#ffbf8e',
+      dark: '#ca8f60'
+    },
+    background: {
+      default: '#fff'
     }
-    /**
-     * WARNING: This setting may cause accessibility issues
-     */
-    // contrastThreshold: 2
+  },
+  dimensions: {
+    projectDetailHeader: {
+      height: 88
+    }
   }
 });
 

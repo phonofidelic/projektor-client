@@ -9,7 +9,6 @@ import { motion } from 'framer-motion';
 import { getPageVariant } from 'constants/pageVariants';
 
 // import logoSrc from 'assets/logo.svg';
-import logoSrc from 'assets/logo2.svg';
 import Header from 'components/Header';
 // import RegistrationForm from 'components/RegistrationForm';
 import LoginButton from 'components/LoginButton';
@@ -49,6 +48,14 @@ import Typography from '@material-ui/core/Typography';
 //   z-index: -1;
 // `;
 
+const HeaderContent = styled.div`
+  @media (max-width: 600px) {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+`;
+
 const HeroContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -56,25 +63,17 @@ const HeroContainer = styled.div`
   height: 100vh;
 `;
 
-const Logo = styled.img`
-  margin: 30px auto;
-  max-width: 400px;
+// const Logo = styled.img`
+//   margin: 30px auto;
+//   max-width: 400px;
 
-  @media (max-width: 840px) {
-    margin: 20px auto;
-  }
-`;
+//   @media (max-width: 840px) {
+//     margin: 20px auto;
+//   }
+// `;
 
 const LogoContainer = styled.div`
   margin: 30px auto;
-`;
-
-const FormContainer = styled.div`
-  margin: 80px auto;
-
-  // @media (max-width: 768px) {
-  //   margin: 0;
-  // }
 `;
 
 const SectionContainer = styled.div`
@@ -110,7 +109,14 @@ export function Landing(props) {
         <title>{strings.ttl__app_title}</title>
       </Helmet>
       <Header position="fixed" background="none">
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        {/* <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-around',
+            width: '100%'
+          }}
+        > */}
+        <HeaderContent>
           {/* <Button
             variant="outlined"
             style={{ textDecoratino: 'none', backgroundColor: '#fff' }}
@@ -120,7 +126,9 @@ export function Landing(props) {
             {strings.btn__sign_in}
           </Button> */}
           <LoginButton />
-        </div>
+          <RegistrationButton />
+        </HeaderContent>
+        {/* </div> */}
       </Header>
       <HeroContainer>
         {/* <Logo src={logoSrc} alt={strings.ttl__app_title} /> */}

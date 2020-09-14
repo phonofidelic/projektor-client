@@ -3,8 +3,8 @@ import { StringContext } from 'strings';
 import moment from 'moment';
 import { useTable, useSortBy, useExpanded, usePagination } from 'react-table';
 import TablePaginationActions from 'components/TablePaginationActions';
-import { useAuth0 } from '@auth0/auth0-react';
 
+import { withStyles, useTheme } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -22,19 +22,30 @@ import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import { makeStyles, withStyles, useTheme } from '@material-ui/core/styles';
 
 const MAX_ROWS = 10;
 
-const StyledTableCell = withStyles({
-  head: { background: '#fff' }
-})(TableCell);
+const StyledTableCell = withStyles(theme => ({
+  root: { borderBottom: `1px solid ${theme.palette.divider}` },
+  head: { backgroundColor: theme.palette.background.default }
+}))(TableCell);
 
-const useStyles = makeStyles({
-  selected: {
-    background: 'linear-gradient(180deg, #eee 100%, #fff 20%)'
-  }
-});
+const StyledTableRow = withStyles(theme => ({
+  // root: { borderBottom: `1px solid ${theme.palette.divider}` },
+  // head: { background: theme.palette.background.default }
+  root: {
+    cursor: 'pointer',
+    '&$selected': { backgroundColor: theme.palette.action.selected },
+    '&$hover:hover': { backgroundColor: theme.palette.action.hover }
+    // backgroundColor: theme.palette.background.default
+  },
+  hover: {},
+  selected: {}
+}))(TableRow);
+
+const StyledTableFooter = withStyles(theme => ({
+  root: { backgroundColor: theme.palette.background.default }
+}))(TableFooter);
 
 moment.locale(navigator.language);
 
@@ -50,18 +61,16 @@ function ContextMenu(props) {
 
   const strings = useContext(StringContext);
 
-  const { getAccessTokenSilently } = useAuth0();
-
   const selectEdit = () => {
     handleOpenWork(workItem);
     handleCloseContextMenu();
   };
 
   const selectDelete = async () => {
-    const token = await getAccessTokenSilently();
+    // const token = await getAccessTokenSilently();
 
     if (window.confirm(strings.msg__confirm_delete_work)) {
-      removeWork(workItem._id, token);
+      removeWork(workItem._id);
       handleCloseContextMenu();
     } else {
       handleCloseContextMenu();
@@ -113,7 +122,6 @@ export default function WorkTable(props) {
   const [selectedWork, setSelectedWork] = useState({ _id: null });
   const [contextOpen, setContextMenuOpen] = useState(false);
   const [contextPos, setContextPos] = useState({});
-  const classes = useStyles();
   const theme = useTheme();
 
   const data = useMemo(() => work.map(workItem => workItem), [work]);
@@ -236,28 +244,31 @@ export default function WorkTable(props) {
           {page.map((row, i) => {
             prepareRow(row);
             return (
-              <TableRow
+              <StyledTableRow
                 {...row.getRowProps()}
-                style={{ cursor: 'pointer' }}
+                // style={{ cursor: 'pointer' }}
                 key={row.original._id}
                 hover
                 selected={row.original._id === selectedWork._id}
                 onClick={() => handleSelectWork(row.original)}
                 onContextMenu={e => handleOpenContextMenu(e, row.original)}
                 onDoubleClick={() => handleOpenWork(row.original)}
-                classes={{ selected: classes.selected }}
+                // classes={{ selected: classes.selected }}
               >
                 {row.cells.map(cell => (
-                  <TableCell style={{ maxWidth: 100 }} {...cell.getCellProps()}>
+                  <StyledTableCell
+                    style={{ maxWidth: 100 }}
+                    {...cell.getCellProps()}
+                  >
                     <Typography noWrap>{cell.render('Cell')}</Typography>
-                  </TableCell>
+                  </StyledTableCell>
                 ))}
-              </TableRow>
+              </StyledTableRow>
             );
           })}
         </TableBody>
         {rows.length > MAX_ROWS && (
-          <TableFooter
+          <StyledTableFooter
             style={{
               position: 'fixed',
               bottom: 0,
@@ -284,7 +295,7 @@ export default function WorkTable(props) {
                 ActionsComponent={TablePaginationActions}
               />
             </TableRow>
-          </TableFooter>
+          </StyledTableFooter>
         )}
       </Table>
       {/* </Paper> */}

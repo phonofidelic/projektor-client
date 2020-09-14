@@ -11,7 +11,7 @@ import BackArrow from '@material-ui/icons/ArrowBack';
 
 const Container = styled.div`
   display: flex;
-  padding: 18px;
+  padding: 16px;
   ${({ isMobile, isProjectDetail }) =>
     isMobile && !isProjectDetail && 'padding-left: 60px'}
   background: ${({ background }) => background || '#fff'};

@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { Formik, Form, Field } from 'formik';
 import styled from 'styled-components';
-import FormikDatePicker from 'components/FormikDatePicker';
 import { StringContext } from 'strings';
+
+import FormikDatePicker from 'components/FormikDatePicker';
 
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -244,6 +245,7 @@ export default function ProjectForm(props) {
                 <InputContainer>
                   <Button
                     style={{ marginTop: '20px' }}
+                    variant="outlined"
                     type="submit"
                     disabled={Object.keys(errors).length > 0}
                   >

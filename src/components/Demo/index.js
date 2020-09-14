@@ -1,113 +1,85 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import ProjectForm from 'components/ProjectForm';
-import ProjectGrid from 'components/ProjectGrid';
-import ProjectGridItem from 'components/ProjectGridItem';
+import { Step0, Step1, Step2, Step3, Step4 } from './Steps';
 
-import Grid from '@material-ui/core/Grid';
-import Grow from '@material-ui/core/Grow';
-import IconButton from '@material-ui/core/IconButton';
+import { useTheme } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
-import AddIcon from '@material-ui/icons/Add';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-
-const demoProject = {
-  title: 'First project',
-  description: 'Getting started with Projektor',
-  startDate: Date.now(),
-  deadline: null,
-  client: 'Phonofidelic',
-  budgetedTime: '',
-  color: '#fd8175'
-};
-
-const steps = [
-  {
-    label: 'Get started'
-  },
-  {
-    label: 'Create your first project'
-  },
-  {
-    label: 'Sort you projects by status'
-  }
-];
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const Container = styled.div`
-  /* width: 100%; */
+  z-index: ${({ theme }) => theme.zIndex.appBar + 1};
 `;
 
 const DemoContainer = styled.div`
-  min-width: 400px;
-  min-height: 400px;
-  /* width: 400px; */
   height: 80vh;
+  /* overflow-y: auto; */
   margin: auto;
   background-color: ${({ color }) => color};
+  box-shadow: inset 0 0 0 40px ${({ color }) => color};
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  /* padding: 8px; */
-  /* text-align: left; */
+  padding: 0px 48px;
   transition: all 0.8s ease;
   -webkit-transition: all 0.8s ease;
 `;
 
 const StepperContainer = styled.div`
   height: 20vh;
+  background-color: ${({ color }) => color};
+  transition: all 0.8s ease;
+  -webkit-transition: all 0.8s ease;
+
+  .MuiStepper-root {
+    background-color: ${({ color }) => color};
+    transition: all 0.8s ease;
+    -webkit-transition: all 0.8s ease;
+  }
+  .MuiStepConnector-line {
+    border-color: #000;
+  }
 `;
-
-const Step0 = props => (
-  <div>
-    <div />
-    <IconButton onClick={props.handleStep}>
-      <AddIcon />
-    </IconButton>
-    <div />
-  </div>
-);
-
-const Step1 = props => (
-  <ProjectForm project={demoProject} handleFormSubmit={props.handleStep} />
-);
-
-const Step2 = props => (
-  // <ProjectGrid projects={[demoProject]} />
-  <div>
-    <Grid container spacing={1}>
-      <ProjectGridItem
-        project={demoProject}
-        projectsDisplayMode="compact"
-        // sm={12}
-        // md={12}
-        handleDemoAction={props.handleStep}
-      />
-    </Grid>
-    <div />
-  </div>
-);
 
 export default function Demo() {
   const [step, setStep] = useState(0);
 
-  const handleStep0 = () => {
-    setStep(1);
-  };
+  const theme = useTheme();
 
-  const handleStep1 = data => {
-    // console.log('Step 2, data:', data);
-    setStep(2);
-  };
+  const [demoProject, setDemoProject] = useState({
+    title: 'First project',
+    description: 'Getting started with Projektor',
+    startDate: Date.now(),
+    deadline: null,
+    client: 'Phonofidelic',
+    budgetedTime: 5,
+    timeUsed: 0,
+    color: '#fd8175',
+    status: 'active',
+    work: [],
+    isDemo: true
+  });
 
-  const handleStep2 = () => {
-    setStep(3);
-  };
+  const steps = [
+    {
+      label: 'Get started',
+      handleClick: () => setStep(0)
+    },
+    {
+      label: 'Create your first project',
+      handleClick: () => setStep(1)
+    },
+    {
+      label: 'Sort you projects by status',
+      handleClick: () => setStep(2)
+    },
+    {
+      label: 'View project details',
+      handleClick: () => setStep(3)
+    }
+  ];
 
   const getBackgroundColor = step => {
     switch (step) {
@@ -120,50 +92,123 @@ export default function Demo() {
       case 2:
         return '#fd8175';
 
+      case 3:
+        return '#c8ba8e';
+
+      case 4:
+        return theme.palette.background.default;
+
       default:
         return '#80f5ff';
     }
   };
 
+  const demoTheme = createMuiTheme({
+    palette: {
+      primary: {
+        light: '#484848',
+        main: '#212121',
+        dark: '#000000'
+      },
+      secondary: {
+        light: '#fff2bf',
+        main: '#ffbf8e',
+        dark: '#ca8f60'
+      },
+      background: {
+        default: getBackgroundColor(step)
+      },
+      divider: '#000'
+    }
+  });
+
+  const handleCreateWork = work => {
+    setDemoProject({
+      ...demoProject,
+      timeUsed: demoProject.timeUsed + work.duration,
+      work: [
+        ...demoProject.work,
+        { _id: `${Math.trunc(Math.random() * 100000)}_${Date.now()}`, ...work }
+      ]
+    });
+  };
+
+  const handleUpdateWork = work => {
+    const oldWorkItem = demoProject.work.filter(
+      demoWork => demoWork._id === work._id
+    )[0];
+
+    const newTimeUsed =
+      demoProject.work.reduce((prev, cur) => prev + cur.duration, 0) -
+      oldWorkItem.duration +
+      work.duration;
+
+    setDemoProject({
+      ...demoProject,
+      timeUsed: newTimeUsed,
+      work: demoProject.work.map(demoWork =>
+        demoWork._id === work._id ? work : demoWork
+      )
+    });
+  };
+
+  const handleRemoveWork = workId => {
+    setDemoProject({
+      ...demoProject,
+      timeUsed:
+        demoProject.timeUsed -
+        demoProject.work.filter(demoWork => demoWork._id === workId)[0]
+          .duration,
+      work: demoProject.work.filter(demoWork => demoWork._id !== workId)
+    });
+  };
+
   const render = step => {
     switch (step) {
       case 0:
-        return (
-          <Grow>
-            <Step0 handleStep={handleStep0} />
-          </Grow>
-        );
+        return <Step0 handleStep={() => setStep(1)} />;
 
       case 1:
         return (
-          <Grow in={step === 1} mountOnEnter unmountOnExit>
-            <Step1 handleStep={handleStep1} />
-          </Grow>
+          <Step1 demoProject={demoProject} handleStep={() => setStep(2)} />
         );
 
       case 2:
         return (
-          <Grow in={step === 2} mountOnEnter unmountOnExit>
-            <Step2 handleStep={handleStep2} />
-          </Grow>
+          <Step2 demoProject={demoProject} handleStep={() => setStep(3)} />
+        );
+
+      case 3:
+        return (
+          <Step3
+            demoProject={demoProject}
+            handleCreateWork={handleCreateWork}
+            handleUpdateWork={handleUpdateWork}
+            handleRemoveWork={handleRemoveWork}
+            handleStep={() => setStep(4)}
+          />
         );
 
       default:
-        return <Step0 handleStep={handleStep0} />;
+        return <Step4 />;
     }
   };
 
   return (
-    <Container id="demo">
+    <Container id="demo" theme={theme}>
       <DemoContainer color={getBackgroundColor(step)}>
-        {render(step)}
+        <MuiThemeProvider theme={demoTheme}>{render(step)}</MuiThemeProvider>
       </DemoContainer>
-      <StepperContainer>
-        {/* <Typography>Hello</Typography> */}
+      <StepperContainer color={getBackgroundColor(step)}>
         <Stepper activeStep={step} alternativeLabel>
           {steps.map(step => (
             <Step key={step.label}>
-              <StepLabel>{step.label}</StepLabel>
+              <StepLabel
+                style={{ cursor: 'pointer' }}
+                onClick={step.handleClick}
+              >
+                {step.label}
+              </StepLabel>
             </Step>
           ))}
         </Stepper>

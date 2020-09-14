@@ -6,7 +6,7 @@ export default function useTaskKeywords(projectId) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const getTaskKeywords = async (projectId) => {
+  const getTaskKeywords = async projectId => {
     let response;
 
     try {
@@ -17,9 +17,9 @@ export default function useTaskKeywords(projectId) {
       setError(err);
     }
 
-    const keywords = response.data.data.map((taskType) => ({
+    const keywords = response.data.data.map(taskType => ({
       ...taskType,
-      id: taskType.term.replace(' ', '_'),
+      id: taskType.term.replace(' ', '_')
     }));
 
     setLoading(false);
@@ -27,7 +27,7 @@ export default function useTaskKeywords(projectId) {
   };
 
   useEffect(() => {
-    getTaskKeywords(projectId, setKeywords, setLoading, setError);
+    projectId && getTaskKeywords(projectId, setKeywords, setLoading, setError);
   }, [projectId]);
 
   return [keywords, loading, error, setKeywords, getTaskKeywords];

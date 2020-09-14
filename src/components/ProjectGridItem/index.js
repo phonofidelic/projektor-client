@@ -79,6 +79,7 @@ export function ProjectGridItem(props) {
             width: '100%',
             display: 'flex',
             justifyContent: 'flex-end'
+            // right: 50
           }}
         >
           <div

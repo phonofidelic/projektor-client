@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import * as actions from 'actions';
 import { connect } from 'react-redux';
 import { StringContext } from 'strings';
@@ -23,12 +23,13 @@ export function ProjectMenu(props) {
   const location = useLocation();
   const history = useHistory();
   const { isMobile } = useMobileDetect();
-
+  const buttonRef = useRef(null);
   const { getAccessTokenSilently } = useAuth0();
 
   const [anchorEl, setAnchor] = useState(null);
   const handleMenuClick = e => {
-    setAnchor(e.currentTarget);
+    // setAnchor(e.currentTarget);
+    setAnchor(buttonRef.current);
   };
   const handleCloseMenu = () => {
     setAnchor(null);
@@ -80,7 +81,7 @@ export function ProjectMenu(props) {
   return (
     <div>
       <Tooltip arrow title={strings.hnt__project_options}>
-        <IconButton onClick={handleMenuClick}>
+        <IconButton ref={buttonRef} onClick={handleMenuClick}>
           <MoreVertIcon />
         </IconButton>
       </Tooltip>
