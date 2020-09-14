@@ -3,7 +3,6 @@ import { StringContext } from 'strings';
 import { Formik, Form, Field } from 'formik';
 import moment from 'moment';
 import styled from 'styled-components';
-import { useAuth0 } from '@auth0/auth0-react';
 
 import FormikDateTimePicker from 'components/FormikDateTimePicker';
 
@@ -35,8 +34,6 @@ export function WorkForm(props) {
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
 
-  const { getAccessTokenSilently } = useAuth0();
-
   console.log('### workItem:', workItem);
 
   return (
@@ -46,7 +43,7 @@ export function WorkForm(props) {
         project: project._id,
         date: workItem ? workItem.date : Date.now(),
         start: workItem ? workItem.start : Date.now(),
-        end: workItem ? workItem.end : Date.now(),
+        end: workItem ? workItem.end : Date.now() + 3.6e6,
         duration: workItem ? workItem.duration : 0,
         notes: workItem ? workItem.notes : ''
       }}
@@ -61,26 +58,19 @@ export function WorkForm(props) {
       onSubmit={async (values, { setSubmitting }) => {
         console.log('Posting note:', values.note);
         console.log('Posting workItem:', workItem);
-        const token = await getAccessTokenSilently();
 
         workItem
-          ? updateWork(
-              {
-                ...values,
-                _id: workItem._id,
-                duration:
-                  parseDateString(values.end) - parseDateString(values.start)
-              },
-              token
-            )
-          : createWork(
-              {
-                ...values,
-                duration:
-                  parseDateString(values.end) - parseDateString(values.start)
-              },
-              token
-            );
+          ? updateWork({
+              ...values,
+              _id: workItem._id,
+              duration:
+                parseDateString(values.end) - parseDateString(values.start)
+            })
+          : createWork({
+              ...values,
+              duration:
+                parseDateString(values.end) - parseDateString(values.start)
+            });
         handleClose();
       }}
     >

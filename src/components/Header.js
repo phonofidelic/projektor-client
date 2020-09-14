@@ -11,7 +11,7 @@ import BackArrow from '@material-ui/icons/ArrowBack';
 
 const Container = styled.div`
   display: flex;
-  padding: 18px;
+  padding: 16px;
   ${({ isMobile, isProjectDetail }) =>
     isMobile && !isProjectDetail && 'padding-left: 60px'}
   background: ${({ background }) => background || '#fff'};
@@ -48,13 +48,15 @@ export default function Header(props) {
       }
     >
       {back && (
-        <IconButton
-          data-testid="header-back-button"
-          style={{ marginRight: 10 }}
-          onClick={() => history.goBack()}
-        >
-          <BackArrow />
-        </IconButton>
+        <div style={{ margin: 'auto' }}>
+          <IconButton
+            data-testid="header-back-button"
+            style={{ marginRight: 10 }}
+            onClick={() => history.goBack()}
+          >
+            <BackArrow />
+          </IconButton>
+        </div>
       )}
       {title && (
         <TitleContainer>

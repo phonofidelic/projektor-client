@@ -18,16 +18,13 @@ import removedColor from '@material-ui/core/colors/red';
 const SHADE = 400;
 
 const Container = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: left;
-  /* width: ${({ searchIsOpen, isMobile }) =>
-    searchIsOpen && isMobile ? '40px' : 'unset'}; */
   height: 40px;
-  margin: 4px;
-  /* margin-right: 20px; */
-  /* smax-width: 100px; */
+  margin: 4px; */
+  margin: auto;
 `;
 
 export function ProjectsStatusSelect(props) {

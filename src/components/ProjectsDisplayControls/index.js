@@ -13,9 +13,10 @@ import TableIcon from '@material-ui/icons/List';
 import Grey from '@material-ui/core/colors/grey';
 
 const Container = styled.div`
-  display: flex;
-  height: 40px;
-  margin: 4px;
+  /* display: flex; */
+  /* height: 40px; */
+  /* margin: 4px; */
+  margin: auto;
   margin-right: 20px;
 `;
 

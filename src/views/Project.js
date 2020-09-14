@@ -29,6 +29,24 @@ export function Project(props) {
 
   const { isMobile } = useMobileDetect();
 
+  const handleCreateWork = async work => {
+    const token = await getAccessTokenSilently();
+
+    createWork(work, token);
+  };
+
+  const handleUpdateWork = async work => {
+    const token = await getAccessTokenSilently();
+
+    updateWork(work, token);
+  };
+
+  const handleRemoveWork = async workId => {
+    const token = await getAccessTokenSilently();
+
+    removeWork(workId, token);
+  };
+
   useEffect(() => {
     // !preload && getProject(projectId);
 
@@ -50,15 +68,15 @@ export function Project(props) {
       <Header
         back
         title={project.title}
-        position={isMobile() ? 'fixed' : 'relative'}
+        position={isMobile() ? 'fixed' : 'unset'}
       >
         <ProjectMenu project={project} />
       </Header>
       <ProjectDetail
         project={project}
-        createWork={createWork}
-        updateWork={updateWork}
-        removeWork={removeWork}
+        createWork={handleCreateWork}
+        updateWork={handleUpdateWork}
+        removeWork={handleRemoveWork}
       />
     </motion.div>
   );

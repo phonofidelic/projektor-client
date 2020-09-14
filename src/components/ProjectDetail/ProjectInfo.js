@@ -5,6 +5,7 @@ import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 import { StringContext } from 'strings';
 
+import { useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Green from '@material-ui/core/colors/green';
@@ -33,7 +34,8 @@ const ProjectInfoContainer = styled(Grid)`
 
 const ProgressContainer = styled.div`
   display: flex;
-  background-color: #ccc;
+  /* background-color: #ccc; */
+  background-color: ${({ theme }) => theme.palette.action.focus};
   height: 10px;
   width: 100%;
   border-radius: 4px;
@@ -45,6 +47,7 @@ const Progress = styled.div`
   width: ${({ project }) =>
     (project.timeUsed / (project.budgetedTime * 3.6e6)) * 100}%;
   height: 10px;
+  transition: width ease-in-out 0.3s;
 `;
 
 const CurrentProgress = styled.div`
@@ -58,6 +61,7 @@ export default function ProjectInfo(props) {
   const { project, time } = props;
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
+  const theme = useTheme();
 
   return (
     <InfoContainer container>
@@ -108,7 +112,7 @@ export default function ProjectInfo(props) {
             .format('h:mm', { trim: false })}
         </div>
         <div>
-          <ProgressContainer>
+          <ProgressContainer theme={theme}>
             <Progress project={project} />
             <CurrentProgress project={project} time={time} />
           </ProgressContainer>

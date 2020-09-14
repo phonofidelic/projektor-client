@@ -4,11 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Root from 'Root';
-// import moment from 'moment';
+import smoothscroll from 'smoothscroll-polyfill';
 
-// import 'moment/locale/sv';
-
-// moment.locale(navigator.language);
+smoothscroll.polyfill();
 
 if (process.env.NODE_ENV === 'production') {
   console.log = () => {

@@ -87,7 +87,7 @@ export function Projects(props) {
       <Header
         nav
         // title={strings.ttl__projects}
-        position={isMobile() ? 'fixed' : 'relative'}
+        position={isMobile() ? 'fixed' : 'unset'}
       >
         <div
           style={{
@@ -130,13 +130,12 @@ export function Projects(props) {
             selectDisplayMode={handleSelectDisplayMode}
           />
         )}
-
         <ProjectsStatusSelect
           searchIsOpen={searchIsOpen}
           projectStatusView={projectStatusView}
           setProjectStatusView={setProjectStatusView}
         />
-        {projectStatusView === ACTIVE && <CreateProjectButton />}
+        <div>{projectStatusView === ACTIVE && <CreateProjectButton />}</div>
       </Header>
 
       <div>

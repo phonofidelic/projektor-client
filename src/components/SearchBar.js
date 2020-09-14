@@ -10,10 +10,11 @@ import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
 
 const Container = styled.div`
-  background-color: ${({ theme }) => theme.palette.primary.background};
   display: flex;
   width: ${({ open, isMobile }) => (open && isMobile ? '100%' : 'unset')};
-  z-index: 0;
+  /* z-index: 0; */
+  margin: auto;
+  margin-right: 8px;
 `;
 
 export default function SearchBar(props) {
