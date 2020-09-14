@@ -17,7 +17,7 @@ export default function Logo(props) {
       height={height}
       viewBox={`0 0 ${400} ${text ? 480 : 400}`}
       aria-label="Logo for Projektor"
-      onClick={() => handleClick()}
+      onClick={() => (handleClick ? handleClick() : null)}
     >
       <g fill="#00EBFF" opacity={0.5}>
         {/* <rect x={50} y={150} width={200} height={200} /> */}
