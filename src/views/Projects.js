@@ -135,7 +135,9 @@ export function Projects(props) {
           projectStatusView={projectStatusView}
           setProjectStatusView={setProjectStatusView}
         />
-        <div>{projectStatusView === ACTIVE && <CreateProjectButton />}</div>
+        <div style={{ margin: 'auto', marginLeft: 8 }}>
+          {projectStatusView === ACTIVE && <CreateProjectButton />}
+        </div>
       </Header>
 
       <div>
