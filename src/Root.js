@@ -17,7 +17,7 @@ import 'moment/locale/sv';
 
 moment.locale(navigator.language);
 
-const localeMap = {
+export const localeMap = {
   en: enLocale,
   sv: svLocale
 };
