@@ -21,7 +21,7 @@ export function Project(props) {
     getProject,
     createWork,
     updateWork,
-    removeWork
+    removeWork,
   } = props;
   const strings = useContext(StringContext);
 
@@ -29,19 +29,19 @@ export function Project(props) {
 
   const { isMobile } = useMobileDetect();
 
-  const handleCreateWork = async work => {
+  const handleCreateWork = async (work) => {
     const token = await getAccessTokenSilently();
 
     createWork(work, token);
   };
 
-  const handleUpdateWork = async work => {
+  const handleUpdateWork = async (work) => {
     const token = await getAccessTokenSilently();
 
     updateWork(work, token);
   };
 
-  const handleRemoveWork = async workId => {
+  const handleRemoveWork = async (workId) => {
     const token = await getAccessTokenSilently();
 
     removeWork(workId, token);
@@ -82,9 +82,9 @@ export function Project(props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    project: state.projects.selectedProject
+    project: state.projects.selectedProject,
   };
 };
 
