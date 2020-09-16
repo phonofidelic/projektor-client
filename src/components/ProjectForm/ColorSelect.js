@@ -2,45 +2,78 @@ import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Field } from 'formik';
 
+import { useTheme } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import Grey from '@material-ui/core/colors/grey';
-import Red from '@material-ui/core/colors/red';
-import Purple from '@material-ui/core/colors/purple';
-import Blue from '@material-ui/core/colors/blue';
-import Green from '@material-ui/core/colors/green';
-import Yellow from '@material-ui/core/colors/yellow';
-import Orange from '@material-ui/core/colors/orange';
 
 const colors = [
-  { value: Grey[50], hover: Grey[200] },
-  { value: Grey[400], hover: Grey[600] },
-  { value: Grey[800], hover: Grey[900] },
-  { value: Red[400], hover: Red[600] },
-  { value: Purple[400], hover: Purple[600] },
-  { value: Blue[400], hover: Blue[600] },
-  { value: Green[400], hover: Green[600] },
-  { value: Yellow[400], hover: Yellow[600] },
-  { value: Orange[400], hover: Orange[600] },
+  {
+    value: (theme) => theme.palette.augmentColor({ main: '#EF5D60' }).main,
+    hover: (theme) => theme.palette.augmentColor({ main: '#EF5D60' }).light,
+  },
+  {
+    value: (theme) => theme.palette.augmentColor({ main: '#F8A948' }).main,
+    hover: (theme) => theme.palette.augmentColor({ main: '#F8A948' }).light,
+  },
+  {
+    value: (theme) => theme.palette.augmentColor({ main: '#F9DB6D' }).main,
+    hover: (theme) => theme.palette.augmentColor({ main: '#F9DB6D' }).light,
+  },
+  {
+    value: (theme) => theme.palette.augmentColor({ main: '#87CE60' }).main,
+    hover: (theme) => theme.palette.augmentColor({ main: '#87CE60' }).light,
+  },
+  {
+    value: (theme) => theme.palette.augmentColor({ main: '#7BDFF2' }).main,
+    hover: (theme) => theme.palette.augmentColor({ main: '#7BDFF2' }).light,
+  },
+  {
+    value: (theme) => theme.palette.augmentColor({ main: '#9E86D0' }).main,
+    hover: (theme) => theme.palette.augmentColor({ main: '#9E86D0' }).light,
+  },
+  /** Row 2 */
+  {
+    value: (theme) => theme.palette.augmentColor({ main: '#EF5D60' }).dark,
+    hover: (theme) => theme.palette.augmentColor({ main: '#EF5D60' }).main,
+  },
+  {
+    value: (theme) => theme.palette.augmentColor({ main: '#F8A948' }).dark,
+    hover: (theme) => theme.palette.augmentColor({ main: '#F8A948' }).main,
+  },
+  {
+    value: (theme) => theme.palette.augmentColor({ main: '#F9DB6D' }).dark,
+    hover: (theme) => theme.palette.augmentColor({ main: '#F9DB6D' }).main,
+  },
+  {
+    value: (theme) => theme.palette.augmentColor({ main: '#87CE60' }).dark,
+    hover: (theme) => theme.palette.augmentColor({ main: '#87CE60' }).main,
+  },
+  {
+    value: (theme) => theme.palette.augmentColor({ main: '#7BDFF2' }).dark,
+    hover: (theme) => theme.palette.augmentColor({ main: '#7BDFF2' }).main,
+  },
+  {
+    value: (theme) => theme.palette.augmentColor({ main: '#9E86D0' }).dark,
+    hover: (theme) => theme.palette.augmentColor({ main: '#9E86D0' }).main,
+  },
+
+  {
+    value: (theme) => theme.palette.augmentColor({ main: Grey[900] }).main,
+    hover: (theme) => theme.palette.augmentColor({ main: Grey[900] }).dark,
+  },
+  {
+    value: (theme) => theme.palette.augmentColor({ main: Grey[600] }).main,
+    hover: (theme) => theme.palette.augmentColor({ main: Grey[600] }).dark,
+  },
+  {
+    value: (theme) => theme.palette.augmentColor({ main: Grey[50] }).main,
+    hover: (theme) => theme.palette.augmentColor({ main: Grey[50] }).dark,
+  },
 ];
-
-const ColorBox = styled.div`
-  width: 40px;
-  height: 40px;
-  margin: 4px;
-  background-color: ${({ color }) => color};
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.6s;
-
-  &:hover {
-    background-color: ${({ hover }) => hover};
-    transition: background-color 0.6s;
-  }
-`;
 
 const ColorMenu = styled.div`
   padding: 4px;
@@ -53,15 +86,33 @@ const ColorMenu = styled.div`
   } */
 `;
 
+const ColorBox = styled.div`
+  width: 40px;
+  height: 40px;
+  margin: 4px;
+  background-color: ${({ color }) => color};
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.6s;
+
+  &:hover {
+    background-color: ${({ hover }) => hover};
+    transition: background-color 0.6s;
+  }
+`;
+
 export default function ColorSelect(props) {
   const { selectedColor, project, setFieldValue } = props;
 
   const colorSelectLabel = useRef(null);
   const [colorSelectLabelWidth, setColorSelectLabelWidth] = useState(0);
 
+  const theme = useTheme();
+
   const handleChange = (e) => {
     setFieldValue('color', e.target.value, false);
   };
+
   useEffect(() => {
     project && setColorSelectLabelWidth(colorSelectLabel.current.offsetWidth);
   }, [project]);
@@ -91,6 +142,11 @@ export default function ColorSelect(props) {
             component: ColorMenu,
           },
         }}
+        SelectDisplayProps={{
+          style: {
+            width: 20,
+          },
+        }}
         id="project-color"
         name="color"
         label="Project color"
@@ -102,9 +158,9 @@ export default function ColorSelect(props) {
           <ColorBox
             key={i}
             component={() => <MenuItem disableGutters />}
-            value={color.value}
-            color={color.value}
-            hover={color.hover}
+            value={color.value(theme)}
+            color={color.value(theme)}
+            hover={color.hover(theme)}
           />
         ))}
       </Field>

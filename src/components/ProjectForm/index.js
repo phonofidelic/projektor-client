@@ -64,7 +64,7 @@ export default function ProjectForm(props) {
         }) => (
           <Form onSubmit={handleSubmit}>
             <Grid container>
-              <Grid item xs={9}>
+              <Grid item xs={10}>
                 <InputContainer>
                   <TextField
                     fullWidth
@@ -81,7 +81,14 @@ export default function ProjectForm(props) {
                   />
                 </InputContainer>
               </Grid>
-              <Grid item xs={3}>
+              <Grid
+                item
+                xs={2}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                }}
+              >
                 <InputContainer style={{ marginLeft: 0 }}>
                   <ColorSelect
                     selectedColor={values.color}
