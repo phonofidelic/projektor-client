@@ -13,8 +13,12 @@ import Grid from '@material-ui/core/Grid';
 import Grey from '@material-ui/core/colors/grey';
 
 const Container = styled.div`
-  max-width: 800px;
+  max-width: 500px;
   margin: 80px auto;
+
+  @media (max-width: 600px) {
+    margin: 8px auto;
+  }
 `;
 
 const InputContainer = styled(Grid)`
@@ -133,7 +137,7 @@ export default function ProjectForm(props) {
               <Grid item xs={12} sm={6}>
                 <InputContainer>
                   <TextField
-                    variant="outlined"
+                    // variant="outlined"
                     fullWidth
                     id="client"
                     name="client"
@@ -145,7 +149,7 @@ export default function ProjectForm(props) {
                 <InputContainer>
                   <TextField
                     fullWidth
-                    variant="outlined"
+                    // variant="outlined"
                     id="budgeted-time"
                     name="budgetedTime"
                     label={strings.inp_lbl__project_budgeted_time}
@@ -158,10 +162,14 @@ export default function ProjectForm(props) {
               </Grid>
 
               <Grid item xs={12}>
-                <InputContainer>
+                <InputContainer
+                  style={{ textAlign: 'center', marginTop: '60px' }}
+                >
                   <Button
-                    style={{ marginTop: '20px' }}
-                    variant="outlined"
+                    color="primary"
+                    // style={{ marginTop: '20px' }}
+                    variant="contained"
+                    // variant="outlined"
                     type="submit"
                     disabled={Object.keys(errors).length > 0}
                   >
