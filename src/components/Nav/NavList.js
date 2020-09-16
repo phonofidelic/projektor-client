@@ -10,12 +10,6 @@ import AppsIcon from '@material-ui/icons/Apps';
 import SettingsIcon from '@material-ui/icons/Settings';
 import EventIcon from '@material-ui/icons/Event';
 
-import calendarColor from '@material-ui/core/colors/blue';
-import activeColor from '@material-ui/core/colors/green';
-import settingsColor from '@material-ui/core/colors/purple';
-
-const SHADE = 400;
-
 const Container = styled.ul`
   list-style: none;
   padding: 0;
@@ -72,16 +66,13 @@ export default function NavList(props) {
       title: strings.ttl__calendar,
       icon: <EventIcon />,
       link: '/calendar',
-      color: calendarColor[SHADE]
-      // contrast: '#fff'
+      color: '#A6EAF0'
     },
     {
       title: strings.ttl__projects,
       icon: <AppsIcon />,
-      // link: '/projects/active',
       link: '/projects',
-      color: activeColor[SHADE]
-      // contrast: '#fff'
+      color: '#FFC081'
     },
     // {
     //   title: strings.ttl__dashboard,
@@ -93,8 +84,7 @@ export default function NavList(props) {
       title: strings.ttl__settings,
       icon: <SettingsIcon />,
       link: '/settings',
-      color: settingsColor[SHADE]
-      // contrast: '#fff'
+      color: '#FF8070'
     }
   ];
 
