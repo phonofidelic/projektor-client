@@ -6,3 +6,5 @@ export const apiBaseUrl =
   process.env.NODE_ENV === 'production'
     ? 'https://projektor-api.herokuapp.com'
     : 'http://localhost:4000';
+
+export { materialUITheme } from './theme';
