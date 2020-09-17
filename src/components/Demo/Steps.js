@@ -48,19 +48,25 @@ export const Step2 = (props) => (
       margin: '0 auto',
     }}
   >
-    <Grid container spacing={1}>
-      <ProjectGridItem
+    {props.editMode ? (
+      <ProjectForm
         project={props.demoProject}
-        projectsDisplayMode="compact"
-        // xs={12}
-        sm={12}
-        md={12}
-        setDemoProjectStatus={props.setDemoProjectStatus}
-        handleDemoEdit={props.handleDemoEdit}
-        handleDemoAction={props.handleStep}
+        handleFormSubmit={props.handleDemoSave}
       />
-    </Grid>
-    <div />
+    ) : (
+      <Grid container spacing={1}>
+        <ProjectGridItem
+          project={props.demoProject}
+          projectsDisplayMode="compact"
+          // xs={12}
+          sm={12}
+          md={12}
+          setDemoProjectStatus={props.setDemoProjectStatus}
+          handleDemoEdit={props.handleDemoEdit}
+          handleDemoAction={props.handleStep}
+        />
+      </Grid>
+    )}
   </div>
 );
 

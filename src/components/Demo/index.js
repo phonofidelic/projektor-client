@@ -45,7 +45,7 @@ const StepperContainer = styled.div`
 `;
 
 export default function Demo() {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(2);
   const strings = useContext(StringContext);
   const theme = useTheme();
 
@@ -62,6 +62,8 @@ export default function Demo() {
     work: [],
     isDemo: true,
   });
+
+  const [editMode, setEditMode] = useState(false);
 
   const steps = [
     {
@@ -124,7 +126,21 @@ export default function Demo() {
   });
 
   const handleDemoEdit = (project) => {
-    console.log('handleDemoEdit, project:', project);
+    // console.log('handleDemoEdit, project:', project);
+    setEditMode(true);
+  };
+
+  const handleDemoSave = (projectData) => {
+    // console.log('handleDemoSave, projectData:', projectData);
+
+    setDemoProject({
+      ...projectData,
+      work: demoProject.work,
+      isDemo: true,
+      status: demoProject.status,
+    });
+
+    setEditMode(false);
   };
 
   const setDemoProjectStatus = (projectId, status) => {
@@ -186,7 +202,9 @@ export default function Demo() {
         return (
           <Step2
             demoProject={demoProject}
+            editMode={editMode}
             handleDemoEdit={handleDemoEdit}
+            handleDemoSave={handleDemoSave}
             setDemoProjectStatus={setDemoProjectStatus}
             handleStep={() => setStep(3)}
           />
