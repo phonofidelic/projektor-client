@@ -123,6 +123,14 @@ export default function Demo() {
     },
   });
 
+  const handleDemoEdit = (project) => {
+    console.log('handleDemoEdit, project:', project);
+  };
+
+  const setDemoProjectStatus = (projectId, status) => {
+    console.log('setDemoProjectStatus, projectId, status:', projectId, status);
+  };
+
   const handleCreateWork = (work) => {
     setDemoProject({
       ...demoProject,
@@ -176,7 +184,12 @@ export default function Demo() {
 
       case 2:
         return (
-          <Step2 demoProject={demoProject} handleStep={() => setStep(3)} />
+          <Step2
+            demoProject={demoProject}
+            handleDemoEdit={handleDemoEdit}
+            setDemoProjectStatus={setDemoProjectStatus}
+            handleStep={() => setStep(3)}
+          />
         );
 
       case 3:

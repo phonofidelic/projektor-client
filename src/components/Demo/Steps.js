@@ -55,6 +55,8 @@ export const Step2 = (props) => (
         // xs={12}
         sm={12}
         md={12}
+        setDemoProjectStatus={props.setDemoProjectStatus}
+        handleDemoEdit={props.handleDemoEdit}
         handleDemoAction={props.handleStep}
       />
     </Grid>
