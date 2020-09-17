@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 
 import { Step0, Step1, Step2, Step3, Step4 } from './Steps';
+import { StringContext } from 'strings';
 
 import { useTheme } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -45,43 +46,43 @@ const StepperContainer = styled.div`
 
 export default function Demo() {
   const [step, setStep] = useState(0);
-
+  const strings = useContext(StringContext);
   const theme = useTheme();
 
   const [demoProject, setDemoProject] = useState({
-    title: 'First project',
-    description: 'Getting started with Projektor',
+    title: strings.msg__demo_project_title,
+    description: strings.msg__demo_project_description,
     startDate: Date.now(),
     deadline: null,
-    client: 'Phonofidelic',
+    client: strings.msg__demo_project_client,
     budgetedTime: 5,
     timeUsed: 0,
     color: '#fd8175',
     status: 'active',
     work: [],
-    isDemo: true
+    isDemo: true,
   });
 
   const steps = [
     {
-      label: 'Get started',
-      handleClick: () => setStep(0)
+      label: strings.msg__demo_step_0,
+      handleClick: () => setStep(0),
     },
     {
-      label: 'Create your first project',
-      handleClick: () => setStep(1)
+      label: strings.msg__demo_step_1,
+      handleClick: () => setStep(1),
     },
     {
-      label: 'Sort you projects by status',
-      handleClick: () => setStep(2)
+      label: strings.msg__demo_step_2,
+      handleClick: () => setStep(2),
     },
     {
-      label: 'View project details',
-      handleClick: () => setStep(3)
-    }
+      label: strings.msg__demo_step_3,
+      handleClick: () => setStep(3),
+    },
   ];
 
-  const getBackgroundColor = step => {
+  const getBackgroundColor = (step) => {
     switch (step) {
       case 0:
         return '#80f5ff';
@@ -108,34 +109,34 @@ export default function Demo() {
       primary: {
         light: '#484848',
         main: '#212121',
-        dark: '#000000'
+        dark: '#000000',
       },
       secondary: {
         light: '#fff2bf',
         main: '#ffbf8e',
-        dark: '#ca8f60'
+        dark: '#ca8f60',
       },
       background: {
-        default: getBackgroundColor(step)
+        default: getBackgroundColor(step),
       },
-      divider: '#000'
-    }
+      divider: '#000',
+    },
   });
 
-  const handleCreateWork = work => {
+  const handleCreateWork = (work) => {
     setDemoProject({
       ...demoProject,
       timeUsed: demoProject.timeUsed + work.duration,
       work: [
         ...demoProject.work,
-        { _id: `${Math.trunc(Math.random() * 100000)}_${Date.now()}`, ...work }
-      ]
+        { _id: `${Math.trunc(Math.random() * 100000)}_${Date.now()}`, ...work },
+      ],
     });
   };
 
-  const handleUpdateWork = work => {
+  const handleUpdateWork = (work) => {
     const oldWorkItem = demoProject.work.filter(
-      demoWork => demoWork._id === work._id
+      (demoWork) => demoWork._id === work._id
     )[0];
 
     const newTimeUsed =
@@ -146,24 +147,24 @@ export default function Demo() {
     setDemoProject({
       ...demoProject,
       timeUsed: newTimeUsed,
-      work: demoProject.work.map(demoWork =>
+      work: demoProject.work.map((demoWork) =>
         demoWork._id === work._id ? work : demoWork
-      )
+      ),
     });
   };
 
-  const handleRemoveWork = workId => {
+  const handleRemoveWork = (workId) => {
     setDemoProject({
       ...demoProject,
       timeUsed:
         demoProject.timeUsed -
-        demoProject.work.filter(demoWork => demoWork._id === workId)[0]
+        demoProject.work.filter((demoWork) => demoWork._id === workId)[0]
           .duration,
-      work: demoProject.work.filter(demoWork => demoWork._id !== workId)
+      work: demoProject.work.filter((demoWork) => demoWork._id !== workId),
     });
   };
 
-  const render = step => {
+  const render = (step) => {
     switch (step) {
       case 0:
         return <Step0 handleStep={() => setStep(1)} />;
@@ -201,7 +202,7 @@ export default function Demo() {
       </DemoContainer>
       <StepperContainer color={getBackgroundColor(step)}>
         <Stepper activeStep={step} alternativeLabel>
-          {steps.map(step => (
+          {steps.map((step) => (
             <Step key={step.label}>
               <StepLabel
                 style={{ cursor: 'pointer' }}

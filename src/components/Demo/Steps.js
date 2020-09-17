@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 
+import { StringContext } from 'strings';
 import ProjectDetail from 'components/ProjectDetail';
 import ProjectForm from 'components/ProjectForm';
 import ProjectGridItem from 'components/ProjectGridItem';
@@ -11,23 +12,25 @@ import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 
 export function Step0(props) {
+  const strings = useContext(StringContext);
+
   return (
     <div>
       <IconButton onClick={props.handleStep}>
         <AddIcon />
       </IconButton>
       <div style={{ margin: 16 }}>
-        <Typography>Create a project</Typography>
+        <Typography>{strings.hnt__demo_create_project}</Typography>
       </div>
     </div>
   );
 }
 
-export const Step1 = props => (
+export const Step1 = (props) => (
   <div
     style={{
       maxWidth: 600,
-      margin: '0 auto'
+      margin: '0 auto',
     }}
   >
     <ProjectForm
@@ -37,12 +40,12 @@ export const Step1 = props => (
   </div>
 );
 
-export const Step2 = props => (
+export const Step2 = (props) => (
   // <ProjectGrid projects={[demoProject]} />
   <div
     style={{
       maxWidth: 800,
-      margin: '0 auto'
+      margin: '0 auto',
     }}
   >
     <Grid container spacing={1}>
@@ -59,7 +62,7 @@ export const Step2 = props => (
   </div>
 );
 
-export const Step3 = props => {
+export const Step3 = (props) => {
   useEffect(() => {
     props.demoProject.work.length > 2 &&
       setTimeout(() => {
@@ -72,7 +75,7 @@ export const Step3 = props => {
       style={{
         // width: 800,
         // width: '100%',
-        margin: '0 auto'
+        margin: '0 auto',
       }}
     >
       <ProjectDetail
@@ -85,11 +88,13 @@ export const Step3 = props => {
   );
 };
 
-export const Step4 = props => {
+export const Step4 = (props) => {
+  const strings = useContext(StringContext);
+
   return (
     <div>
       <div style={{ margin: 16 }}>
-        <Typography>Continue exploring Projektor!</Typography>
+        <Typography>{strings.msg__demo_continue}</Typography>
       </div>
       <div>
         <RegistrationButton />

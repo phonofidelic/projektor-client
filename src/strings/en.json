@@ -106,5 +106,15 @@
     "hnt__project_options": "Project options",
     "hnt__project_options_for": "Project options for",
     "hnt__search_projects": "Search for Projects",
-    "hnt__search_work": "Search in Work notes"
+    "hnt__search_work": "Search in Work notes",
+    "msg__demo_step_0": "Get started",
+    "msg__demo_step_1": "Create your first project",
+    "msg__demo_step_2": "Sort you projects by status",
+    "msg__demo_step_3": "View project details",
+    "hnt__demo_create_project": "Create a project",
+    "msg__demo_project_title": "My first project",
+    "msg__demo_project_description": "Getting started with Projektor",
+    "msg__demo_project_client": "Phonofidelic",
+    "hnt__demo_create_work": "Add Tasks to track your progress",
+    "msg__demo_continue": "Continue exploring Projektor!"
 }

@@ -40,7 +40,7 @@ export default function WorkSection(props) {
 
   const theme = useTheme();
 
-  const handleOpenWork = workItem => {
+  const handleOpenWork = (workItem) => {
     workItem ? setWorkItem(workItem) : setWorkItem(null);
 
     setWorkFormOpen(true);
@@ -51,7 +51,7 @@ export default function WorkSection(props) {
     setWorkFormOpen(false);
   };
 
-  const handleSearch = query => {
+  const handleSearch = (query) => {
     // console.log('handleSearch, query:', query);
     setFilteredWork(matchSorter(project.work, query, { keys: ['notes'] }));
   };
@@ -84,14 +84,14 @@ export default function WorkSection(props) {
           padding: '9px 18px',
           display: 'flex',
           justifyContent: 'space-between',
-          zIndex: 1
+          zIndex: 1,
         }}
       >
         <div
           style={{
             flex: searchIsOpen ? 0 : 1,
             width: searchIsOpen && isMobile() ? 0 : 'inherit',
-            transition: 'all ease-in-out 0.1s'
+            transition: 'all ease-in-out 0.1s',
           }}
         >
           <Typography
@@ -100,7 +100,7 @@ export default function WorkSection(props) {
             align="left"
             style={{
               height: 48,
-              lineHeight: '48px'
+              lineHeight: '48px',
             }}
           >
             {strings.ttl__work}
@@ -119,7 +119,7 @@ export default function WorkSection(props) {
         )}
         <ContextualHelp
           open={project.isDemo}
-          text={'Add Tasks to track your progress'}
+          text={strings.hnt__demo_create_work}
           uiBackground={theme.palette.background.default}
           backdropBackground={theme.palette.action.active}
           // tooltipBackground={theme.palette.secondary.main}
