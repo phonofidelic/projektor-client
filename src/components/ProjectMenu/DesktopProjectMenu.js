@@ -62,7 +62,7 @@ export default function DesktopProjectMenu(props) {
             </MenuItem>
           )
       )}
-      {project.status === DELETED && (
+      {project.status === DELETED && !project.isDemo && (
         <MenuItem key="perm_delete" onClick={() => handleDelete(project._id)}>
           <ListItemIcon>
             <DeleteIcon />

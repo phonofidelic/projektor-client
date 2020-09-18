@@ -86,7 +86,7 @@ export default function MobileProjectMenu(props) {
               </ListItem>
             )
         )}
-        {project.status === DELETED && (
+        {project.status === DELETED && !project.isDemo && (
           <ListItem
             button
             key="perm_delete"

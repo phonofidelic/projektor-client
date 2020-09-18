@@ -65,7 +65,7 @@ export default function ProjectInfo(props) {
 
   return (
     <InfoContainer container>
-      <Description item xs={12} sm={6} lg={8}>
+      <Description item xs={12} sm={6} lg={6}>
         {project.description === 'No description provided' ||
         project.description === '' ? (
           <Typography color="textSecondary">
@@ -76,7 +76,7 @@ export default function ProjectInfo(props) {
         )}
       </Description>
 
-      <ProjectInfoContainer item xs={12} sm={6} lg={4}>
+      <ProjectInfoContainer item xs={12} sm={6} lg={6}>
         <div>
           <Typography variant="overline">{strings.lbl__client}</Typography>{' '}
           {project.client}

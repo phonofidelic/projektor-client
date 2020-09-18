@@ -45,7 +45,7 @@ const StepperContainer = styled.div`
 `;
 
 export default function Demo() {
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(0);
   const strings = useContext(StringContext);
   const theme = useTheme();
 
@@ -67,19 +67,19 @@ export default function Demo() {
 
   const steps = [
     {
-      label: strings.msg__demo_step_0,
+      label: strings.msg__demo_step_0_short,
       handleClick: () => setStep(0),
     },
     {
-      label: strings.msg__demo_step_1,
+      label: strings.msg__demo_step_1_short,
       handleClick: () => setStep(1),
     },
     {
-      label: strings.msg__demo_step_2,
+      label: strings.msg__demo_step_2_short,
       handleClick: () => setStep(2),
     },
     {
-      label: strings.msg__demo_step_3,
+      label: strings.msg__demo_step_3_short,
       handleClick: () => setStep(3),
     },
   ];
@@ -93,7 +93,7 @@ export default function Demo() {
         return '#fec092';
 
       case 2:
-        return '#fd8175';
+        return '#fff';
 
       case 3:
         return '#c8ba8e';
@@ -131,13 +131,14 @@ export default function Demo() {
   };
 
   const handleDemoSave = (projectData) => {
-    // console.log('handleDemoSave, projectData:', projectData);
+    console.log('handleDemoSave, demoProject.work:', demoProject.work);
 
     setDemoProject({
       ...projectData,
       work: demoProject.work,
       isDemo: true,
       status: demoProject.status,
+      timeUsed: demoProject.timeUsed,
     });
 
     setEditMode(false);
@@ -145,6 +146,11 @@ export default function Demo() {
 
   const setDemoProjectStatus = (projectId, status) => {
     console.log('setDemoProjectStatus, projectId, status:', projectId, status);
+
+    setDemoProject({
+      ...demoProject,
+      status,
+    });
   };
 
   const handleCreateWork = (work) => {
