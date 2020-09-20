@@ -19,35 +19,6 @@ import SVGLogo from 'components/Logo';
 // import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-// const Background = styled.div`
-//   background: linear-gradient(
-//       45deg,
-//       rgba(255, 0, 0, 0.5) 50%,
-//       rgba(255, 255, 255, 0) 50%,
-//       rgba(255, 255, 255, 0) 50%
-//     ),
-//     linear-gradient(
-//       -40deg,
-//       rgba(0, 255, 0, 0.5) 50%,
-//       rgba(255, 255, 255, 0) 50%,
-//       rgba(255, 255, 255, 0) 50%
-//     ),
-//     linear-gradient(
-//       25deg,
-//       rgba(0, 0, 255, 0.5) 50%,
-//       rgba(255, 255, 255, 0) 50%,
-//       rgba(255, 255, 255, 0) 50%
-//     );
-//   background-blend-mode: lighten;
-//   // filter: blur(2px);
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   bottom: 0;
-//   right: 0;
-//   z-index: -1;
-// `;
-
 const HeaderContent = styled.div`
   @media (max-width: 600px) {
     display: flex;
@@ -62,15 +33,6 @@ const HeroContainer = styled.div`
   justify-content: center;
   height: 100vh;
 `;
-
-// const Logo = styled.img`
-//   margin: 30px auto;
-//   max-width: 400px;
-
-//   @media (max-width: 840px) {
-//     margin: 20px auto;
-//   }
-// `;
 
 const LogoContainer = styled.div`
   margin: 30px auto;

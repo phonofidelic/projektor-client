@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const Text = styled.text`
   font-family: Rockwell, serif;
@@ -10,15 +11,19 @@ const Text = styled.text`
 `;
 
 export default function Logo(props) {
-  const { width = 400, height = 480, text, handleClick } = props;
+  const max400 = useMediaQuery('@media (max-width: 400px)');
+  const { width = max400 ? 200 : 400, height = 480, text, handleClick } = props;
   const theme = useTheme();
 
   return (
+    // <div style={{ width: '100%' }}>
     <svg
       style={{ cursor: 'pointer' }}
       width={width}
       height={height}
+      // viewBox={`0 0 ${width} ${text ? height : width}`}
       viewBox={`0 0 ${400} ${text ? 480 : 400}`}
+      // preserveAspectRatio
       aria-label="Logo for Projektor"
       onClick={() => (handleClick ? handleClick() : null)}
     >
@@ -53,5 +58,6 @@ export default function Logo(props) {
         </g>
       )}
     </svg>
+    // </div>
   );
 }
