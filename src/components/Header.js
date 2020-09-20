@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import useMobileDetect from 'use-mobile-detect-hook';
 
+import { useAuth } from 'services/AuthProvider';
+
 import { useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,8 +14,8 @@ import BackArrow from '@material-ui/icons/ArrowBack';
 const Container = styled.div`
   display: flex;
   padding: 16px;
-  ${({ isMobile, isProjectDetail }) =>
-    isMobile && !isProjectDetail && 'padding-left: 60px'}
+  ${({ isMobile, isProjectDetail, isAuthenticated }) =>
+    isMobile && isAuthenticated && !isProjectDetail && 'padding-left: 60px'}
   background: ${({ background }) => background || '#fff'};
 `;
 
@@ -27,10 +29,13 @@ export default function Header(props) {
   const { pathname } = useLocation();
   const theme = useTheme();
 
+  const { isAuthenticated } = useAuth();
+
   const isProjectDetail = /projects\/\w+/.test(pathname);
 
   return (
     <Container
+      isAuthenticated={isAuthenticated}
       isMobile={isMobile()}
       isProjectDetail={isProjectDetail}
       background={background}
@@ -41,7 +46,7 @@ export default function Header(props) {
               top: 0,
               left: 0,
               right: 0,
-              zIndex: theme.zIndex.appBar
+              zIndex: theme.zIndex.appBar,
               // borderBottom: isMobile() ? 'solid #e0e0e0 1px' : 'none'
             }
           : null
@@ -65,7 +70,7 @@ export default function Header(props) {
             variant="h5"
             style={{
               // lineHeight: '24px',
-              maxWidth: isMobile() ? '50vw' : '100%'
+              maxWidth: isMobile() ? '50vw' : '100%',
             }}
           >
             {title}

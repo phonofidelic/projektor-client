@@ -15,14 +15,14 @@ export default function LoginButton() {
       style={{
         backgroundColor: '#fff',
         border: `1px solid ${theme.palette.primary.main}`,
-        color: theme.palette.primary.main
-        // margin: '0 8px'
+        color: theme.palette.primary.main,
+        margin: '0 8px',
       }}
       // variant="outlined"
       onClick={() =>
         loginWithRedirect({
           // redirectUri: `${process.env.REACT_APP_DOMAIN}/projects`
-          redirectUri: `${window.location.origin}/projects`
+          redirectUri: `${window.location.origin}/projects`,
         })
       }
     >
