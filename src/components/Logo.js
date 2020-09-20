@@ -12,7 +12,12 @@ const Text = styled.text`
 
 export default function Logo(props) {
   const max400 = useMediaQuery('@media (max-width: 400px)');
-  const { width = max400 ? 200 : 400, height = 480, text, handleClick } = props;
+  const {
+    width = max400 ? 200 : 400,
+    height = max400 ? 300 : 400,
+    text,
+    handleClick,
+  } = props;
   const theme = useTheme();
 
   return (
