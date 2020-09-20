@@ -126,7 +126,6 @@ export default function Demo() {
       background: {
         default: getBackgroundColor(step),
       },
-      divider: '#000',
     },
   });
 
