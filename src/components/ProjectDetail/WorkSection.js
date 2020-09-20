@@ -86,7 +86,7 @@ export default function WorkSection(props) {
           updateWork={updateWork}
         />
       </WorkModal>
-      <Divider />
+      {!project.isDemo && <Divider />}
       <div
         style={{
           backgroundColor: theme.palette.background.default,

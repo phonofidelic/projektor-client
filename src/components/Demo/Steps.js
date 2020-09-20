@@ -2,7 +2,8 @@ import React, { useEffect, useContext } from 'react';
 import styled from 'styled-components';
 
 import { StringContext } from 'strings';
-import ProjectDetail from 'components/ProjectDetail';
+// import ProjectDetail from 'components/ProjectDetail';
+import WorkSection from 'components/ProjectDetail/WorkSection';
 import ProjectForm from 'components/ProjectForm';
 import ProjectGridItem from 'components/ProjectGridItem';
 import RegistrationButton from 'components/RegistrationButton';
@@ -30,8 +31,6 @@ export function Step0(props) {
 }
 
 export const Step1 = (props) => {
-  const max740 = useMediaQuery('(max-width: 740px)');
-
   return (
     <div
       style={
@@ -141,6 +140,8 @@ export const Step2 = (props) => {
 };
 
 export const Step3 = (props) => {
+  const max800 = useMediaQuery('@media (max-width: 800px)');
+
   useEffect(() => {
     props.demoProject.work.length > 2 &&
       setTimeout(() => {
@@ -151,12 +152,12 @@ export const Step3 = (props) => {
   return (
     <div
       style={{
-        maxWidth: 800,
-        // width: '100%',
+        width: max800 ? '100%' : 800,
         margin: '0 auto',
+        padding: 0,
       }}
     >
-      <ProjectDetail
+      <WorkSection
         project={props.demoProject}
         createWork={props.handleCreateWork}
         updateWork={props.handleUpdateWork}

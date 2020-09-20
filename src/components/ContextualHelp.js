@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { useTheme, withStyles } from '@material-ui/core/styles';
+// import Backdrop from '@material-ui/core/Backdrop';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
@@ -12,6 +13,7 @@ const Backdrop = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
+  /* height: 100vh; */
   z-index: ${({ theme }) => theme.zIndex.modal};
 `;
 
@@ -90,6 +92,7 @@ export default function ContextualHelp(props) {
         </div>
       </StyledTooltip>
       <Backdrop
+        open={helpIsOpen}
         theme={theme}
         backdropBackground={backdropBackground || 'rgba(0, 0, 0, 0.54)'}
         onClick={handleClose}
