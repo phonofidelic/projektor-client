@@ -6,6 +6,7 @@ import { StringContext } from 'strings';
 import ColorSelect from './ColorSelect';
 import FormikDatePicker from 'components/FormikDatePicker';
 
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -28,6 +29,7 @@ const InputContainer = styled(Grid)`
 export default function ProjectForm(props) {
   const { project } = props;
   const strings = useContext(StringContext);
+  const max740 = useMediaQuery('(max-width: 740px)');
 
   return (
     <Container>
@@ -116,54 +118,62 @@ export default function ProjectForm(props) {
                   />
                 </InputContainer>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <InputContainer>
-                  <Field
-                    id="start-date"
-                    name="startDate"
-                    label={strings.inp_lbl__project_start_date}
-                    component={FormikDatePicker}
-                  />
-                </InputContainer>
-                <InputContainer>
-                  <Field
-                    id="deadline"
-                    name="deadline"
-                    label={strings.inp_lbl__project_deadline}
-                    component={FormikDatePicker}
-                  />
-                </InputContainer>
+              <Grid container item xs={12} sm={6}>
+                <Grid item xs={6} sm={12}>
+                  <InputContainer>
+                    <Field
+                      id="start-date"
+                      name="startDate"
+                      label={strings.inp_lbl__project_start_date}
+                      component={FormikDatePicker}
+                    />
+                  </InputContainer>
+                </Grid>
+                <Grid item xs={6} sm={12}>
+                  <InputContainer>
+                    <Field
+                      id="deadline"
+                      name="deadline"
+                      label={strings.inp_lbl__project_deadline}
+                      component={FormikDatePicker}
+                    />
+                  </InputContainer>
+                </Grid>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <InputContainer>
-                  <TextField
-                    // variant="outlined"
-                    fullWidth
-                    id="client"
-                    name="client"
-                    label={strings.inp_lbl__project_client}
-                    value={values.client}
-                    onChange={handleChange}
-                  />
-                </InputContainer>
-                <InputContainer>
-                  <TextField
-                    fullWidth
-                    // variant="outlined"
-                    id="budgeted-time"
-                    name="budgetedTime"
-                    label={strings.inp_lbl__project_budgeted_time}
-                    type="number"
-                    inputProps={{ step: '0.1' }}
-                    value={values.budgetedTime}
-                    onChange={handleChange}
-                  />
-                </InputContainer>
+              <Grid container item xs={12} sm={6}>
+                <Grid item xs={6} sm={12}>
+                  <InputContainer>
+                    <TextField
+                      // variant="outlined"
+                      fullWidth
+                      id="client"
+                      name="client"
+                      label={strings.inp_lbl__project_client}
+                      value={values.client}
+                      onChange={handleChange}
+                    />
+                  </InputContainer>
+                </Grid>
+                <Grid item xs={6} sm={12}>
+                  <InputContainer>
+                    <TextField
+                      fullWidth
+                      // variant="outlined"
+                      id="budgeted-time"
+                      name="budgetedTime"
+                      label={strings.inp_lbl__project_budgeted_time}
+                      type="number"
+                      inputProps={{ step: '0.1' }}
+                      value={values.budgetedTime}
+                      onChange={handleChange}
+                    />
+                  </InputContainer>
+                </Grid>
               </Grid>
 
               <Grid item xs={12}>
                 <InputContainer
-                  style={{ textAlign: 'center', marginTop: '60px' }}
+                  style={{ textAlign: 'center', marginTop: max740 ? 32 : 80 }}
                 >
                   <Button
                     color="primary"

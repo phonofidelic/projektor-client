@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { StringContext } from 'strings';
 import styled from 'styled-components';
 import matchSorter from 'match-sorter';
@@ -28,6 +28,16 @@ const WorkContainer = styled.div`
   // flex: 1;
 `;
 
+const CreateWorkButton = React.forwardRef((props, ref) => (
+  <IconButton
+    ref={ref}
+    variant="outlined"
+    onClick={() => props.handleOpenWork(false)}
+  >
+    <AddIcon />
+  </IconButton>
+));
+
 export default function WorkSection(props) {
   const { project, createWork, updateWork, removeWork } = props;
   const strings = useContext(StringContext);
@@ -39,6 +49,8 @@ export default function WorkSection(props) {
   const { isMobile } = useMobileDetect();
 
   const theme = useTheme();
+
+  const createWorkButtonRef = useRef();
 
   const handleOpenWork = (workItem) => {
     workItem ? setWorkItem(workItem) : setWorkItem(null);
@@ -118,17 +130,32 @@ export default function WorkSection(props) {
           <TaskAnalysis project={project} handleSearch={handleSearch} />
         )}
         <ContextualHelp
+          childRef={createWorkButtonRef}
           open={project.isDemo}
           text={strings.hnt__demo_create_work}
           uiBackground={theme.palette.background.default}
           backdropBackground={theme.palette.action.active}
-          // tooltipBackground={theme.palette.secondary.main}
           tooltipBackground={theme.palette.background.default}
+          focusComponent={
+            <CreateWorkButton
+              ref={createWorkButtonRef}
+              handleOpenWork={handleOpenWork}
+            />
+          }
+          focusClickAction={handleOpenWork}
+        />
+        {/* <CreateWorkButton
+          ref={createWorkButtonRef}
+          handleOpenWork={handleOpenWork}
+        /> */}
+        <IconButton
+          ref={createWorkButtonRef}
+          variant="outlined"
+          onClick={() => handleOpenWork(false)}
         >
-          <IconButton variant="outlined" onClick={() => handleOpenWork(false)}>
-            <AddIcon />
-          </IconButton>
-        </ContextualHelp>
+          <AddIcon />
+        </IconButton>
+        {/* </ContextualHelp> */}
       </div>
       <WorkContainer>
         {filterdWork.length > 0 ? (

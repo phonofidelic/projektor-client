@@ -121,7 +121,7 @@ export default function ColorSelect(props) {
     <FormControl variant="outlined">
       <InputLabel
         style={{
-          backgroundColor: '#fff',
+          backgroundColor: theme.palette.background.default,
           borderRadius: '4px',
           padding: 2,
         }}

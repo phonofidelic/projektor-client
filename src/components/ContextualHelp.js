@@ -1,14 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { useTheme, withStyles } from '@material-ui/core/styles';
-// import Backdrop from '@material-ui/core/Backdrop';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 const Backdrop = styled.div`
   background-color: ${({ backdropBackground }) => backdropBackground};
-  /* background-color: green; */
   position: fixed;
   top: 0;
   right: 0;
@@ -19,38 +17,65 @@ const Backdrop = styled.div`
 
 export default function ContextualHelp(props) {
   const {
+    childRef,
     open,
     text,
     uiBackground,
     backdropBackground,
-    tooltipBackground
+    tooltipBackground,
+    focusComponent,
+    focusClickAction,
   } = props;
   const [helpIsOpen, setHelpIsOpen] = useState(open);
-  // const [boundingClientRect, setBoundingClientRect] = useState({});
+  const [boundingClientRect, setBoundingClientRect] = useState({});
 
   const theme = useTheme();
-
-  const ref = useRef(null);
 
   const handleClose = () => {
     console.log('close');
     setHelpIsOpen(false);
-    // setBoundingClientRect({});
+    setBoundingClientRect({});
+  };
+
+  const handleFocusClick = () => {
+    setHelpIsOpen(false);
+    setBoundingClientRect({});
+    focusClickAction();
   };
 
   const StyledTooltip = withStyles({
     tooltip: {
       background: tooltipBackground || '#fff',
-      color: props.tooltipColor || '#000'
+      color: props.tooltipColor || '#000',
     },
-    arrow: { color: tooltipBackground || '#fff' }
+    arrow: { color: tooltipBackground || '#fff' },
   })(Tooltip);
 
-  // useEffect(() => {
-  //   setBoundingClientRect(ref.current.getBoundingClientRect());
-  // }, []);
+  useEffect(() => {
+    console.log('childRef.current:', childRef.current);
 
-  return (
+    console.log(
+      'boundingClientRect:',
+      childRef.current.getBoundingClientRect()
+    );
+    setBoundingClientRect(childRef.current.getBoundingClientRect());
+  }, []);
+
+  const focusStyle = {
+    cursor: 'pointer',
+    zIndex: theme.zIndex.modal + 1,
+    position: 'absolute',
+    background: uiBackground || '#fff',
+    borderRadius: '100%',
+    ...boundingClientRect,
+    width: boundingClientRect.width,
+    height: boundingClientRect.height,
+  };
+
+  console.log('focusStyle:', focusStyle);
+  console.log('boundingClientRect:', boundingClientRect);
+
+  return helpIsOpen ? (
     <div>
       <StyledTooltip
         arrow
@@ -60,42 +85,17 @@ export default function ContextualHelp(props) {
         open={helpIsOpen}
         title={<Typography>{text}</Typography>}
       >
-        <div
-          style={
-            helpIsOpen
-              ? {
-                  zIndex: theme.zIndex.modal + 1,
-                  position: 'absolute',
-                  background: uiBackground || '#fff',
-                  borderRadius: '100%'
-                  // right: 12
-                  // ...boundingClientRect,
-                  // width:
-                  //   boundingClientRect.width > boundingClientRect.height
-                  //     ? boundingClientRect.width
-                  //     : boundingClientRect.height,
-                  // height:
-                  //   boundingClientRect.width > boundingClientRect.height
-                  //     ? boundingClientRect.width
-                  //     : boundingClientRect.height
-                }
-              : {}
-          }
-          ref={ref}
-          onClick={handleClose}
-        >
-          {props.children}
+        <div style={focusStyle} onClick={handleFocusClick}>
+          {focusComponent}
         </div>
       </StyledTooltip>
-      {helpIsOpen && (
-        <Backdrop
-          theme={theme}
-          backdropBackground={backdropBackground || 'rgba(0, 0, 0, 0.54)'}
-          onClick={handleClose}
-        />
-      )}
+      <Backdrop
+        theme={theme}
+        backdropBackground={backdropBackground || 'rgba(0, 0, 0, 0.54)'}
+        onClick={handleClose}
+      />
     </div>
-  );
+  ) : null;
 }
 
 /**

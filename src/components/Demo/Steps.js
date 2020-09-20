@@ -7,6 +7,7 @@ import ProjectForm from 'components/ProjectForm';
 import ProjectGridItem from 'components/ProjectGridItem';
 import RegistrationButton from 'components/RegistrationButton';
 
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
@@ -28,19 +29,25 @@ export function Step0(props) {
   );
 }
 
-export const Step1 = (props) => (
-  <div
-    style={{
-      maxWidth: 600,
-      margin: '0 auto',
-    }}
-  >
-    <ProjectForm
-      project={props.demoProject}
-      handleFormSubmit={props.handleStep}
-    />
-  </div>
-);
+export const Step1 = (props) => {
+  const max740 = useMediaQuery('(max-width: 740px)');
+
+  return (
+    <div
+      style={
+        {
+          // maxWidth: max740 ? '100%' : 600,
+          // margin: '0 auto',
+        }
+      }
+    >
+      <ProjectForm
+        project={props.demoProject}
+        handleFormSubmit={props.handleStep}
+      />
+    </div>
+  );
+};
 
 const GridStatusLabel = styled(Grid)`
   height: 40px;
@@ -57,7 +64,7 @@ export const Step2 = (props) => {
         handleFormSubmit={props.handleDemoSave}
       />
     ) : (
-      <Grid container spacing={1}>
+      <Grid container spacing={1} style={{ padding: '0px 48px' }}>
         {props.demoProject.status === 'archived' && (
           <GridStatusLabel
             style={{
@@ -66,7 +73,7 @@ export const Step2 = (props) => {
             item
             sm={4}
           >
-            Archived
+            {strings.ttl__archived}
           </GridStatusLabel>
         )}
         <Grid item sm={4} />
@@ -76,7 +83,7 @@ export const Step2 = (props) => {
             item
             sm={4}
           >
-            Active
+            {strings.ttl__active}
           </GridStatusLabel>
         )}
         <Grid item sm={4} />
@@ -86,7 +93,7 @@ export const Step2 = (props) => {
             item
             sm={4}
           >
-            Removed
+            {strings.ttl__removed}
           </GridStatusLabel>
         )}
 

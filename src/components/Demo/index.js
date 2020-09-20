@@ -26,6 +26,11 @@ const DemoContainer = styled.div`
   padding: 0px 48px;
   transition: all 0.8s ease;
   -webkit-transition: all 0.8s ease;
+  overflow-y: auto;
+
+  @media (max-width: 740px) {
+    padding: 0;
+  }
 `;
 
 const StepperContainer = styled.div`
