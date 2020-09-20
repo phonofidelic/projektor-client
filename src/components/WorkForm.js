@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { StringContext } from 'strings';
 import { Formik, Form, Field } from 'formik';
 import moment from 'moment';
+import momentDurationFormatSetup from 'moment-duration-format';
+
 import styled from 'styled-components';
 
 import FormikDateTimePicker from 'components/FormikDateTimePicker';
@@ -13,8 +15,9 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 moment.locale(navigator.language);
+momentDurationFormatSetup(moment);
 
-const parseDateString = string => {
+const parseDateString = (string) => {
   if (typeof string === 'number') return string;
   return Date.parse(string);
 };
@@ -45,9 +48,9 @@ export function WorkForm(props) {
         start: workItem ? workItem.start : Date.now(),
         end: workItem ? workItem.end : Date.now() + 3.6e6,
         duration: workItem ? workItem.duration : 0,
-        notes: workItem ? workItem.notes : ''
+        notes: workItem ? workItem.notes : '',
       }}
-      validate={values => {
+      validate={(values) => {
         const errors = {};
         if (parseDateString(values.end) <= parseDateString(values.start)) {
           errors.end = 'Stop must be after Start';
@@ -64,12 +67,12 @@ export function WorkForm(props) {
               ...values,
               _id: workItem._id,
               duration:
-                parseDateString(values.end) - parseDateString(values.start)
+                parseDateString(values.end) - parseDateString(values.start),
             })
           : createWork({
               ...values,
               duration:
-                parseDateString(values.end) - parseDateString(values.start)
+                parseDateString(values.end) - parseDateString(values.start),
             });
         handleClose();
       }}
@@ -81,7 +84,7 @@ export function WorkForm(props) {
         handleChange,
         handleBlur,
         handleSubmit,
-        isSubmitting
+        isSubmitting,
       }) => (
         <Form>
           <Grid container style={{ padding: 24, paddingBottom: 0 }}>

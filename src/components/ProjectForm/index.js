@@ -107,7 +107,8 @@ export default function ProjectForm(props) {
                 <InputContainer>
                   <TextField
                     multiline
-                    rows={3}
+                    rows={5}
+                    rowsMax={10}
                     variant="outlined"
                     fullWidth
                     id="description"
