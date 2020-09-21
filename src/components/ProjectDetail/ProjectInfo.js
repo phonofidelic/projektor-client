@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import moment from 'moment';
 // eslint-disable-next-line
 import momentDurationFormatSetup from 'moment-duration-format';
+import ReactMarkdown from 'react-markdown';
+
 import { StringContext } from 'strings';
 
 import { useTheme } from '@material-ui/core/styles';
@@ -72,7 +74,8 @@ export default function ProjectInfo(props) {
             {strings.msg__empty_project_description}
           </Typography>
         ) : (
-          <Typography>{project.description}</Typography>
+          // <Typography>{project.description}</Typography>
+          <ReactMarkdown source={project.description} />
         )}
       </Description>
 
