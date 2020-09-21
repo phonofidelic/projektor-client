@@ -144,17 +144,17 @@ export default function WorkSection(props) {
           }
           focusClickAction={handleOpenWork}
         />
-        {/* <CreateWorkButton
+        <CreateWorkButton
           ref={createWorkButtonRef}
           handleOpenWork={handleOpenWork}
-        /> */}
-        <IconButton
+        />
+        {/* <IconButton
           ref={createWorkButtonRef}
           variant="outlined"
           onClick={() => handleOpenWork(false)}
         >
           <AddIcon />
-        </IconButton>
+        </IconButton> */}
         {/* </ContextualHelp> */}
       </div>
       <WorkContainer>

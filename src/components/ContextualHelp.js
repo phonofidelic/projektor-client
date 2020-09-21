@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { useTheme, withStyles } from '@material-ui/core/styles';
-// import Backdrop from '@material-ui/core/Backdrop';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
@@ -13,7 +12,6 @@ const Backdrop = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  /* height: 100vh; */
   z-index: ${({ theme }) => theme.zIndex.modal};
 `;
 
@@ -34,7 +32,6 @@ export default function ContextualHelp(props) {
   const theme = useTheme();
 
   const handleClose = () => {
-    console.log('close');
     setHelpIsOpen(false);
     setBoundingClientRect({});
   };
@@ -61,7 +58,7 @@ export default function ContextualHelp(props) {
       childRef.current.getBoundingClientRect()
     );
     setBoundingClientRect(childRef.current.getBoundingClientRect());
-  }, []);
+  }, [childRef]);
 
   const focusStyle = {
     cursor: 'pointer',
@@ -69,7 +66,6 @@ export default function ContextualHelp(props) {
     position: 'absolute',
     background: uiBackground || '#fff',
     borderRadius: '100%',
-    ...boundingClientRect,
     width: boundingClientRect.width,
     height: boundingClientRect.height,
   };
