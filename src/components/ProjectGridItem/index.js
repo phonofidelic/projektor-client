@@ -7,7 +7,9 @@ import { EXPANDED } from 'constants/projectsDisplayModes';
 import useMobileDetect from 'use-mobile-detect-hook';
 
 import ProjectCardContent from './ProjectCardContent';
-import ProjectMenu from 'components/ProjectMenu';
+import ProjectMenu, {
+  ProjectMenu as DemoProjectMenu,
+} from 'components/ProjectMenu';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
@@ -16,16 +18,16 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardHeader from '@material-ui/core/CardHeader';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   cardHeader: {
     width: 100,
-    display: 'content'
+    display: 'content',
   },
   avatar: {
     backgroundColor: ({ projectColor }) => projectColor,
     color: ({ projectColor }) =>
-      theme.palette.getContrastText(projectColor || '#fff')
-  }
+      theme.palette.getContrastText(projectColor || '#fff'),
+  },
 }));
 
 const ProgressContainer = styled.div`
@@ -70,7 +72,7 @@ export function ProjectGridItem(props) {
         variant="outlined"
         style={{
           position: 'relative',
-          transition: 'all 0.3 ease-in-out'
+          transition: 'all 0.3 ease-in-out',
         }}
       >
         <div
@@ -78,7 +80,7 @@ export function ProjectGridItem(props) {
             position: 'absolute',
             width: '100%',
             display: 'flex',
-            justifyContent: 'flex-end'
+            justifyContent: 'flex-end',
             // right: 50
           }}
         >
@@ -87,10 +89,18 @@ export function ProjectGridItem(props) {
               visibility: hovered || isMobile() ? 'visible' : 'hidden',
               margin: 12,
               display: 'flex',
-              zIndex: 1
+              zIndex: 1,
             }}
           >
-            <ProjectMenu project={project} />
+            {project.isDemo ? (
+              <DemoProjectMenu
+                project={project}
+                setDemoProjectStatus={props.setDemoProjectStatus}
+                handleDemoEdit={props.handleDemoEdit}
+              />
+            ) : (
+              <ProjectMenu project={project} />
+            )}
           </div>
         </div>
 
@@ -102,13 +112,13 @@ export function ProjectGridItem(props) {
                 {project.title
                   .split(' ')
                   .slice(0, 2)
-                  .map(s => s.charAt(0))
+                  .map((s) => s.charAt(0))
                   .join('')}
               </Avatar>
             }
             title={project.title}
             titleTypographyProps={{
-              noWrap: true
+              noWrap: true,
             }}
             subheader={project.client}
             action={<div style={{ width: 50 }} />}
@@ -138,9 +148,9 @@ ProjectGridItem.propTypes = {
     created: PropTypes.string,
     userId: PropTypes.string,
     budgetedTime: PropTypes.number,
-    timeUsed: PropTypes.number
+    timeUsed: PropTypes.number,
   }),
-  projectsDisplayMode: PropTypes.string
+  projectsDisplayMode: PropTypes.string,
 };
 
 export default ProjectGridItem;

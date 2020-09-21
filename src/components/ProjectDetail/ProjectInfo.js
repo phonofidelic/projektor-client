@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import moment from 'moment';
 // eslint-disable-next-line
 import momentDurationFormatSetup from 'moment-duration-format';
+import ReactMarkdown from 'react-markdown';
+
 import { StringContext } from 'strings';
 
 import { useTheme } from '@material-ui/core/styles';
@@ -65,18 +67,19 @@ export default function ProjectInfo(props) {
 
   return (
     <InfoContainer container>
-      <Description item xs={12} sm={6} lg={8}>
+      <Description item xs={12} sm={6} lg={6}>
         {project.description === 'No description provided' ||
         project.description === '' ? (
           <Typography color="textSecondary">
             {strings.msg__empty_project_description}
           </Typography>
         ) : (
-          <Typography>{project.description}</Typography>
+          // <Typography>{project.description}</Typography>
+          <ReactMarkdown source={project.description} />
         )}
       </Description>
 
-      <ProjectInfoContainer item xs={12} sm={6} lg={4}>
+      <ProjectInfoContainer item xs={12} sm={6} lg={6}>
         <div>
           <Typography variant="overline">{strings.lbl__client}</Typography>{' '}
           {project.client}

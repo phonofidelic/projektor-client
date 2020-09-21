@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { StringContext } from 'strings';
 import styled from 'styled-components';
 import matchSorter from 'match-sorter';
@@ -28,6 +28,16 @@ const WorkContainer = styled.div`
   // flex: 1;
 `;
 
+const CreateWorkButton = React.forwardRef((props, ref) => (
+  <IconButton
+    ref={ref}
+    variant="outlined"
+    onClick={() => props.handleOpenWork(false)}
+  >
+    <AddIcon />
+  </IconButton>
+));
+
 export default function WorkSection(props) {
   const { project, createWork, updateWork, removeWork } = props;
   const strings = useContext(StringContext);
@@ -40,7 +50,9 @@ export default function WorkSection(props) {
 
   const theme = useTheme();
 
-  const handleOpenWork = workItem => {
+  const createWorkButtonRef = useRef();
+
+  const handleOpenWork = (workItem) => {
     workItem ? setWorkItem(workItem) : setWorkItem(null);
 
     setWorkFormOpen(true);
@@ -51,7 +63,7 @@ export default function WorkSection(props) {
     setWorkFormOpen(false);
   };
 
-  const handleSearch = query => {
+  const handleSearch = (query) => {
     // console.log('handleSearch, query:', query);
     setFilteredWork(matchSorter(project.work, query, { keys: ['notes'] }));
   };
@@ -74,7 +86,7 @@ export default function WorkSection(props) {
           updateWork={updateWork}
         />
       </WorkModal>
-      <Divider />
+      {!project.isDemo && <Divider />}
       <div
         style={{
           backgroundColor: theme.palette.background.default,
@@ -84,14 +96,14 @@ export default function WorkSection(props) {
           padding: '9px 18px',
           display: 'flex',
           justifyContent: 'space-between',
-          zIndex: 1
+          zIndex: 1,
         }}
       >
         <div
           style={{
             flex: searchIsOpen ? 0 : 1,
             width: searchIsOpen && isMobile() ? 0 : 'inherit',
-            transition: 'all ease-in-out 0.1s'
+            transition: 'all ease-in-out 0.1s',
           }}
         >
           <Typography
@@ -100,7 +112,7 @@ export default function WorkSection(props) {
             align="left"
             style={{
               height: 48,
-              lineHeight: '48px'
+              lineHeight: '48px',
             }}
           >
             {strings.ttl__work}
@@ -118,17 +130,32 @@ export default function WorkSection(props) {
           <TaskAnalysis project={project} handleSearch={handleSearch} />
         )}
         <ContextualHelp
+          childRef={createWorkButtonRef}
           open={project.isDemo}
-          text={'Add Tasks to track your progress'}
+          text={strings.hnt__demo_create_work}
           uiBackground={theme.palette.background.default}
           backdropBackground={theme.palette.action.active}
-          // tooltipBackground={theme.palette.secondary.main}
           tooltipBackground={theme.palette.background.default}
+          focusComponent={
+            <CreateWorkButton
+              ref={createWorkButtonRef}
+              handleOpenWork={handleOpenWork}
+            />
+          }
+          focusClickAction={handleOpenWork}
+        />
+        <CreateWorkButton
+          ref={createWorkButtonRef}
+          handleOpenWork={handleOpenWork}
+        />
+        {/* <IconButton
+          ref={createWorkButtonRef}
+          variant="outlined"
+          onClick={() => handleOpenWork(false)}
         >
-          <IconButton variant="outlined" onClick={() => handleOpenWork(false)}>
-            <AddIcon />
-          </IconButton>
-        </ContextualHelp>
+          <AddIcon />
+        </IconButton> */}
+        {/* </ContextualHelp> */}
       </div>
       <WorkContainer>
         {filterdWork.length > 0 ? (

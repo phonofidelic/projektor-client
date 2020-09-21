@@ -7,14 +7,20 @@ import Root from 'Root';
 import ProjectDetail from 'components/ProjectDetail';
 
 /**
+ * Add global.crypto object for view component tests that use Auth0 library.
+ * https://stackoverflow.com/a/60370536/4677401
+ */
+global.crypto = { subtle: {} };
+
+/**
  * From: https://stackoverflow.com/a/58180976
  */
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'), // use actual for all non-hook parts
   useParams: () => ({
-    projectId: '5deccf102d02734c530164ff'
+    projectId: '5deccf102d02734c530164ff',
   }),
-  useRouteMatch: () => ({ url: '/projects/:projectId' })
+  useRouteMatch: () => ({ url: '/projects/:projectId' }),
 }));
 
 describe('Project view', () => {

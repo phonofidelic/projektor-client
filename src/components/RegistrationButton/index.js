@@ -16,13 +16,13 @@ export default function RegistrationButton() {
       style={{
         backgroundColor: theme.palette.primary.main,
         color: '#fff',
-        margin: '0 8px'
+        // margin: '0 8px'
       }}
       // variant="outlined"
       onClick={() =>
         loginWithRedirect({
           screen_hint: 'signup',
-          redirectUri: `${process.env.REACT_APP_DOMAIN}/projects`
+          redirectUri: `${process.env.REACT_APP_DOMAIN}/projects`,
         })
       }
     >

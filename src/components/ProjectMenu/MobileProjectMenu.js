@@ -20,7 +20,7 @@ export default function MobileProjectMenu(props) {
     menuActions,
     handleMenuSelection,
     handleDelete,
-    handleCloseMenu
+    handleCloseMenu,
   } = props;
 
   const strings = useContext(StringContext);
@@ -40,23 +40,39 @@ export default function MobileProjectMenu(props) {
             primaryTypographyProps={{ noWrap: true }}
           />
         </ListItem>
-        {project.status === ACTIVE && (
-          <ListItem
-            button
-            style={{
-              color: theme.palette.text.primary,
-              textDecoration: 'none'
-            }}
-            key="edit"
-            component={Link}
-            to={`/projects/edit/${project._id}`}
-          >
-            <ListItemIcon>
-              <EditIcon />
-            </ListItemIcon>
-            <ListItemText>{strings.btn__edit}</ListItemText>
-          </ListItem>
-        )}
+        {project.status === ACTIVE &&
+          (project.isDemo ? (
+            <ListItem
+              button
+              style={{
+                color: theme.palette.text.primary,
+                textDecoration: 'none',
+              }}
+              key="edit"
+              onClick={() => props.handleDemoEdit(project)}
+            >
+              <ListItemIcon>
+                <EditIcon />
+              </ListItemIcon>
+              <ListItemText>{strings.btn__edit}</ListItemText>
+            </ListItem>
+          ) : (
+            <ListItem
+              button
+              style={{
+                color: theme.palette.text.primary,
+                textDecoration: 'none',
+              }}
+              key="edit"
+              component={Link}
+              to={`/projects/edit/${project._id}`}
+            >
+              <ListItemIcon>
+                <EditIcon />
+              </ListItemIcon>
+              <ListItemText>{strings.btn__edit}</ListItemText>
+            </ListItem>
+          ))}
         {menuActions.map(
           (item, i) =>
             project.status !== item.status && (
@@ -70,7 +86,7 @@ export default function MobileProjectMenu(props) {
               </ListItem>
             )
         )}
-        {project.status === DELETED && (
+        {project.status === DELETED && !project.isDemo && (
           <ListItem
             button
             key="perm_delete"

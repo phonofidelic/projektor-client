@@ -27,7 +27,7 @@ export function ProjectMenu(props) {
   const { getAccessTokenSilently } = useAuth0();
 
   const [anchorEl, setAnchor] = useState(null);
-  const handleMenuClick = e => {
+  const handleMenuClick = (e) => {
     // setAnchor(e.currentTarget);
     setAnchor(buttonRef.current);
   };
@@ -36,6 +36,8 @@ export function ProjectMenu(props) {
   };
 
   const handleMenuSelection = async (projectId, status) => {
+    if (project.isDemo) return props.setDemoProjectStatus(project, status);
+
     const token = await getAccessTokenSilently();
     setProjectStatus(projectId, status, token);
     handleCloseMenu();
@@ -46,7 +48,7 @@ export function ProjectMenu(props) {
     if (location.pathname.includes(projectId)) history.goBack();
   };
 
-  const handleDelete = async projectId => {
+  const handleDelete = async (projectId) => {
     /**
      * TODO: Use custom Confirm dialog component
      */
@@ -62,20 +64,20 @@ export function ProjectMenu(props) {
       pathname: '/projects',
       status: ACTIVE,
       title: strings.btn__activate,
-      icon: <CachedIcon />
+      icon: <CachedIcon />,
     },
     {
       pathname: '/archived',
       status: ARCHIVED,
       title: strings.btn__archive,
-      icon: <BookIcon />
+      icon: <BookIcon />,
     },
     {
       pathname: '/removed',
       status: DELETED,
       title: strings.btn__remove,
-      icon: <DeleteIcon />
-    }
+      icon: <DeleteIcon />,
+    },
   ];
 
   return (
@@ -93,6 +95,7 @@ export function ProjectMenu(props) {
           handleMenuSelection={handleMenuSelection}
           handleDelete={handleDelete}
           handleCloseMenu={handleCloseMenu}
+          handleDemoEdit={props.handleDemoEdit}
         />
       ) : (
         <DesktopProjectMenu
@@ -102,6 +105,7 @@ export function ProjectMenu(props) {
           handleMenuSelection={handleMenuSelection}
           handleDelete={handleDelete}
           handleCloseMenu={handleCloseMenu}
+          handleDemoEdit={props.handleDemoEdit}
         />
       )}
     </div>

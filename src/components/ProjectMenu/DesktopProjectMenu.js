@@ -17,7 +17,7 @@ export default function DesktopProjectMenu(props) {
     menuActions,
     handleMenuSelection,
     handleDelete,
-    handleCloseMenu
+    handleCloseMenu,
   } = props;
 
   const strings = useContext(StringContext);
@@ -30,18 +30,26 @@ export default function DesktopProjectMenu(props) {
       open={Boolean(anchorEl)}
       onClose={handleCloseMenu}
     >
-      {project.status === ACTIVE && (
-        <MenuItem
-          key="edit"
-          component={Link}
-          to={`/projects/edit/${project._id}`}
-        >
-          <ListItemIcon>
-            <EditIcon />
-          </ListItemIcon>
-          {strings.btn__edit}
-        </MenuItem>
-      )}
+      {project.status === ACTIVE &&
+        (project.isDemo ? (
+          <MenuItem key="edit" onClick={() => props.handleDemoEdit(project)}>
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            {strings.btn__edit}
+          </MenuItem>
+        ) : (
+          <MenuItem
+            key="edit"
+            component={Link}
+            to={`/projects/edit/${project._id}`}
+          >
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            {strings.btn__edit}
+          </MenuItem>
+        ))}
       {menuActions.map(
         (item, i) =>
           project.status !== item.status && (
@@ -54,7 +62,7 @@ export default function DesktopProjectMenu(props) {
             </MenuItem>
           )
       )}
-      {project.status === DELETED && (
+      {project.status === DELETED && !project.isDemo && (
         <MenuItem key="perm_delete" onClick={() => handleDelete(project._id)}>
           <ListItemIcon>
             <DeleteIcon />
