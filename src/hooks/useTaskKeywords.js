@@ -6,7 +6,8 @@ export default function useTaskKeywords(projectId) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const getTaskKeywords = async projectId => {
+  const getTaskKeywords = async (projectId) => {
+    // return setError(new Error('Could not load task keywords'));
     let response;
 
     try {
@@ -14,12 +15,12 @@ export default function useTaskKeywords(projectId) {
     } catch (err) {
       console.error(err);
       setLoading(false);
-      setError(err);
+      return setError(new Error('Could not load task keywords'));
     }
 
-    const keywords = response.data.data.map(taskType => ({
+    const keywords = response.data.data.map((taskType) => ({
       ...taskType,
-      id: taskType.term.replace(' ', '_')
+      id: taskType.term.replace(' ', '_'),
     }));
 
     setLoading(false);

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 // import { api } from 'actions/utils';
 import useTaskKeywords from 'hooks/useTaskKeywords';
 
+import ErrorDialog from 'components/ErrorDialog';
 import WorkModal from 'components/ProjectDetail/WorkModal';
 
 import Button from '@material-ui/core/Button';
@@ -89,7 +90,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 //   },
 // };
 
-export const TaskAnalysis = props => {
+export const TaskAnalysis = (props) => {
   const {
     project,
     // loadingTaskAnalysis,
@@ -97,7 +98,7 @@ export const TaskAnalysis = props => {
     // taskTypes,
     // getTaskKeywords,
     // deleteTaskType,
-    handleSearch
+    handleSearch,
   } = props;
 
   // const [loadingTaskAnalysis, setLoadingTaskAnalysis] = useState(false);
@@ -108,10 +109,12 @@ export const TaskAnalysis = props => {
   const [
     taskTypes,
     loadingTaskAnalysis,
-    // error,
+    taskAnalysisError,
     setTaskTypes,
-    getTaskKeywords
+    getTaskKeywords,
   ] = useTaskKeywords(project._id);
+
+  console.log('### taskAnalysisError:', taskAnalysisError);
 
   // const getTaskKeywords = async (projectId) => {
   //   let response;
@@ -134,11 +137,11 @@ export const TaskAnalysis = props => {
   //   setTaskTypesAnalyzed(true);
   // };
 
-  const deleteTaskType = term => {
-    setTaskTypes(taskTypes.filter(taskType => taskType.term !== term));
+  const deleteTaskType = (term) => {
+    setTaskTypes(taskTypes.filter((taskType) => taskType.term !== term));
   };
 
-  const handleDelete = task => {
+  const handleDelete = (task) => {
     console.log('delete task:', task);
     deleteTaskType(task.term);
   };
@@ -156,13 +159,18 @@ export const TaskAnalysis = props => {
     setOpen(false);
   };
 
-  const searchByTaskTerm = term => {
+  const searchByTaskTerm = (term) => {
     handleSearch(term);
     setOpen(false);
   };
 
   return (
     <div style={{ display: 'flex' }}>
+      <ErrorDialog
+        showDialog={Boolean(taskAnalysisError)}
+        title="Something went wrong..."
+        body={taskAnalysisError.message}
+      />
       <WorkModal
         open={open}
         // workItem={workItem}
@@ -170,7 +178,7 @@ export const TaskAnalysis = props => {
       >
         <div
           style={{
-            padding: 16
+            padding: 16,
           }}
         >
           <div>
@@ -179,7 +187,7 @@ export const TaskAnalysis = props => {
               align="left"
               style={{
                 height: 48,
-                lineHeight: '48px'
+                lineHeight: '48px',
               }}
             >
               Task Types
@@ -194,7 +202,7 @@ export const TaskAnalysis = props => {
               marginTop: 16,
               // textAlign: 'center',
               maxHeight: '30vh',
-              overflowY: 'auto'
+              overflowY: 'auto',
             }}
           >
             {taskTypes.map((task, i) => (
@@ -202,7 +210,7 @@ export const TaskAnalysis = props => {
                 key={`task_type_${i}`}
                 style={{
                   // marginRight: 5
-                  margin: 5
+                  margin: 5,
                 }}
                 variant="outlined"
                 // avatar={<DoneIcon />}
@@ -219,7 +227,7 @@ export const TaskAnalysis = props => {
             style={{
               marginTop: 16,
               display: 'flex',
-              justifyContent: 'flex-end'
+              justifyContent: 'flex-end',
             }}
           >
             <Button color="secondary" onClick={clearAllTaskTypes}>
@@ -234,7 +242,7 @@ export const TaskAnalysis = props => {
           display: 'flex',
           overflowY: 'auto',
           maxWidth: 500,
-          margin: 'auto'
+          margin: 'auto',
         }}
       >
         {taskTypes.slice(0, 3).map((task, i) => (
@@ -242,7 +250,7 @@ export const TaskAnalysis = props => {
             key={`task_type_${i}`}
             style={{
               // marginRight: 5
-              margin: 5
+              margin: 5,
             }}
             variant="outlined"
             label={task.term}
