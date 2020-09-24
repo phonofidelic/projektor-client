@@ -120,5 +120,6 @@
     "msg__demo_project_description": "A good description helps you get context and an understanding of your project's objectives. Projektor uses all your written text to help you search for the info you need and to generate key-words for classifying different types of tasks.",
     "msg__demo_project_client": "Phonofidelic",
     "hnt__demo_create_work": "Add Tasks to track your progress",
-    "msg__demo_continue": "Continue exploring Projektor!"
+    "msg__demo_continue": "Continue exploring Projektor!",
+    "msg__task_note_prompt": "Wat did you work on?"
 }

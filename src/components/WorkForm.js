@@ -131,7 +131,7 @@ export function WorkForm(props) {
                 variant="outlined"
                 margin="dense"
                 id="note"
-                label={strings.ttl__work_notes}
+                label={strings.msg__task_note_prompt}
                 fullWidth
                 name="notes"
                 value={values.notes || ''}

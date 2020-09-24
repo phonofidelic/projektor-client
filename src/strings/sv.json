@@ -117,8 +117,9 @@
     "msg__demo_step_3_short": "Utforska",
     "hnt__demo_create_project": "Skapa ett projekt",
     "msg__demo_project_title": "Mitt första projekt",
-    "msg__demo_project_description": "En bra beskrivning hjälper dig att få ett sammanhang om vad projektet går ut på. Projektor använder all text som du skriver för att hjälpa dig söka efter den information du behöver och för att generera nyckelord som kan användas för att klassifiera olika sorter av arbetsuppgifter.",
+    "msg__demo_project_description": "En bra beskrivning hjälper dig att få ett sammanhang om vad projektet går ut på. Projektor använder all text som du skriver för att hjälpa dig söka efter den information du behöver och för att generera nyckelord som kan användas för att klassificera olika sorter av arbetsuppgifter.",
     "msg__demo_project_client": "Phonofidelic",
     "hnt__demo_create_work": "Skapa arbetsupgifter för att spåra dina framsteg",
-    "msg__demo_continue": "Fortsätt utforska Projektor!"
+    "msg__demo_continue": "Fortsätt utforska Projektor!",
+    "msg__task_note_prompt": "Var har du jobbat med?"
 }
