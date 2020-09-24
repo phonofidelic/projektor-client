@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import useTaskKeywords from 'hooks/useTaskKeywords';
+
+import useTaskKeywords from './hooks/useTaskKeywords';
 
 import ErrorDialog from 'components/ErrorDialog';
 import WorkModal from 'components/ProjectDetail/WorkModal';
 
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import IconButton from '@material-ui/core/IconButton';
@@ -120,9 +122,11 @@ export const TaskKeywords = (props) => {
               justifyContent: 'flex-end',
             }}
           >
-            <Button color="secondary" onClick={clearAllTaskTypes}>
-              Clear All
-            </Button>
+            <Box color="error.main">
+              <Button color="inherit" onClick={clearAllTaskTypes}>
+                Clear All
+              </Button>
+            </Box>
             <Button onClick={closeTaskAnalysis}>Cancel</Button>
           </div>
         </div>
