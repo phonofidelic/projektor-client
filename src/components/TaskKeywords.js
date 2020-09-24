@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import { connect } from 'react-redux';
-// import { api } from 'actions/utils';
 import useTaskKeywords from 'hooks/useTaskKeywords';
 
 import ErrorDialog from 'components/ErrorDialog';
@@ -14,96 +12,9 @@ import Typography from '@material-ui/core/Typography';
 import BubbleChartIcon from '@material-ui/icons/BubbleChart';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-// const TASK_KEYWORDS = 'task_keywords',
-//   TASK_KEYWORDS_SUCCESS = 'task_keywords_success',
-//   TASK_KEYWORDS_FAILURE = 'task_keywords_failure',
-//   DELETE_TASK_KEYWORD = 'delete_taske_keyword';
+export const TaskKeywords = (props) => {
+  const { project, handleSearch } = props;
 
-// /**
-//  * Task analysis reducer
-//  */
-// const defaultState = {
-//   taskTypesAnalyzed: false,
-//   taskTypes: [],
-//   loading: false,
-// };
-// export const taskAnalysisReducer = (state = defaultState, action) => {
-//   switch (action.type) {
-//     case TASK_KEYWORDS:
-//       return {
-//         ...state,
-//         loading: true,
-//       };
-
-//     case TASK_KEYWORDS_SUCCESS:
-//       return {
-//         ...state,
-//         loading: false,
-//         taskTypesAnalyzed: true,
-//         taskTypes: action.payload,
-//       };
-
-//     case TASK_KEYWORDS_FAILURE:
-//       return {
-//         ...state,
-//         loading: false,
-//       };
-
-//     case DELETE_TASK_KEYWORD:
-//       return {
-//         ...state,
-//         taskTypes: state.taskTypes.filter(
-//           (taskType) => taskType.term !== action.payload
-//         ),
-//       };
-
-//     default:
-//       return state;
-//   }
-// };
-
-// const actions = {
-//   getTaskKeywords: (projectId) => {
-//     return async (dispatch) => {
-//       dispatch({
-//         type: TASK_KEYWORDS,
-//       });
-
-//       let response;
-//       try {
-//         response = await api().get(`/projects/keytasks/${projectId}`);
-//         console.log();
-//         handleResponse(response, dispatch, TASK_KEYWORDS_SUCCESS);
-//       } catch (err) {
-//         console.error(err);
-//         handleError(err, dispatch, TASK_KEYWORDS_FAILURE);
-//       }
-//     };
-//   },
-//   deleteTaskType: (taskTerm) => {
-//     return (dispatch) => {
-//       dispatch({
-//         type: DELETE_TASK_KEYWORD,
-//         payload: taskTerm,
-//       });
-//     };
-//   },
-// };
-
-export const TaskAnalysis = (props) => {
-  const {
-    project,
-    // loadingTaskAnalysis,
-    // taskTypesAnalyzed,
-    // taskTypes,
-    // getTaskKeywords,
-    // deleteTaskType,
-    handleSearch,
-  } = props;
-
-  // const [loadingTaskAnalysis, setLoadingTaskAnalysis] = useState(false);
-  // const [taskTypesAnalyzed, setTaskTypesAnalyzed] = useState(false);
-  // const [taskTypes, setTaskTypes] = useState([]);
   const [open, setOpen] = useState(false);
 
   const [
@@ -115,27 +26,6 @@ export const TaskAnalysis = (props) => {
   ] = useTaskKeywords(project._id);
 
   console.log('### taskAnalysisError:', taskAnalysisError);
-
-  // const getTaskKeywords = async (projectId) => {
-  //   let response;
-
-  //   try {
-  //     response = await api().get(`/projects/keytasks/${projectId}`);
-  //   } catch (err) {
-  //     console.error(err);
-  //     setLoadingTaskAnalysis(false);
-  //   }
-
-  //   const taskTypes = response.data.data.map((taskType) => ({
-  //     ...taskType,
-  //     id: taskType.term.replace(' ', '_'),
-  //   }));
-  //   console.log('taskTypes:', taskTypes);
-
-  //   setTaskTypes(taskTypes);
-  //   setLoadingTaskAnalysis(false);
-  //   setTaskTypesAnalyzed(true);
-  // };
 
   const deleteTaskType = (term) => {
     setTaskTypes(taskTypes.filter((taskType) => taskType.term !== term));
@@ -282,11 +172,4 @@ export const TaskAnalysis = (props) => {
   );
 };
 
-// const mapStateToProps = (state) => ({
-//   taskTypes: state.taskAnalysis.taskTypes,
-//   loadingTaskAnalysis: state.taskAnalysis.loading,
-//   taskTypesAnalyzed: state.taskAnalysis.taskTypesAnalyzed,
-// });
-
-// export default connect(mapStateToProps, actions)(TaskAnalysis);
-export default TaskAnalysis;
+export default TaskKeywords;

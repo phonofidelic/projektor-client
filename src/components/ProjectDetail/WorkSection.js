@@ -11,7 +11,7 @@ import WorkModal from 'components/ProjectDetail/WorkModal';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import WorkForm from 'components/WorkForm';
 import SearchBar from 'components/SearchBar';
-import TaskAnalysis from 'components/TaskAnalysis';
+import TaskKeywords from 'components/TaskKeywords';
 
 import { useTheme } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
@@ -127,7 +127,7 @@ export default function WorkSection(props) {
           />
         </div>
         {!isMobile() && !project.isDemo && (
-          <TaskAnalysis project={project} handleSearch={handleSearch} />
+          <TaskKeywords project={project} handleSearch={handleSearch} />
         )}
         <ContextualHelp
           childRef={createWorkButtonRef}
