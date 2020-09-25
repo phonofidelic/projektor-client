@@ -25,7 +25,13 @@ export default function useTaskAnalysis(notes) {
   };
 
   useEffect(() => {
-    fetchWorkNotesAnalysis(notes);
+    const handler = setTimeout(() => {
+      fetchWorkNotesAnalysis(notes);
+    }, 500);
+
+    return () => {
+      clearTimeout(handler);
+    };
   }, [notes]);
 
   return [data, loading, error];
