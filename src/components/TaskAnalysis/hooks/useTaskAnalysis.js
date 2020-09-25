@@ -9,22 +9,25 @@ export default function useTaskAnalysis(notes) {
 
   const { getAccessTokenSilently } = useAuth();
 
-  const fetchWorkNotesAnalysis = async (notes) => {
-    const token = await getAccessTokenSilently();
-
-    let response;
-    try {
-      response = await api(token).post('/work/analyze', { notes });
-    } catch (err) {
-      console.error(err);
-      return setError(new Error('Could not analyze task notes'));
-    }
-
-    console.log('### /work/analyze response:', response);
-    setData(response.data.keyTerms);
-  };
-
   useEffect(() => {
+    const fetchWorkNotesAnalysis = async (notes) => {
+      setLoading(true);
+      const token = await getAccessTokenSilently();
+
+      let response;
+      try {
+        response = await api(token).post('/work/analyze', { notes });
+      } catch (err) {
+        console.error(err);
+        setLoading(false);
+        return setError(new Error('Could not analyze task notes'));
+      }
+
+      console.log('### /work/analyze response:', response);
+      setLoading(false);
+      setData(response.data.keyTerms);
+    };
+
     const handler = setTimeout(() => {
       fetchWorkNotesAnalysis(notes);
     }, 500);
@@ -32,7 +35,7 @@ export default function useTaskAnalysis(notes) {
     return () => {
       clearTimeout(handler);
     };
-  }, [notes]);
+  }, [notes, getAccessTokenSilently]);
 
-  return [data, loading, error];
+  return { data, loading, error };
 }

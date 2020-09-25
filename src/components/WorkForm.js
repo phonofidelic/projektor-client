@@ -34,14 +34,7 @@ const InputContainer = styled.div`
 `;
 
 export function WorkForm(props) {
-  const {
-    project,
-    workItem,
-    notesRef,
-    handleClose,
-    createWork,
-    updateWork,
-  } = props;
+  const { project, workItem, handleClose, createWork, updateWork } = props;
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
 
