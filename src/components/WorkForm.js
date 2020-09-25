@@ -7,6 +7,7 @@ import momentDurationFormatSetup from 'moment-duration-format';
 import styled from 'styled-components';
 
 import FormikDateTimePicker from 'components/FormikDateTimePicker';
+import TaskAnalysis from 'components/TaskAnalysis';
 
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -33,11 +34,18 @@ const InputContainer = styled.div`
 `;
 
 export function WorkForm(props) {
-  const { project, workItem, handleClose, createWork, updateWork } = props;
+  const {
+    project,
+    workItem,
+    notesRef,
+    handleClose,
+    createWork,
+    updateWork,
+  } = props;
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
 
-  console.log('### workItem:', workItem);
+  // console.log('### workItem:', workItem);
 
   return (
     <Formik
@@ -176,6 +184,9 @@ export function WorkForm(props) {
                 />
               </InputContainer> */}
             </WorkInfoContainer>
+            <Grid item xs={12}>
+              <TaskAnalysis notes={values.notes} />
+            </Grid>
             <Grid item xs={12}>
               <DialogActions>
                 <Button onClick={handleClose} color="primary">
