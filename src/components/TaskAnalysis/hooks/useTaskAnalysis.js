@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import api from 'api';
 import { useAuth } from 'services/AuthProvider';
+import { StringContext } from 'strings';
 
 export default function useTaskAnalysis(notes) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const strings = useContext(StringContext);
   const { getAccessTokenSilently } = useAuth();
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function useTaskAnalysis(notes) {
       } catch (err) {
         console.error(err);
         setLoading(false);
-        return setError(new Error('Could not analyze task notes'));
+        return setError(new Error(strings.msg__analyze_notes_error));
       }
 
       console.log('### /work/analyze response:', response);

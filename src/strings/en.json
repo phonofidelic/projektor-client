@@ -98,7 +98,7 @@
     "ttl__sign_in": "Sign In",
     "ttl__this__week": "This Week:",
     "ttl__verification_failure": "Email verification required",
-    "ttl__work": "Tasks",
+    "ttl__work": "Work Log",
     "ttl__work_details": "Task Details",
     "ttl__work_notes": "Notes ",
     "ttl__calendar": "Calendar",
@@ -121,5 +121,7 @@
     "msg__demo_project_client": "Phonofidelic",
     "hnt__demo_create_work": "Add Tasks to track your progress",
     "msg__demo_continue": "Continue exploring Projektor!",
-    "msg__task_note_prompt": "Wat did you work on?"
+    "msg__task_note_prompt": "Wat did you work on?",
+    "hnt__create_task": "Click to create this task",
+    "msg__analyze_notes_error": "Could not extract tasks from these notes"
 }
