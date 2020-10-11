@@ -12,21 +12,35 @@ import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import WorkForm from 'components/WorkForm';
 import SearchBar from 'components/SearchBar';
 import TaskKeywords from 'components/TaskKeywords';
+import { TaskTable } from 'components/TaskAnalysis';
 
 import { useTheme } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import Slide from '@material-ui/core/Slide';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
+import { projectData } from 'components/ProjectForm/ProjectForm.stories';
+
+const WORK_TABLE_VIEW = 'work_table';
+const TASK_TABLE_VIEW = 'task_table';
 
 const Container = styled.div`
   /* border-top: solid #e0e0e0 1px; */
   flex: 1;
 `;
 
-const WorkContainer = styled.div`
-  // flex: 1;
+const WorkSectionHeader = styled.div`
+  background-color: ${({ theme }) => theme.palette.background.default};
+  position: ${({ isMobile }) => (isMobile ? 'sticky' : 'inherit')};
+  top: ${({ theme }) => theme.dimensions.projectDetailHeader.height};
+  padding: 9px 18px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1;
 `;
+
+const WorkSectionMain = styled.div``;
 
 const CreateWorkButton = React.forwardRef((props, ref) => (
   <IconButton
@@ -45,6 +59,7 @@ export default function WorkSection(props) {
   const [workFormOpen, setWorkFormOpen] = useState(false);
   const [filterdWork, setFilteredWork] = useState(project.work);
   const [searchIsOpen, setSearchIsOpen] = useState(false);
+  const [mainView, setMainView] = useState(WORK_TABLE_VIEW);
 
   const { isMobile } = useMobileDetect();
 
@@ -87,20 +102,11 @@ export default function WorkSection(props) {
         />
       </WorkModal>
       {!project.isDemo && <Divider />}
-      <div
-        style={{
-          backgroundColor: theme.palette.background.default,
-          // borderTop: 'solid #e0e0e0 1px',
-          position: isMobile() ? 'sticky' : 'inherit',
-          top: theme.dimensions.projectDetailHeader.height,
-          padding: '9px 18px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          zIndex: 1,
-        }}
-      >
+      <WorkSectionHeader theme={theme} isMobile={isMobile()}>
         <div
           style={{
+            display: 'flex',
+            // justifyContent: 'space-between',
             flex: searchIsOpen ? 0 : 1,
             width: searchIsOpen && isMobile() ? 0 : 'inherit',
             transition: 'all ease-in-out 0.1s',
@@ -112,10 +118,48 @@ export default function WorkSection(props) {
             align="left"
             style={{
               height: 48,
+              marginRight: 16,
               lineHeight: '48px',
+              cursor: 'pointer',
+
+              borderBottom:
+                mainView === WORK_TABLE_VIEW
+                  ? `4px solid ${theme.palette.secondary.main}`
+                  : 'none',
+
+              // textDecorationColor: theme.palette.secondary.main,
+              // textDecoration:
+              //   mainView === WORK_TABLE_VIEW
+              //     ? `underline ${theme.palette.secondary.main}`
+              //     : 'none',
+
+              // boxShadow:
+              //   mainView === WORK_TABLE_VIEW
+              //     ? `inset 0 -4px 0 ${theme.palette.secondary.main}`
+              //     : 'none',
             }}
+            color={mainView === WORK_TABLE_VIEW ? 'initial' : 'textSecondary'}
+            onClick={() => setMainView(WORK_TABLE_VIEW)}
           >
             {strings.ttl__work}
+          </Typography>
+          <Typography
+            noWrap
+            variant="h6"
+            align="left"
+            style={{
+              height: 48,
+              lineHeight: '48px',
+              cursor: 'pointer',
+              borderBottom:
+                mainView === TASK_TABLE_VIEW
+                  ? `4px solid ${theme.palette.secondary.main}`
+                  : 'none',
+            }}
+            color={mainView === TASK_TABLE_VIEW ? 'initial' : 'textSecondary'}
+            onClick={() => setMainView(TASK_TABLE_VIEW)}
+          >
+            Tasks
           </Typography>
         </div>
         <div style={{ flex: searchIsOpen ? 1 : 0 }}>
@@ -126,9 +170,9 @@ export default function WorkSection(props) {
             handleSearch={handleSearch}
           />
         </div>
-        {!isMobile() && !project.isDemo && (
+        {/* {!isMobile() && !project.isDemo && (
           <TaskKeywords project={project} handleSearch={handleSearch} />
-        )}
+        )} */}
         <ContextualHelp
           childRef={createWorkButtonRef}
           open={project.isDemo}
@@ -148,34 +192,50 @@ export default function WorkSection(props) {
           ref={createWorkButtonRef}
           handleOpenWork={handleOpenWork}
         />
-        {/* <IconButton
-          ref={createWorkButtonRef}
-          variant="outlined"
-          onClick={() => handleOpenWork(false)}
+      </WorkSectionHeader>
+
+      <WorkSectionMain>
+        <Slide
+          in={mainView === WORK_TABLE_VIEW}
+          direction="right"
+          mountOnEnter
+          unmountOnExit
         >
-          <AddIcon />
-        </IconButton> */}
-        {/* </ContextualHelp> */}
-      </div>
-      <WorkContainer>
-        {filterdWork.length > 0 ? (
-          isMobile() ? (
-            <WorkList
-              work={filterdWork}
-              handleOpenWork={handleOpenWork}
-              removeWork={removeWork}
-            />
-          ) : (
-            <WorkTable
-              work={filterdWork}
-              handleOpenWork={handleOpenWork}
-              removeWork={removeWork}
-            />
-          )
-        ) : (
-          <DefaultEmptyMessage text={strings.msg__default_empty_work} />
-        )}
-      </WorkContainer>
+          <div>
+            {filterdWork.length > 0 ? (
+              isMobile() ? (
+                //<Slide in={true} direction="right" mountOnEnter unmountOnExit>
+                <WorkList
+                  work={filterdWork}
+                  handleOpenWork={handleOpenWork}
+                  removeWork={removeWork}
+                />
+              ) : (
+                //</Slide>
+                //<Slide in={true} direction="right" mountOnEnter unmountOnExit>
+                <WorkTable
+                  work={filterdWork}
+                  handleOpenWork={handleOpenWork}
+                  removeWork={removeWork}
+                />
+                //</Slide>
+              )
+            ) : (
+              <DefaultEmptyMessage text={strings.msg__default_empty_work} />
+            )}
+          </div>
+        </Slide>
+        <Slide
+          in={mainView === TASK_TABLE_VIEW}
+          direction="left"
+          mountOnEnter
+          unmountOnExit
+        >
+          <div>
+            <TaskTable project={project} />
+          </div>
+        </Slide>
+      </WorkSectionMain>
       {/* <ActiveWork project={project} createWork={createWork} /> */}
     </Container>
   );

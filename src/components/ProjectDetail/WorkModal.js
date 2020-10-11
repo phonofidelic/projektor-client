@@ -11,7 +11,7 @@ export function WorkModal(props) {
     open,
     // workItem,
     // activeNote,
-    handleClose
+    handleClose,
     // handleSetActiveNote,
     // updateWork
   } = props;
@@ -30,10 +30,11 @@ export function WorkModal(props) {
           style={{
             maxWidth: 800,
             margin: '100px auto',
+            // margin: 'auto',
             outline: 0,
             position: isMobile() ? 'absolute' : 'relative',
             bottom: isMobile() ? 0 : 'inherit',
-            marginBottom: isMobile() ? 0 : 100
+            marginBottom: isMobile() ? 0 : 100,
           }}
         >
           {children}

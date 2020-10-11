@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { StringContext } from 'strings';
 import { Formik, Form, Field } from 'formik';
 import moment from 'moment';
@@ -7,7 +7,7 @@ import momentDurationFormatSetup from 'moment-duration-format';
 import styled from 'styled-components';
 
 import FormikDateTimePicker from 'components/FormikDateTimePicker';
-import TaskAnalysis from 'components/TaskAnalysis';
+import { TaskSuggestions } from 'components/TaskAnalysis';
 
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -50,6 +50,7 @@ export function WorkForm(props) {
         end: workItem ? workItem.end : Date.now() + 3.6e6,
         duration: workItem ? workItem.duration : 0,
         notes: workItem ? workItem.notes : '',
+        tasks: workItem?.tasks,
       }}
       validate={(values) => {
         const errors = {};
@@ -86,9 +87,16 @@ export function WorkForm(props) {
         handleBlur,
         handleSubmit,
         isSubmitting,
+        setFieldValue,
       }) => (
         <Form>
-          <Grid container style={{ padding: 24, paddingBottom: 0 }}>
+          <Grid
+            container
+            style={{
+              padding: 24,
+              paddingBottom: 0,
+            }}
+          >
             <Grid item xs={12} sm={6}>
               <Typography
                 style={{ marginBottom: 24 }}
@@ -97,6 +105,9 @@ export function WorkForm(props) {
               >
                 {strings.ttl__work_details}
               </Typography>
+              {process.env.NODE_ENV !== 'production' && (
+                <Typography variant="caption">ID: {workItem?._id}</Typography>
+              )}
             </Grid>
             <WorkInfoContainer container item xs={12} sm={6}>
               <Grid item xs={12} sm={12}>
@@ -162,24 +173,17 @@ export function WorkForm(props) {
                   // onChange={handleChange}
                 />
               </InputContainer>
-              {/* <InputContainer>
-                <Typography variant="overline">Tags</Typography>
-                <Field
-                  fullWidth
-                  id="end-date"
-                  name="end"
-                  label="Tags"
-                  helperText={touched.end && errors.end}
-                  error={Boolean(errors.end && touched.end)}
-                  component={TextField}
-                  // handleDateTimeError={handleDateTimeError}
-                  // onChange={handleChange}
-                />
-              </InputContainer> */}
             </WorkInfoContainer>
+
             <Grid item xs={12}>
-              <TaskAnalysis notes={values.notes} />
+              <TaskSuggestions
+                workItem={workItem}
+                projectId={project._id}
+                notes={values.notes}
+                setFieldValue={setFieldValue}
+              />
             </Grid>
+
             <Grid item xs={12}>
               <DialogActions>
                 <Button onClick={handleClose} color="primary">

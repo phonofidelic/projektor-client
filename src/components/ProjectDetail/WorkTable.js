@@ -25,26 +25,26 @@ import EditIcon from '@material-ui/icons/Edit';
 
 const MAX_ROWS = 10;
 
-const StyledTableCell = withStyles(theme => ({
+const StyledTableCell = withStyles((theme) => ({
   root: { borderBottom: `1px solid ${theme.palette.divider}` },
-  head: { backgroundColor: theme.palette.background.default }
+  head: { backgroundColor: theme.palette.background.default },
 }))(TableCell);
 
-const StyledTableRow = withStyles(theme => ({
+const StyledTableRow = withStyles((theme) => ({
   // root: { borderBottom: `1px solid ${theme.palette.divider}` },
   // head: { background: theme.palette.background.default }
   root: {
     cursor: 'pointer',
     '&$selected': { backgroundColor: theme.palette.action.selected },
-    '&$hover:hover': { backgroundColor: theme.palette.action.hover }
+    '&$hover:hover': { backgroundColor: theme.palette.action.hover },
     // backgroundColor: theme.palette.background.default
   },
   hover: {},
-  selected: {}
+  selected: {},
 }))(TableRow);
 
-const StyledTableFooter = withStyles(theme => ({
-  root: { backgroundColor: theme.palette.background.default }
+const StyledTableFooter = withStyles((theme) => ({
+  root: { backgroundColor: theme.palette.background.default },
 }))(TableFooter);
 
 moment.locale(navigator.language);
@@ -56,7 +56,7 @@ function ContextMenu(props) {
     workItem,
     handleCloseContextMenu,
     handleOpenWork,
-    removeWork
+    removeWork,
   } = props;
 
   const strings = useContext(StringContext);
@@ -84,7 +84,7 @@ function ContextMenu(props) {
       anchorEl={document.body}
       anchorOrigin={{
         vertical: contextPos.y + window.scrollY || 0,
-        horizontal: contextPos.x || 0
+        horizontal: contextPos.x || 0,
       }}
       getContentAnchorEl={null}
       onClose={handleCloseContextMenu}
@@ -124,36 +124,36 @@ export default function WorkTable(props) {
   const [contextPos, setContextPos] = useState({});
   const theme = useTheme();
 
-  const data = useMemo(() => work.map(workItem => workItem), [work]);
+  const data = useMemo(() => work.map((workItem) => workItem), [work]);
 
   const columns = useMemo(
     () => [
       {
         Header: strings.lbl__work_tbl_start_date,
-        accessor: row =>
-          moment(row.start).format(currentLocaleData.longDateFormat('L'))
+        accessor: (row) =>
+          moment(row.start).format(currentLocaleData.longDateFormat('L')),
       },
       {
         Header: strings.lbl__work_tbl_start_time,
-        accessor: row =>
-          moment(row.start).format(currentLocaleData.longDateFormat('LT'))
+        accessor: (row) =>
+          moment(row.start).format(currentLocaleData.longDateFormat('LT')),
       },
       {
         Header: strings.lbl__work_tbl_end_time,
-        accessor: row =>
-          moment(row.end).format(currentLocaleData.longDateFormat('LT'))
+        accessor: (row) =>
+          moment(row.end).format(currentLocaleData.longDateFormat('LT')),
       },
       {
         Header: strings.lbl__work_tbl_duration,
-        accessor: row =>
+        accessor: (row) =>
           moment
             .duration(row.duration, 'ms')
-            .format('hh:mm:ss', { trim: false })
+            .format('hh:mm:ss', { trim: false }),
       },
       {
         Header: strings.lbl__work_tbl_notes,
-        accessor: 'notes'
-      }
+        accessor: 'notes',
+      },
     ],
     [currentLocaleData, strings]
   );
@@ -174,7 +174,7 @@ export default function WorkTable(props) {
     // nextPage,
     // previousPage,
     setPageSize,
-    state: { pageIndex, pageSize }
+    state: { pageIndex, pageSize },
   } = useTable(
     { columns, data, autoResetSortBy: false },
     useSortBy,
@@ -182,7 +182,7 @@ export default function WorkTable(props) {
     usePagination
   );
 
-  const handleSelectWork = work => {
+  const handleSelectWork = (work) => {
     setSelectedWork(work);
   };
 
@@ -203,7 +203,7 @@ export default function WorkTable(props) {
   };
 
   return (
-    <>
+    <div>
       {/* <Paper style={{ margin: 18, flex: 1 }}> */}
       <ContextMenu
         open={contextOpen}
@@ -215,16 +215,16 @@ export default function WorkTable(props) {
       />
       <Table
         style={{
-          paddingBottom: 53
+          paddingBottom: 53,
         }}
         size="small"
         {...getTableProps()}
         stickyHeader
       >
         <TableHead>
-          {headerGroups.map(headerGroup => (
+          {headerGroups.map((headerGroup) => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
+              {headerGroup.headers.map((column) => (
                 <StyledTableCell
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
@@ -251,11 +251,11 @@ export default function WorkTable(props) {
                 hover
                 selected={row.original._id === selectedWork._id}
                 onClick={() => handleSelectWork(row.original)}
-                onContextMenu={e => handleOpenContextMenu(e, row.original)}
+                onContextMenu={(e) => handleOpenContextMenu(e, row.original)}
                 onDoubleClick={() => handleOpenWork(row.original)}
                 // classes={{ selected: classes.selected }}
               >
-                {row.cells.map(cell => (
+                {row.cells.map((cell) => (
                   <StyledTableCell
                     style={{ maxWidth: 100 }}
                     {...cell.getCellProps()}
@@ -274,7 +274,7 @@ export default function WorkTable(props) {
               bottom: 0,
               width: '100%',
               backgroundColor: theme.palette.primary.background,
-              borderTop: `1px solid ${theme.palette.divider}`
+              borderTop: `1px solid ${theme.palette.divider}`,
             }}
           >
             <TableRow>
@@ -286,10 +286,10 @@ export default function WorkTable(props) {
                 page={pageIndex}
                 SelectProps={{
                   inputProps: { 'aria-label': 'rows per page' },
-                  native: true
+                  native: true,
                 }}
                 onChangePage={handleChangePage}
-                onChangeRowsPerPage={e => {
+                onChangeRowsPerPage={(e) => {
                   setPageSize(Number(e.target.value));
                 }}
                 ActionsComponent={TablePaginationActions}
@@ -299,6 +299,6 @@ export default function WorkTable(props) {
         )}
       </Table>
       {/* </Paper> */}
-    </>
+    </div>
   );
 }

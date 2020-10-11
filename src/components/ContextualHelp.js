@@ -51,12 +51,6 @@ export default function ContextualHelp(props) {
   })(Tooltip);
 
   useEffect(() => {
-    console.log('childRef.current:', childRef.current);
-
-    console.log(
-      'boundingClientRect:',
-      childRef.current.getBoundingClientRect()
-    );
     setBoundingClientRect(childRef.current.getBoundingClientRect());
   }, [childRef]);
 
@@ -69,9 +63,6 @@ export default function ContextualHelp(props) {
     width: boundingClientRect.width,
     height: boundingClientRect.height,
   };
-
-  console.log('focusStyle:', focusStyle);
-  console.log('boundingClientRect:', boundingClientRect);
 
   return helpIsOpen ? (
     <div>
