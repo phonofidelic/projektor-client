@@ -11,7 +11,7 @@ import WorkModal from 'components/ProjectDetail/WorkModal';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import WorkForm from 'components/WorkForm';
 import SearchBar from 'components/SearchBar';
-import TaskKeywords from 'components/TaskKeywords';
+// import TaskKeywords from 'components/TaskKeywords';
 import { TaskTable } from 'components/TaskAnalysis';
 
 import { useTheme } from '@material-ui/core/styles';
@@ -20,7 +20,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Slide from '@material-ui/core/Slide';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
-import { projectData } from 'components/ProjectForm/ProjectForm.stories';
 
 const WORK_TABLE_VIEW = 'work_table';
 const TASK_TABLE_VIEW = 'task_table';

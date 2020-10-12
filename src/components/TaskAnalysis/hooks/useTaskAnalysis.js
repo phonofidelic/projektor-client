@@ -39,7 +39,12 @@ export default function useTaskAnalysis({ notes, projectId }) {
     return () => {
       clearTimeout(handler);
     };
-  }, [notes, getAccessTokenSilently, strings.msg__analyze_notes_error]);
+  }, [
+    notes,
+    projectId,
+    getAccessTokenSilently,
+    strings.msg__analyze_notes_error,
+  ]);
 
   return { data, loading, error };
 }

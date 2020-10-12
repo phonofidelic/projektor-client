@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import useTaskData from './hooks/useTaskData';
 import moment from 'moment';
 
@@ -8,11 +8,8 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableFooter from '@material-ui/core/TableFooter';
 import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Typography from '@material-ui/core/Typography';
 
 export default function TaskTable(props) {
@@ -21,20 +18,6 @@ export default function TaskTable(props) {
   const theme = useTheme();
 
   console.log('TaskTable, taskData:', taskData);
-
-  // const taskDataWithProjectTime = taskData.map((task) => ({
-  //   ...task,
-  //   projectTime: task.work.reduce((acc, cur) => {
-  //     return acc + cur.duration;
-  //   }, 0),
-  // }));
-
-  // const durations = taskDataWithProjectTime.map(
-  //   (task) => (task.projectTime / project.timeUsed) * 100
-  // );
-
-  // console.log('### durations:', durations);
-  // console.log('TaskTable, taskDataWithProjectTime:', taskDataWithProjectTime);
 
   if (error) return <div>{error.message}</div>;
 

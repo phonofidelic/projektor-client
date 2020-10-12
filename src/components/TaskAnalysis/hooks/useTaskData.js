@@ -35,7 +35,7 @@ export default function useTaskData(projectId) {
     };
 
     fetchTasks();
-  }, []);
+  }, [projectId, getAccessTokenSilently]);
 
   return [data, loading, error];
 }

@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 
-import useTaskData from './hooks/useTaskData';
 import useTaskAnalysis from './hooks/useTaskAnalysis';
 
 import { StringContext } from 'strings';
@@ -16,11 +15,10 @@ import DoneIcon from '@material-ui/icons/Done';
 
 export default function TaskSuggestions(props) {
   const { workItem, projectId, notes, setFieldValue } = props;
-  const { data: taskKeywords, error: taskKeywordsError } = useTaskAnalysis({
+  const { data: taskKeywords, loading, error } = useTaskAnalysis({
     notes,
     projectId,
   });
-  const [taskData, loading, error] = useTaskData(projectId);
   const [addedTasks, setAddedTasks] = useState(workItem?.tasks || []);
   const strings = useContext(StringContext);
   const theme = useTheme();
@@ -48,10 +46,10 @@ export default function TaskSuggestions(props) {
     setFieldValue('tasks', addedTasks);
   }, [addedTasks, setFieldValue]);
 
-  if (error || taskKeywordsError)
+  if (error)
     return (
       <Box color="error.main">
-        <Typography>{error?.message || taskKeywordsError.message}</Typography>
+        <Typography>{error.message}</Typography>
       </Box>
     );
 
