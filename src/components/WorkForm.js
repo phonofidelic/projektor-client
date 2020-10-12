@@ -25,7 +25,7 @@ const parseDateString = (string) => {
 
 const WorkInfoContainer = styled(Grid)`
   @media (min-width: 600px) {
-    padding-left: 24px;
+    /* padding-left: 24px; */
   }
 `;
 
@@ -94,6 +94,7 @@ export function WorkForm(props) {
             container
             style={{
               padding: 24,
+              paddingLeft: 24 - 15,
               paddingBottom: 0,
             }}
           >
@@ -109,6 +110,7 @@ export function WorkForm(props) {
                 <Typography variant="caption">ID: {workItem?._id}</Typography>
               )}
             </Grid>
+
             <WorkInfoContainer container item xs={12} sm={6}>
               <Grid item xs={12} sm={12}>
                 <Typography variant="overline">
@@ -130,27 +132,8 @@ export function WorkForm(props) {
                   .format('hh:mm:ss', { trim: false })}
               </Grid>
             </WorkInfoContainer>
-            <Grid
-              item
-              xs={12}
-              // sm={workItem ? 6 : 12}
-              sm={6}
-            >
-              <TextField
-                autoFocus
-                multiline
-                rows={7}
-                variant="outlined"
-                margin="dense"
-                id="note"
-                label={strings.msg__task_note_prompt}
-                fullWidth
-                name="notes"
-                value={values.notes || ''}
-                onChange={handleChange}
-              />
-            </Grid>
-            <WorkInfoContainer item xs={12} sm={6}>
+
+            <Grid item xs={12} sm={6} style={{ marginTop: 16 }}>
               <InputContainer>
                 <Field
                   id="start-date"
@@ -161,6 +144,8 @@ export function WorkForm(props) {
                   // onChange={handleChange}
                 />
               </InputContainer>
+            </Grid>
+            <Grid item xs={12} sm={6} style={{ marginTop: 16 }}>
               <InputContainer>
                 <Field
                   id="end-date"
@@ -173,9 +158,34 @@ export function WorkForm(props) {
                   // onChange={handleChange}
                 />
               </InputContainer>
-            </WorkInfoContainer>
+            </Grid>
 
-            <Grid item xs={12}>
+            <Grid
+              item
+              xs={12}
+              // sm={workItem ? 6 : 12}
+              sm={12}
+              style={{ marginTop: 16 }}
+            >
+              <Typography variant="overline">
+                {strings.ttl__work_notes}
+              </Typography>
+              <TextField
+                autoFocus
+                multiline
+                // rows={7}
+                variant="outlined"
+                margin="dense"
+                id="note"
+                label={strings.msg__task_note_prompt}
+                fullWidth
+                name="notes"
+                value={values.notes || ''}
+                onChange={handleChange}
+              />
+            </Grid>
+
+            <Grid item xs={12} style={{ marginTop: 16 }}>
               <TaskSuggestions
                 workItem={workItem}
                 projectId={project._id}
@@ -184,7 +194,7 @@ export function WorkForm(props) {
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={12} style={{ marginTop: 16 }}>
               <DialogActions>
                 <Button onClick={handleClose} color="primary">
                   {strings.btn__cancel}

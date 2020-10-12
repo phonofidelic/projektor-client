@@ -124,5 +124,7 @@
     "msg__task_note_prompt": "Wat did you work on?",
     "hnt__create_task": "Click to create this task",
     "msg__analyze_notes_error": "Could not extract tasks from these notes",
-    "hnt__add_task": "Click to add this task"
+    "hnt__add_task": "Click to add this task",
+    "lbl__suggested_tasks": "Suggested Tasks",
+    "lbl__added_tasks": "Added Tasks"
 }

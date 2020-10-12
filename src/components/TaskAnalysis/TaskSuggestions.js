@@ -62,11 +62,14 @@ export default function TaskSuggestions(props) {
       </Box>
     );
 
+  if (!taskKeywords) return null;
+
   return (
     <Grid
       container
       style={{
-        height: 42,
+        // height: 42,
+        marginTop: 16,
       }}
     >
       <Grid
@@ -78,6 +81,15 @@ export default function TaskSuggestions(props) {
           borderRadius: theme.shape.borderRadius,
         }}
       >
+        <div
+          style={{
+            marginLeft: 8,
+          }}
+        >
+          <Typography variant="overline">
+            {strings.lbl__suggested_tasks}:
+          </Typography>
+        </div>
         {taskKeywords.map((task, i) => (
           <Grow
             key={`suggested_task_${i}`}
@@ -109,7 +121,7 @@ export default function TaskSuggestions(props) {
         ))}
       </Grid>
 
-      <Grid item xs={12} sm={2}></Grid>
+      <Grid item xs={12} sm={2} style={{ height: 8 }}></Grid>
 
       <Grid
         item
@@ -120,6 +132,15 @@ export default function TaskSuggestions(props) {
           borderRadius: theme.shape.borderRadius,
         }}
       >
+        <div
+          style={{
+            marginLeft: 8,
+          }}
+        >
+          <Typography variant="overline">
+            {strings.lbl__added_tasks}:
+          </Typography>
+        </div>
         {addedTasks.map((addedTask, i) => (
           <Chip
             style={{

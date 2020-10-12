@@ -24,6 +24,10 @@ export function WorkModal(props) {
       open={Boolean(open)}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
+      style={{
+        overflow: 'auto',
+        right: '-15px',
+      }}
     >
       <Slide in={open} direction="up">
         <Paper
@@ -33,8 +37,10 @@ export function WorkModal(props) {
             // margin: 'auto',
             outline: 0,
             position: isMobile() ? 'absolute' : 'relative',
+            top: isMobile() ? 0 : 'inherit',
             bottom: isMobile() ? 0 : 'inherit',
             marginBottom: isMobile() ? 0 : 100,
+            overflow: 'auto',
           }}
         >
           {children}
