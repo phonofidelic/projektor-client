@@ -98,7 +98,7 @@
     "ttl__sign_in": "Logga in",
     "ttl__this__week": "Denna vecka:",
     "ttl__verification_failure": "E-post verifiering krävs",
-    "ttl__work": "Utfört arbete",
+    "ttl__work": "Arbetslogg",
     "ttl__work_details": "Arbetsdetaljer",
     "ttl__work_notes": "Anteckingar",
     "ttl__calendar": "Kalender",
@@ -117,8 +117,14 @@
     "msg__demo_step_3_short": "Utforska",
     "hnt__demo_create_project": "Skapa ett projekt",
     "msg__demo_project_title": "Mitt första projekt",
-    "msg__demo_project_description": "En bra beskrivning hjälper dig att få ett sammanhang om vad projektet går ut på. Projektor använder all text som du skriver för att hjälpa dig söka efter den information du behöver och för att generera nyckelord som kan användas för att klassifiera olika sorter av arbetsuppgifter.",
+    "msg__demo_project_description": "En bra beskrivning hjälper dig att få ett sammanhang om vad projektet går ut på. Projektor använder all text som du skriver för att hjälpa dig söka efter den information du behöver och för att generera nyckelord som kan användas för att klassificera olika sorter av arbetsuppgifter.",
     "msg__demo_project_client": "Phonofidelic",
     "hnt__demo_create_work": "Skapa arbetsupgifter för att spåra dina framsteg",
-    "msg__demo_continue": "Fortsätt utforska Projektor!"
+    "msg__demo_continue": "Fortsätt utforska Projektor!",
+    "msg__task_note_prompt": "Var har du jobbat med?",
+    "hnt__create_task": "Klicka för att skapa dena uppgift",
+    "msg__analyze_notes_error": "Det gick inte att analysera uppgifter i denna anteckning",
+    "hnt__add_task": "Klicka för att lägga till denna uppgift",
+    "lbl__suggested_tasks": "Föreslagna uppgifter",
+    "lbl__added_tasks": "Tillaggda uppgifter"
 }

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import { useAuth } from 'services/AuthProvider';
 
@@ -9,12 +10,15 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function _Dialog(props) {
+export function ErrorDialog(props) {
   const { showDialog, title, body, actionButton, action } = props;
+  const [open, setOpen] = useState(Boolean(showDialog));
+
   const { getAccessTokenSilently } = useAuth();
 
   const handleClose = () => {
     console.log('close dialog');
+    setOpen(false);
   };
 
   const handleAction = async () => {
@@ -22,9 +26,13 @@ export default function _Dialog(props) {
     action(token);
   };
 
-  return showDialog ? (
+  useEffect(() => {
+    setOpen(Boolean(showDialog));
+  }, [showDialog]);
+
+  return (
     <Dialog
-      open={showDialog}
+      open={open}
       onClose={handleClose}
       aria-labelledby={title}
       aria-describedby={body}
@@ -44,7 +52,18 @@ export default function _Dialog(props) {
             {actionButton}
           </Button>
         )}
+        <Button onClick={handleClose}>Ok</Button>
       </DialogActions>
     </Dialog>
-  ) : null;
+  );
 }
+
+ErrorDialog.propTypes = {
+  showDialog: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string,
+  actionButton: PropTypes.string,
+  action: PropTypes.func,
+};
+
+export default ErrorDialog;

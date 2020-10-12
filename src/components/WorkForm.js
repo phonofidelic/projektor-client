@@ -7,6 +7,7 @@ import momentDurationFormatSetup from 'moment-duration-format';
 import styled from 'styled-components';
 
 import FormikDateTimePicker from 'components/FormikDateTimePicker';
+import { TaskSuggestions } from 'components/TaskAnalysis';
 
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -24,7 +25,7 @@ const parseDateString = (string) => {
 
 const WorkInfoContainer = styled(Grid)`
   @media (min-width: 600px) {
-    padding-left: 24px;
+    /* padding-left: 24px; */
   }
 `;
 
@@ -37,7 +38,7 @@ export function WorkForm(props) {
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
 
-  console.log('### workItem:', workItem);
+  // console.log('### workItem:', workItem);
 
   return (
     <Formik
@@ -49,6 +50,7 @@ export function WorkForm(props) {
         end: workItem ? workItem.end : Date.now() + 3.6e6,
         duration: workItem ? workItem.duration : 0,
         notes: workItem ? workItem.notes : '',
+        tasks: workItem?.tasks,
       }}
       validate={(values) => {
         const errors = {};
@@ -85,9 +87,17 @@ export function WorkForm(props) {
         handleBlur,
         handleSubmit,
         isSubmitting,
+        setFieldValue,
       }) => (
         <Form>
-          <Grid container style={{ padding: 24, paddingBottom: 0 }}>
+          <Grid
+            container
+            style={{
+              padding: 24,
+              paddingLeft: 24 - 15,
+              paddingBottom: 0,
+            }}
+          >
             <Grid item xs={12} sm={6}>
               <Typography
                 style={{ marginBottom: 24 }}
@@ -96,7 +106,11 @@ export function WorkForm(props) {
               >
                 {strings.ttl__work_details}
               </Typography>
+              {process.env.NODE_ENV !== 'production' && (
+                <Typography variant="caption">ID: {workItem?._id}</Typography>
+              )}
             </Grid>
+
             <WorkInfoContainer container item xs={12} sm={6}>
               <Grid item xs={12} sm={12}>
                 <Typography variant="overline">
@@ -118,27 +132,8 @@ export function WorkForm(props) {
                   .format('hh:mm:ss', { trim: false })}
               </Grid>
             </WorkInfoContainer>
-            <Grid
-              item
-              xs={12}
-              // sm={workItem ? 6 : 12}
-              sm={6}
-            >
-              <TextField
-                autoFocus
-                multiline
-                rows={7}
-                variant="outlined"
-                margin="dense"
-                id="note"
-                label={strings.ttl__work_notes}
-                fullWidth
-                name="notes"
-                value={values.notes || ''}
-                onChange={handleChange}
-              />
-            </Grid>
-            <WorkInfoContainer item xs={12} sm={6}>
+
+            <Grid item xs={12} sm={6} style={{ marginTop: 16 }}>
               <InputContainer>
                 <Field
                   id="start-date"
@@ -149,6 +144,8 @@ export function WorkForm(props) {
                   // onChange={handleChange}
                 />
               </InputContainer>
+            </Grid>
+            <Grid item xs={12} sm={6} style={{ marginTop: 16 }}>
               <InputContainer>
                 <Field
                   id="end-date"
@@ -161,22 +158,43 @@ export function WorkForm(props) {
                   // onChange={handleChange}
                 />
               </InputContainer>
-              {/* <InputContainer>
-                <Typography variant="overline">Tags</Typography>
-                <Field
-                  fullWidth
-                  id="end-date"
-                  name="end"
-                  label="Tags"
-                  helperText={touched.end && errors.end}
-                  error={Boolean(errors.end && touched.end)}
-                  component={TextField}
-                  // handleDateTimeError={handleDateTimeError}
-                  // onChange={handleChange}
-                />
-              </InputContainer> */}
-            </WorkInfoContainer>
-            <Grid item xs={12}>
+            </Grid>
+
+            <Grid
+              item
+              xs={12}
+              // sm={workItem ? 6 : 12}
+              sm={12}
+              style={{ marginTop: 16 }}
+            >
+              <Typography variant="overline">
+                {strings.ttl__work_notes}
+              </Typography>
+              <TextField
+                autoFocus
+                multiline
+                // rows={7}
+                variant="outlined"
+                margin="dense"
+                id="note"
+                label={strings.msg__task_note_prompt}
+                fullWidth
+                name="notes"
+                value={values.notes || ''}
+                onChange={handleChange}
+              />
+            </Grid>
+
+            <Grid item xs={12} style={{ marginTop: 16 }}>
+              <TaskSuggestions
+                workItem={workItem}
+                projectId={project._id}
+                notes={values.notes}
+                setFieldValue={setFieldValue}
+              />
+            </Grid>
+
+            <Grid item xs={12} style={{ marginTop: 16 }}>
               <DialogActions>
                 <Button onClick={handleClose} color="primary">
                   {strings.btn__cancel}

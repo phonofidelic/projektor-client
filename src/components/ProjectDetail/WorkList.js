@@ -23,7 +23,7 @@ export default function WorkList(props) {
 
   const workData = work;
 
-  const handleOpenWorkMenu = workItem => {
+  const handleOpenWorkMenu = (workItem) => {
     setSelectedWork(workItem);
     setWorkMenuOpen(true);
   };
@@ -34,7 +34,7 @@ export default function WorkList(props) {
   };
 
   return (
-    <>
+    <div>
       <MobileWorkMenu
         open={workMenuOpen}
         workItem={selectedWork}
@@ -78,6 +78,6 @@ export default function WorkList(props) {
           </ListItem>
         ))}
       </List>
-    </>
+    </div>
   );
 }
