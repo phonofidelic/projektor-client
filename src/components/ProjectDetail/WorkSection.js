@@ -161,7 +161,13 @@ export default function WorkSection(props) {
             Tasks
           </Typography>
         </div>
-        <div style={{ flex: searchIsOpen ? 1 : 0 }}>
+        <div
+          style={{
+            flex: searchIsOpen ? 1 : 0,
+            // maxWidth: 360,
+            margin: 'auto',
+          }}
+        >
           <SearchBar
             placeholderMessage={strings.hnt__search_work}
             open={searchIsOpen}
@@ -187,10 +193,12 @@ export default function WorkSection(props) {
           }
           focusClickAction={handleOpenWork}
         />
-        <CreateWorkButton
-          ref={createWorkButtonRef}
-          handleOpenWork={handleOpenWork}
-        />
+        <div style={{ margin: 'auto' }}>
+          <CreateWorkButton
+            ref={createWorkButtonRef}
+            handleOpenWork={handleOpenWork}
+          />
+        </div>
       </WorkSectionHeader>
 
       <WorkSectionMain>
