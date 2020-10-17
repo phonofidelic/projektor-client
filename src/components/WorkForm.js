@@ -3,14 +3,17 @@ import { StringContext } from 'strings';
 import { Formik, Form, Field } from 'formik';
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
+import useMobileDetect from 'use-mobile-detect-hook';
 
 import styled from 'styled-components';
 
 import FormikDateTimePicker from 'components/FormikDateTimePicker';
 import { TaskSuggestions } from 'components/TaskAnalysis';
 
+import { useTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
+import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -23,12 +26,6 @@ const parseDateString = (string) => {
   return Date.parse(string);
 };
 
-const WorkInfoContainer = styled(Grid)`
-  @media (min-width: 600px) {
-    /* padding-left: 24px; */
-  }
-`;
-
 const InputContainer = styled.div`
   margin-top: 10px;
 `;
@@ -37,6 +34,8 @@ export function WorkForm(props) {
   const { project, workItem, handleClose, createWork, updateWork } = props;
   const strings = useContext(StringContext);
   const currentLocaleData = moment.localeData();
+  const { isMobile } = useMobileDetect();
+  const theme = useTheme();
 
   // console.log('### workItem:', workItem);
 
@@ -90,48 +89,64 @@ export function WorkForm(props) {
         setFieldValue,
       }) => (
         <Form>
-          <Grid
-            container
+          <div
             style={{
-              padding: 24,
-              paddingLeft: 24 - 15,
-              paddingBottom: 0,
+              position: 'sticky',
+              top: 0,
+              zIndex: theme.zIndex.appBar,
             }}
           >
-            <Grid item xs={12} sm={6}>
+            <div
+              style={{
+                padding: 24,
+
+                // width: '100%',
+                backgroundColor: theme.palette.background.default,
+              }}
+              item
+              xs={12}
+              sm={6}
+            >
               <Typography
-                style={{ marginBottom: 24 }}
+                // style={{ marginBottom: 24 }}
                 id="form-dialog-title"
                 variant="h6"
               >
                 {strings.ttl__work_details}
               </Typography>
-              {process.env.NODE_ENV !== 'production' && (
-                <Typography variant="caption">ID: {workItem?._id}</Typography>
+              {/* {process.env.NODE_ENV !== 'production' && (
+              <Typography variant="caption">ID: {workItem?._id}</Typography>
+            )} */}
+            </div>
+            {isMobile() && <Divider />}
+          </div>
+          <Grid
+            container
+            style={{
+              padding: 24,
+              paddingLeft: isMobile() ? 24 - 15 : 24,
+              paddingBottom: 0,
+            }}
+          >
+            <Grid item xs={12} sm={6}>
+              <Typography variant="overline">
+                {strings.lbl__work_tbl_start_date}:
+              </Typography>{' '}
+              {moment(values.start).format(
+                currentLocaleData.longDateFormat('L')
               )}
             </Grid>
-
-            <WorkInfoContainer container item xs={12} sm={6}>
-              <Grid item xs={12} sm={12}>
-                <Typography variant="overline">
-                  {strings.lbl__work_tbl_start_date}:
-                </Typography>{' '}
-                {moment(values.start).format(
-                  currentLocaleData.longDateFormat('L')
-                )}
-              </Grid>
-              <Grid item xs={12} sm={12}>
-                <Typography variant="overline">
-                  {strings.lbl__work_tbl_duration}:
-                </Typography>{' '}
-                {moment
-                  .duration(
-                    parseDateString(values.end) - parseDateString(values.start),
-                    'ms'
-                  )
-                  .format('hh:mm:ss', { trim: false })}
-              </Grid>
-            </WorkInfoContainer>
+            <Grid item xs={12} sm={6}>
+              <Typography variant="overline">
+                {strings.lbl__work_tbl_duration}:
+              </Typography>{' '}
+              {moment
+                .duration(
+                  parseDateString(values.end) - parseDateString(values.start),
+                  'ms'
+                )
+                .format('hh:mm:ss', { trim: false })}
+            </Grid>
 
             <Grid item xs={12} sm={6} style={{ marginTop: 16 }}>
               <InputContainer>
@@ -171,7 +186,7 @@ export function WorkForm(props) {
                 {strings.ttl__work_notes}
               </Typography>
               <TextField
-                autoFocus
+                autoFocus={!isMobile()}
                 multiline
                 // rows={7}
                 variant="outlined"
@@ -193,22 +208,33 @@ export function WorkForm(props) {
                 setFieldValue={setFieldValue}
               />
             </Grid>
-
-            <Grid item xs={12} style={{ marginTop: 16 }}>
-              <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                  {strings.btn__cancel}
-                </Button>
-                <Button
-                  type="submit"
-                  color="primary"
-                  // disabled={Object.keys(errors).length > 0}
-                >
-                  {strings.btn__save}
-                </Button>
-              </DialogActions>
-            </Grid>
           </Grid>
+          <div
+            style={{
+              marginTop: 16,
+              position: 'sticky',
+              bottom: 0,
+              backgroundColor: theme.palette.background.default,
+              zIndex: theme.zIndex.appBar,
+              paddingRight: 16,
+            }}
+            item
+            xs={12}
+          >
+            {isMobile() && <Divider />}
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                {strings.btn__cancel}
+              </Button>
+              <Button
+                type="submit"
+                color="primary"
+                // disabled={Object.keys(errors).length > 0}
+              >
+                {strings.btn__save}
+              </Button>
+            </DialogActions>
+          </div>
         </Form>
       )}
     </Formik>
