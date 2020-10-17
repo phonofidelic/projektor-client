@@ -103,9 +103,6 @@ export function WorkForm(props) {
                 // width: '100%',
                 backgroundColor: theme.palette.background.default,
               }}
-              item
-              xs={12}
-              sm={6}
             >
               <Typography
                 // style={{ marginBottom: 24 }}
@@ -218,8 +215,6 @@ export function WorkForm(props) {
               zIndex: theme.zIndex.appBar,
               paddingRight: 16,
             }}
-            item
-            xs={12}
           >
             {isMobile() && <Divider />}
             <DialogActions>
