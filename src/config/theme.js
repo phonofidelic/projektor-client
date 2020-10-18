@@ -33,5 +33,8 @@ export const materialUITheme = createMuiTheme({
     projectDetailHeader: {
       height: 88,
     },
+    header: {
+      height: 88,
+    },
   },
 });

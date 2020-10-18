@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { history } from 'config';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import useMobileDetect from 'use-mobile-detect-hook';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
 import { useAuth } from 'services/AuthProvider';
 
@@ -25,6 +26,8 @@ const TitleContainer = styled.div`
 
 export default function Header(props) {
   const { title, centerTitle, back, background, position } = props;
+  const [showBottomBorder, setShowBottomBorder] = useState(false);
+
   const { isMobile } = useMobileDetect();
   const { pathname } = useLocation();
   const theme = useTheme();
@@ -32,6 +35,10 @@ export default function Header(props) {
   const { isAuthenticated } = useAuth();
 
   const isProjectDetail = /projects\/\w+/.test(pathname);
+
+  useScrollPosition(({ prevPos, currPos }) => {
+    setShowBottomBorder(currPos.y < -10);
+  }, []);
 
   return (
     <Container
@@ -47,7 +54,10 @@ export default function Header(props) {
               left: 0,
               right: 0,
               zIndex: theme.zIndex.appBar,
-              // borderBottom: isMobile() ? 'solid #e0e0e0 1px' : 'none'
+              borderBottom:
+                isMobile() && showBottomBorder
+                  ? `solid ${theme.palette.divider} 1px`
+                  : 'none',
             }
           : null
       }

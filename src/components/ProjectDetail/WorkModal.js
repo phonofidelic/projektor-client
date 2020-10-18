@@ -1,23 +1,15 @@
 import React from 'react';
 import useMobileDetect from 'use-mobile-detect-hook';
 
+import { useTheme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
 import Slide from '@material-ui/core/Slide';
 
 export function WorkModal(props) {
-  const {
-    children,
-    open,
-    // workItem,
-    // activeNote,
-    handleClose,
-    // handleSetActiveNote,
-    // updateWork
-  } = props;
-  // const strings = useContext(StringContext);
-  // const currentLocaleData = moment.localeData();
+  const { children, open, handleClose } = props;
   const { isMobile } = useMobileDetect();
+  const theme = useTheme();
 
   return (
     <Modal
@@ -25,16 +17,14 @@ export function WorkModal(props) {
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       style={{
-        overflow: 'auto',
-        right: '-15px',
+        overflowY: isMobile() ? 'unset' : 'auto',
       }}
     >
       <Slide in={open} direction="up">
         <Paper
           style={{
             maxWidth: 800,
-            margin: '100px auto',
-            // margin: 'auto',
+            margin: `${theme.dimensions.header.height}px auto`,
             outline: 0,
             position: isMobile() ? 'absolute' : 'relative',
             top: isMobile() ? 0 : 'inherit',

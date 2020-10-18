@@ -57,10 +57,10 @@ function ProjectGrid(props) {
   // const projectsWithLocation = withProjectLocation(projects);
 
   return (
-    <Container>
+    <Container style={{ paddingBottom: 80 }}>
       <Grid container spacing={1}>
         {/* <AnimatePresence> */}
-        {projects.map(project => (
+        {projects.map((project) => (
           <ProjectGridItem
             key={project._id}
             project={project}

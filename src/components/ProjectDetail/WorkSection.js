@@ -54,7 +54,7 @@ const CreateWorkButton = React.forwardRef((props, ref) => (
 export default function WorkSection(props) {
   const { project, createWork, updateWork, removeWork } = props;
   const strings = useContext(StringContext);
-  const [workItem, setWorkItem] = useState(null);
+  const [workItem, setWorkItem] = useState({});
   const [workFormOpen, setWorkFormOpen] = useState(false);
   const [filterdWork, setFilteredWork] = useState(project.work);
   const [searchIsOpen, setSearchIsOpen] = useState(false);
@@ -67,7 +67,7 @@ export default function WorkSection(props) {
   const createWorkButtonRef = useRef();
 
   const handleOpenWork = (workItem) => {
-    workItem ? setWorkItem(workItem) : setWorkItem(null);
+    setWorkItem(workItem);
 
     setWorkFormOpen(true);
   };
@@ -82,16 +82,15 @@ export default function WorkSection(props) {
     setFilteredWork(matchSorter(project.work, query, { keys: ['notes'] }));
   };
 
-  useEffect(() => setFilteredWork(project.work), [project.work]);
+  useEffect(() => {
+    setFilteredWork(project.work);
+  }, [project.work]);
+
+  // console.log('WorkSection, workItem:', workItem);
 
   return (
     <Container>
-      <WorkModal
-        open={workFormOpen}
-        // workItem={workItem}
-        handleClose={handleCloseWork}
-        updateWork={updateWork}
-      >
+      <WorkModal open={workFormOpen} handleClose={handleCloseWork}>
         <WorkForm
           project={project}
           workItem={workItem}
@@ -161,7 +160,13 @@ export default function WorkSection(props) {
             Tasks
           </Typography>
         </div>
-        <div style={{ flex: searchIsOpen ? 1 : 0 }}>
+        <div
+          style={{
+            flex: searchIsOpen ? 1 : 0,
+            // maxWidth: 360,
+            margin: 'auto',
+          }}
+        >
           <SearchBar
             placeholderMessage={strings.hnt__search_work}
             open={searchIsOpen}
@@ -187,10 +192,12 @@ export default function WorkSection(props) {
           }
           focusClickAction={handleOpenWork}
         />
-        <CreateWorkButton
-          ref={createWorkButtonRef}
-          handleOpenWork={handleOpenWork}
-        />
+        <div style={{ margin: 'auto' }}>
+          <CreateWorkButton
+            ref={createWorkButtonRef}
+            handleOpenWork={handleOpenWork}
+          />
+        </div>
       </WorkSectionHeader>
 
       <WorkSectionMain>
