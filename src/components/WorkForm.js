@@ -37,7 +37,7 @@ export function WorkForm(props) {
   const { isMobile } = useMobileDetect();
   const theme = useTheme();
 
-  // console.log('### workItem:', workItem);
+  console.log('WorkForm, workItem:', workItem);
 
   return (
     <Formik
@@ -111,9 +111,9 @@ export function WorkForm(props) {
               >
                 {strings.ttl__work_details}
               </Typography>
-              {/* {process.env.NODE_ENV !== 'production' && (
-              <Typography variant="caption">ID: {workItem?._id}</Typography>
-            )} */}
+              {process.env.NODE_ENV !== 'production' && (
+                <Typography variant="caption">ID: {workItem?._id}</Typography>
+              )}
             </div>
             {isMobile() && <Divider />}
           </div>
@@ -121,7 +121,7 @@ export function WorkForm(props) {
             container
             style={{
               padding: 24,
-              paddingLeft: isMobile() ? 24 - 15 : 24,
+              // paddingLeft: isMobile() ? 24 - 15 : 24,
               paddingBottom: 0,
             }}
           >
@@ -213,7 +213,7 @@ export function WorkForm(props) {
               bottom: 0,
               backgroundColor: theme.palette.background.default,
               zIndex: theme.zIndex.appBar,
-              paddingRight: 16,
+              // paddingRight: 16,
             }}
           >
             {isMobile() && <Divider />}

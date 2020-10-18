@@ -44,7 +44,11 @@ export default function WorkList(props) {
       />
       <List>
         {workData.map((workItem, i) => (
-          <ListItem key={`work-item_${i}`} divider>
+          <ListItem
+            key={`work-item_${i}`}
+            divider
+            onClick={() => handleOpenWork(workItem)}
+          >
             <ListItemText
               // alignItems="flex-start"
               primary={moment(workItem.start).format(
