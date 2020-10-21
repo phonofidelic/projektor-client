@@ -16,8 +16,8 @@ import SearchBar from 'components/SearchBar';
 import { TaskTable } from 'components/TaskAnalysis';
 
 import { useTheme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import DialogActions from '@material-ui/core/DialogActions';
+// import Button from '@material-ui/core/Button';
+// import DialogActions from '@material-ui/core/DialogActions';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Slide from '@material-ui/core/Slide';
@@ -26,8 +26,8 @@ import AddIcon from '@material-ui/icons/Add';
 
 const WORK_TABLE_VIEW = 'work_table';
 const TASK_TABLE_VIEW = 'task_table';
-const WORK_DETAIL_VIEW = 'work_detail';
-const TASK_DETAIL_VIEW = 'task_detail';
+// const WORK_DETAIL_VIEW = 'work_detail';
+// const TASK_DETAIL_VIEW = 'task_detail';
 
 const Container = styled.div`
   /* border-top: solid #e0e0e0 1px; */
