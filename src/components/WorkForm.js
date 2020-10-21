@@ -99,16 +99,10 @@ export function WorkForm(props) {
             <div
               style={{
                 padding: 24,
-
-                // width: '100%',
                 backgroundColor: theme.palette.background.default,
               }}
             >
-              <Typography
-                // style={{ marginBottom: 24 }}
-                id="form-dialog-title"
-                variant="h6"
-              >
+              <Typography id="form-dialog-title" variant="h6">
                 {strings.ttl__work_details}
               </Typography>
               {process.env.NODE_ENV !== 'production' && (
