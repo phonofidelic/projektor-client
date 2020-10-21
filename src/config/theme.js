@@ -36,5 +36,8 @@ export const materialUITheme = createMuiTheme({
     header: {
       height: 88,
     },
+    workFormFooter: {
+      height: 52,
+    },
   },
 });

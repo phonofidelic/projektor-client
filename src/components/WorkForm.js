@@ -21,6 +21,8 @@ import Typography from '@material-ui/core/Typography';
 moment.locale(navigator.language);
 momentDurationFormatSetup(moment);
 
+const SHOW_WORK_ID = true;
+
 const parseDateString = (string) => {
   if (typeof string === 'number') return string;
   return Date.parse(string);
@@ -105,7 +107,7 @@ export function WorkForm(props) {
               <Typography id="form-dialog-title" variant="h6">
                 {strings.ttl__work_details}
               </Typography>
-              {process.env.NODE_ENV !== 'production' && (
+              {process.env.NODE_ENV !== 'production' && SHOW_WORK_ID && (
                 <Typography variant="caption">ID: {workItem?._id}</Typography>
               )}
             </div>
@@ -116,7 +118,9 @@ export function WorkForm(props) {
             style={{
               padding: 24,
               // paddingLeft: isMobile() ? 24 - 15 : 24,
-              paddingBottom: 0,
+              paddingBottom: isMobile()
+                ? theme.dimensions.workFormFooter.height + 24
+                : 0,
             }}
           >
             <Grid item xs={12} sm={6}>
@@ -203,8 +207,9 @@ export function WorkForm(props) {
           <div
             style={{
               marginTop: 16,
-              position: 'sticky',
+              position: isMobile() ? 'fixed' : 'unset',
               bottom: 0,
+              width: '100%',
               backgroundColor: theme.palette.background.default,
               zIndex: theme.zIndex.appBar,
               // paddingRight: 16,
