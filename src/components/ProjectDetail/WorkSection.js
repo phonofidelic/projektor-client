@@ -97,7 +97,7 @@ export default function WorkSection(props) {
     ({ prevPos, currPos }) => {
       setShowBottomBorder(currPos.y <= theme.dimensions.header.height);
     },
-    [],
+    [theme.dimensions.header.height],
     workSectionHeaderRef
   );
 
