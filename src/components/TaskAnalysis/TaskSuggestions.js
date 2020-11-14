@@ -1,4 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
+import styled from 'styled-components';
+import moment from 'moment';
 
 import useTaskAnalysis from './hooks/useTaskAnalysis';
 
@@ -9,9 +11,16 @@ import Box from '@material-ui/core/Box';
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import Grow from '@material-ui/core/Grow';
+import Slider from '@material-ui/core/Slider';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import DoneIcon from '@material-ui/icons/Done';
+
+const StyledSlider = styled(Slider)`
+  .MuiSlider-thumb {
+    background-color: 'green';
+  }
+`;
 
 export default function TaskSuggestions(props) {
   const { workItem, projectId, notes, setFieldValue } = props;
@@ -20,6 +29,9 @@ export default function TaskSuggestions(props) {
     projectId,
   });
   const [addedTasks, setAddedTasks] = useState(workItem?.tasks || []);
+  const [taskAlloc, setTaskAlloc] = useState(
+    workItem?.taskAlloc.map((alloc) => ({ ...alloc, locked: false })) || []
+  );
   const strings = useContext(StringContext);
   const theme = useTheme();
 
@@ -38,12 +50,54 @@ export default function TaskSuggestions(props) {
     setAddedTasks(
       addedTasks.filter((task) => task.value !== taskToRemove.value)
     );
+
+    console.log('### handleRemoveTask, taskToRemove:', taskToRemove);
+    console.log('### handleRemoveTask, taskAlloc:', taskAlloc);
+    setTaskAlloc(taskAlloc.filter((item) => item.task !== taskToRemove._id));
   };
 
-  // console.log('TaskSuggestions, workItem:', workItem);
+  const handleAllocationChange = (value, allocatedTask) => {
+    console.log('### handleAllocationChange, values:', allocatedTask, value);
+
+    setTaskAlloc(
+      taskAlloc.map((item, i) => {
+        if (item.task === allocatedTask) {
+          return {
+            ...item,
+            allocation: value,
+            locked: true,
+          };
+        }
+
+        return {
+          ...item,
+          allocation: (workItem.duration - value) / (taskAlloc.length - 1),
+        };
+      })
+    );
+
+    // setTaskAlloc(
+    //   taskAlloc.map((task, i) => ({
+    //     ...task,
+    //     allocation: value,
+    //   }))
+    // );
+    setFieldValue('taskAlloc', taskAlloc);
+  };
+
+  const getDurationFormat = (value) => {
+    const duration = moment
+      .duration(value, 'ms')
+      .format('hh:mm', { trim: false });
+    // console.log('### getDurationFormat, duration:', duration);
+    return duration;
+  };
+
+  console.log('TaskSuggestions, taskAlloc:', taskAlloc);
 
   useEffect(() => {
     setFieldValue('tasks', addedTasks);
+    // setFieldValue('taskAlloc', taskAlloc);
   }, [addedTasks, setFieldValue]);
 
   if (error)
@@ -145,11 +199,51 @@ export default function TaskSuggestions(props) {
               margin: 4,
             }}
             key={`added-task_${i}`}
-            label={addedTask.displayName}
+            label={`${addedTask.displayName} - ${moment
+              .duration(
+                taskAlloc?.find(
+                  (taskAlocItem) => taskAlocItem.task === addedTask._id
+                )?.allocation,
+                'ms'
+              )
+              .format('hh:mm:ss', { trim: false })}`}
             onDelete={() => handleRemoveTask(addedTask)}
           />
         ))}
       </Grid>
+      {taskAlloc && (
+        <Grid item sx={12}>
+          Task allocation
+          {taskAlloc.map((task, i) => (
+            <div key={`task-alloc_${i}`}>
+              <Slider
+                value={task.allocation}
+                defaultValue={task.allocation}
+                max={workItem?.duration}
+                valueLabelDisplay="auto"
+                valueLabelFormat={getDurationFormat}
+                step={60000}
+                onChange={(e, value) =>
+                  handleAllocationChange(value, task.task)
+                }
+              />
+            </div>
+          ))}
+          {/* <StyledSlider
+            value={taskAlloc.map((task, i) => task.allocation * (i + 1))}
+            // value={taskAlloc.map((task, i) => task.allocation)}
+            // defaultValue={taskAlloc.map((task, i) => task.allocation * (i + 1))}
+            max={workItem?.duration}
+            valueLabelDisplay="auto"
+            valueLabelFormat={(value, i) => {
+              const displayValue = value - (taskAlloc[i]?.allocation || 0);
+              return getDurationFormat(value);
+            }}
+            step={60000}
+            onChange={(e, value) => handleAllocationChange(value)}
+          /> */}
+        </Grid>
+      )}
     </Grid>
   );
 }

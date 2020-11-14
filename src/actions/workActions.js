@@ -13,16 +13,16 @@ import {
   GET_WORK_BY_INTERVAL_FAILURE,
   GET_ALL_WORK,
   GET_ALL_WORK_SUCCESS,
-  GET_ALL_WORK_FAILURE
+  GET_ALL_WORK_FAILURE,
 } from 'actions/types';
 import { api, handleError, handleResponse } from 'actions/utils';
 
 export const createWork = (work, token) => {
   console.log('createWork, work:', work);
 
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
-      type: CREATE_WORK
+      type: CREATE_WORK,
     });
 
     let response;
@@ -38,15 +38,15 @@ export const createWork = (work, token) => {
 
 export const updateWork = (workData, token) => {
   console.log('updateWork, wordData:', workData);
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
-      type: UPDATE_WORK
+      type: UPDATE_WORK,
     });
 
     let response;
     try {
       response = await api(token).put(`/work/update/${workData._id}`, {
-        workData
+        workData,
       });
       console.log('updateWork, response:', response);
       handleResponse(response, dispatch, UPDATE_WORK_SUCCESS);
@@ -58,9 +58,9 @@ export const updateWork = (workData, token) => {
 };
 
 export const removeWork = (workId, token) => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
-      type: REMOVE_WORK
+      type: REMOVE_WORK,
     });
 
     let response;
@@ -75,10 +75,10 @@ export const removeWork = (workId, token) => {
   };
 };
 
-export const getAllWork = token => {
-  return async dispatch => {
+export const getAllWork = (token) => {
+  return async (dispatch) => {
     dispatch({
-      type: GET_ALL_WORK
+      type: GET_ALL_WORK,
     });
 
     let response;
@@ -95,9 +95,9 @@ export const getAllWork = token => {
 
 export const getAllWorkByInterval = (start, end) => {
   console.log('getAllWorkByInterval, start:', start);
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch({
-      type: GET_WORK_BY_INTERVAL
+      type: GET_WORK_BY_INTERVAL,
     });
 
     let response;

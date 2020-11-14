@@ -27,6 +27,9 @@ export default function useTaskData(projectId) {
         projectTime: task.work.reduce((acc, cur) => {
           return acc + cur.duration;
         }, 0),
+        // projectTime: task.work.map(workItem => {
+
+        // })
       }));
 
       // console.log('### fetch tasks response:', response);

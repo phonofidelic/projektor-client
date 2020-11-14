@@ -148,17 +148,6 @@ export default function WorkSection(props) {
                 mainView === WORK_TABLE_VIEW
                   ? `4px solid ${theme.palette.secondary.main}`
                   : 'none',
-
-              // textDecorationColor: theme.palette.secondary.main,
-              // textDecoration:
-              //   mainView === WORK_TABLE_VIEW
-              //     ? `underline ${theme.palette.secondary.main}`
-              //     : 'none',
-
-              // boxShadow:
-              //   mainView === WORK_TABLE_VIEW
-              //     ? `inset 0 -4px 0 ${theme.palette.secondary.main}`
-              //     : 'none',
             }}
             color={mainView === WORK_TABLE_VIEW ? 'initial' : 'textSecondary'}
             onClick={() => setMainView(WORK_TABLE_VIEW)}
@@ -181,7 +170,7 @@ export default function WorkSection(props) {
             color={mainView === TASK_TABLE_VIEW ? 'initial' : 'textSecondary'}
             onClick={() => setMainView(TASK_TABLE_VIEW)}
           >
-            Tasks
+            {strings.ttl__tasks}
           </Typography>
         </div>
         <div

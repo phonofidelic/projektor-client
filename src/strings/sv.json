@@ -127,5 +127,7 @@
     "hnt__add_task": "Klicka för att lägga till denna uppgift",
     "lbl__suggested_tasks": "Föreslagna uppgifter",
     "lbl__added_tasks": "Tillaggda uppgifter",
-    "msg__default_empty_tasks": "Uppgifter för projektet kommer att visas här"
+    "msg__default_empty_tasks": "Uppgifter för projektet kommer att visas här",
+    "ttl__tasks": "Uppgifter",
+    "ttl__task_details": "Uppgiftsdetaljer"
 }
