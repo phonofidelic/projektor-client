@@ -19,7 +19,7 @@ export default function TaskTable(props) {
   const theme = useTheme();
   const strings = useContext(StringContext);
 
-  console.log('TaskTable, taskData:', taskData);
+  // console.log('TaskTable, taskData:', taskData);
 
   if (error) return <div>{error.message}</div>;
 

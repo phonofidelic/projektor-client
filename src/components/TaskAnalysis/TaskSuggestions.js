@@ -30,7 +30,7 @@ export default function TaskSuggestions(props) {
   });
   const [addedTasks, setAddedTasks] = useState(workItem?.tasks || []);
   const [taskAlloc, setTaskAlloc] = useState(
-    workItem?.taskAlloc.map((alloc) => ({ ...alloc, locked: false })) || []
+    workItem?.taskAlloc?.map((alloc) => ({ ...alloc, locked: false })) || []
   );
   const strings = useContext(StringContext);
   const theme = useTheme();
@@ -57,7 +57,10 @@ export default function TaskSuggestions(props) {
   };
 
   const handleAllocationChange = (value, allocatedTask) => {
-    console.log('### handleAllocationChange, values:', allocatedTask, value);
+    console.log(
+      '### handleAllocationChange, calculation:',
+      (workItem.duration - value) / (taskAlloc.length - 1)
+    );
 
     setTaskAlloc(
       taskAlloc.map((item, i) => {
@@ -89,11 +92,11 @@ export default function TaskSuggestions(props) {
     const duration = moment
       .duration(value, 'ms')
       .format('hh:mm', { trim: false });
-    // console.log('### getDurationFormat, duration:', duration);
+
     return duration;
   };
 
-  console.log('TaskSuggestions, taskAlloc:', taskAlloc);
+  // console.log('TaskSuggestions, taskAlloc:', taskAlloc);
 
   useEffect(() => {
     setFieldValue('tasks', addedTasks);
@@ -206,7 +209,7 @@ export default function TaskSuggestions(props) {
                 )?.allocation,
                 'ms'
               )
-              .format('hh:mm:ss', { trim: false })}`}
+              .format('hh:mm', { trim: false })}`}
             onDelete={() => handleRemoveTask(addedTask)}
           />
         ))}
@@ -222,7 +225,7 @@ export default function TaskSuggestions(props) {
                 max={workItem?.duration}
                 valueLabelDisplay="auto"
                 valueLabelFormat={getDurationFormat}
-                step={60000}
+                step={300000}
                 onChange={(e, value) =>
                   handleAllocationChange(value, task.task)
                 }
