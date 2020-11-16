@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -17,11 +17,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import DoneIcon from '@material-ui/icons/Done';
 
-const StyledSlider = styled(Slider)`
-  .MuiSlider-thumb {
-    background-color: 'green';
-  }
-`;
+// const StyledSlider = styled(Slider)`
+//   .MuiSlider-thumb {
+//     background-color: 'green';
+//   }
+// `;
 
 export default function TaskSuggestions(props) {
   const { workItem, projectId, notes, setFieldValue } = props;
