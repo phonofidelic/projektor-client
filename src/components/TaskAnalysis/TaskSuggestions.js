@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
+import { v4 as uuidv4 } from 'uuid';
 
 import useTaskAnalysis from './hooks/useTaskAnalysis';
 
@@ -39,11 +40,25 @@ export default function TaskSuggestions(props) {
     tasks.findIndex((task) => task.value === term) >= 0 ? true : false;
 
   const handleAddTask = (task) => {
+    console.log('### handleAddTask, task:', task);
+    const tempId = uuidv4();
     const newTask = {
       ...task,
+      _id: tempId,
     };
 
-    setAddedTasks([...addedTasks, newTask]);
+    setTaskAlloc((taskAlloc) => {
+      setAddedTasks((addedTasks) => {
+        return [...addedTasks, newTask];
+      });
+      return [...taskAlloc, { task: tempId }].map((item) => ({
+        ...item,
+        allocation: workItem.duration / (taskAlloc.length + 1),
+      }));
+    });
+
+    setFieldValue('tasks', addedTasks);
+    setFieldValue('taskAlloc', taskAlloc);
   };
 
   const handleRemoveTask = (taskToRemove) => {
@@ -53,7 +68,18 @@ export default function TaskSuggestions(props) {
 
     console.log('### handleRemoveTask, taskToRemove:', taskToRemove);
     console.log('### handleRemoveTask, taskAlloc:', taskAlloc);
-    setTaskAlloc(taskAlloc.filter((item) => item.task !== taskToRemove._id));
+    setTaskAlloc((taskAlloc) =>
+      taskAlloc
+        .filter((item) => item.task !== taskToRemove._id)
+        /** Re-calculate allocation */
+        .map((item) => ({
+          ...item,
+          allocation: workItem.duration / (taskAlloc.length - 1),
+        }))
+    );
+
+    setFieldValue('tasks', addedTasks);
+    setFieldValue('taskAlloc', taskAlloc);
   };
 
   const handleAllocationChange = (value, allocatedTask) => {
@@ -100,8 +126,8 @@ export default function TaskSuggestions(props) {
 
   useEffect(() => {
     setFieldValue('tasks', addedTasks);
-    // setFieldValue('taskAlloc', taskAlloc);
-  }, [addedTasks, setFieldValue]);
+    setFieldValue('taskAlloc', taskAlloc);
+  }, [addedTasks, taskAlloc, setFieldValue]);
 
   if (error)
     return (
@@ -204,9 +230,10 @@ export default function TaskSuggestions(props) {
             key={`added-task_${i}`}
             label={`${addedTask.displayName} - ${moment
               .duration(
-                taskAlloc?.find(
-                  (taskAlocItem) => taskAlocItem.task === addedTask._id
-                )?.allocation,
+                // taskAlloc?.find(
+                //   (taskAlocItem) => taskAlocItem.task === addedTask._id
+                // )?.allocation,
+                taskAlloc[i].allocation,
                 'ms'
               )
               .format('hh:mm', { trim: false })}`}
@@ -214,11 +241,11 @@ export default function TaskSuggestions(props) {
           />
         ))}
       </Grid>
-      {taskAlloc && (
+      {taskAlloc.length > 1 && (
         <Grid item sx={12}>
           Task allocation
           {taskAlloc.map((task, i) => (
-            <div key={`task-alloc_${i}`}>
+            <div style={{ display: 'flex' }} key={`task-alloc_${i}`}>
               <Slider
                 value={task.allocation}
                 defaultValue={task.allocation}
@@ -230,6 +257,7 @@ export default function TaskSuggestions(props) {
                   handleAllocationChange(value, task.task)
                 }
               />
+              {/* {addedTasks[i].value} */}
             </div>
           ))}
           {/* <StyledSlider

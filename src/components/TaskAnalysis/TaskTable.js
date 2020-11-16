@@ -66,6 +66,8 @@ export default function TaskTable(props) {
               <Typography>
                 {moment
                   .duration(task.projectTime, 'ms')
+                  .locale(navigator.language)
+                  // .humanize({ h: 3.6e6 + 1 })
                   .format('h:mm', { trim: false })}
               </Typography>
               <LinearProgress
