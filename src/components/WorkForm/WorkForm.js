@@ -145,7 +145,12 @@ export function WorkForm(props) {
               </Typography>
             </div>
             {process.env.NODE_ENV !== 'production' && SHOW_WORK_ID && (
-              <div style={{ padding: 24 }}>
+              <div
+                style={{
+                  padding: 24,
+                  backgroundColor: theme.palette.background.default,
+                }}
+              >
                 <Typography variant="caption">ID: {workItem?._id}</Typography>
               </div>
             )}
