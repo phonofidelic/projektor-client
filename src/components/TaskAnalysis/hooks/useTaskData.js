@@ -35,7 +35,7 @@ export default function useTaskData(projectId) {
           .filter(
             (workItem) =>
               workItem.taskAlloc.find((alloc) => alloc.task === task._id)
-                .task === task._id
+                ?.task === task._id
           )
           /** Return taskAlloc items for this task */
           .map((workItem) =>
