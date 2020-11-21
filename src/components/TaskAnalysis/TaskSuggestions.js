@@ -233,7 +233,7 @@ export default function TaskSuggestions(props) {
                 // taskAlloc?.find(
                 //   (taskAlocItem) => taskAlocItem.task === addedTask._id
                 // )?.allocation,
-                taskAlloc[i].allocation,
+                taskAlloc[i]?.allocation,
                 'ms'
               )
               .format('hh:mm', { trim: false })}`}
