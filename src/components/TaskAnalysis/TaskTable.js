@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { StringContext } from 'strings';
 import useTaskData from './hooks/useTaskData';
 import moment from 'moment';
 
@@ -16,14 +17,15 @@ export default function TaskTable(props) {
   const { project } = props;
   const [taskData, loading, error] = useTaskData(project._id);
   const theme = useTheme();
+  const strings = useContext(StringContext);
 
-  console.log('TaskTable, taskData:', taskData);
+  // console.log('TaskTable, taskData:', taskData);
 
   if (error) return <div>{error.message}</div>;
 
   if (loading) return <div>Loading...</div>;
 
-  if (taskData.length < 1) return <div>Loading...</div>;
+  if (taskData.length < 1) return <div>{strings.msg__default_empty_tasks}</div>;
 
   return (
     <Table>
@@ -64,6 +66,8 @@ export default function TaskTable(props) {
               <Typography>
                 {moment
                   .duration(task.projectTime, 'ms')
+                  .locale(navigator.language)
+                  // .humanize({ h: 3.6e6 + 1 })
                   .format('h:mm', { trim: false })}
               </Typography>
               <LinearProgress

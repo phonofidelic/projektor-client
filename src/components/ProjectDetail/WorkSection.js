@@ -3,6 +3,7 @@ import { StringContext } from 'strings';
 import styled from 'styled-components';
 import matchSorter from 'match-sorter';
 import useMobileDetect from 'use-mobile-detect-hook';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
 import ContextualHelp from 'components/ContextualHelp';
 import WorkTable from 'components/ProjectDetail/WorkTable';
@@ -15,6 +16,8 @@ import SearchBar from 'components/SearchBar';
 import { TaskTable } from 'components/TaskAnalysis';
 
 import { useTheme } from '@material-ui/core/styles';
+// import Button from '@material-ui/core/Button';
+// import DialogActions from '@material-ui/core/DialogActions';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Slide from '@material-ui/core/Slide';
@@ -23,6 +26,8 @@ import AddIcon from '@material-ui/icons/Add';
 
 const WORK_TABLE_VIEW = 'work_table';
 const TASK_TABLE_VIEW = 'task_table';
+// const WORK_DETAIL_VIEW = 'work_detail';
+// const TASK_DETAIL_VIEW = 'task_detail';
 
 const Container = styled.div`
   /* border-top: solid #e0e0e0 1px; */
@@ -32,11 +37,15 @@ const Container = styled.div`
 const WorkSectionHeader = styled.div`
   background-color: ${({ theme }) => theme.palette.background.default};
   position: ${({ isMobile }) => (isMobile ? 'sticky' : 'inherit')};
-  top: ${({ theme }) => theme.dimensions.projectDetailHeader.height};
+  top: ${({ theme }) => theme.dimensions.header.height}px;
   padding: 9px 18px;
   display: flex;
   justify-content: space-between;
   z-index: 1;
+  border-bottom: ${({ theme, isMobile, showBottomBorder }) =>
+    isMobile && showBottomBorder
+      ? `solid ${theme.palette.divider} 1px`
+      : 'none'};
 `;
 
 const WorkSectionMain = styled.div``;
@@ -59,12 +68,14 @@ export default function WorkSection(props) {
   const [filterdWork, setFilteredWork] = useState(project.work);
   const [searchIsOpen, setSearchIsOpen] = useState(false);
   const [mainView, setMainView] = useState(WORK_TABLE_VIEW);
+  const [showBottomBorder, setShowBottomBorder] = useState(false);
 
   const { isMobile } = useMobileDetect();
 
   const theme = useTheme();
 
   const createWorkButtonRef = useRef();
+  const workSectionHeaderRef = useRef();
 
   const handleOpenWork = (workItem) => {
     setWorkItem(workItem);
@@ -81,6 +92,14 @@ export default function WorkSection(props) {
     // console.log('handleSearch, query:', query);
     setFilteredWork(matchSorter(project.work, query, { keys: ['notes'] }));
   };
+
+  useScrollPosition(
+    ({ prevPos, currPos }) => {
+      setShowBottomBorder(currPos.y <= theme.dimensions.header.height);
+    },
+    [theme.dimensions.header.height],
+    workSectionHeaderRef
+  );
 
   useEffect(() => {
     setFilteredWork(project.work);
@@ -100,7 +119,12 @@ export default function WorkSection(props) {
         />
       </WorkModal>
       {!project.isDemo && <Divider />}
-      <WorkSectionHeader theme={theme} isMobile={isMobile()}>
+      <WorkSectionHeader
+        ref={workSectionHeaderRef}
+        theme={theme}
+        isMobile={isMobile()}
+        showBottomBorder={showBottomBorder}
+      >
         <div
           style={{
             display: 'flex',
@@ -124,17 +148,6 @@ export default function WorkSection(props) {
                 mainView === WORK_TABLE_VIEW
                   ? `4px solid ${theme.palette.secondary.main}`
                   : 'none',
-
-              // textDecorationColor: theme.palette.secondary.main,
-              // textDecoration:
-              //   mainView === WORK_TABLE_VIEW
-              //     ? `underline ${theme.palette.secondary.main}`
-              //     : 'none',
-
-              // boxShadow:
-              //   mainView === WORK_TABLE_VIEW
-              //     ? `inset 0 -4px 0 ${theme.palette.secondary.main}`
-              //     : 'none',
             }}
             color={mainView === WORK_TABLE_VIEW ? 'initial' : 'textSecondary'}
             onClick={() => setMainView(WORK_TABLE_VIEW)}
@@ -157,7 +170,7 @@ export default function WorkSection(props) {
             color={mainView === TASK_TABLE_VIEW ? 'initial' : 'textSecondary'}
             onClick={() => setMainView(TASK_TABLE_VIEW)}
           >
-            Tasks
+            {strings.ttl__tasks}
           </Typography>
         </div>
         <div
