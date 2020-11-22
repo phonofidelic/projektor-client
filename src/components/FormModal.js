@@ -6,8 +6,8 @@ import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
 import Slide from '@material-ui/core/Slide';
 
-export function WorkModal(props) {
-  const { children, open, handleClose } = props;
+export function FormModal(props) {
+  const { maxWidth, children, open, handleClose } = props;
   const { isMobile } = useMobileDetect();
   const theme = useTheme();
 
@@ -23,7 +23,7 @@ export function WorkModal(props) {
       <Slide in={open} direction="up">
         <Paper
           style={{
-            maxWidth: 800,
+            maxWidth: maxWidth || 800,
             margin: `${theme.dimensions.header.height}px auto`,
             outline: 0,
             position: isMobile() ? 'absolute' : 'relative',
@@ -40,4 +40,4 @@ export function WorkModal(props) {
   );
 }
 
-export default WorkModal;
+export default FormModal;

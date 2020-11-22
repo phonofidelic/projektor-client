@@ -8,7 +8,7 @@ import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import ContextualHelp from 'components/ContextualHelp';
 import WorkTable from 'components/ProjectDetail/WorkTable';
 import WorkList from './WorkList';
-import WorkModal from 'components/ProjectDetail/WorkModal';
+import FormModal from 'components/FormModal';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import WorkForm from 'components/WorkForm';
 import SearchBar from 'components/SearchBar';
@@ -109,7 +109,7 @@ export default function WorkSection(props) {
 
   return (
     <Container>
-      <WorkModal open={workFormOpen} handleClose={handleCloseWork}>
+      <FormModal open={workFormOpen} handleClose={handleCloseWork}>
         <WorkForm
           project={project}
           workItem={workItem}
@@ -117,7 +117,7 @@ export default function WorkSection(props) {
           createWork={createWork}
           updateWork={updateWork}
         />
-      </WorkModal>
+      </FormModal>
       {!project.isDemo && <Divider />}
       <WorkSectionHeader
         ref={workSectionHeaderRef}
