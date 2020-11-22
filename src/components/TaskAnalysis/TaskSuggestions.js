@@ -210,7 +210,7 @@ export default function TaskSuggestions(props) {
           handleClose={closeCustomTask}
         >
           <TaskForm
-            workId={workItem._id}
+            workId={workItem?._id}
             projectId={projectId}
             handleClose={closeCustomTask}
           />
