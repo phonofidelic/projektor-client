@@ -11,6 +11,7 @@ import WorkList from './WorkList';
 import FormModal from 'components/FormModal';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import WorkForm from 'components/WorkForm';
+import TaskForm from 'components/TaskForm';
 import SearchBar from 'components/SearchBar';
 // import TaskKeywords from 'components/TaskKeywords';
 import { TaskTable } from 'components/TaskAnalysis';
@@ -65,6 +66,7 @@ export default function WorkSection(props) {
   const strings = useContext(StringContext);
   const [workItem, setWorkItem] = useState({});
   const [workFormOpen, setWorkFormOpen] = useState(false);
+  const [taskFormOpen, setTaskFormOpen] = useState(false);
   const [filterdWork, setFilteredWork] = useState(project.work);
   const [searchIsOpen, setSearchIsOpen] = useState(false);
   const [mainView, setMainView] = useState(WORK_TABLE_VIEW);
@@ -86,6 +88,14 @@ export default function WorkSection(props) {
   const handleCloseWork = () => {
     setWorkItem(null);
     setWorkFormOpen(false);
+  };
+
+  const openTaskForm = () => {
+    setTaskFormOpen(true);
+  };
+
+  const closeTaskForm = () => {
+    setTaskFormOpen(false);
   };
 
   const handleSearch = (query) => {
@@ -117,6 +127,9 @@ export default function WorkSection(props) {
           createWork={createWork}
           updateWork={updateWork}
         />
+      </FormModal>
+      <FormModal maxWidth={500} open={taskFormOpen} handleClose={closeTaskForm}>
+        <TaskForm projectId={project._id} handleClose={closeTaskForm} />
       </FormModal>
       {!project.isDemo && <Divider />}
       <WorkSectionHeader
@@ -190,27 +203,39 @@ export default function WorkSection(props) {
         {/* {!isMobile() && !project.isDemo && (
           <TaskKeywords project={project} handleSearch={handleSearch} />
         )} */}
-        <ContextualHelp
-          childRef={createWorkButtonRef}
-          open={project.isDemo}
-          text={strings.hnt__demo_create_work}
-          uiBackground={theme.palette.background.default}
-          backdropBackground={theme.palette.action.active}
-          tooltipBackground={theme.palette.background.default}
-          focusComponent={
-            <CreateWorkButton
-              ref={createWorkButtonRef}
-              handleOpenWork={handleOpenWork}
+
+        {mainView === WORK_TABLE_VIEW && (
+          <>
+            <ContextualHelp
+              childRef={createWorkButtonRef}
+              open={project.isDemo}
+              text={strings.hnt__demo_create_work}
+              uiBackground={theme.palette.background.default}
+              backdropBackground={theme.palette.action.active}
+              tooltipBackground={theme.palette.background.default}
+              focusComponent={
+                <CreateWorkButton
+                  ref={createWorkButtonRef}
+                  handleOpenWork={handleOpenWork}
+                />
+              }
+              focusClickAction={handleOpenWork}
             />
-          }
-          focusClickAction={handleOpenWork}
-        />
-        <div style={{ margin: 'auto' }}>
-          <CreateWorkButton
-            ref={createWorkButtonRef}
-            handleOpenWork={handleOpenWork}
-          />
-        </div>
+            <div style={{ margin: 'auto' }}>
+              <CreateWorkButton
+                ref={createWorkButtonRef}
+                handleOpenWork={handleOpenWork}
+              />
+            </div>
+          </>
+        )}
+        {mainView === TASK_TABLE_VIEW && (
+          <div style={{ margin: 'auto' }}>
+            <IconButton variant="outlined" onClick={openTaskForm}>
+              <AddIcon />
+            </IconButton>
+          </div>
+        )}
       </WorkSectionHeader>
 
       <WorkSectionMain>
