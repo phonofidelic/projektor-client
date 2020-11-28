@@ -209,6 +209,7 @@ export default function TaskSuggestions(props) {
             workId={workItem?._id}
             projectId={projectId}
             handleClose={closeCustomTask}
+            onTaskAdded={handleAddTask}
           />
         </FormModal>
 

@@ -55,14 +55,22 @@ const CreateWorkButton = React.forwardRef((props, ref) => (
   <IconButton
     ref={ref}
     variant="outlined"
-    onClick={() => props.handleOpenWork(false)}
+    onClick={() => props.handleNewWork()}
   >
     <AddIcon />
   </IconButton>
 ));
 
 export default function WorkSection(props) {
-  const { project, createWork, updateWork, removeWork } = props;
+  const {
+    project,
+    startedWork,
+    startWork,
+    cancelWork,
+    createWork,
+    updateWork,
+    removeWork,
+  } = props;
   const strings = useContext(StringContext);
   const [workItem, setWorkItem] = useState({});
   const [workFormOpen, setWorkFormOpen] = useState(false);
@@ -78,6 +86,19 @@ export default function WorkSection(props) {
 
   const createWorkButtonRef = useRef();
   const workSectionHeaderRef = useRef();
+
+  const handleNewWork = () => {
+    setWorkItem(false);
+    startWork(project._id);
+
+    setWorkFormOpen(true);
+  };
+
+  const handleCancelWork = () => {
+    cancelWork(startedWork._id);
+    setWorkItem(null);
+    setWorkFormOpen(false);
+  };
 
   const handleOpenWork = (workItem) => {
     setWorkItem(workItem);
@@ -115,21 +136,35 @@ export default function WorkSection(props) {
     setFilteredWork(project.work);
   }, [project.work]);
 
-  // console.log('WorkSection, workItem:', workItem);
+  console.log('WorkSection, startedWork:', startedWork);
 
   return (
     <Container>
-      <FormModal open={workFormOpen} handleClose={handleCloseWork}>
+      <FormModal
+        open={workFormOpen}
+        handleClose={startedWork ? handleCancelWork : handleCloseWork}
+      >
         <WorkForm
           project={project}
           workItem={workItem}
+          startedWork={startedWork}
           handleClose={handleCloseWork}
           createWork={createWork}
           updateWork={updateWork}
+          cancelWork={handleCancelWork}
         />
       </FormModal>
       <FormModal maxWidth={500} open={taskFormOpen} handleClose={closeTaskForm}>
-        <TaskForm projectId={project._id} handleClose={closeTaskForm} />
+        <TaskForm
+          projectId={project._id}
+          handleClose={closeTaskForm}
+          onTaskAdded={(addedTask) =>
+            console.log(
+              'TODO: handle added task in WorkSection, addedTask:',
+              addedTask
+            )
+          }
+        />
       </FormModal>
       {!project.isDemo && <Divider />}
       <WorkSectionHeader
@@ -216,7 +251,7 @@ export default function WorkSection(props) {
               focusComponent={
                 <CreateWorkButton
                   ref={createWorkButtonRef}
-                  handleOpenWork={handleOpenWork}
+                  handleNewWork={handleNewWork}
                 />
               }
               focusClickAction={handleOpenWork}
@@ -224,7 +259,7 @@ export default function WorkSection(props) {
             <div style={{ margin: 'auto' }}>
               <CreateWorkButton
                 ref={createWorkButtonRef}
-                handleOpenWork={handleOpenWork}
+                handleNewWork={handleNewWork}
               />
             </div>
           </>

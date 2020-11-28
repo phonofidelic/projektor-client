@@ -22,7 +22,15 @@ const Container = styled.div`
 `;
 
 export default function ProjectDetail(props) {
-  const { project, createWork, updateWork, removeWork } = props;
+  const {
+    project,
+    startedWork,
+    startWork,
+    cancelWork,
+    createWork,
+    updateWork,
+    removeWork,
+  } = props;
 
   const time = 0;
   // const [time, setTime] = useState(0);
@@ -103,6 +111,9 @@ export default function ProjectDetail(props) {
       <ProjectInfo project={project} time={time} />
       <WorkSection
         project={project}
+        startedWork={startedWork}
+        startWork={startWork}
+        cancelWork={cancelWork}
         createWork={createWork}
         updateWork={updateWork}
         removeWork={removeWork}

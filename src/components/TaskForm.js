@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 
 import { StringContext } from 'strings';
+import api from 'api';
+import { useAuth } from 'services/AuthProvider';
 
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -17,9 +19,26 @@ const Container = styled.div`
 const Header = styled.div``;
 
 export default function TaskForm(props) {
-  const { workId, projectId, handleClose } = props;
+  const { workId, projectId, handleClose, onTaskAdded } = props;
 
   const strings = useContext(StringContext);
+  const { getAccessTokenSilently } = useAuth();
+
+  const postNewTask = async (taskData) => {
+    let response;
+
+    try {
+      const token = await getAccessTokenSilently();
+      response = await api(token).post(`/tasks`, taskData);
+    } catch (err) {
+      console.error('Could not post new Task:', err);
+    }
+
+    const addedTask = response.data.createdTask;
+
+    console.log('New Task:', addedTask);
+    onTaskAdded(addedTask);
+  };
 
   return (
     <Container>
@@ -50,6 +69,7 @@ export default function TaskForm(props) {
         }}
         onSubmit={async (values, { setSubmitting }) => {
           console.log('Posting Task:', values);
+          postNewTask(values);
         }}
       >
         {({

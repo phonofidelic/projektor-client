@@ -18,7 +18,10 @@ export function Project(props) {
   const {
     preload,
     project,
+    startedWork,
     getProject,
+    startWork,
+    cancelWork,
     createWork,
     updateWork,
     removeWork,
@@ -28,6 +31,18 @@ export function Project(props) {
   const { getAccessTokenSilently } = useAuth0();
 
   const { isMobile } = useMobileDetect();
+
+  const handleStartWork = async (projectId) => {
+    const token = await getAccessTokenSilently();
+
+    startWork(projectId, token);
+  };
+
+  const handelCancelWork = async (workId) => {
+    const token = await getAccessTokenSilently();
+
+    cancelWork(workId, token);
+  };
 
   const handleCreateWork = async (work) => {
     const token = await getAccessTokenSilently();
@@ -74,6 +89,9 @@ export function Project(props) {
       </Header>
       <ProjectDetail
         project={project}
+        startedWork={startedWork}
+        startWork={handleStartWork}
+        cancelWork={handelCancelWork}
         createWork={handleCreateWork}
         updateWork={handleUpdateWork}
         removeWork={handleRemoveWork}
@@ -85,6 +103,7 @@ export function Project(props) {
 const mapStateToProps = (state) => {
   return {
     project: state.projects.selectedProject,
+    startedWork: state.projects.startedWork,
   };
 };
 
