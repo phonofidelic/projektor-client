@@ -124,6 +124,11 @@ export default function WorkSection(props) {
     setFilteredWork(matchSorter(project.work, query, { keys: ['notes'] }));
   };
 
+  const confirm = (action) => {
+    if (window.confirm('Are you sure you want to cancel this Work entry?'))
+      action();
+  };
+
   useScrollPosition(
     ({ prevPos, currPos }) => {
       setShowBottomBorder(currPos.y <= theme.dimensions.header.height);
@@ -142,7 +147,9 @@ export default function WorkSection(props) {
     <Container>
       <FormModal
         open={workFormOpen}
-        handleClose={startedWork ? handleCancelWork : handleCloseWork}
+        handleClose={
+          startedWork ? () => confirm(handleCancelWork) : handleCloseWork
+        }
       >
         <WorkForm
           project={project}

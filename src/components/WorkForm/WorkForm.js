@@ -70,10 +70,10 @@ export function WorkForm(props) {
         console.log('Posting note:', values.note);
         console.log('Posting workItem:', workItem);
 
-        workItem
+        workItem || startedWork
           ? updateWork({
               ...values,
-              _id: workItem._id,
+              _id: workItem?._id || startedWork?._id,
               duration:
                 parseDateString(values.end) - parseDateString(values.start),
             })

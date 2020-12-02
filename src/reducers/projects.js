@@ -19,9 +19,9 @@ import {
   CANCEL_WORK,
   CANCEL_WORK_SUCCESS,
   CANCEL_WORK_FAILURE,
-  CREATE_WORK,
-  CREATE_WORK_SUCCESS,
-  CREATE_WORK_FAILURE,
+  // CREATE_WORK,
+  // CREATE_WORK_SUCCESS,
+  // CREATE_WORK_FAILURE,
   UPDATE_WORK,
   UPDATE_WORK_SUCCESS,
   UPDATE_WORK_FAILURE,
@@ -51,7 +51,7 @@ import {
   TTL__ARCHIVED,
   TTL__DELETED,
   // MSG__DELETE_ALL_REMOVED_PROJECTS_ERROR,
-  MSG__CREATE_WORK_ERROR,
+  // MSG__CREATE_WORK_ERROR,
 } from 'constants/strings';
 import format from 'string-format';
 format.extend(String.prototype, {});
@@ -286,6 +286,11 @@ export default function (state = defaultState, action) {
         ...state,
         loading: false,
         startedWork: action.payload,
+        selectedProject: {
+          ...state.selectedProject,
+          timeUsed: state.selectedProject.timeUsed + action.payload.duration,
+          work: [action.payload, ...state.selectedProject.work],
+        },
       };
     }
 
@@ -308,6 +313,13 @@ export default function (state = defaultState, action) {
         ...state,
         loading: false,
         startedWork: null,
+        selectedProject: {
+          ...state.selectedProject,
+          timeUsed: state.selectedProject.timeUsed - action.payload.duration,
+          work: state.selectedProject.work.filter(
+            (workItem) => workItem._id !== action.payload._id
+          ),
+        },
       };
 
     case CANCEL_WORK_FAILURE:
@@ -317,29 +329,30 @@ export default function (state = defaultState, action) {
         error: { message: 'Could not cancel started Work' },
       };
 
-    case CREATE_WORK:
-      return {
-        ...state,
-        loading: true,
-      };
+    // case CREATE_WORK:
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //   };
 
-    case CREATE_WORK_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        selectedProject: {
-          ...state.selectedProject,
-          timeUsed: state.selectedProject.timeUsed + action.payload.duration,
-          work: [...state.selectedProject.work, action.payload],
-        },
-      };
+    // case CREATE_WORK_SUCCESS:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     selectedProject: {
+    //       ...state.selectedProject,
+    //       timeUsed: state.selectedProject.timeUsed + action.payload.duration,
+    //       work: [action.payload, ...state.selectedProject.work],
+    //     },
+    //     startedWork: null,
+    //   };
 
-    case CREATE_WORK_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: { message: MSG__CREATE_WORK_ERROR },
-      };
+    // case CREATE_WORK_FAILURE:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     error: { message: MSG__CREATE_WORK_ERROR },
+    //   };
 
     case UPDATE_WORK:
       return {
@@ -365,6 +378,7 @@ export default function (state = defaultState, action) {
           timeUsed: updatedTimeUsed,
           work: updatedWork,
         },
+        startedWork: null,
       };
 
     case UPDATE_WORK_FAILURE: {
