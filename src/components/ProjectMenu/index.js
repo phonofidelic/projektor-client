@@ -65,7 +65,7 @@ export function ProjectMenu(props) {
     console.log('work:', work);
 
     const outputData = work.map((workItem) => ({
-      date: moment(workItem.data).format('MM/DD/YYYY'),
+      date: moment(workItem.date).format('MM/DD/YYYY'),
       duration: moment
         .duration(workItem.duration, 'ms')
         .format('hh:mm', { trim: false }),
