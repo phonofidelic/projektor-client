@@ -9,6 +9,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import ExportIcon from '@material-ui/icons/GetApp';
 
 export default function DesktopProjectMenu(props) {
   const {
@@ -18,6 +19,7 @@ export default function DesktopProjectMenu(props) {
     handleMenuSelection,
     handleDelete,
     handleCloseMenu,
+    handleExportProject,
   } = props;
 
   const strings = useContext(StringContext);
@@ -30,6 +32,12 @@ export default function DesktopProjectMenu(props) {
       open={Boolean(anchorEl)}
       onClose={handleCloseMenu}
     >
+      <MenuItem key="export" onClick={handleExportProject}>
+        <ListItemIcon>
+          <ExportIcon />
+        </ListItemIcon>
+        Export
+      </MenuItem>
       {project.status === ACTIVE &&
         (project.isDemo ? (
           <MenuItem key="edit" onClick={() => props.handleDemoEdit(project)}>
