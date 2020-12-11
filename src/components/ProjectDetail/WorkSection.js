@@ -8,9 +8,10 @@ import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import ContextualHelp from 'components/ContextualHelp';
 import WorkTable from 'components/ProjectDetail/WorkTable';
 import WorkList from './WorkList';
-import WorkModal from 'components/ProjectDetail/WorkModal';
+import FormModal from 'components/FormModal';
 import DefaultEmptyMessage from 'components/DefaultEmptyMessage';
 import WorkForm from 'components/WorkForm';
+import TaskForm from 'components/TaskForm';
 import SearchBar from 'components/SearchBar';
 // import TaskKeywords from 'components/TaskKeywords';
 import { TaskTable } from 'components/TaskAnalysis';
@@ -54,17 +55,26 @@ const CreateWorkButton = React.forwardRef((props, ref) => (
   <IconButton
     ref={ref}
     variant="outlined"
-    onClick={() => props.handleOpenWork(false)}
+    onClick={() => props.handleNewWork()}
   >
     <AddIcon />
   </IconButton>
 ));
 
 export default function WorkSection(props) {
-  const { project, createWork, updateWork, removeWork } = props;
+  const {
+    project,
+    startedWork,
+    startWork,
+    cancelWork,
+    createWork,
+    updateWork,
+    removeWork,
+  } = props;
   const strings = useContext(StringContext);
   const [workItem, setWorkItem] = useState({});
   const [workFormOpen, setWorkFormOpen] = useState(false);
+  const [taskFormOpen, setTaskFormOpen] = useState(false);
   const [filterdWork, setFilteredWork] = useState(project.work);
   const [searchIsOpen, setSearchIsOpen] = useState(false);
   const [mainView, setMainView] = useState(WORK_TABLE_VIEW);
@@ -77,6 +87,19 @@ export default function WorkSection(props) {
   const createWorkButtonRef = useRef();
   const workSectionHeaderRef = useRef();
 
+  const handleNewWork = () => {
+    setWorkItem(false);
+    startWork(project._id);
+
+    setWorkFormOpen(true);
+  };
+
+  const handleCancelWork = () => {
+    cancelWork(startedWork._id);
+    setWorkItem(null);
+    setWorkFormOpen(false);
+  };
+
   const handleOpenWork = (workItem) => {
     setWorkItem(workItem);
 
@@ -88,9 +111,22 @@ export default function WorkSection(props) {
     setWorkFormOpen(false);
   };
 
+  const openTaskForm = () => {
+    setTaskFormOpen(true);
+  };
+
+  const closeTaskForm = () => {
+    setTaskFormOpen(false);
+  };
+
   const handleSearch = (query) => {
     // console.log('handleSearch, query:', query);
     setFilteredWork(matchSorter(project.work, query, { keys: ['notes'] }));
+  };
+
+  const confirm = (action) => {
+    if (window.confirm('Are you sure you want to cancel this Work entry?'))
+      action();
   };
 
   useScrollPosition(
@@ -105,19 +141,38 @@ export default function WorkSection(props) {
     setFilteredWork(project.work);
   }, [project.work]);
 
-  // console.log('WorkSection, workItem:', workItem);
+  console.log('WorkSection, startedWork:', startedWork);
 
   return (
     <Container>
-      <WorkModal open={workFormOpen} handleClose={handleCloseWork}>
+      <FormModal
+        open={workFormOpen}
+        handleClose={
+          startedWork ? () => confirm(handleCancelWork) : handleCloseWork
+        }
+      >
         <WorkForm
           project={project}
           workItem={workItem}
+          startedWork={startedWork}
           handleClose={handleCloseWork}
           createWork={createWork}
           updateWork={updateWork}
+          cancelWork={handleCancelWork}
         />
-      </WorkModal>
+      </FormModal>
+      <FormModal maxWidth={500} open={taskFormOpen} handleClose={closeTaskForm}>
+        <TaskForm
+          projectId={project._id}
+          handleClose={closeTaskForm}
+          onTaskAdded={(addedTask) =>
+            console.log(
+              'TODO: handle added task in WorkSection, addedTask:',
+              addedTask
+            )
+          }
+        />
+      </FormModal>
       {!project.isDemo && <Divider />}
       <WorkSectionHeader
         ref={workSectionHeaderRef}
@@ -190,27 +245,39 @@ export default function WorkSection(props) {
         {/* {!isMobile() && !project.isDemo && (
           <TaskKeywords project={project} handleSearch={handleSearch} />
         )} */}
-        <ContextualHelp
-          childRef={createWorkButtonRef}
-          open={project.isDemo}
-          text={strings.hnt__demo_create_work}
-          uiBackground={theme.palette.background.default}
-          backdropBackground={theme.palette.action.active}
-          tooltipBackground={theme.palette.background.default}
-          focusComponent={
-            <CreateWorkButton
-              ref={createWorkButtonRef}
-              handleOpenWork={handleOpenWork}
+
+        {mainView === WORK_TABLE_VIEW && (
+          <>
+            <ContextualHelp
+              childRef={createWorkButtonRef}
+              open={project.isDemo}
+              text={strings.hnt__demo_create_work}
+              uiBackground={theme.palette.background.default}
+              backdropBackground={theme.palette.action.active}
+              tooltipBackground={theme.palette.background.default}
+              focusComponent={
+                <CreateWorkButton
+                  ref={createWorkButtonRef}
+                  handleNewWork={handleNewWork}
+                />
+              }
+              focusClickAction={handleOpenWork}
             />
-          }
-          focusClickAction={handleOpenWork}
-        />
-        <div style={{ margin: 'auto' }}>
-          <CreateWorkButton
-            ref={createWorkButtonRef}
-            handleOpenWork={handleOpenWork}
-          />
-        </div>
+            <div style={{ margin: 'auto' }}>
+              <CreateWorkButton
+                ref={createWorkButtonRef}
+                handleNewWork={handleNewWork}
+              />
+            </div>
+          </>
+        )}
+        {mainView === TASK_TABLE_VIEW && (
+          <div style={{ margin: 'auto' }}>
+            <IconButton variant="outlined" onClick={openTaskForm}>
+              <AddIcon />
+            </IconButton>
+          </div>
+        )}
       </WorkSectionHeader>
 
       <WorkSectionMain>

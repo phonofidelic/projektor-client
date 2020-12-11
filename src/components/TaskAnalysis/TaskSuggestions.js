@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 
 import useTaskAnalysis from './hooks/useTaskAnalysis';
+import TaskForm from 'components/TaskForm';
+import FormModal from 'components/FormModal';
 
 import { StringContext } from 'strings';
 
@@ -15,24 +17,31 @@ import Grow from '@material-ui/core/Grow';
 import Slider from '@material-ui/core/Slider';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import DoneIcon from '@material-ui/icons/Done';
 
-// const StyledSlider = styled(Slider)`
-//   .MuiSlider-thumb {
-//     background-color: 'green';
-//   }
-// `;
+const TaskContainerGridItem = styled(Grid)`
+  border: 1px solid ${({ theme }) => theme.palette.divider};
+  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
+  min-height: 5em;
+  max-height: 10em;
+  overflow-y: auto;
+`;
 
 export default function TaskSuggestions(props) {
   const { workItem, projectId, notes, setFieldValue } = props;
-  const { data: taskKeywords, loading, error } = useTaskAnalysis({
+
+  const { data: taskKeywords, error } = useTaskAnalysis({
     notes,
     projectId,
   });
+
   const [addedTasks, setAddedTasks] = useState(workItem?.tasks || []);
   const [taskAlloc, setTaskAlloc] = useState(
     workItem?.taskAlloc?.map((alloc) => ({ ...alloc, locked: false })) || []
   );
+  const [customTaskAnchor, setCustomTaskAnchor] = useState(false);
+
   const strings = useContext(StringContext);
   const theme = useTheme();
 
@@ -122,6 +131,14 @@ export default function TaskSuggestions(props) {
     return duration;
   };
 
+  const openCustomTask = (evt) => {
+    setCustomTaskAnchor(evt.currentTarget);
+  };
+
+  const closeCustomTask = () => {
+    setCustomTaskAnchor(null);
+  };
+
   // console.log('TaskSuggestions, taskAlloc:', taskAlloc);
 
   useEffect(() => {
@@ -136,14 +153,15 @@ export default function TaskSuggestions(props) {
       </Box>
     );
 
-  if (loading)
-    return (
-      <Box>
-        <Typography>Loading...</Typography>
-      </Box>
-    );
+  // if (loading)
+  //   return (
+  //     <Box>
+  //       {/* <Typography>Loading...</Typography> */}
+  //       <Skeleton variant="rect" height="10em" />
+  //     </Box>
+  //   );
 
-  if (!taskKeywords) return null;
+  // if (!taskKeywords) return null;
 
   return (
     <Grid
@@ -153,15 +171,7 @@ export default function TaskSuggestions(props) {
         marginTop: 16,
       }}
     >
-      <Grid
-        item
-        xs={12}
-        sm={5}
-        style={{
-          border: `1px solid ${theme.palette.divider}`,
-          borderRadius: theme.shape.borderRadius,
-        }}
-      >
+      <TaskContainerGridItem item xs={12} sm={5} theme={theme}>
         <div
           style={{
             marginLeft: 8,
@@ -171,48 +181,73 @@ export default function TaskSuggestions(props) {
             {strings.lbl__suggested_tasks}:
           </Typography>
         </div>
-        {taskKeywords.map((task, i) => (
-          <Grow
-            key={`suggested_task_${i}`}
-            in={true}
-            mountOnEnter
-            unmountOnExit
-          >
-            <Tooltip
-              arrow
-              title={
-                task._id ? strings.hnt__add_task : strings.hnt__create_task
-              }
+
+        <Tooltip arrow title={'Add a new cusom Task'}>
+          <Chip
+            style={{
+              margin: 4,
+              backgroundColor: theme.palette.secondary.main,
+              borderColor: theme.palette.secondary.main,
+            }}
+            // color={task._id ? 'primary' : 'default'}
+            variant="outlined"
+            icon={
+              <AddCircleIcon style={{ color: theme.palette.primary.main }} />
+            }
+            // disabled={includesTerm(addedTasks, task.value)}
+            label={strings.btn__custom_task}
+            onClick={openCustomTask}
+          />
+        </Tooltip>
+        <FormModal
+          maxWidth={500}
+          open={Boolean(customTaskAnchor)}
+          // anchorEl={customTaskAnchor}
+          handleClose={closeCustomTask}
+        >
+          <TaskForm
+            workId={workItem?._id}
+            projectId={projectId}
+            handleClose={closeCustomTask}
+            onTaskAdded={handleAddTask}
+          />
+        </FormModal>
+
+        {taskKeywords &&
+          taskKeywords.map((task, i) => (
+            <Grow
+              key={`suggested_task_${i}`}
+              in={true}
+              mountOnEnter
+              unmountOnExit
             >
-              <Chip
-                style={{
-                  margin: 4,
-                }}
-                color={task._id ? 'primary' : 'default'}
-                variant="outlined"
-                icon={
-                  includesTerm(addedTasks, task.value) ? <DoneIcon /> : null
+              <Tooltip
+                arrow
+                title={
+                  task._id ? strings.hnt__add_task : strings.hnt__create_task
                 }
-                disabled={includesTerm(addedTasks, task.value)}
-                label={task.value}
-                onClick={() => handleAddTask(task)}
-              />
-            </Tooltip>
-          </Grow>
-        ))}
-      </Grid>
+              >
+                <Chip
+                  style={{
+                    margin: 4,
+                  }}
+                  color={task._id ? 'primary' : 'default'}
+                  variant="outlined"
+                  icon={
+                    includesTerm(addedTasks, task.value) ? <DoneIcon /> : null
+                  }
+                  disabled={includesTerm(addedTasks, task.value)}
+                  label={task.value}
+                  onClick={() => handleAddTask(task)}
+                />
+              </Tooltip>
+            </Grow>
+          ))}
+      </TaskContainerGridItem>
 
       <Grid item xs={12} sm={2} style={{ height: 8 }}></Grid>
 
-      <Grid
-        item
-        xs={12}
-        sm={5}
-        style={{
-          border: `1px solid ${theme.palette.divider}`,
-          borderRadius: theme.shape.borderRadius,
-        }}
-      >
+      <TaskContainerGridItem item xs={12} sm={5} theme={theme}>
         <div
           style={{
             marginLeft: 8,
@@ -240,7 +275,7 @@ export default function TaskSuggestions(props) {
             onDelete={() => handleRemoveTask(addedTask)}
           />
         ))}
-      </Grid>
+      </TaskContainerGridItem>
       {taskAlloc.length > 1 && (
         <Grid item sx={12}>
           Task allocation

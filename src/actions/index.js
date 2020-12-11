@@ -13,6 +13,8 @@ import {
 
 /** WORK ACTIONS */
 import {
+  startWork,
+  cancelWork,
   createWork,
   updateWork,
   removeWork,
@@ -38,6 +40,8 @@ export {
   setProjectStatus,
   deleteProject,
   deleteAllTrash,
+  startWork,
+  cancelWork,
   createWork,
   updateWork,
   removeWork,

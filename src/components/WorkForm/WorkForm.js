@@ -28,7 +28,15 @@ const parseDateString = (string) => {
 };
 
 export function WorkForm(props) {
-  const { project, workItem, handleClose, createWork, updateWork } = props;
+  const {
+    project,
+    workItem,
+    startedWork,
+    handleClose,
+    createWork,
+    updateWork,
+    cancelWork,
+  } = props;
   const [mainView, setMainView] = useState(WORK_FORM_VIEW);
 
   const strings = useContext(StringContext);
@@ -62,10 +70,10 @@ export function WorkForm(props) {
         console.log('Posting note:', values.note);
         console.log('Posting workItem:', workItem);
 
-        workItem
+        workItem || startedWork
           ? updateWork({
               ...values,
-              _id: workItem._id,
+              _id: workItem?._id || startedWork?._id,
               duration:
                 parseDateString(values.end) - parseDateString(values.start),
             })
@@ -145,8 +153,15 @@ export function WorkForm(props) {
               </Typography>
             </div>
             {process.env.NODE_ENV !== 'production' && SHOW_WORK_ID && (
-              <div style={{ padding: 24 }}>
-                <Typography variant="caption">ID: {workItem?._id}</Typography>
+              <div
+                style={{
+                  padding: 24,
+                  backgroundColor: theme.palette.background.default,
+                }}
+              >
+                <Typography variant="caption">
+                  ID: {workItem?._id || startedWork?._id}
+                </Typography>
               </div>
             )}
 
@@ -200,7 +215,10 @@ export function WorkForm(props) {
           >
             {isMobile() && <Divider />}
             <DialogActions>
-              <Button onClick={handleClose} color="primary">
+              <Button
+                onClick={startedWork ? cancelWork : handleClose}
+                color="primary"
+              >
                 {strings.btn__cancel}
               </Button>
               <Button

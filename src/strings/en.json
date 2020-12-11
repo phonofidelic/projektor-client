@@ -129,5 +129,6 @@
     "lbl__added_tasks": "Added Tasks",
     "msg__default_empty_tasks": "Project Tasks will be shown here",
     "ttl__tasks": "Tasks",
-    "ttl__task_details": "Task Details"
+    "ttl__task_details": "Task Details",
+    "btn__custom_task": "Custom task"
 }
