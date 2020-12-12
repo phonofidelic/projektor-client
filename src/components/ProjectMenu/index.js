@@ -139,6 +139,7 @@ export function ProjectMenu(props) {
           project={project}
           anchorEl={anchorEl}
           menuActions={menuActions}
+          showExportOption={work.length > 0}
           handleMenuSelection={handleMenuSelection}
           handleDelete={handleDelete}
           handleCloseMenu={handleCloseMenu}
@@ -150,6 +151,7 @@ export function ProjectMenu(props) {
           project={project}
           anchorEl={anchorEl}
           menuActions={menuActions}
+          showExportOption={work.length > 0}
           handleMenuSelection={handleMenuSelection}
           handleDelete={handleDelete}
           handleCloseMenu={handleCloseMenu}
@@ -163,7 +165,7 @@ export function ProjectMenu(props) {
 
 const mapStateToProps = (state) => {
   return {
-    work: state.projects.selectedProject.work,
+    work: state.projects.selectedProject?.work || [],
   };
 };
 

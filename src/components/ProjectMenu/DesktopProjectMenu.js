@@ -16,6 +16,7 @@ export default function DesktopProjectMenu(props) {
     project,
     anchorEl,
     menuActions,
+    showExportOption,
     handleMenuSelection,
     handleDelete,
     handleCloseMenu,
@@ -32,12 +33,14 @@ export default function DesktopProjectMenu(props) {
       open={Boolean(anchorEl)}
       onClose={handleCloseMenu}
     >
-      <MenuItem key="export" onClick={handleExportProject}>
-        <ListItemIcon>
-          <ExportIcon />
-        </ListItemIcon>
-        Export
-      </MenuItem>
+      {showExportOption && (
+        <MenuItem key="export" onClick={handleExportProject}>
+          <ListItemIcon>
+            <ExportIcon />
+          </ListItemIcon>
+          Export
+        </MenuItem>
+      )}
       {project.status === ACTIVE &&
         (project.isDemo ? (
           <MenuItem key="edit" onClick={() => props.handleDemoEdit(project)}>
