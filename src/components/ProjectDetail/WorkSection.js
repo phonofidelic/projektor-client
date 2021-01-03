@@ -75,7 +75,7 @@ export default function WorkSection(props) {
   const [workItem, setWorkItem] = useState({});
   const [workFormOpen, setWorkFormOpen] = useState(false);
   const [taskFormOpen, setTaskFormOpen] = useState(false);
-  const [filterdWork, setFilteredWork] = useState(project.work);
+  const [filteredWork, setFilteredWork] = useState(project.work);
   const [searchIsOpen, setSearchIsOpen] = useState(false);
   const [mainView, setMainView] = useState(WORK_TABLE_VIEW);
   const [showBottomBorder, setShowBottomBorder] = useState(false);
@@ -288,11 +288,11 @@ export default function WorkSection(props) {
           unmountOnExit
         >
           <div>
-            {filterdWork.length > 0 ? (
+            {filteredWork.length > 0 ? (
               isMobile() ? (
                 //<Slide in={true} direction="right" mountOnEnter unmountOnExit>
                 <WorkList
-                  work={filterdWork}
+                  work={filteredWork}
                   handleOpenWork={handleOpenWork}
                   removeWork={removeWork}
                 />
@@ -300,7 +300,7 @@ export default function WorkSection(props) {
                 //</Slide>
                 //<Slide in={true} direction="right" mountOnEnter unmountOnExit>
                 <WorkTable
-                  work={filterdWork}
+                  work={filteredWork}
                   handleOpenWork={handleOpenWork}
                   removeWork={removeWork}
                 />
